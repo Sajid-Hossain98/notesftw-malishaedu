@@ -1,10 +1,10 @@
 import { Navbar } from "@/components/navbar";
+import { SearchBar } from "@/components/search";
 import { cn } from "@/lib/utils";
 import localFont from "next/font/local";
 
 const lightAvenir = localFont({
-  src: "./fonts/Light-Avenir LT Pro 35 Light.woff2",
-  weight: "100 900",
+  src: "./fonts/Avenir-LT-W01-65-Medium-Book.woff",
 });
 
 export default function Home() {
@@ -16,6 +16,7 @@ export default function Home() {
       )}
     >
       <Navbar />
+      <SearchBar />
     </main>
   );
 }
