@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
+import { ClerkProvider } from "@clerk/nextjs";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -21,10 +23,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn("bg-[#0b2c24]", geistSans.className)}>
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={cn("bg-[#0b2c24]", geistSans.className)}
+          suppressHydrationWarning={true}
+        >
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
