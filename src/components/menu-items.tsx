@@ -13,12 +13,12 @@ export const MenuItems = () => {
       </nav>
 
       <nav>
-        <Link href="/sign-in" className="flex items-center gap-1">
-          <Button variant="myButtons" className="font-semibold">
+        <Button variant="myButtons" className="font-semibold gap-1" asChild>
+          <Link href="/sign-in" className="flex items-center">
             <Plus className="w-5 h-5" />
             Add a note
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </nav>
     </div>
   );
