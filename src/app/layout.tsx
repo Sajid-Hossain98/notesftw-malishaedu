@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
-import { cn } from "@/lib/utils";
-
 import { ClerkProvider } from "@clerk/nextjs";
+
+import "./globals.css";
+import { Header } from "@/components/header";
+import { cn } from "@/lib/utils";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,10 +27,13 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={cn("bg-[#0b2c24] text-[#edf2f4]", geistSans.className)}
+          className={cn(
+            "bg-[#0b2c24] text-[#edf2f4] w-[92vw] mx-auto h-screen overflow-hidden",
+            geistSans.className
+          )}
           suppressHydrationWarning={true}
         >
-          {children}
+          <Header>{children}</Header>
         </body>
       </html>
     </ClerkProvider>
