@@ -1,8 +1,9 @@
 import { BookHeart, Plus } from "lucide-react";
-import { Button } from "./ui/button";
 import Link from "next/link";
 
-export const MenuItems = async () => {
+import { Button } from "@/components/ui/button";
+
+export const MenuItems = () => {
   return (
     <div className="hidden gap-3 md:flex">
       <nav>
