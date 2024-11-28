@@ -20,12 +20,12 @@ enum UserRole {
 }
 
 model User {
-  id       String   @id @default(uuid())
-  userId   String   @unique
-  name     String
-  imageUrl String   @db.Text
-  email    String   @db.Text
-  role     UserRole @default(USER)
+  id          String   @id @default(uuid())
+  clerkUserId String   @unique
+  name        String
+  imageUrl    String   @db.Text
+  email       String   @db.Text
+  role        UserRole @default(USER)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

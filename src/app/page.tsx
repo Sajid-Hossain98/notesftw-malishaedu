@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main
       className={cn(
-        "w-[92vw] text-[#edf2f4] mx-auto h-screen overflow-hidden",
+        "w-[92vw] mx-auto h-screen overflow-hidden",
         lightAvenir.className
       )}
     >

@@ -1,3 +1,4 @@
+import { UserButton } from "@clerk/nextjs";
 import { Logo } from "./logo";
 import { MenuBar } from "./menu-bar";
 import { MenuItems } from "./menu-items";
@@ -10,6 +11,8 @@ export const Navbar = () => {
       <MenuBar />
 
       <MenuItems />
+
+      <UserButton />
     </div>
   );
 };

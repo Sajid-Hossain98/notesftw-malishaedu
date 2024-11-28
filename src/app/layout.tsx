@@ -26,7 +26,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={cn("bg-[#0b2c24]", geistSans.className)}
+          className={cn("bg-[#0b2c24] text-[#edf2f4]", geistSans.className)}
           suppressHydrationWarning={true}
         >
           {children}
