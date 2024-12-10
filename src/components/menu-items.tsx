@@ -17,7 +17,7 @@ export const MenuItems = () => {
         <Button variant="myButtons" className="font-semibold gap-1" asChild>
           <Link href="/add-note" className="flex items-center">
             <Plus className="w-5 h-5" />
-            Add a note
+            Add notes
           </Link>
         </Button>
       </nav>

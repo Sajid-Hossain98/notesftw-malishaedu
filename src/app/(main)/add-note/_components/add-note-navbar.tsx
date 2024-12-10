@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { NotebookPen, School } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,14 +13,14 @@ export const AddNoteNavbar = () => {
   const routes = useMemo(
     () => [
       {
-        label: "Add Note",
-        active: pathname !== "/add-note",
+        label: "Add a note",
+        active: pathname === "/add-note",
         href: "/add-note",
         icon: NotebookPen,
       },
       {
-        label: "Add University",
-        active: pathname === "/add-an-university",
+        label: "Add an university",
+        active: pathname === "/add-note/add-university",
         href: "/add-note/add-university",
         icon: School,
       },
@@ -27,11 +29,18 @@ export const AddNoteNavbar = () => {
   );
 
   return (
-    <div>
+    <div className="w-full bg-[#185339] rounded-full flex justify-around overflow-hidden my-4">
       {routes.map((route) => (
-        <Link key={route.href} href={route.href}>
-          {route.label}
-        </Link>
+        <Button
+          asChild
+          key={route.href}
+          className={cn(
+            "w-full text-lg",
+            route.active && "text-black bg-[#ebf2fa] hover:bg-[#ebf2fa]"
+          )}
+        >
+          <Link href={route.href}>{route.label}</Link>
+        </Button>
       ))}
     </div>
   );
