@@ -20,23 +20,35 @@ import {
 import { useRouter } from "next/navigation";
 
 const addUniversityFormSchema = z.object({
-  universityShortForm: z.string().max(8, {
-    message:
-      "Short name of the university is required and it should not be more than 8 characters!",
-  }),
-  universityFullName: z.string().min(5, {
-    message: "Full name of the university is required!",
-  }),
+  universityShortForm: z
+    .string()
+    .min(1, {
+      message: "Required and should have at least 1 character!",
+    })
+    .max(8, {
+      message: "Should not be more than 8 characters!",
+    })
+    .refine((value) => /^[a-zA-Z]+$/.test(value), {
+      message: "Only alphabetic letters (a-z, A-Z) are allowed!",
+    }),
+  universityFullName: z
+    .string()
+    .min(5, {
+      message: "Full name of the university is required!",
+    })
+    .max(80, {
+      message: "Should not be more than 80 characters!",
+    }),
   logoImage: z
     .instanceof(FileList, {
-      message: "Please select an image of university logo.",
+      message: "Please select an image of the university logo.",
     })
     .refine((file) => file.length == 1, {
       message: "Please upload a PNG image file.",
     }),
 });
 
-export const AddUniversity = () => {
+export const AddAnUniversity = () => {
   const router = useRouter();
   const { storage } = createSupabaseClient();
 
