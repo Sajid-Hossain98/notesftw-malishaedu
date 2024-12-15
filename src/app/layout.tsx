@@ -12,6 +12,10 @@ const geistSans = localFont({
   weight: "100 900",
 });
 
+const lightAvenir = localFont({
+  src: "../app/fonts/Avenir-LT-W01-65-Medium-Book.woff",
+});
+
 export const metadata: Metadata = {
   title: "Notes For The Win :)",
   description:
@@ -29,7 +33,8 @@ export default function RootLayout({
         <body
           className={cn(
             "bg-[#0b2c24] text-[#edf2f4] w-[92vw] mx-auto h-screen overflow-hidden",
-            geistSans.className
+            geistSans.className,
+            lightAvenir.className
           )}
           suppressHydrationWarning={true}
         >

@@ -17,8 +17,6 @@ const AddNotePage = async () => {
     },
   });
 
-  console.log(noteTypes);
-
   return (
     <div className="">
       <AddANote
