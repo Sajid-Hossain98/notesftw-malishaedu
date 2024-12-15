@@ -52,6 +52,7 @@ model University {
 
 model Note {
   id          String         @id @default(uuid())
+  title       String         @db.Text
   description String         @db.Text
   approval    ApprovalStatus @default(PENDING)
 

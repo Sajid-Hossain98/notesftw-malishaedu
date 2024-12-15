@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface AddANoteProps {
   universityShortNameData: { universityShortName: string }[];
@@ -53,6 +55,8 @@ export const AddANote = ({
   universityShortNameData,
   noteTypes,
 }: AddANoteProps) => {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof addANoteFormSchema>>({
     resolver: zodResolver(addANoteFormSchema),
     defaultValues: {
@@ -79,16 +83,16 @@ export const AddANote = ({
 
   //onSubmit handler
   const onSubmit = async (values: z.infer<typeof addANoteFormSchema>) => {
-    console.log("Title:", values.title);
+    const valuesToSend = {
+      title: values.title,
+      universityShortForm: values.universityShortForm,
+      noteType: values.noteType,
+      noteDescription: values.noteDescription,
+    };
 
-    console.log(
-      "Selected University Short Name:",
-      values.universityShortForm.value
-    );
-
-    console.log("Selected type:", values.noteType.label);
-
-    console.log("Description:", values.noteDescription);
+    await axios.post("api/add-note", valuesToSend);
+    form.reset();
+    router.refresh();
   };
 
   return (
