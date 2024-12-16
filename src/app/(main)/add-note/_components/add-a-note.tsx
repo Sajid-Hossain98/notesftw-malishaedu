@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Editor } from "@/components/editor";
+import { Frown, HeartCrack } from "lucide-react";
 
 interface AddANoteProps {
   universityShortNameData: { universityShortName: string }[];
@@ -38,7 +39,7 @@ const addANoteFormSchema = z.object({
       message: "oops, you forgot to select one!",
     }),
   noteDescription: z.string().min(10, {
-    message: "Please try to be as specific as possible.",
+    message: "Please try to be as descriptive as possible.",
   }),
   noteType: z
     .object({
@@ -123,18 +124,43 @@ export const AddANote = ({
           )}
         />
 
-        <div className="flex flex-col justify-between w-full space-y-6 sm:flex-row sm:space-y-0">
+        <div className="flex flex-col justify-between w-full space-y-6 sm:flex-row sm:space-y-0 gap-3">
           <FormField
             control={form.control}
             name="universityShortForm"
             render={({ field }) => (
-              <FormItem className="sm:w-[48%]">
+              <FormItem className="sm:w-[50%]">
                 <FormLabel>University short name</FormLabel>
                 <FormControl>
                   <Select
                     {...field}
                     value={field.value}
                     options={shortNameOptions}
+                    className="text-black"
+                    isDisabled={isLoading}
+                    noOptionsMessage={() => (
+                      <div className="flex items-center justify-center gap-2">
+                        <Frown className="w-14 h-14 text-rose-800" />
+                        <span>
+                          Looks like, the university you are looking for is not
+                          added yet, kindly contact Admin.
+                        </span>
+                      </div>
+                    )}
+                    styles={{
+                      noOptionsMessage: (baseStyles) => ({
+                        ...baseStyles,
+                        color: "GrayText",
+                        fontSize: "20px",
+                        backgroundColor: "#ebf2fa",
+                      }),
+                      control: (baseStyles) => ({
+                        ...baseStyles,
+                        backgroundColor: "#ebf2fa",
+                        cursor: "pointer",
+                      }),
+                    }}
+                    placeholder="Select a university..."
                     onChange={(uniShortNameSelectedOption) =>
                       field.onChange(uniShortNameSelectedOption)
                     }
@@ -150,13 +176,35 @@ export const AddANote = ({
             control={form.control}
             name="noteType"
             render={({ field }) => (
-              <FormItem className="sm:w-[48%]">
+              <FormItem className="sm:w-[50%]">
                 <FormLabel>Type of note</FormLabel>
                 <FormControl>
                   <Select
                     {...field}
                     value={field.value}
                     options={noteTypesOptions}
+                    className="text-black"
+                    isDisabled={isLoading}
+                    noOptionsMessage={() => (
+                      <div className="flex items-center justify-center gap-2">
+                        <HeartCrack className="w-5 h-5" />
+                        <span>We don't have that type</span>
+                      </div>
+                    )}
+                    styles={{
+                      noOptionsMessage: (baseStyles) => ({
+                        ...baseStyles,
+                        color: "GrayText",
+                        fontSize: "20px",
+                        backgroundColor: "#ebf2fa",
+                      }),
+                      control: (baseStyles) => ({
+                        ...baseStyles,
+                        backgroundColor: "#ebf2fa",
+                        cursor: "pointer",
+                      }),
+                    }}
+                    placeholder="Select a type..."
                     onChange={(noteTypeSelectedOption) =>
                       field.onChange(noteTypeSelectedOption)
                     }
@@ -176,7 +224,7 @@ export const AddANote = ({
             <FormItem className="md:max-h-80">
               <FormLabel>Description of the note</FormLabel>
               <FormControl>
-                <Editor {...field} />
+                <Editor {...field} placeholder={"Click here to write..."} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -185,7 +233,7 @@ export const AddANote = ({
         <Button
           type="submit"
           variant={"myButtons"}
-          className="w-full text-lg !mt-8"
+          className="w-full text-lg md:text-xl !mt-8 font-semibold"
         >
           Create
         </Button>

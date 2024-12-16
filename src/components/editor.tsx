@@ -7,9 +7,10 @@ import "react-quill/dist/quill.snow.css";
 interface EditorProps {
   onChange: (value: string) => void;
   value: string;
+  placeholder: string;
 }
 
-export const Editor = ({ onChange, value }: EditorProps) => {
+export const Editor = ({ onChange, value, placeholder }: EditorProps) => {
   const ReactQuill = useMemo(
     () =>
       dynamic(() => import("react-quill"), {
@@ -20,7 +21,12 @@ export const Editor = ({ onChange, value }: EditorProps) => {
 
   return (
     <div className="bg-[#ebf2fa] text-black rounded-xl overflow-hidden">
-      <ReactQuill theme="snow" value={value} onChange={onChange} />
+      <ReactQuill
+        theme="snow"
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
     </div>
   );
 };
