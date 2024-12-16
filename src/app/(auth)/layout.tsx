@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col items-center gap-4 justify-center h-screen">
+    <div className="flex flex-col items-center gap-4 justify-start h-screen">
       {children}
       <Button
         variant="link"

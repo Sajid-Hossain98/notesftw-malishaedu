@@ -19,7 +19,7 @@ export const AddNoteNavbar = () => {
         icon: NotebookPen,
       },
       {
-        label: "Add an university",
+        label: "Add a university",
         active: pathname === "/add-note/add-university",
         href: "/add-note/add-university",
         icon: School,
@@ -29,17 +29,19 @@ export const AddNoteNavbar = () => {
   );
 
   return (
-    <div className="w-full bg-[#185339] rounded-full flex justify-around overflow-hidden my-4">
+    <div className="lg:max-w-[80%] md:max-w-[70%] mx-auto bg-[#185339] rounded-full flex justify-around overflow-hidden my-4">
       {routes.map((route) => (
         <Button
           asChild
           key={route.href}
           className={cn(
-            "w-full text-lg",
+            "w-full text-base md:text-lg",
             route.active && "text-black bg-[#ebf2fa] hover:bg-[#ebf2fa]"
           )}
         >
-          <Link href={route.href}>{route.label}</Link>
+          <Link href={route.href} className="font-semibold h-full py-1 md:py-2">
+            {route.label}
+          </Link>
         </Button>
       ))}
     </div>

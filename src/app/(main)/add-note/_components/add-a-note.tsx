@@ -97,7 +97,10 @@ export const AddANote = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="md:mt-10 mt-4 md:space-y-8 space-y-5 lg:max-w-[80%] md:max-w-[70%] mx-auto relative mb-10"
+      >
         <FormField
           control={form.control}
           name="title"
@@ -105,19 +108,23 @@ export const AddANote = ({
             <FormItem>
               <FormLabel>Title of the note</FormLabel>
               <FormControl>
-                <Input placeholder="Enter the title of the note" {...field} />
+                <Input
+                  className="md:py-3 md:text-xl text-lg bg-[#ebf2fa] text-black rounded-xl"
+                  placeholder="Enter the title of the note"
+                  {...field}
+                />
               </FormControl>
-              <FormMessage className="absolute" />
+              <FormMessage />
             </FormItem>
           )}
         />
 
-        <div className="flex w-full justify-between">
+        <div className="flex flex-col justify-between w-full space-y-6 sm:flex-row sm:space-y-0">
           <FormField
             control={form.control}
             name="universityShortForm"
             render={({ field }) => (
-              <FormItem className="w-[48%]">
+              <FormItem className="sm:w-[48%]">
                 <FormLabel>University short name</FormLabel>
                 <FormControl>
                   <Select
@@ -130,7 +137,7 @@ export const AddANote = ({
                     isClearable
                   />
                 </FormControl>
-                <FormMessage className="absolute" />
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -139,7 +146,7 @@ export const AddANote = ({
             control={form.control}
             name="noteType"
             render={({ field }) => (
-              <FormItem className="w-[48%]">
+              <FormItem className="sm:w-[48%]">
                 <FormLabel>Type of note</FormLabel>
                 <FormControl>
                   <Select
@@ -152,7 +159,7 @@ export const AddANote = ({
                     isClearable
                   />
                 </FormControl>
-                <FormMessage className="absolute" />
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -162,19 +169,22 @@ export const AddANote = ({
           control={form.control}
           name="noteDescription"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="max-h-40">
               <FormLabel>Description of the note</FormLabel>
               <FormControl>
                 <Textarea
+                  className="placeholder:text-base placeholder-gray-400 text-black bg-[#ebf2fa]"
                   {...field}
                   placeholder="Please describe the note properly."
                 />
               </FormControl>
-              <FormMessage className="absolute" />
+              <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Create</Button>
+        <Button type="submit" variant={"myButtons"} className="w-full text-lg">
+          Create
+        </Button>
       </form>
     </Form>
   );

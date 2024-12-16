@@ -4,7 +4,7 @@ const AddNoteLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <AddNoteNavbar />
-      {children}
+      <div className="overflow-auto max-h-[80dvh] pb-4">{children}</div>
     </div>
   );
 };

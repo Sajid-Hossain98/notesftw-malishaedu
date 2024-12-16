@@ -32,7 +32,7 @@ export default function RootLayout({
       <html lang="en">
         <body
           className={cn(
-            "bg-[#0b2c24] text-[#edf2f4] w-[92vw] mx-auto h-screen overflow-hidden",
+            "bg-[#0b2c24] text-[#edf2f4] w-[92vw] mx-auto h-[100dvh] overflow-hidden",
             geistSans.className,
             lightAvenir.className
           )}
