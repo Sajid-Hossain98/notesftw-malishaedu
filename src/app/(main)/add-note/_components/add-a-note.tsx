@@ -15,9 +15,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { Editor } from "@/components/editor";
 
 interface AddANoteProps {
   universityShortNameData: { universityShortName: string }[];
@@ -81,6 +81,9 @@ export const AddANote = ({
     value: type.name,
   }));
 
+  //getting the form state(loading)
+  const isLoading = form.formState.isSubmitting;
+
   //onSubmit handler
   const onSubmit = async (values: z.infer<typeof addANoteFormSchema>) => {
     const valuesToSend = {
@@ -109,6 +112,7 @@ export const AddANote = ({
               <FormLabel>Title of the note</FormLabel>
               <FormControl>
                 <Input
+                  disabled={isLoading}
                   className="md:py-3 md:text-xl text-lg bg-[#ebf2fa] text-black rounded-xl"
                   placeholder="Enter the title of the note"
                   {...field}
@@ -137,7 +141,7 @@ export const AddANote = ({
                     isClearable
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="sm:left-0" />
               </FormItem>
             )}
           />
@@ -169,20 +173,20 @@ export const AddANote = ({
           control={form.control}
           name="noteDescription"
           render={({ field }) => (
-            <FormItem className="max-h-40">
+            <FormItem className="md:max-h-80">
               <FormLabel>Description of the note</FormLabel>
               <FormControl>
-                <Textarea
-                  className="placeholder:text-base placeholder-gray-400 text-black bg-[#ebf2fa]"
-                  {...field}
-                  placeholder="Please describe the note properly."
-                />
+                <Editor {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" variant={"myButtons"} className="w-full text-lg">
+        <Button
+          type="submit"
+          variant={"myButtons"}
+          className="w-full text-lg !mt-8"
+        >
           Create
         </Button>
       </form>
