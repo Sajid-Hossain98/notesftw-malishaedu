@@ -17,6 +17,7 @@ export const Logo = ({ width, height, className }: LogoProps) => {
           alt="MalishaEdu's Logo"
           width={width}
           height={height}
+          loading="eager"
           className={cn(className)}
         />
       </div>
