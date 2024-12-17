@@ -19,6 +19,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Editor } from "@/components/editor";
 import { Frown, HeartCrack } from "lucide-react";
+import { toast } from "sonner";
 
 interface AddANoteProps {
   universityShortNameData: { universityShortName: string }[];
@@ -87,16 +88,32 @@ export const AddANote = ({
 
   //onSubmit handler
   const onSubmit = async (values: z.infer<typeof addANoteFormSchema>) => {
-    const valuesToSend = {
-      title: values.title,
-      universityShortForm: values.universityShortForm,
-      noteType: values.noteType,
-      noteDescription: values.noteDescription,
-    };
+    try {
+      const valuesToSend = {
+        title: values.title,
+        universityShortForm: values.universityShortForm,
+        noteType: values.noteType,
+        noteDescription: values.noteDescription,
+      };
 
-    await axios.post("api/add-note", valuesToSend);
-    form.reset();
-    router.refresh();
+      await axios.post("api/add-note", valuesToSend);
+
+      toast.success("Successfully created the note.");
+
+      form.reset();
+      router.refresh();
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(
+          <div>
+            <span className="font-semibold">Something went wrong!</span>
+            <p className="text-xs">{error.message}</p>
+          </div>
+        );
+      } else {
+        toast.error("Something went wrong!");
+      }
+    }
   };
 
   return (
@@ -140,7 +157,7 @@ export const AddANote = ({
                     isDisabled={isLoading}
                     noOptionsMessage={() => (
                       <div className="flex items-center justify-center gap-2">
-                        <Frown className="w-14 h-14 text-rose-800" />
+                        <Frown className="w-14 h-14 text-rose-600" />
                         <span>
                           Looks like, the university you are looking for is not
                           added yet, kindly contact Admin.
@@ -187,8 +204,8 @@ export const AddANote = ({
                     isDisabled={isLoading}
                     noOptionsMessage={() => (
                       <div className="flex items-center justify-center gap-2">
-                        <HeartCrack className="w-5 h-5" />
-                        <span>We don't have that type</span>
+                        <HeartCrack className="w-5 h-5 text-rose-600" />
+                        <span>We don&apos;t have that type</span>
                       </div>
                     )}
                     styles={{

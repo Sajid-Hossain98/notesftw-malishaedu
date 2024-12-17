@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,6 +40,7 @@ export default function RootLayout({
           suppressHydrationWarning={true}
         >
           <Header>{children}</Header>
+          <Toaster theme="system" richColors offset={50} />
         </body>
       </html>
     </ClerkProvider>
