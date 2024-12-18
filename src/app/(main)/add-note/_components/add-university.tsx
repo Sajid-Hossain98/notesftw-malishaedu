@@ -91,11 +91,11 @@ export const AddAnUniversity = () => {
 
       const valuesToSend = {
         universityFullName: values.universityFullName,
-        universityShortForm: values.universityShortForm,
+        universityShortForm: values.universityShortForm.toUpperCase(),
         logoImage: imageData?.path,
       };
 
-      await axios.post("api/add-university", valuesToSend);
+      await axios.post("/api/add-university", valuesToSend);
 
       form.reset();
       router.refresh();
@@ -107,7 +107,10 @@ export const AddAnUniversity = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="md:mt-10 mt-4 md:space-y-8 space-y-5 lg:max-w-[80%] md:max-w-[70%] mx-auto relative mb-10"
+      >
         <FormField
           control={form.control}
           name="universityShortForm"
@@ -116,6 +119,7 @@ export const AddAnUniversity = () => {
               <FormLabel>University short name</FormLabel>
               <FormControl>
                 <Input
+                  className="md:py-3 md:text-xl text-lg bg-[#ebf2fa] text-black rounded-xl"
                   disabled={isLoading}
                   placeholder="Enter the short name of the university"
                   {...field}
@@ -134,6 +138,7 @@ export const AddAnUniversity = () => {
               <FormLabel>University full name</FormLabel>
               <FormControl>
                 <Input
+                  className="md:py-3 md:text-xl text-lg bg-[#ebf2fa] text-black rounded-xl"
                   disabled={isLoading}
                   placeholder="Enter the full name of the university"
                   {...field}
@@ -152,6 +157,7 @@ export const AddAnUniversity = () => {
               <FormLabel>University logo</FormLabel>
               <FormControl>
                 <Input
+                  className="bg-[#ebf2fa] text-black text-lg rounded-xl file:bg-slate-400 cursor-pointer py-0 file:py-2 px-0 md:px-0 file:px-4"
                   type="file"
                   accept="image/png"
                   disabled={isLoading}
@@ -163,7 +169,13 @@ export const AddAnUniversity = () => {
           )}
         />
 
-        <Button type="submit">Create</Button>
+        <Button
+          variant={"myButtons"}
+          className="w-full text-lg md:text-xl !mt-8 font-semibold"
+          type="submit"
+        >
+          Create
+        </Button>
       </form>
     </Form>
   );
