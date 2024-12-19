@@ -41,7 +41,7 @@ model User {
 
 model University {
   id                  String @id @default(uuid())
-  universityShortName String
+  universityShortName String @unique
   universityFullName  String
   logoImage           String @db.Text
 

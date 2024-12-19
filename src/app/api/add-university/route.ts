@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { currentUser } from "@clerk/nextjs/server";
+import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -20,9 +21,26 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json(university);
-  } catch (error) {
+    return NextResponse.json(
+      { message: "University added successfully!", data: university },
+      { status: 200 }
+    );
+  } catch (error: unknown) {
     console.log("[ADD-UNIVERSITY]", error);
+
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2002" &&
+      error.meta?.target
+    ) {
+      return NextResponse.json(
+        {
+          error: `The university already exists`,
+          details: error.meta.target, // Optional: include more error details
+        },
+        { status: 400 }
+      );
+    }
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

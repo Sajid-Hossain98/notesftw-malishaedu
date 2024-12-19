@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const addUniversityFormSchema = z.object({
   universityShortForm: z
@@ -85,8 +86,8 @@ export const AddAnUniversity = () => {
         });
 
       if (imageError) {
-        //TODO: handle error messages with sonner
         console.log("Image error");
+        toast.error("Failed to upload the image. Please try again.");
       }
 
       const valuesToSend = {
@@ -97,11 +98,23 @@ export const AddAnUniversity = () => {
 
       await axios.post("/api/add-university", valuesToSend);
 
+      toast.success(`Successfully created ${values.universityFullName}`);
+
       form.reset();
       router.refresh();
     } catch (error) {
-      //TODO: handle error messages with sonner
-      console.log("Error", error);
+      if (axios.isAxiosError(error) && error.response) {
+        const backendError = error.response.data?.error;
+
+        toast.error(
+          <div className="inline-flex items-center gap-2">
+            <span className="font-semibold">Error:</span>
+            <p>{backendError || "Something went wrong!"}</p>
+          </div>
+        );
+      } else {
+        toast.error("Something went wrong!");
+      }
     }
   };
 
