@@ -1,6 +1,7 @@
 import { currentUserData } from "@/lib/current-user-data";
 import { db } from "@/lib/db";
 import { currentUser } from "@clerk/nextjs/server";
+import { UserRole } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -16,8 +17,8 @@ export async function POST(req: Request) {
     }
 
     if (
-      currentlyLoggedInUserData?.role !== "ADMIN" &&
-      currentlyLoggedInUserData?.role !== "MODERATOR"
+      currentlyLoggedInUserData?.role !== UserRole.ADMIN &&
+      currentlyLoggedInUserData?.role !== UserRole.MODERATOR
     ) {
       return new NextResponse("Your are not allowed to perform this task", {
         status: 403,

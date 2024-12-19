@@ -1,6 +1,7 @@
+import { currentUserData } from "@/lib/current-user-data";
 import { db } from "@/lib/db";
 import { currentUser } from "@clerk/nextjs/server";
-import { Prisma } from "@prisma/client";
+import { Prisma, UserRole } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -9,8 +10,16 @@ export async function POST(req: Request) {
       await req.json();
 
     const currentlyLoggedInUser = await currentUser();
+    const currentlyLoggedInUserData = await currentUserData();
+
     if (!currentlyLoggedInUser) {
       return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    if (currentlyLoggedInUserData?.role !== UserRole.ADMIN) {
+      return new NextResponse("Your are not allowed to perform this task", {
+        status: 403,
+      });
     }
 
     const university = await db.university.create({
@@ -36,7 +45,7 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           error: `The university already exists`,
-          details: error.meta.target, // Optional: include more error details
+          details: error.meta.target, // Optional - for more error details
         },
         { status: 400 }
       );

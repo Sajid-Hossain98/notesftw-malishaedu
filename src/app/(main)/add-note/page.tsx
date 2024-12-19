@@ -1,10 +1,10 @@
-// import { initialUser } from "@/lib/initialUser";
-// import Link from "next/link";
+import { initialUser } from "@/lib/initialUser";
 import { AddANote } from "./_components/add-a-note";
 import { db } from "@/lib/db";
 
 const AddNotePage = async () => {
-  // const user = await initialUser();
+  await initialUser();
+
   const universityShortNameData = await db.university.findMany({
     select: {
       universityShortName: true,
@@ -18,7 +18,7 @@ const AddNotePage = async () => {
   });
 
   return (
-    <div className="">
+    <div>
       <AddANote
         universityShortNameData={universityShortNameData}
         noteTypes={noteTypes}
