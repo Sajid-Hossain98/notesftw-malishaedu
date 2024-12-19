@@ -40,13 +40,12 @@ const addUniversityFormSchema = z.object({
     .max(80, {
       message: "Should not be more than 80 characters!",
     }),
-  logoImage: z
-    .instanceof(FileList, {
-      message: "Please select an image of the university logo.",
-    })
-    .refine((file) => file.length == 1, {
-      message: "Please upload a PNG image file.",
-    }),
+  logoImage:
+    typeof window === "undefined"
+      ? z.any()
+      : z.instanceof(FileList).refine((file) => file.length == 1, {
+          message: "Please upload a PNG image file.",
+        }),
 });
 
 export const AddAnUniversity = () => {
