@@ -6,6 +6,7 @@ import "./globals.css";
 import { Header } from "@/components/header";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
+import { siteConfig } from "@/config/site";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,9 +19,23 @@ const lightAvenir = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Notes For The Win :)",
-  description:
-    "It is an application that will be helpful to quickly check for any notes/guidance to apply in different universities",
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  icons: [
+    {
+      media: "(prefers-color-scheme: light)",
+      url: "/logo-light.svg",
+      href: "/logo-light.svg",
+    },
+    {
+      media: "(prefers-color-scheme: dark)",
+      url: "/logo-dark.svg",
+      href: "/logo-dark.svg",
+    },
+  ],
 };
 
 export default function RootLayout({
