@@ -18,8 +18,9 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Editor } from "@/components/editor";
-import { Frown, HeartCrack } from "lucide-react";
+import { Frown, HeartCrack, Info } from "lucide-react";
 import { toast } from "sonner";
+import { ActionTooltip } from "@/components/action-tooltip";
 
 interface AddANoteProps {
   universityShortNameData: { universityShortName: string }[];
@@ -194,7 +195,12 @@ export const AddANote = ({
             name="noteType"
             render={({ field }) => (
               <FormItem className="sm:w-[50%]">
-                <FormLabel>Type of note</FormLabel>
+                <FormLabel className="flex items-center gap-2">
+                  Type of note
+                  <ActionTooltip label="Select a type that suits the best.">
+                    <Info className="h-5 w-5" />
+                  </ActionTooltip>
+                </FormLabel>
                 <FormControl>
                   <Select
                     {...field}
