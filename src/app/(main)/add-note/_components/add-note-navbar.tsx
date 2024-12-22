@@ -40,7 +40,8 @@ export const AddNoteNavbar = () => {
           )}
         >
           <Link href={route.href} className="font-semibold h-full py-1 md:py-2">
-            {route.label}
+            <route.icon />
+            <p>{route.label}</p>
           </Link>
         </Button>
       ))}
