@@ -24,18 +24,18 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  icons: [
-    {
-      media: "(prefers-color-scheme: light)",
-      url: "/logo-light.svg",
-      href: "/logo-light.svg",
-    },
-    {
-      media: "(prefers-color-scheme: dark)",
-      url: "/logo-dark.svg",
-      href: "/logo-dark.svg",
-    },
-  ],
+  // icons: [
+  //   {
+  //     media: "(prefers-color-scheme: light)",
+  //     url: "/logo-dark.svg",
+  //     href: "/logo-dark.svg",
+  //   },
+  //   {
+  //     media: "(prefers-color-scheme: dark)",
+  //     url: "/logo-light.svg",
+  //     href: "/logo-light.svg",
+  //   },
+  // ],
 };
 
 export default function RootLayout({
