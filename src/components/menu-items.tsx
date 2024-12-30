@@ -5,16 +5,23 @@ import { Button } from "@/components/ui/button";
 
 export const MenuItems = () => {
   return (
-    <div className="hidden gap-3 md:flex">
-      <nav>
-        <Button variant="myButtons" className="font-semibold gap-1">
+    <>
+      <nav className="w-full mt-10 md:mt-0">
+        <Button
+          variant="myButtons"
+          className="font-semibold gap-1 md:w-fit w-full"
+        >
           <BookHeart className="w-5 h-5" />
           Code of conduct
         </Button>
       </nav>
 
-      <nav>
-        <Button variant="myButtons" className="font-semibold gap-1" asChild>
+      <nav className="w-full">
+        <Button
+          variant="myButtons"
+          className="font-semibold gap-1 md:w-fit w-full"
+          asChild
+        >
           <Link href="/add-note" className="flex items-center">
             <Plus className="w-5 h-5" />
             Add notes
@@ -22,13 +29,17 @@ export const MenuItems = () => {
         </Button>
       </nav>
 
-      <nav>
-        <Button variant="myButtons" className="font-semibold gap-1" asChild>
+      <nav className="w-full">
+        <Button
+          variant="myButtons"
+          className="font-semibold gap-1 md:w-fit w-full"
+          asChild
+        >
           <Link href="/admin">
             <Shield strokeWidth={3} className="!h-6 !w-6" />
           </Link>
         </Button>
       </nav>
-    </div>
+    </>
   );
 };

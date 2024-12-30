@@ -17,7 +17,7 @@ export const MenuBar = () => {
         <motion.button
           initial={false}
           onClick={() => setActive((prev) => !prev)}
-          className="relative h-10 w-10 md:hidden"
+          className="relative h-10 w-10"
           animate={active ? "open" : "closed"}
         >
           {/* Top bar */}
