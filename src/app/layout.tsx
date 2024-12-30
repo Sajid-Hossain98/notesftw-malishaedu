@@ -47,15 +47,19 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={cn(
-            "bg-[#0b2c24] text-[#edf2f4] w-[92vw] mx-auto h-[100dvh] overflow-hidden",
-            geistSans.className,
-            lightAvenir.className
-          )}
+          className="bg-[#0b2c24] text-[#ebf2fa] overflow-hidden"
           suppressHydrationWarning={true}
         >
-          <Header>{children}</Header>
-          <Toaster theme="system" richColors offset={50} />
+          <div
+            className={cn(
+              "w-[92vw] mx-auto h-[100dvh]",
+              geistSans.className,
+              lightAvenir.className
+            )}
+          >
+            <Header>{children}</Header>
+            <Toaster theme="system" richColors offset={50} />
+          </div>
         </body>
       </html>
     </ClerkProvider>

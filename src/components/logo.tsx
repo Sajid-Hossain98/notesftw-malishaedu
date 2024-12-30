@@ -13,12 +13,12 @@ export const Logo = ({ width, height, className }: LogoProps) => {
     <Link href="/">
       <div>
         <Image
-          src="/malishaedu-logo-with-border.svg"
+          src="/logo-light.svg"
           alt="MalishaEdu's Logo"
           width={width}
           height={height}
           loading="eager"
-          className={cn(className)}
+          className={cn("w-12 md:w-14", className)}
         />
       </div>
     </Link>
