@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 
 export const SearchBar = () => {
   return (
-    <div className="relative h-16">
+    <div className="relative md:h-16">
       <Image
         src="/malishaedu-logo.svg"
         height={56}

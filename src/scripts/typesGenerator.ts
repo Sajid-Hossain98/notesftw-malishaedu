@@ -7,9 +7,11 @@ async function main() {
   try {
     await database.type.createMany({
       data: [
-        { name: "General", color: "#000000", bgColor: "bg-rose-300" },
+        { name: "General", color: "#000", bgColor: "bg-rose-300" },
         { name: "Apply", color: "#000000", bgColor: "bg-slate-200" },
         { name: "Submit", color: "#ebf2fa", bgColor: "bg-green-400" },
+        { name: "Assessment", color: "#ebf4fa", bgColor: "bg-blue-400" },
+        { name: "Offer", color: "#ebf2fa", bgColor: "bg-pink-400" },
       ],
     });
 

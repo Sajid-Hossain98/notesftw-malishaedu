@@ -14,7 +14,7 @@ export const Logo = ({ width, height, className }: LogoProps) => {
       <div>
         <Image
           src="/logo-light.svg"
-          alt="MalishaEdu's Logo"
+          alt="Logo"
           width={width}
           height={height}
           loading="eager"
