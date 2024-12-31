@@ -13,7 +13,7 @@ export const Logo = ({ width, height, className }: LogoProps) => {
     <Link href="/">
       <div>
         <Image
-          src="/logo-light.svg"
+          src="/static/logo-light.svg"
           alt="Logo"
           width={width}
           height={height}

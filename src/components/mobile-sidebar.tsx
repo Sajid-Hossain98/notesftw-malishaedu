@@ -4,9 +4,10 @@ import { useMobileSidebar } from "@/hooks/use-mobile-sidebar";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { Sheet, SheetContent } from "./ui/sheet";
+import { Sheet, SheetContent, SheetTitle } from "./ui/sheet";
 import { MenuItems } from "./menu-items";
 import { Menu } from "lucide-react";
+import { Logo } from "./logo";
 
 export const MobileSidebar = () => {
   const pathname = usePathname();
@@ -49,6 +50,13 @@ export const MobileSidebar = () => {
           side="right"
           className="flex flex-col items-center bg-[#0b2c24] w-[60%]"
         >
+          <SheetTitle>
+            <Logo
+              height={20}
+              width={20}
+              className="w-10 bg-black rounded-full p-1 select-none"
+            />
+          </SheetTitle>
           <MenuItems />
         </SheetContent>
       </Sheet>
