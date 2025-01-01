@@ -7,6 +7,7 @@ import { Header } from "@/components/header";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/config/site";
+import { ModalProvider } from "@/components/providers/modal-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -47,7 +48,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className="bg-[#0b2c24] text-[#ebf2fa] overflow-hidden"
+          className="bg-[#000000] text-[#F7F7F7] overflow-hidden"
           suppressHydrationWarning={true}
         >
           <div
@@ -57,6 +58,7 @@ export default function RootLayout({
               lightAvenir.className
             )}
           >
+            <ModalProvider />
             <Header>{children}</Header>
             <Toaster theme="system" richColors offset={50} />
           </div>

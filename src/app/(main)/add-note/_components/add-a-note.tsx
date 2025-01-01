@@ -132,7 +132,7 @@ export const AddANote = ({
               <FormControl>
                 <Input
                   disabled={isLoading}
-                  className="md:py-3 md:text-xl text-lg bg-[#ebf2fa] text-black rounded-xl"
+                  className="md:py-3 md:text-xl text-lg bg-[#F7F7F7] text-black rounded-xl"
                   placeholder="Enter the title of the note"
                   {...field}
                 />
@@ -170,11 +170,11 @@ export const AddANote = ({
                         ...baseStyles,
                         color: "GrayText",
                         fontSize: "20px",
-                        backgroundColor: "#ebf2fa",
+                        backgroundColor: "#F7F7F7",
                       }),
                       control: (baseStyles) => ({
                         ...baseStyles,
-                        backgroundColor: "#ebf2fa",
+                        backgroundColor: "#F7F7F7",
                         cursor: "pointer",
                       }),
                     }}
@@ -219,11 +219,11 @@ export const AddANote = ({
                         ...baseStyles,
                         color: "GrayText",
                         fontSize: "20px",
-                        backgroundColor: "#ebf2fa",
+                        backgroundColor: "#F7F7F7",
                       }),
                       control: (baseStyles) => ({
                         ...baseStyles,
-                        backgroundColor: "#ebf2fa",
+                        backgroundColor: "#F7F7F7",
                         cursor: "pointer",
                       }),
                     }}

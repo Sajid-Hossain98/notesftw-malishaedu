@@ -18,7 +18,7 @@ export const SearchBar = () => {
       </span>
 
       <Input
-        className="bg-[#185339] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] caret-[#edf2f4] placeholder-gray-500"
+        className="bg-[#242424] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] caret-[#edf2f4] placeholder-gray-500"
         type="text"
         placeholder="Search: e.g., #WIT, #YZU, #NTU, #NJUT"
       />

@@ -48,13 +48,13 @@ export const MobileSidebar = () => {
       <Sheet open={isMobileSidebarOpen} onOpenChange={onMobileSidebarClose}>
         <SheetContent
           side="right"
-          className="flex flex-col items-center bg-[#0b2c24] w-[60%]"
+          className="flex flex-col items-center bg-[#000000] w-[60%]"
         >
-          <SheetTitle>
+          <SheetTitle onClick={onMobileSidebarClose}>
             <Logo
               height={20}
               width={20}
-              className="w-10 bg-black rounded-full p-1 select-none"
+              className="w-10 bg-gray-800 rounded-full p-2 select-none"
             />
           </SheetTitle>
           <MenuItems />
