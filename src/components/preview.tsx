@@ -1,14 +1,16 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
 import "react-quill/dist/quill.bubble.css";
 
 interface PreviewProps {
-  value: string;
+  value: string | undefined;
+  className?: string;
 }
 
-export const Preview = ({ value }: PreviewProps) => {
+export const Preview = ({ value, className }: PreviewProps) => {
   const ReactQuill = useMemo(
     () =>
       dynamic(() => import("react-quill"), {
@@ -17,5 +19,12 @@ export const Preview = ({ value }: PreviewProps) => {
     []
   );
 
-  return <ReactQuill theme="bubble" value={value} readOnly />;
+  return (
+    <ReactQuill
+      theme="bubble"
+      value={value}
+      readOnly
+      className={cn(className)}
+    />
+  );
 };

@@ -7,13 +7,13 @@ export const SearchBar = () => {
     <div className="relative md:h-16">
       <Image
         src="/malishaedu-logo.svg"
-        height={56}
-        width={56}
+        height={54}
+        width={54}
         alt="MalishaEdu's Logo"
-        className="absolute hidden transform -translate-y-1/2 bg-white rounded-full top-1/2 left-1 aspect-square md:flex"
+        className="absolute hidden transform -translate-y-1/2 bg-white rounded-full top-1/2 left-1.5 aspect-square md:flex"
       />
 
-      <span className="absolute hidden transform -translate-y-1/2 bg-white rounded-full top-1/2 right-1 aspect-square md:flex h-14 w-14">
+      <span className="absolute hidden transform -translate-y-1/2 bg-white rounded-full top-1/2 right-1.5 aspect-square md:flex h-[54px] w-[54px]">
         <Search className="h-10 w-10 text-black m-auto stroke-2" />
       </span>
 

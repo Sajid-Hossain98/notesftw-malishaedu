@@ -9,11 +9,12 @@ export default async function Home() {
       <div className="min-h-[70vh] bg-[#242424] rounded-xl p-3 md:p-5">
         <NotesList
           getAll={false}
+          sliceCount={21}
           classNames={{
             notesContainer:
-              "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2",
-            noteTitle: "text-xl font-semibold truncate",
-            noteDescription: "truncate",
+              "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 md:gap-3",
+            noteTitle: "text-xl font-semibold truncate select-none",
+            noteDescription: "truncate select-none",
           }}
         />
       </div>

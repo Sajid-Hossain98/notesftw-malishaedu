@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-// import { NotesModal } from "../modals/notes-modal";
+import { NotesViewModal } from "../modals/notes-view-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -14,5 +14,9 @@ export const ModalProvider = () => {
     return null;
   }
 
-  return <>{/* <NotesModal /> */}</>;
+  return (
+    <>
+      <NotesViewModal />
+    </>
+  );
 };
