@@ -6,7 +6,7 @@ export type NotesWithUniTypeUser = (Note & {
     universityShortName: string;
     logoImage: string;
   };
-  type: { bgColor: string };
+  type: { name: string; bgColor: string; color: string };
 })[];
 
 export type SingleNotesWithUniTypeUser = Note & {
@@ -15,5 +15,5 @@ export type SingleNotesWithUniTypeUser = Note & {
     universityShortName: string;
     logoImage: string;
   };
-  type: { bgColor: string };
+  type: { name: string; bgColor: string; color: string };
 };

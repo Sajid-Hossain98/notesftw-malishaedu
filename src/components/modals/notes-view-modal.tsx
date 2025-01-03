@@ -15,6 +15,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { HandHeart, School } from "lucide-react";
 import Image from "next/image";
 import { Separator } from "../ui/separator";
+import { Badge } from "../ui/badge";
 
 export const NotesViewModal = () => {
   const { isOpen, onClose, type, data } = useModal();
@@ -44,32 +45,37 @@ export const NotesViewModal = () => {
             <Image
               src={imageUrl}
               fill
-              className="object-cover rounded-full"
+              className="object-cover rounded-full filter brightness-200 contrast-100"
               alt="University Logo"
             />
           </div>
 
-          <DialogTitle className="text-xl text-zinc-200 sm:text-3xl md:py-2">
-            {toTitleCase(note?.title)}
-          </DialogTitle>
+          <div className="flex items-start md:items-center justify-between flex-col md:flex-row gap-1">
+            <div>
+              <DialogTitle className="text-lg text-zinc-200 sm:text-3xl md:py-2">
+                {toTitleCase(note?.title)}
+              </DialogTitle>
 
-          <div className="flex items-center gap-2">
-            <DialogDescription className="flex items-center gap-2 text-base font-semibold text-zinc-300 sm:text-xl">
-              <School className="w-4 h-4 md:w-5 md:h-5" />
+              <div className="flex items-center gap-2">
+                <DialogDescription className="flex items-center gap-1 sm:gap-2 text-sm font-semibold text-zinc-300 sm:text-xl">
+                  <School className="w-3.5 h-3.5 md:w-5 md:h-5" />
 
-              {note?.university.universityShortName}
-            </DialogDescription>
-
-            <Separator orientation="vertical" className="bg-[#3f3f3f] w-0.5" />
-
-            <DialogDescription className="text-base font-semibold capitalize text-zinc-300 sm:text-xl">
-              {note?.university.universityFullName}
-            </DialogDescription>
+                  {note?.university.universityShortName}
+                </DialogDescription>
+                -
+                <DialogDescription className="text-sm font-semibold capitalize text-zinc-300 sm:text-xl">
+                  {note?.university.universityFullName}
+                </DialogDescription>
+              </div>
+            </div>
+            <div>
+              <Badge className="bg-red-300">{note?.type?.name}</Badge>
+            </div>
           </div>
 
           <Separator className="bg-[#3f3f3f]" />
 
-          <ScrollArea className="md:max-h-[70vh] max-h-[55vh] py-2">
+          <ScrollArea className="md:max-h-[65vh] max-h-[45vh] py-2">
             <Preview
               value={note?.description}
               className="text-base md:text-lg"
@@ -79,9 +85,9 @@ export const NotesViewModal = () => {
 
         <DialogFooter>
           <DialogClose asChild>
-            <span className="flex items-center justify-center w-full gap-2 px-3 py-2 border-2 cursor-pointer border-zinc-700 font-semibold text-base md:text-lg">
+            <span className="flex items-center justify-center w-full gap-2 py-2 border-2 cursor-pointer border-zinc-700 font-semibold text-sm md:text-lg">
               Thanks
-              <HandHeart />
+              <HandHeart className="w-4 h-4 sm:w-6 sm:h-6" />
             </span>
           </DialogClose>
         </DialogFooter>

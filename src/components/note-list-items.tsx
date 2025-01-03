@@ -48,7 +48,7 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
                   alt={note?.university?.universityShortName}
                   width={40}
                   height={40}
-                  className="rounded-full"
+                  className="rounded-full filter brightness-200 contrast-100"
                 />
                 <div className="flex-1 min-w-0">
                   <h2 className={cn(classNames?.noteTitle)}>{note?.title}</h2>
