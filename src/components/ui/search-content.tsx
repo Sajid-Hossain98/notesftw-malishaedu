@@ -24,6 +24,10 @@ export const SearchContent = ({
           </div>
         );
       })}
+
+      {isLoading && <p>Loading...</p>}
+
+      <div>{searchError?.message}</div>
     </ScrollArea>
   );
 };

@@ -78,7 +78,11 @@ export const SearchBar = () => {
       />
 
       {debouncedSearchWords && (
-        <SearchContent searchedNotes={data} searchError={error} isLoading />
+        <SearchContent
+          searchedNotes={data}
+          searchError={error}
+          isLoading={isLoading}
+        />
       )}
     </div>
   );
