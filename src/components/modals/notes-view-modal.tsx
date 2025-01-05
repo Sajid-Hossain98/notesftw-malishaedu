@@ -37,6 +37,18 @@ export const NotesViewModal = () => {
     note?.university?.logoImage
   }`;
 
+  let formattedDate = null;
+
+  const updatedDate = note?.updatedAt ? new Date(note.updatedAt) : null;
+
+  if (updatedDate) {
+    formattedDate = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }).format(updatedDate);
+  }
+
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="bg-[#242424] border-zinc-700 !rounded-xl md:min-w-[60%] w-11/12 p-3 md:p-6">
@@ -63,13 +75,22 @@ export const NotesViewModal = () => {
                   {note?.university.universityShortName}
                 </DialogDescription>
                 -
-                <DialogDescription className="text-sm font-semibold capitalize text-zinc-300 sm:text-xl">
+                <DialogDescription className="text-sm font-semibold capitalize text-zinc-300 sm:text-xl line-clamp-1">
                   {note?.university.universityFullName}
                 </DialogDescription>
               </div>
             </div>
-            <div>
-              <Badge className="bg-red-300">{note?.type?.name}</Badge>
+            <div className="flex flex-col md:items-center gap-1">
+              <Badge
+                className={`${note?.type?.bgColor} max-w-fit`}
+                style={{ color: note?.type?.color }}
+              >
+                {note?.type?.name}
+              </Badge>
+
+              <p className="text-xs md:text-center">
+                Last updated: {formattedDate}
+              </p>
             </div>
           </div>
 
@@ -84,7 +105,7 @@ export const NotesViewModal = () => {
         </DialogHeader>
 
         <DialogFooter>
-          <DialogClose asChild>
+          <DialogClose asChild className="hover:bg-black transition-colors">
             <span className="flex items-center justify-center w-full gap-2 py-2 border-2 cursor-pointer border-zinc-700 font-semibold text-sm md:text-lg">
               Thanks
               <HandHeart className="w-4 h-4 sm:w-6 sm:h-6" />

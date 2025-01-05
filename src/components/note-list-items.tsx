@@ -3,7 +3,9 @@
 import { useModal } from "@/hooks/use-modal-store";
 import { cn } from "@/lib/utils";
 import { NotesWithUniTypeUser } from "@/types";
+import { School } from "lucide-react";
 import Image from "next/image";
+import { Badge } from "./ui/badge";
 
 interface NoteListItemsProps {
   notes: NotesWithUniTypeUser;
@@ -53,6 +55,19 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
                 <div className="flex-1 min-w-0">
                   <h2 className={cn(classNames?.noteTitle)}>{note?.title}</h2>
                   <p className={cn(classNames?.noteDescription)}>{plainText}</p>
+
+                  <Badge
+                    className={`${note?.type?.bgColor} max-w-fit mb-1`}
+                    style={{ color: note?.type?.color }}
+                  >
+                    {note?.type?.name}
+                  </Badge>
+
+                  <p className="flex items-start gap-1 text-xs font-semibold text-zinc-300 sm:text-sm">
+                    <School className="w-3.5 h-3.5 md:w-4 md:h-4" />
+
+                    {note?.university.universityShortName}
+                  </p>
                 </div>
               </div>
             </div>

@@ -41,8 +41,6 @@ export const SearchBar = () => {
     enabled: debouncedSearchWords.length > 0,
   });
 
-  console.log(data, error, isLoading);
-
   useEffect(() => {
     const url = qs.stringifyUrl(
       {
