@@ -44,12 +44,12 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
                 borderRadius: "4px",
               }}
             >
-              <div className="flex items-center gap-2 md:gap-3 capitalize">
+              <div className="flex items-center gap-2 md:gap-4 capitalize">
                 <Image
                   src={imageUrl}
                   alt={note?.university?.universityShortName}
-                  width={40}
-                  height={40}
+                  width={70}
+                  height={70}
                   className="rounded-full filter brightness-200 contrast-100"
                 />
                 <div className="flex-1 min-w-0">
@@ -57,7 +57,7 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
                   <p className={cn(classNames?.noteDescription)}>{plainText}</p>
 
                   <Badge
-                    className={`${note?.type?.bgColor} max-w-fit mb-1`}
+                    className={`${note?.type?.bgColor} max-w-fit mb-1 md:mb-2`}
                     style={{ color: note?.type?.color }}
                   >
                     {note?.type?.name}
