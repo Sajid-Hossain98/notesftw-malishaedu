@@ -68,7 +68,7 @@ export const SearchBar = () => {
         <Search className="h-10 w-10 text-black m-auto stroke-2" />
       </span>
       <Input
-        className="bg-[#242424] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] caret-[#edf2f4] placeholder-gray-500"
+        className="bg-[#242424] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 caret-[#edf2f4] placeholder-gray-500"
         type="text"
         placeholder="Search: e.g., #WIT, #YZU, #NTU, #NJUT"
         value={searchWords}

@@ -6,7 +6,7 @@ export default async function Home() {
     <main className="space-y-3 md:space-y-8">
       <SearchBar />
 
-      <div className="max-h-[70vh] bg-[#242424] rounded-xl p-3 md:p-5 overflow-y-auto">
+      <div className="md:max-h-[80vh] max-h-[60vh] bg-[#242424] rounded-xl p-3 md:p-5 overflow-y-auto">
         <NotesList
           getAll={false}
           sliceCount={21}
