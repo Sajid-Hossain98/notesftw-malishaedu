@@ -1,4 +1,4 @@
-import { Note } from "@prisma/client";
+import { Note, Type, University } from "@prisma/client";
 
 export type NotesWithUniTypeUser = (Note & {
   university: {
@@ -16,4 +16,11 @@ export type SingleNotesWithUniTypeUser = Note & {
     logoImage: string;
   };
   type: { name: string; bgColor: string; color: string };
+};
+
+export type GroupedSearchedNotes = {
+  [key: string]: (Note & {
+    university: University;
+    type: Type;
+  })[]; // Array of notes for each note type (Assessment, Submit, Offer, etc.)
 };

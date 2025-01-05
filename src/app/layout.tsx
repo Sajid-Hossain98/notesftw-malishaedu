@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/config/site";
 import { ModalProvider } from "@/components/providers/modal-provider";
+import QueryProvider from "@/components/providers/QueryProviders";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -59,7 +60,9 @@ export default function RootLayout({
             )}
           >
             <ModalProvider />
-            <Header>{children}</Header>
+            <QueryProvider>
+              <Header>{children}</Header>
+            </QueryProvider>
             <Toaster theme="system" richColors offset={50} />
           </div>
         </body>
