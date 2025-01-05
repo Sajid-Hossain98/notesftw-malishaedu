@@ -7,11 +7,41 @@ async function main() {
   try {
     await database.type.createMany({
       data: [
-        { name: "General", color: "#000", bgColor: "bg-rose-300" },
-        { name: "Apply", color: "#000000", bgColor: "bg-slate-200" },
-        { name: "Submit", color: "#F7F7F7", bgColor: "bg-green-400" },
-        { name: "Assessment", color: "#ebf4fa", bgColor: "bg-blue-400" },
-        { name: "Offer", color: "#F7F7F7", bgColor: "bg-pink-400" },
+        {
+          name: "Apply",
+          bgColor: "bg-blue-300",
+          color: "#000",
+        },
+        {
+          name: "Submit",
+          bgColor: "bg-green-300",
+          color: "#000",
+        },
+        {
+          name: "Documents",
+          bgColor: "bg-teal-300",
+          color: "#000",
+        },
+        {
+          name: "Content",
+          bgColor: "bg-orange-300",
+          color: "#000",
+        },
+        {
+          name: "Assessment",
+          bgColor: "bg-stone-300",
+          color: "#000",
+        },
+        {
+          name: "General",
+          bgColor: "bg-amber-300",
+          color: "#000",
+        },
+        {
+          name: "Offer",
+          bgColor: "bg-rose-400",
+          color: "#ffffff",
+        },
       ],
     });
 
