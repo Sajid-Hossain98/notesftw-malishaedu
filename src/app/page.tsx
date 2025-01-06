@@ -6,7 +6,7 @@ export default async function Home() {
     <main className="space-y-3 md:space-y-8">
       <SearchBar />
 
-      <div className="md:max-h-[70dvh] max-h-[65dvh] bg-[#242424] rounded-xl p-3 md:p-5 overflow-y-auto mb-10 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-[#242424] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-500">
+      <div className="md:max-h-[70dvh] max-h-[65dvh] bg-[#242424] rounded-xl p-3 md:p-5 overflow-y-auto md:!mb-12 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-[#242424] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-500">
         <NotesList
           getAll={false}
           sliceCount={21}
