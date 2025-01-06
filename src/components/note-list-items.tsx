@@ -48,11 +48,11 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
                 <Image
                   src={imageUrl}
                   alt={note?.university?.universityShortName}
+                  className="rounded-full filter brightness-200 contrast-100 h-14 md:h-20 w-14 md:w-20 object-cover select-none"
                   width={70}
                   height={70}
-                  className="rounded-full filter brightness-200 contrast-100"
                 />
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 select-none">
                   <h2 className={cn(classNames?.noteTitle)}>{note?.title}</h2>
                   <p className={cn(classNames?.noteDescription)}>{plainText}</p>
 
