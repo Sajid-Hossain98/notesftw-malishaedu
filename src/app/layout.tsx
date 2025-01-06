@@ -49,7 +49,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className="bg-[#000000] text-[#F7F7F7] overflow-hidden"
+          className="bg-[#000000] text-zinc-300 overflow-hidden"
           suppressHydrationWarning={true}
         >
           <div

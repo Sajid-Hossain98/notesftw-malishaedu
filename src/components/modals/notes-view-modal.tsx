@@ -64,7 +64,7 @@ export const NotesViewModal = () => {
 
           <div className="flex items-start md:items-center justify-between flex-col md:flex-row gap-1">
             <div>
-              <DialogTitle className="text-lg text-zinc-200 sm:text-3xl md:py-2">
+              <DialogTitle className="text-lg text-zinc-300 sm:text-3xl md:py-2">
                 {toTitleCase(note?.title)}
               </DialogTitle>
 

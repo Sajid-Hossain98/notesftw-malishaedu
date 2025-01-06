@@ -48,7 +48,7 @@ export const MobileSidebar = () => {
       <Sheet open={isMobileSidebarOpen} onOpenChange={onMobileSidebarClose}>
         <SheetContent
           side="right"
-          className="flex flex-col items-center bg-[#000000] w-[60%]"
+          className="flex flex-col items-center bg-[#000000] w-[80%]"
         >
           <SheetTitle onClick={onMobileSidebarClose}>
             <Logo

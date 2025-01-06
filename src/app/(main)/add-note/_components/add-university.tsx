@@ -131,7 +131,7 @@ export const AddAnUniversity = () => {
               <FormLabel>University short name</FormLabel>
               <FormControl>
                 <Input
-                  className="md:py-3 md:text-xl text-lg bg-[#F7F7F7] text-black rounded-xl"
+                  className="md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-xl"
                   disabled={isLoading}
                   placeholder="Enter the short name of the university"
                   {...field}
@@ -150,7 +150,7 @@ export const AddAnUniversity = () => {
               <FormLabel>University full name</FormLabel>
               <FormControl>
                 <Input
-                  className="md:py-3 md:text-xl text-lg bg-[#F7F7F7] text-black rounded-xl"
+                  className="md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-xl"
                   disabled={isLoading}
                   placeholder="Enter the full name of the university"
                   {...field}
@@ -169,7 +169,7 @@ export const AddAnUniversity = () => {
               <FormLabel>University logo</FormLabel>
               <FormControl>
                 <Input
-                  className="bg-[#F7F7F7] text-black text-lg rounded-xl file:bg-slate-400 cursor-pointer py-0 file:py-2 px-0 md:px-0 file:px-4"
+                  className="bg-zinc-100 text-black text-lg rounded-xl file:bg-slate-400 cursor-pointer py-0 file:py-2 px-0 md:px-0 file:px-4"
                   type="file"
                   accept="image/png"
                   disabled={isLoading}

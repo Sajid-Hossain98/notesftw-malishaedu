@@ -39,7 +39,7 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
             <div
               key={note?.id}
               onClick={() => onOpen("viewNote", { note: note })}
-              className="bg-[#333333] p-2 md:p-3 space-y-1 min-w-0 cursor-pointer"
+              className={`${note?.type?.bgColor} p-2 md:p-3 space-y-1 min-w-0 cursor-pointer bg-opacity-5 relative overflow-hidden`}
               style={{
                 borderRadius: "4px",
               }}
@@ -57,7 +57,7 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
                   <p className={cn(classNames?.noteDescription)}>{plainText}</p>
 
                   <Badge
-                    className={`${note?.type?.bgColor} max-w-fit mb-1 md:mb-2`}
+                    className={`${note?.type?.bgColor} absolute right-0 bottom-0 rounded-bl-none rounded-br-none rounded-tr-none bg-opacity-60`}
                     style={{ color: note?.type?.color }}
                   >
                     {note?.type?.name}
