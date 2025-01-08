@@ -28,13 +28,11 @@ export const ActionTooltip = ({
         </TooltipTrigger>
 
         <TooltipContent
-          className="bg-[#000000] text-slate-300 max-w-[300px]"
+          className="bg-[#000000] text-slate-300 max-w-[300px] md:max-w-[50%]"
           side={side}
           align={align}
         >
-          <p className="font-semibold text-sm capitalize">
-            {label.toLowerCase()}
-          </p>
+          <p className="font-semibold text-sm">{label}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

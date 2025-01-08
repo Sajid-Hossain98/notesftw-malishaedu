@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Input } from "./ui/input";
-import { Search, SearchX, X } from "lucide-react";
+import { BadgeInfo, Search, SearchX, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/use-debounce";
 import { usePathname, useRouter } from "next/navigation";
@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { SearchContent } from "./ui/search-content";
 import { GroupedSearchedNotes } from "@/types";
+import { ActionTooltip } from "./action-tooltip";
 
 // : Promise<SingleNotesWithUniTypeUser>
 const fetchSearchResults = async (
@@ -60,7 +61,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <>
+    <div className="relative">
       <div className="relative md:h-16">
         <Image
           src="/malishaedu-logo.svg"
@@ -82,7 +83,7 @@ export const SearchBar = () => {
 
         {searchWords && (
           <X
-            className="md:hidden absolute right-2 h-5 w-5 top-[50%] -translate-y-1/2 text-white m-auto stroke-2 cursor-pointer z-10"
+            className="md:hidden absolute right-3 h-5 w-5 top-[50%] -translate-y-1/2 text-white m-auto stroke-2 cursor-pointer z-10"
             onClick={handleClearSearch}
           />
         )}
@@ -90,18 +91,29 @@ export const SearchBar = () => {
         <Input
           className="bg-[#242424] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 caret-[#edf2f4] placeholder-gray-500"
           type="text"
-          placeholder="Search: e.g., #WIT, #YZU, #NTU, #NJUT"
+          placeholder="e.g., NJTech / Nanjing Tech"
           value={searchWords}
           onChange={(e) => setSearchWords(e.target.value)}
         />
       </div>
+      <span className="text-xs flex gap-1 justify-center mt-1 text-zinc-400">
+        Having difficulties searching?
+        <ActionTooltip
+          side="bottom"
+          label="You can search using either the short name of the university or full name! A list of short names will be provided soon."
+        >
+          <BadgeInfo className="h-4 w-4" />
+        </ActionTooltip>
+      </span>
       {debouncedSearchWords && (
-        <SearchContent
-          searchedNotes={data}
-          searchError={error}
-          isLoading={isLoading}
-        />
+        <div className="absolute w-full top-full mt-2 bg-gray-800 z-50 px-4 py-2 rounded-xl">
+          <SearchContent
+            searchedNotes={data}
+            searchError={error}
+            isLoading={isLoading}
+          />
+        </div>
       )}
-    </>
+    </div>
   );
 };
