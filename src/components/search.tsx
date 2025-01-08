@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Input } from "./ui/input";
-import { Search } from "lucide-react";
+import { Search, SearchX, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/use-debounce";
 import { usePathname, useRouter } from "next/navigation";
@@ -31,7 +31,7 @@ const fetchSearchResults = async (
 
 export const SearchBar = () => {
   const [searchWords, setSearchWords] = useState<string>("");
-  const debouncedSearchWords = useDebounce(searchWords, 500);
+  const debouncedSearchWords = useDebounce(searchWords, 300);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -55,26 +55,46 @@ export const SearchBar = () => {
     router.push(url);
   }, [debouncedSearchWords, router, pathname]);
 
-  return (
-    <div className="relative md:h-16">
-      <Image
-        src="/malishaedu-logo.svg"
-        height={54}
-        width={54}
-        alt="MalishaEdu's Logo"
-        className="absolute hidden transform -translate-y-1/2 bg-white rounded-full top-1/2 left-1.5 aspect-square md:flex"
-      />
-      <span className="absolute hidden transform -translate-y-1/2 bg-white rounded-full top-1/2 right-1.5 aspect-square md:flex h-[54px] w-[54px]">
-        <Search className="h-10 w-10 text-black m-auto stroke-2" />
-      </span>
-      <Input
-        className="bg-[#242424] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 caret-[#edf2f4] placeholder-gray-500"
-        type="text"
-        placeholder="Search: e.g., #WIT, #YZU, #NTU, #NJUT"
-        value={searchWords}
-        onChange={(e) => setSearchWords(e.target.value)}
-      />
+  const handleClearSearch = () => {
+    setSearchWords("");
+  };
 
+  return (
+    <>
+      <div className="relative md:h-16">
+        <Image
+          src="/malishaedu-logo.svg"
+          height={54}
+          width={54}
+          alt="MalishaEdu's Logo"
+          className="absolute hidden transform -translate-y-1/2 bg-white rounded-full top-1/2 left-1.5 aspect-square md:flex"
+        />
+        <span
+          className="absolute hidden transform -translate-y-1/2 bg-white rounded-full top-1/2 right-1.5 aspect-square md:flex h-[54px] w-[54px] cursor-pointer"
+          onClick={handleClearSearch}
+        >
+          {searchWords ? (
+            <SearchX className="h-10 w-10 text-black m-auto stroke-2" />
+          ) : (
+            <Search className="h-10 w-10 text-black m-auto stroke-2" />
+          )}
+        </span>
+
+        {searchWords && (
+          <X
+            className="md:hidden absolute right-2 h-5 w-5 top-[50%] -translate-y-1/2 text-white m-auto stroke-2 cursor-pointer z-10"
+            onClick={handleClearSearch}
+          />
+        )}
+
+        <Input
+          className="bg-[#242424] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 caret-[#edf2f4] placeholder-gray-500"
+          type="text"
+          placeholder="Search: e.g., #WIT, #YZU, #NTU, #NJUT"
+          value={searchWords}
+          onChange={(e) => setSearchWords(e.target.value)}
+        />
+      </div>
       {debouncedSearchWords && (
         <SearchContent
           searchedNotes={data}
@@ -82,6 +102,6 @@ export const SearchBar = () => {
           isLoading={isLoading}
         />
       )}
-    </div>
+    </>
   );
 };
