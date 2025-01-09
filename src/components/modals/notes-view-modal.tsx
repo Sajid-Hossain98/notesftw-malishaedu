@@ -101,7 +101,10 @@ export const NotesViewModal = () => {
         </DialogHeader>
 
         <DialogFooter>
-          <DialogClose asChild className="hover:bg-black transition-colors">
+          <DialogClose
+            asChild
+            className="md:hover:bg-black active:bg-black transition-colors"
+          >
             <span className="flex items-center justify-center w-full gap-2 py-2 border-2 cursor-pointer border-zinc-700 font-semibold text-sm md:text-lg">
               Thanks
               <HandHeart className="w-4 h-4 sm:w-6 sm:h-6" />

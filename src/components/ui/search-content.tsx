@@ -33,17 +33,25 @@ export const SearchContent = ({
       )}
 
       {Object.entries(searchedNotes || {}).map(([type, notes]) => {
+        const typeBgColor = notes?.[0]?.type?.bgColor || "bg-gray-600";
+        const typeTextColor = notes?.[0]?.type?.color || "text-black";
+
         return (
-          <div key={type} className="mb-2">
-            <h3 className="relative font-semibold md:text-lg text-base flex items-center">
+          <div key={type} className="mb-2 group">
+            <div className="relative font-semibold md:text-lg text-base flex items-center md:mb-1 mb-0.5">
               <span className="w-3 h-[1px] bg-zinc-600 mr-2"></span>
-              {type}
+              <h3
+                className={`${typeBgColor} px-2 py-0.5 rounded-full bg-opacity-60 md:group-hover:bg-opacity-100 transition-colors group-active:bg-opacity-100`}
+                style={{ color: typeTextColor }}
+              >
+                {type}
+              </h3>
               <span className="flex-grow h-[1px] bg-zinc-600 ml-2"></span>
-            </h3>
+            </div>
             {notes?.map((note) => (
               <div
                 key={note.id}
-                className="cursor-pointer hover:bg-gray-900 py-1 md:py-2 hover:rounded-xl truncate min-w-0 w-full text-ellipsis flex items-center justify-between pr-1 md:pr-2"
+                className="cursor-pointer md:hover:bg-gray-900 active:bg-gray-900 py-1 md:py-2 hover:rounded-xl truncate min-w-0 w-full text-ellipsis flex items-center justify-between pr-1 md:pr-2"
                 onClick={() => onOpen("viewNote", { note: note })}
               >
                 <div className="flex items-center gap-1 md:gap-2 px-1 md:px-2">

@@ -13,19 +13,19 @@ export const AdminNavbar = () => {
   const routes = useMemo(
     () => [
       {
-        label: "Manage notes",
+        label: "Notes",
         active: pathname === "/admin",
         href: "/admin",
         icon: NotebookPen,
       },
       {
-        label: "Manage universities",
+        label: "Universities",
         active: pathname === "/admin/manage-universities",
         href: "/admin/manage-universities",
         icon: School,
       },
       {
-        label: "Manage users",
+        label: "Users",
         active: pathname === "/admin/manage-users",
         href: "/admin/manage-users",
         icon: Users2,
