@@ -1,6 +1,6 @@
 import { GroupedSearchedNotes } from "@/types";
 import { ScrollArea } from "./scroll-area";
-import { Lightbulb } from "lucide-react";
+import { HeartCrack, Lightbulb } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
 
 interface SearchContentProps {
@@ -16,8 +16,22 @@ export const SearchContent = ({
 }: SearchContentProps) => {
   const { onOpen } = useModal();
 
+  const hasNotes =
+    searchedNotes &&
+    Object.values(searchedNotes).some((notes) => notes.length > 0);
+
   return (
     <ScrollArea className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto bg-gray-800 mt-2 z-40 px-2 md:px-4 py-2 rounded-xl">
+      {!isLoading && !hasNotes && !searchError && (
+        <div className="min-h-20 flex items-center justify-center gap-2 md:gap-3">
+          <p className="text-center text-xl font-semibold text-gray-400">
+            No results found
+          </p>
+
+          <HeartCrack className="h-5 w-5 text-rose-500" />
+        </div>
+      )}
+
       {Object.entries(searchedNotes || {}).map(([type, notes]) => {
         return (
           <div key={type} className="mb-2">
