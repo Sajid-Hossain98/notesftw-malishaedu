@@ -32,7 +32,7 @@ const fetchSearchResults = async (
 
 export const SearchBar = () => {
   const [searchWords, setSearchWords] = useState<string>("");
-  const debouncedSearchWords = useDebounce(searchWords, 300);
+  const debouncedSearchWords = useDebounce(searchWords, 100);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -106,7 +106,7 @@ export const SearchBar = () => {
         </ActionTooltip>
       </span>
       {debouncedSearchWords && (
-        <div className="absolute w-full top-full mt-2 bg-gray-800 z-50 px-4 py-2 rounded-xl">
+        <div className="absolute top-full w-full">
           <SearchContent
             searchedNotes={data}
             searchError={error}

@@ -28,7 +28,7 @@ export const ActionTooltip = ({
         </TooltipTrigger>
 
         <TooltipContent
-          className="bg-[#000000] text-slate-300 max-w-[300px] md:max-w-[50%]"
+          className="bg-[#000000] text-slate-300 max-w-[300px] md:max-w-[50%] z-50"
           side={side}
           align={align}
         >

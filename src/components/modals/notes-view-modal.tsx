@@ -51,7 +51,7 @@ export const NotesViewModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-[#242424] border-zinc-700 !rounded-xl md:min-w-[60%] w-11/12 p-3 md:p-6">
+      <DialogContent className="bg-[#242424] border-zinc-700 !rounded-xl md:min-w-[60%] w-11/12 p-3 md:p-6 overflow-hidden">
         <DialogHeader className="text-start">
           <div className="relative mx-auto h-14 md:h-20 w-14 md:w-20">
             <Image
@@ -79,19 +79,15 @@ export const NotesViewModal = () => {
                   {note?.university.universityFullName}
                 </DialogDescription>
               </div>
-            </div>
-            <div className="flex flex-col md:items-center gap-1">
-              <Badge
-                className={`${note?.type?.bgColor} max-w-fit`}
-                style={{ color: note?.type?.color }}
-              >
-                {note?.type?.name}
-              </Badge>
 
-              <p className="text-xs md:text-center">
-                Last updated: {formattedDate}
-              </p>
+              <p className="text-xs">Last updated: {formattedDate}</p>
             </div>
+            <Badge
+              className={`${note?.type?.bgColor} max-w-fit absolute top-0 left-0 rounded-bl-none rounded-tr-none rounded-tl-none rounded-br-xl`}
+              style={{ color: note?.type?.color }}
+            >
+              {note?.type?.name}
+            </Badge>
           </div>
 
           <Separator className="bg-[#3f3f3f]" />
