@@ -1,5 +1,4 @@
 import { GroupedSearchedNotes } from "@/types";
-import { ScrollArea } from "./scroll-area";
 import { HeartCrack, Lightbulb } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
 
@@ -21,7 +20,7 @@ export const SearchContent = ({
     Object.values(searchedNotes).some((notes) => notes.length > 0);
 
   return (
-    <ScrollArea className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto bg-gray-800 mt-2 z-40 px-2 md:px-4 py-2 rounded-xl">
+    <div className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto bg-gray-800 mt-2 px-2 md:px-4 py-2 rounded-xl">
       {!isLoading && !hasNotes && !searchError && (
         <div className="min-h-20 flex items-center justify-center gap-2 md:gap-3">
           <p className="text-center text-xl font-semibold text-gray-400">
@@ -56,12 +55,12 @@ export const SearchContent = ({
               >
                 <div className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
                   <span>
-                    <Lightbulb className="h-4 w-4" />
+                    <Lightbulb className="h-4 w-4 text-cyan-300" />
                   </span>
                   <h4 className="md:text-base text-sm">{note.title}</h4>
                 </div>
 
-                <span className="text-xs bg-gray-400 px-2 py-0.5 rounded-xl text-black">
+                <span className="text-xs bg-gray-600 px-2 py-0.5 rounded-xl font-semibold">
                   {note.university.universityShortName}
                 </span>
               </div>
@@ -73,6 +72,6 @@ export const SearchContent = ({
       {isLoading && <p>Loading...</p>}
 
       <div>{searchError?.message}</div>
-    </ScrollArea>
+    </div>
   );
 };

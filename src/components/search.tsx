@@ -96,17 +96,17 @@ export const SearchBar = () => {
           onChange={(e) => setSearchWords(e.target.value)}
         />
       </div>
-      <span className="text-xs flex gap-1 justify-center mt-1 text-zinc-400">
+      <span className="text-xs hidden md:flex gap-1 justify-center mt-1 text-zinc-400">
         Having difficulties searching?
         <ActionTooltip
           side="bottom"
-          label="You can search using either the short name of the university or full name! A list of short names will be provided soon."
+          label="You can search typing either the short name of the university or full name! A list of short names will be provided soon."
         >
           <BadgeInfo className="h-4 w-4" />
         </ActionTooltip>
       </span>
       {debouncedSearchWords && (
-        <div className="absolute top-full w-full">
+        <div className="absolute top-full w-full z-40">
           <SearchContent
             searchedNotes={data}
             searchError={error}
