@@ -1,6 +1,7 @@
 import { GroupedSearchedNotes } from "@/types";
 import { HeartCrack, Lightbulb } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
+import { Skeleton } from "./skeleton";
 
 interface SearchContentProps {
   searchedNotes: GroupedSearchedNotes | undefined;
@@ -22,12 +23,45 @@ export const SearchContent = ({
   return (
     <div className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto bg-gray-800 mt-2 px-2 md:px-4 py-2 rounded-xl">
       {!isLoading && !hasNotes && !searchError && (
-        <div className="min-h-20 flex items-center justify-center gap-2 md:gap-3">
-          <p className="text-center text-xl font-semibold text-gray-400">
+        <div className="flex items-center justify-center gap-2 min-h-20 md:gap-3">
+          <p className="text-xl font-semibold text-center text-gray-400">
             No results found
           </p>
 
-          <HeartCrack className="h-5 w-5 text-rose-500" />
+          <HeartCrack className="w-5 h-5 text-rose-500" />
+        </div>
+      )}
+
+      {isLoading && (
+        <div className="flex flex-col gap-4">
+          {Array.from({ length: 3 }).map((_, idx) => (
+            <div key={idx} className="mb-2">
+              {/* Header Skeleton */}
+              <div className="relative font-semibold md:text-lg text-base flex items-center md:mb-1 mb-0.5">
+                <span className="w-3 h-[1px] bg-zinc-600 mr-2"></span>
+                <Skeleton className="w-24 h-6 rounded-full bg-zinc-500" />
+                <span className="flex-grow h-[1px] bg-zinc-600 ml-2"></span>
+              </div>
+
+              {/* Notes Skeleton */}
+              {Array.from({ length: 2 }).map((_, noteIdx) => (
+                <div
+                  key={noteIdx}
+                  className="flex items-center justify-between w-full min-w-0 py-1 pr-1 truncate hover:rounded-xl md:py-2"
+                >
+                  <div className="flex items-center gap-1 px-1 md:gap-2 md:px-2">
+                    <Skeleton className="w-5 h-5 rounded-full bg-zinc-500 flex-shrink" />
+                    <Skeleton
+                      style={{ borderRadius: "4px" }}
+                      className="w-36 sm:w-72 md:w-[500px] lg:w-[900px] h-5 bg-zinc-500"
+                    />
+                  </div>
+
+                  <Skeleton className="w-16 h-5 rounded-xl bg-zinc-500" />
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
       )}
 
@@ -50,14 +84,16 @@ export const SearchContent = ({
             {notes?.map((note) => (
               <div
                 key={note.id}
-                className="cursor-pointer md:hover:bg-gray-900 active:bg-gray-900 py-1 md:py-2 hover:rounded-xl truncate min-w-0 w-full text-ellipsis flex items-center justify-between pr-1 md:pr-2"
+                className="flex items-center justify-between w-full min-w-0 py-1 pr-1 truncate cursor-pointer md:hover:bg-gray-900 active:bg-gray-900 md:py-2 hover:rounded-xl text-ellipsis md:pr-2"
                 onClick={() => onOpen("viewNote", { note: note })}
               >
-                <div className="flex items-center gap-1 md:gap-2 px-1 md:px-2">
+                <div className="flex items-center gap-1 px-1 md:gap-2 md:px-2">
                   <span>
-                    <Lightbulb className="h-4 w-4 text-cyan-300" />
+                    <Lightbulb className="w-4 h-4 text-cyan-600" />
                   </span>
-                  <h4 className="md:text-base text-sm">{note.title}</h4>
+                  <h4 className="text-sm md:text-base font-semibold">
+                    {note.title}
+                  </h4>
                 </div>
 
                 <span className="text-xs bg-gray-600 px-2 py-0.5 rounded-xl font-semibold">
@@ -68,8 +104,6 @@ export const SearchContent = ({
           </div>
         );
       })}
-
-      {isLoading && <p>Loading...</p>}
 
       <div>{searchError?.message}</div>
     </div>

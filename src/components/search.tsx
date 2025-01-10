@@ -94,6 +94,7 @@ export const SearchBar = () => {
           placeholder="e.g., NJTech / Nanjing Tech"
           value={searchWords}
           onChange={(e) => setSearchWords(e.target.value)}
+          autoFocus
         />
       </div>
       <span className="text-xs hidden md:flex gap-1 justify-center mt-1 text-zinc-400">
