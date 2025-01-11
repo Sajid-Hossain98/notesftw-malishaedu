@@ -42,7 +42,7 @@ export const AdminNavbar = () => {
           key={route.href}
           className={cn(
             "w-full text-base md:text-lg",
-            route.active && "text-black bg-zinc-100 hover:bg-[#f7f7f7e0]"
+            route.active && "text-black bg-zinc-300 hover:bg-zinc-300/80"
           )}
         >
           <Link
