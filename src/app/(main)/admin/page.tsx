@@ -1,15 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AdminAllNotes } from "./_components/admin-all-notes";
-// import { db } from "@/lib/db";
+import { Suspense } from "react";
 
 const AdminPage = () => {
-  // const notes = db.note.findMany({
-  //   include: {
-  //     university: true,
-  //     type: true,
-  //   },
-  // });
-
   return (
     <Tabs defaultValue="all">
       <TabsList className="grid md:w-[80%] w-full grid-cols-3 mx-auto">
@@ -25,7 +18,10 @@ const AdminPage = () => {
       </TabsList>
 
       <TabsContent value="all" className="w-full h-full">
-        <AdminAllNotes />
+        {/* TODO: handle loading later */}
+        <Suspense fallback={<div>Loading...</div>}>
+          <AdminAllNotes />
+        </Suspense>
       </TabsContent>
       <TabsContent value="approved">
         Only approved notes will be rendered here!
