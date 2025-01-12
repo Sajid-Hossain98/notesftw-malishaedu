@@ -26,11 +26,33 @@ export async function GET(request: Request) {
     const page = parseInt(searchParams.get("page") || "1", 10);
     const limit = parseInt(searchParams.get("limit") || "10", 10);
 
+    const search = searchParams.get("search") || "";
+
     const offset = (page - 1) * limit;
 
     const notes = await db.note.findMany({
       skip: offset,
       take: limit,
+      where: {
+        OR: [
+          {
+            university: {
+              universityFullName: {
+                contains: search,
+                mode: "insensitive", // Case-insensitive search
+              },
+            },
+          },
+          {
+            university: {
+              universityShortName: {
+                contains: search,
+                mode: "insensitive", // Case-insensitive search
+              },
+            },
+          },
+        ],
+      },
       include: {
         university: true,
         type: true,
@@ -40,7 +62,28 @@ export async function GET(request: Request) {
       },
     });
 
-    const totalCount = await db.note.count();
+    const totalCount = await db.note.count({
+      where: {
+        OR: [
+          {
+            university: {
+              universityFullName: {
+                contains: search,
+                mode: "insensitive",
+              },
+            },
+          },
+          {
+            university: {
+              universityShortName: {
+                contains: search,
+                mode: "insensitive",
+              },
+            },
+          },
+        ],
+      },
+    });
     const totalPages = Math.ceil(totalCount / limit);
 
     const response = {
