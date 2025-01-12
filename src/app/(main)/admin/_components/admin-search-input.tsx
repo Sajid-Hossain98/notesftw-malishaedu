@@ -1,5 +1,3 @@
-import { Input } from "@/components/ui/input";
-
 interface AdminSearchInputFieldProps {
   placeholder: string;
   value: string;
