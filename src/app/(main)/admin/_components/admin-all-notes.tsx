@@ -16,6 +16,7 @@ type NotesResponse = {
 
 export const AdminAllNotes = () => {
   const [page, setPage] = useState(1);
+  const [searchInput, setSearchInput] = useState("");
   const [searchNotes, setSearchNotes] = useState("");
   const limit = 2;
   const router = useRouter();
@@ -32,6 +33,7 @@ export const AdminAllNotes = () => {
 
     if (querySearch) {
       setSearchNotes(querySearch);
+      setSearchInput(querySearch);
     }
   }, [searchParams]);
 
@@ -46,9 +48,7 @@ export const AdminAllNotes = () => {
       },
       { skipEmptyString: true, skipNull: true }
     );
-    if (window.location.href !== url) {
-      router.push(url);
-    }
+    router.push(url);
   }, [page, pathname, router, searchNotes]);
 
   const { data, isError, isLoading, error } = useQuery<NotesResponse>({
@@ -56,6 +56,12 @@ export const AdminAllNotes = () => {
     queryFn: () => fetchPaginatedNotes(page, limit, searchNotes),
     placeholderData: keepPreviousData,
   });
+
+  const onSearchSubmitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSearchNotes(searchInput);
+    setPage(1);
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -79,13 +85,16 @@ export const AdminAllNotes = () => {
 
   return (
     <div>
-      <div className="w-full flex justify-end">
+      <form
+        onSubmit={onSearchSubmitHandler}
+        className="w-full flex justify-end"
+      >
         <AdminSearchInputField
-          value={searchNotes}
+          value={searchInput}
           placeholder="Search notes"
-          onChange={(e) => setSearchNotes(e.target.value)}
+          onChange={(e) => setSearchInput(e.target.value)}
         />
-      </div>
+      </form>
       <div>
         {data?.notes && data?.notes.length > 0 ? (
           data.notes.map((note) => (
