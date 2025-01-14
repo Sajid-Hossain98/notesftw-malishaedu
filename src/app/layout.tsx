@@ -26,18 +26,6 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  // icons: [
-  //   {
-  //     media: "(prefers-color-scheme: light)",
-  //     url: "/logo-dark.svg",
-  //     href: "/logo-dark.svg",
-  //   },
-  //   {
-  //     media: "(prefers-color-scheme: dark)",
-  //     url: "/logo-light.svg",
-  //     href: "/logo-light.svg",
-  //   },
-  // ],
 };
 
 export default function RootLayout({
@@ -49,9 +37,10 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className="bg-[#000000] text-zinc-300 overflow-hidden"
+          className="relative text-zinc-300 overflow-hidden bg-[url('/static/bg-gradient-img.svg')] bg-no-repeat bg-cover bg-top"
           suppressHydrationWarning={true}
         >
+          <div className="absolute inset-0 md:bg-black/30 bg-black/15 -z-10" />
           <div
             className={cn(
               "w-[92vw] mx-auto h-[100dvh]",
