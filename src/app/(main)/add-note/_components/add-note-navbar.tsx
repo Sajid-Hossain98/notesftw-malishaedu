@@ -29,7 +29,7 @@ export const AddNoteNavbar = () => {
   );
 
   return (
-    <div className="lg:max-w-[80%] md:max-w-[70%] mx-auto bg-[#242424] rounded-full flex justify-around overflow-hidden my-4">
+    <div className="lg:max-w-[80%] md:max-w-[70%] mx-auto bg-[#242424] rounded-full flex justify-around overflow-hidden md:my-4">
       {routes.map((route) => (
         <Button
           asChild

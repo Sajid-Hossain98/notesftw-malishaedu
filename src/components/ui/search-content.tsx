@@ -7,12 +7,14 @@ interface SearchContentProps {
   searchedNotes: GroupedSearchedNotes | undefined;
   searchError: Error | null;
   isLoading: boolean;
+  debouncedSearchWords: string;
 }
 
 export const SearchContent = ({
   searchedNotes,
   searchError,
   isLoading,
+  debouncedSearchWords,
 }: SearchContentProps) => {
   const { onOpen } = useModal();
 
@@ -25,7 +27,10 @@ export const SearchContent = ({
       {!isLoading && !hasNotes && !searchError && (
         <div className="flex items-center justify-center gap-2 min-h-20 md:gap-3">
           <p className="text-xl font-semibold text-center text-gray-400">
-            No results found
+            No results found for{" "}
+            <span className="bg-slate-700 px-1 rounded-[3px] py-0.5 md:px-2">
+              &apos;{debouncedSearchWords}&apos;
+            </span>
           </p>
 
           <HeartCrack className="w-5 h-5 text-rose-500" />

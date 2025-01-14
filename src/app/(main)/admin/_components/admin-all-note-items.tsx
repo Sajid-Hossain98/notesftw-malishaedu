@@ -13,7 +13,7 @@ export const AdminAllNoteItems = ({ notes }: AdminAllNoteItemsProps) => {
   const { onOpen } = useModal();
 
   return (
-    <div className="flex flex-col gap-2 min-h-fit overflow-y-auto overflow-x-hidden mt-2 md:mt-3 bg-[#242424] px-2 md:px-4 py-1 md:py-2 rounded-xl">
+    <div className="flex flex-col gap-1 md:gap-2 max-h-[60vh] overflow-y-auto overflow-x-hidden mt-2 md:mt-3 bg-[#242424] px-2 md:px-4 py-1 md:py-2 rounded-xl [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-[#242424] [&::-webkit-scrollbar-thumb]:bg-gray-500">
       {notes && notes?.length > 0 ? (
         notes?.map((note) => {
           let formattedDate = null;
@@ -31,7 +31,7 @@ export const AdminAllNoteItems = ({ notes }: AdminAllNoteItemsProps) => {
           return (
             <div
               key={note.id}
-              className="flex items-center justify-between gap-1 md:gap-2 hover:bg-[#3a3939] active:bg-[#3a3939] py-2 px-2 rounded-xl transition-colors"
+              className="flex items-center justify-between gap-1 md:gap-2 md:hover:bg-[#3a3939] active:bg-[#3a3939] py-1 md:py-2 px-1 md:px-2 rounded-xl transition-colors"
             >
               <div
                 className="min-w-0 cursor-pointer"
@@ -49,11 +49,11 @@ export const AdminAllNoteItems = ({ notes }: AdminAllNoteItemsProps) => {
 
                   <Separator
                     orientation="vertical"
-                    className="h-5 w-[0.5px] bg-zinc-500 mx-2"
+                    className="h-4 w-[0.5px] bg-zinc-500 mx-2"
                   />
 
                   <span
-                    className={`${note?.type?.bgColor} text-xs rounded-full px-1 md:px-2 md:py-1 py-0.5 bg-opacity-90`}
+                    className={`${note?.type?.bgColor} text-xs rounded-full px-1 md:px-2 md:py-1 bg-opacity-90`}
                     style={{ color: note?.type?.color }}
                   >
                     {note?.type?.name}

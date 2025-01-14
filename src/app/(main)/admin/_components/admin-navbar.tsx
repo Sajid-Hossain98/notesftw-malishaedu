@@ -35,13 +35,13 @@ export const AdminNavbar = () => {
   );
 
   return (
-    <div className="mx-auto bg-[#242424] rounded-full flex justify-around overflow-hidden my-4">
+    <div className="mx-auto bg-[#242424] rounded-full flex justify-around overflow-hidden md:my-4 my-1">
       {routes.map((route) => (
         <Button
           asChild
           key={route.href}
           className={cn(
-            "w-full text-base md:text-lg",
+            "w-full text-xs md:text-lg",
             route.active && "text-black bg-zinc-300 hover:bg-zinc-300/80"
           )}
         >
