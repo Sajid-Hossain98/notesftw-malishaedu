@@ -92,22 +92,26 @@ export const AdminAllNotes = () => {
       >
         <AdminSearchInputField
           value={searchInput}
-          placeholder="University-wise search, e.g., NJTech / Nanjing Tech"
+          placeholder="e.g., NJTech / Nanjing Tech"
           onChange={(e) => setSearchInput(e.target.value)}
         />
       </form>
 
       <AdminAllNoteItems notes={data?.notes} />
 
-      <div>
+      <div className="flex items-center justify-between mt-3 md:justify-end md:mt-5 md:gap-3">
         <button
-          className="disabled:cursor-not-allowed"
+          className="px-4 py-2 text-xs font-bold text-black transition-colors bg-gray-500 rounded-l disabled:cursor-not-allowed disabled:bg-opacity-30 hover:bg-gray-500/95 disabled:hover:bg-gray-500/30 md:text-base disabled:text-stone-500"
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           disabled={page === 1}
         >
           Previous
         </button>
+        <p className="text-sm md:text-base font-semibold">
+          {data?.currentPage} / {data?.totalPages}
+        </p>
         <button
+          className="px-4 py-2 text-xs font-bold text-black transition-colors bg-gray-500 rounded-r disabled:cursor-not-allowed disabled:bg-opacity-30 hover:bg-gray-500/95 disabled:hover:bg-gray-500/30 md:text-base disabled:text-stone-500"
           onClick={() =>
             setPage((prev) => Math.min(prev + 1, data?.totalPages || 1))
           }
@@ -115,12 +119,6 @@ export const AdminAllNotes = () => {
         >
           Next
         </button>
-      </div>
-
-      <div>
-        <p>
-          Page {data?.currentPage} of {data?.totalPages}
-        </p>
       </div>
     </div>
   );

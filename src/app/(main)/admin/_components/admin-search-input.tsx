@@ -16,6 +16,7 @@ export const AdminSearchInputField = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      autoFocus
       style={{
         borderRadius: "5px",
       }}
