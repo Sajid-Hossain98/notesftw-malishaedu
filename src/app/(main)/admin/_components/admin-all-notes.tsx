@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import qs from "query-string";
 import { AdminSearchInputField } from "./admin-search-input";
 import { AdminAllNoteItems } from "./admin-all-note-items";
+import { X } from "lucide-react";
 
 type NotesResponse = {
   notes: NotesWithUniTypeUser;
@@ -88,13 +89,29 @@ export const AdminAllNotes = () => {
     <div>
       <form
         onSubmit={onSearchSubmitHandler}
-        className="flex justify-end w-full"
+        className="flex items-center justify-end w-full gap-2"
       >
-        <AdminSearchInputField
-          value={searchInput}
-          placeholder="e.g., NJTech / Nanjing Tech"
-          onChange={(e) => setSearchInput(e.target.value)}
-        />
+        <div className="relative w-full">
+          <AdminSearchInputField
+            value={searchInput}
+            placeholder="e.g., NJTech / Nanjing Tech"
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
+
+          {searchInput && (
+            <X
+              className="absolute w-4 h-4 -translate-y-1/2 cursor-pointer md:right-3 right-1 top-1/2 md:h-5 md:w-5"
+              onClick={() => setSearchInput("")}
+            />
+          )}
+        </div>
+
+        <button
+          type="submit"
+          className="bg-[#242424] px-2 py-1 md:py-2 text-xs md:text-base font-semibold rounded-[3px]"
+        >
+          Search
+        </button>
       </form>
 
       <AdminAllNoteItems notes={data?.notes} />
@@ -107,7 +124,7 @@ export const AdminAllNotes = () => {
         >
           Previous
         </button>
-        <p className="text-sm md:text-base font-semibold">
+        <p className="text-sm font-semibold md:text-base">
           {data?.currentPage} / {data?.totalPages}
         </p>
         <button
