@@ -1,7 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AdminAllNotes } from "./_components/admin-all-notes";
 import { Suspense } from "react";
-import { CircleCheckBig, List, LoaderCircle } from "lucide-react";
+import { List, LoaderCircle } from "lucide-react";
+import { AdminPendingNotes } from "./_components/admin-pending-notes";
 
 const AdminPage = () => {
   return (
@@ -10,31 +11,31 @@ const AdminPage = () => {
       className="md:flex md:justify-between md:gap-3 md:w-full"
     >
       {/* grid md:w-[80%] w-full grid-cols-3 mx-auto */}
-      <TabsList className="md:flex md:flex-col md:items-center md:justify-start md:gap-2 md:bg-[#242424] md:max-h-fit md:rounded-xl md:px-2 md:py-2 grid md:max-w-[15%] w-full grid-cols-3 md:mt-2">
+      <TabsList className="md:flex md:flex-col md:items-center md:justify-start md:gap-2 md:bg-[#242424] md:max-h-fit md:rounded-xl md:px-2 md:py-2 grid md:max-w-[15%] w-full grid-cols-2 md:mt-2">
         <TabsTrigger
           value="all"
-          className="rounded-l-xl md:w-full md:rounded-[2px] text-xs md:text-base bg-[#242424]"
+          className="rounded-l-xl md:w-full md:rounded-[2px] text-xs md:text-base bg-[#242424] py-1 md:py-1.5"
         >
           <span>
-            <List className="h-3 md:h-4 w-3 md:w-4 mr-1 md:mr-2" />
+            <List className="w-3 h-3 mr-1 md:h-4 md:w-4 md:mr-2" />
           </span>
           All
         </TabsTrigger>
-        <TabsTrigger
+        {/* <TabsTrigger
           value="approved"
           className="md:text-base text-xs md:w-full md:rounded-[2px] bg-[#242424]"
         >
           <span>
-            <CircleCheckBig className="h-3 md:h-4 w-3 md:w-4 mr-1 md:mr-2" />
+            <CircleCheckBig className="w-3 h-3 mr-1 md:h-4 md:w-4 md:mr-2" />
           </span>
           Approved
-        </TabsTrigger>
+        </TabsTrigger> */}
         <TabsTrigger
           value="pending"
-          className="rounded-r-xl md:text-base md:w-full text-xs md:rounded-[2px] bg-[#242424]"
+          className="rounded-r-xl md:text-base md:w-full text-xs md:rounded-[2px] bg-[#242424] py-1 md:py-1.5"
         >
           <span>
-            <LoaderCircle className="h-3 md:h-4 w-3 md:w-4 mr-1 md:mr-2" />
+            <LoaderCircle className="w-3 h-3 mr-1 md:h-4 md:w-4 md:mr-2" />
           </span>
           Pending
         </TabsTrigger>
@@ -46,11 +47,9 @@ const AdminPage = () => {
           <AdminAllNotes />
         </Suspense>
       </TabsContent>
-      <TabsContent value="approved">
-        Only approved notes will be rendered here!
-      </TabsContent>
-      <TabsContent value="pending">
-        Only pending notes will be rendered here!
+
+      <TabsContent value="pending" className="w-full h-full mt-1">
+        <AdminPendingNotes />
       </TabsContent>
     </Tabs>
   );
