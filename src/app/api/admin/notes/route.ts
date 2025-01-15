@@ -39,7 +39,7 @@ export async function GET(request: Request) {
             university: {
               universityFullName: {
                 contains: search,
-                mode: "insensitive", // Case-insensitive search
+                mode: "insensitive",
               },
             },
           },
@@ -47,8 +47,14 @@ export async function GET(request: Request) {
             university: {
               universityShortName: {
                 contains: search,
-                mode: "insensitive", // Case-insensitive search
+                mode: "insensitive",
               },
+            },
+          },
+          {
+            title: {
+              contains: search,
+              mode: "insensitive",
             },
           },
         ],
@@ -79,6 +85,12 @@ export async function GET(request: Request) {
                 contains: search,
                 mode: "insensitive",
               },
+            },
+          },
+          {
+            title: {
+              contains: search,
+              mode: "insensitive",
             },
           },
         ],
