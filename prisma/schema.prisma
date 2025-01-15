@@ -33,7 +33,8 @@ model User {
   email       String   @db.Text
   role        UserRole @default(USER)
 
-  notes Note[]
+  notes         Note[]
+  approvedNotes Note[] @relation("ApprovedBy")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -58,6 +59,9 @@ model Note {
 
   userId String // Foreign key to reference the User
   user   User   @relation(fields: [userId], references: [id])
+
+  approvedById String? // Foreign key to reference the approving user
+  approvedBy   User?   @relation("ApprovedBy", fields: [approvedById], references: [id])
 
   universityId String
   university   University @relation(fields: [universityId], references: [id])
