@@ -48,7 +48,7 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
                 <Image
                   src={imageUrl}
                   alt={note?.university?.universityShortName}
-                  className="rounded-full filter brightness-200 contrast-100 h-14 md:h-20 w-14 md:w-20 object-cover select-none"
+                  className="rounded-full filter brightness-125 h-14 md:h-20 w-14 md:w-20 object-cover select-none"
                   width={70}
                   height={70}
                 />

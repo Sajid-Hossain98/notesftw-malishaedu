@@ -57,7 +57,7 @@ export const NotesViewModal = () => {
             <Image
               src={imageUrl}
               fill
-              className="object-cover rounded-full filter brightness-200 contrast-100"
+              className="object-cover rounded-full filter brightness-125 contrast-100"
               alt="University Logo"
             />
           </div>
