@@ -57,7 +57,7 @@ export const NotesViewModal = () => {
             <div className="flex items-center justify-start gap-2 md:gap-4 mt-3">
               <Image
                 src={imageUrl}
-                className="rounded-full h-14 md:h-20 w-14 md:w-20 object-cover select-none bg-white p-[0.8px]"
+                className="rounded-full h-14 md:h-20 w-14 md:w-20 object-cover select-none bg-zinc-100 p-[0.8px]"
                 alt="University Logo"
                 height={100}
                 width={100}
