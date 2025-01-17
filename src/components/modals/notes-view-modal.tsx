@@ -53,34 +53,35 @@ export const NotesViewModal = () => {
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="bg-[#242424] border-zinc-700 !rounded-xl md:min-w-[60%] w-11/12 p-3 md:p-6 overflow-hidden">
         <DialogHeader className="text-start">
-          <div className="relative mx-auto h-14 md:h-20 w-14 md:w-20">
-            <Image
-              src={imageUrl}
-              fill
-              className="object-cover rounded-full filter brightness-125 contrast-100"
-              alt="University Logo"
-            />
-          </div>
+          <div>
+            <div className="flex items-center justify-start gap-2 md:gap-4 mt-3">
+              <Image
+                src={imageUrl}
+                className="rounded-full h-14 md:h-20 w-14 md:w-20 object-cover select-none bg-white p-[0.8px]"
+                alt="University Logo"
+                height={100}
+                width={100}
+              />
 
-          <div className="flex items-start md:items-center justify-between flex-col md:flex-row gap-1">
-            <div>
-              <DialogTitle className="text-lg text-zinc-300 sm:text-3xl md:py-2">
-                {toTitleCase(note?.title)}
-              </DialogTitle>
+              <div>
+                <DialogTitle className="text-lg text-zinc-300 sm:text-3xl md:py-2">
+                  {toTitleCase(note?.title)}
+                </DialogTitle>
 
-              <div className="flex items-center gap-2">
-                <DialogDescription className="flex items-center gap-1 sm:gap-2 text-sm font-semibold text-zinc-300 sm:text-xl">
-                  <School className="w-3.5 h-3.5 md:w-5 md:h-5" />
+                <div className="flex items-center gap-2">
+                  <DialogDescription className="flex items-center gap-1 sm:gap-2 text-sm font-semibold text-zinc-300 sm:text-xl">
+                    <School className="w-3.5 h-3.5 md:w-5 md:h-5" />
 
-                  {note?.university.universityShortName}
-                </DialogDescription>
-                -
-                <DialogDescription className="text-sm font-semibold capitalize text-zinc-300 sm:text-xl line-clamp-1">
-                  {note?.university.universityFullName}
-                </DialogDescription>
+                    {note?.university.universityShortName}
+                  </DialogDescription>
+                  -
+                  <DialogDescription className="text-sm font-semibold capitalize text-zinc-300 sm:text-xl line-clamp-1">
+                    {note?.university.universityFullName}
+                  </DialogDescription>
+                </div>
+
+                <p className="text-xs">Last updated: {formattedDate}</p>
               </div>
-
-              <p className="text-xs">Last updated: {formattedDate}</p>
             </div>
             <Badge
               className={`${note?.type?.bgColor} max-w-fit absolute top-0 left-0 rounded-bl-none rounded-tr-none rounded-tl-none rounded-br-xl`}
@@ -92,7 +93,7 @@ export const NotesViewModal = () => {
 
           <Separator className="bg-[#3f3f3f]" />
 
-          <ScrollArea className="md:max-h-[65vh] max-h-[45vh] py-2">
+          <ScrollArea className="md:max-h-[60vh] max-h-[45vh] py-2">
             <Preview
               value={note?.description}
               className="text-base md:text-lg"

@@ -62,9 +62,9 @@ export const AdminAllNoteItems = ({ notes }: AdminAllNoteItemsProps) => {
 
                 <span className="text-xs">Last updated: {formattedDate}</span>
               </div>
-              <div className="px-2 py-2 transition-colors rounded-full cursor-pointer hover:bg-black">
+              <button className="px-3 py-3 transition-colors rounded-full cursor-pointer md:hover:bg-black active:bg-black">
                 <Edit3 className="w-4 h-4 md:h-5 md:w-5" />
-              </div>
+              </button>
             </div>
           );
         })
