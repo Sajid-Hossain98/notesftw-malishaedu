@@ -16,14 +16,17 @@ export async function POST(req: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    if (
-      currentlyLoggedInUserData?.role !== UserRole.ADMIN &&
-      currentlyLoggedInUserData?.role !== UserRole.MODERATOR
-    ) {
-      return new NextResponse("Your are not allowed to perform this task", {
-        status: 403,
-      });
-    }
+    // if (
+    //   currentlyLoggedInUserData?.role !== UserRole.ADMIN &&
+    //   currentlyLoggedInUserData?.role !== UserRole.MODERATOR
+    // ) {
+    //   return new NextResponse("Your are not allowed to perform this task", {
+    //     status: 403,
+    //   });
+    // }
+
+    //to check if ADMIN?
+    const isAdmin = currentlyLoggedInUserData?.role === UserRole.ADMIN;
 
     //to find the university for which the note is being added
     const university = await db.university.findFirst({
@@ -51,6 +54,7 @@ export async function POST(req: Request) {
       data: {
         title: title,
         description: noteDescription,
+        approval: isAdmin ? "APPROVED" : "PENDING",
         user: {
           connect: { id: currentlyLoggedInUserData?.id },
         },

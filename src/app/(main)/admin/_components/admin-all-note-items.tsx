@@ -13,7 +13,7 @@ export const AdminAllNoteItems = ({ notes }: AdminAllNoteItemsProps) => {
   const { onOpen } = useModal();
 
   return (
-    <div className="flex flex-col gap-1 md:gap-2 md:max-h-[65vh] max-h-[45vh] overflow-y-auto overflow-x-hidden mt-2 md:mt-3 bg-[#242424] px-2 md:px-4 py-1 md:py-2 rounded-xl [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-[#242424] [&::-webkit-scrollbar-thumb]:bg-gray-500">
+    <div className="flex flex-col gap-1 md:gap-2 md:max-h-[65vh] max-h-[45vh] overflow-y-auto overflow-x-hidden mt-2 md:mt-3 bg-[#242424] px-2 md:px-3 py-1 md:py-2 rounded-xl [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-[#242424] [&::-webkit-scrollbar-thumb]:bg-gray-500">
       {notes && notes?.length > 0 ? (
         notes?.map((note) => {
           let formattedDate = null;
@@ -31,10 +31,10 @@ export const AdminAllNoteItems = ({ notes }: AdminAllNoteItemsProps) => {
           return (
             <div
               key={note.id}
-              className="flex items-center justify-between gap-1 md:gap-2 md:hover:bg-[#3a3939] active:bg-[#3a3939] py-1 md:py-2 px-1 md:px-4 rounded-xl transition-colors"
+              className="flex items-center justify-between gap-1 md:gap-2 pl-1 rounded-xl transition-colors"
             >
               <div
-                className="min-w-0 cursor-pointer"
+                className="min-w-0 cursor-pointer md:hover:bg-[#3a3939] active:bg-[#3a3939] w-full px-1 md:px-2 py-1 hover:rounded-[4px]"
                 onClick={() => onOpen("viewNote", { note })}
               >
                 <h2 className="text-base font-semibold truncate md:text-lg">
@@ -62,7 +62,7 @@ export const AdminAllNoteItems = ({ notes }: AdminAllNoteItemsProps) => {
 
                 <span className="text-xs">Last updated: {formattedDate}</span>
               </div>
-              <button className="px-3 py-3 transition-colors rounded-full cursor-pointer md:hover:bg-black active:bg-black">
+              <button className="md:hover:bg-black active:bg-black cursor-pointer px-3 py-3 rounded-full">
                 <Edit3 className="w-4 h-4 md:h-5 md:w-5" />
               </button>
             </div>
