@@ -9,7 +9,7 @@ interface MenuItemsProps {
 }
 
 export const MenuItems = ({ userData }: MenuItemsProps) => {
-  const admin = userData?.role === "ADMIN";
+  const admin = userData?.role === "ADMIN" || userData?.role === "MODERATOR";
 
   return (
     <>

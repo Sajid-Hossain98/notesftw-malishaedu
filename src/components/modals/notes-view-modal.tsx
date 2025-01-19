@@ -64,7 +64,7 @@ export const NotesViewModal = () => {
               />
 
               <div>
-                <DialogTitle className="text-lg text-zinc-300 sm:text-3xl md:py-2">
+                <DialogTitle className="text-lg text-zinc-300 sm:text-3xl md:pb-2">
                   {toTitleCase(note?.title)}
                 </DialogTitle>
 
