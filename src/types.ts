@@ -24,6 +24,7 @@ export type GroupedSearchedNotes = {
   [key: string]: (Note & {
     university: University;
     type: Type;
+    user: { id: string; name: string; imageUrl: string; role: string };
   })[]; // Array of notes for each note type (Assessment, Submit, Offer, etc.)
 };
 
