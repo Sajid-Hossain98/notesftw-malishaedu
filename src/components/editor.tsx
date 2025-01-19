@@ -19,10 +19,42 @@ export const Editor = ({ onChange, value, placeholder }: EditorProps) => {
     []
   );
 
+  const quillModules = {
+    toolbar: [
+      [{ header: [1, 2, 3, false] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link"],
+      [{ align: [] }],
+      [{ color: [] }],
+      [{ background: [] }],
+      ["code-block"],
+      ["clean"],
+    ],
+  };
+
+  const quillFormats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "link",
+    "align",
+    "color",
+    "code-block",
+    "background",
+  ];
+
   return (
     <div className="bg-zinc-100 text-black rounded-xl overflow-hidden">
       <ReactQuill
         theme="snow"
+        formats={quillFormats}
+        modules={quillModules}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
