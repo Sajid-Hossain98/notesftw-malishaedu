@@ -69,6 +69,14 @@ export async function GET(request: Request) {
       include: {
         university: true,
         type: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            imageUrl: true,
+            role: true,
+          },
+        },
       },
       orderBy: {
         createdAt: "desc",

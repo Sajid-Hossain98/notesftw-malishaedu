@@ -58,6 +58,7 @@ export const AdminAllNoteItems = ({ notes }: AdminAllNoteItemsProps) => {
                   >
                     {note?.type?.name}
                   </span>
+                  {note?.user?.name}
                 </div>
 
                 <span className="text-xs">Last updated: {formattedDate}</span>

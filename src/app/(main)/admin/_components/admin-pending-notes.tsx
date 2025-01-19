@@ -26,7 +26,7 @@ export const AdminPendingNotes = () => {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const queryPage = searchParams.get("allNotesPage");
+    const queryPage = searchParams.get("pendingNotes");
     const querySearch = searchParams.get("searchedNotes");
 
     if (queryPage) {
@@ -44,7 +44,7 @@ export const AdminPendingNotes = () => {
       {
         url: pathname,
         query: {
-          allNotesPage: page,
+          pendingNotes: page,
           searchedNotes: searchNotes,
         },
       },

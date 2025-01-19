@@ -13,7 +13,6 @@ import { SearchContent } from "./ui/search-content";
 import { GroupedSearchedNotes } from "@/types";
 import { ActionTooltip } from "./action-tooltip";
 
-// : Promise<SingleNotesWithUniTypeUser>
 const fetchSearchResults = async (
   searchedUniversity: string
 ): Promise<GroupedSearchedNotes> => {

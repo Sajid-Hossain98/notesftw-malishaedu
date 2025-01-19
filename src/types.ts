@@ -7,6 +7,7 @@ export type NotesWithUniTypeUser = (Note & {
     logoImage: string;
   };
   type: { name: string; bgColor: string; color: string };
+  user: { id: string; name: string; imageUrl: string; role: string };
 })[];
 
 export type SingleNotesWithUniTypeUser = Note & {
@@ -16,6 +17,7 @@ export type SingleNotesWithUniTypeUser = Note & {
     logoImage: string;
   };
   type: { name: string; bgColor: string; color: string };
+  user: { id: string; name: string; imageUrl: string; role: string };
 };
 
 export type GroupedSearchedNotes = {

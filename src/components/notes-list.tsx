@@ -23,6 +23,14 @@ export const NotesList = async ({
       include: {
         university: true,
         type: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            imageUrl: true,
+            role: true,
+          },
+        },
       },
     });
   } else {
@@ -45,11 +53,21 @@ export const NotesList = async ({
           },
         },
         type: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            imageUrl: true,
+            role: true,
+          },
+        },
       },
       skip: randomOffset,
       take: sliceCount,
     });
   }
+
+  console.log("NOTES", notes);
 
   return <NoteListItems notes={notes} classNames={classNames} />;
 };
