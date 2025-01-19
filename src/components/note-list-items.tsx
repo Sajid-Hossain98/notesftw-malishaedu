@@ -48,7 +48,7 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
                 <Image
                   src={imageUrl}
                   alt={note?.university?.universityShortName}
-                  className="rounded-full h-14 md:h-20 w-14 md:w-20 object-cover select-none bg-zinc-100 p-[0.8px]"
+                  className="rounded-full h-14 md:h-20 w-14 md:w-20 object-cover select-none bg-zinc-100 p-[1.5px]"
                   width={100}
                   height={100}
                 />

@@ -57,7 +57,7 @@ export const MobileSidebar = () => {
               className="w-10 bg-gray-800 rounded-full p-2 select-none"
             />
           </SheetTitle>
-          <MenuItems />
+          <MenuItems userData={null} />
         </SheetContent>
       </Sheet>
     </>

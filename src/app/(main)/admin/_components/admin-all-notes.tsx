@@ -74,13 +74,14 @@ export const AdminAllNotes = () => {
     if (error && (error as any).status === 403) {
       return (
         <div className="mt-8 text-xl font-semibold text-center text-rose-500">
-          Excuse me sir, You are not authorized to view these items.
+          Excuse me sir, You are not authorized to view these items! &quot;GO
+          HOME&quot;
         </div>
       );
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (error && (error as any).status === 401) {
-      return <div>You need to be logged in to access this page.</div>;
+      return <div>You need to be logged-in to access this page.</div>;
     }
     return <div>Something went wrong: {(error as Error).message}</div>;
   }

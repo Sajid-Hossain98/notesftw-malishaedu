@@ -2,8 +2,15 @@ import { BookHeart, Plus, Shield } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import { UserData } from "@/types";
 
-export const MenuItems = () => {
+interface MenuItemsProps {
+  userData: UserData | null;
+}
+
+export const MenuItems = ({ userData }: MenuItemsProps) => {
+  const admin = userData?.role === "ADMIN";
+
   return (
     <>
       <nav className="w-full mt-10 md:mt-0">
@@ -29,17 +36,19 @@ export const MenuItems = () => {
         </Button>
       </nav>
 
-      <nav className="w-full">
-        <Button
-          variant="myButtons"
-          className="font-semibold gap-1 md:w-fit w-full"
-          asChild
-        >
-          <Link href="/admin">
-            <Shield strokeWidth={3} className="!h-6 !w-6" />
-          </Link>
-        </Button>
-      </nav>
+      {admin && (
+        <nav className="w-full">
+          <Button
+            variant="myButtons"
+            className="font-semibold gap-1 md:w-fit w-full"
+            asChild
+          >
+            <Link href="/admin">
+              <Shield strokeWidth={3} className="!h-6 !w-6" />
+            </Link>
+          </Button>
+        </nav>
+      )}
     </>
   );
 };
