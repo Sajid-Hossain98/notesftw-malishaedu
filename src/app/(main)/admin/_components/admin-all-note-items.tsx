@@ -58,10 +58,11 @@ export const AdminAllNoteItems = ({ notes }: AdminAllNoteItemsProps) => {
                   >
                     {note?.type?.name}
                   </span>
-                  {note?.user?.name}
                 </div>
 
-                <span className="text-xs">Last updated: {formattedDate}</span>
+                <p className="text-xs">Last updated: {formattedDate}</p>
+                <p className="text-xs">Created by: {note?.user?.name}</p>
+                {note?.approvedById}
               </div>
               <button className="md:hover:bg-black active:bg-black cursor-pointer px-3 py-3 rounded-full">
                 <Edit3 className="w-4 h-4 md:h-5 md:w-5" />

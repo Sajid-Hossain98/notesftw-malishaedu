@@ -20,6 +20,9 @@ export const NotesList = async ({
 
   if (getAll) {
     notes = await db.note.findMany({
+      where: {
+        approval: "APPROVED",
+      },
       include: {
         university: true,
         type: true,
@@ -44,6 +47,9 @@ export const NotesList = async ({
     );
 
     notes = await db.note.findMany({
+      where: {
+        approval: "APPROVED",
+      },
       include: {
         university: {
           select: {
@@ -66,8 +72,6 @@ export const NotesList = async ({
       take: sliceCount,
     });
   }
-
-  console.log("NOTES", notes);
 
   return <NoteListItems notes={notes} classNames={classNames} />;
 };
