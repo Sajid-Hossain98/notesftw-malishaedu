@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Editor } from "@/components/editor";
-import { Frown, HeartCrack, Info } from "lucide-react";
+import { Frown, HeartCrack, Info, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { ActionTooltip } from "@/components/action-tooltip";
 
@@ -254,11 +254,15 @@ export const AddANote = ({
           )}
         />
         <Button
+          disabled={isLoading}
           type="submit"
           variant={"myButtons"}
           className="w-full text-lg md:text-xl !mt-8 font-semibold"
         >
           Create
+          {isLoading && (
+            <Loader2 className="h-3 w-3 md:h-4 md:w-4 animate-spin" />
+          )}
         </Button>
       </form>
     </Form>

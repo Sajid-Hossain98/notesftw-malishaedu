@@ -19,6 +19,12 @@ import {
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
+import { UserData } from "@/types";
+
+interface AddUniversityProps {
+  userData: UserData | null;
+}
 
 const addUniversityFormSchema = z.object({
   universityShortForm: z
@@ -48,7 +54,7 @@ const addUniversityFormSchema = z.object({
         }),
 });
 
-export const AddAnUniversity = () => {
+export const AddAnUniversity = ({ userData }: AddUniversityProps) => {
   const router = useRouter();
   const { storage } = createSupabaseClient();
 
@@ -117,6 +123,15 @@ export const AddAnUniversity = () => {
     }
   };
 
+  if (userData?.role !== "ADMIN") {
+    return (
+      <div className="mt-8 text-2xl text-center text-rose-500">
+        You are not authorized to add an university, kindly ask an
+        &quot;ADMIN&quot;
+      </div>
+    );
+  }
+
   return (
     <Form {...form}>
       <form
@@ -182,11 +197,15 @@ export const AddAnUniversity = () => {
         />
 
         <Button
+          disabled={isLoading}
           variant={"myButtons"}
           className="w-full text-lg md:text-xl !mt-8 font-semibold"
           type="submit"
         >
           Create
+          {isLoading && (
+            <Loader2 className="h-3 w-3 md:h-4 md:w-4 animate-spin" />
+          )}
         </Button>
       </form>
     </Form>
