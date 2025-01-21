@@ -22,7 +22,7 @@ export default function Loading() {
       </div>
 
       {/* Submit Button Skeleton */}
-      <Skeleton className="h-12 md:h-14 w-full mt-8 rounded-xl bg-zinc-400" />
+      <Skeleton className="h-6 md:h-10 w-full mt-8 rounded-xl bg-zinc-400" />
     </div>
   );
 }
