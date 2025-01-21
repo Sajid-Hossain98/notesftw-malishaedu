@@ -24,12 +24,12 @@ export const NotesViewModal = () => {
 
   const { note } = data;
 
-  const toTitleCase = (title: string | undefined) => {
-    return title?.replace(
-      /\w\S*/g,
-      (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
-    );
-  };
+  // const toTitleCase = (title: string | undefined) => {
+  //   return title?.replace(
+  //     /\w\S*/g,
+  //     (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
+  //   );
+  // };
 
   //preparing the url of the supabase images
   const imageUrl = `${process.env
@@ -65,18 +65,18 @@ export const NotesViewModal = () => {
 
               <div>
                 <DialogTitle className="text-lg text-zinc-300 sm:text-3xl md:pb-2">
-                  {toTitleCase(note?.title)}
+                  {note?.title}
                 </DialogTitle>
 
                 <div className="flex items-center gap-2">
                   <DialogDescription className="flex items-center gap-1 sm:gap-2 text-sm font-semibold text-zinc-300 sm:text-xl">
                     <School className="w-3.5 h-3.5 md:w-5 md:h-5" />
 
-                    {note?.university.universityShortName}
+                    {note?.university?.universityShortName}
                   </DialogDescription>
                   -
                   <DialogDescription className="text-sm font-semibold capitalize text-zinc-300 sm:text-xl line-clamp-1">
-                    {note?.university.universityFullName}
+                    {note?.university?.universityFullName}
                   </DialogDescription>
                 </div>
 

@@ -15,6 +15,7 @@ const config: Config = {
     "bg-stone-300",
     "bg-amber-300",
     "bg-rose-400",
+    "bg-lime-300",
     "#ffffff",
     "#000",
   ],
