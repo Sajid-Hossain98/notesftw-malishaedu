@@ -37,6 +37,21 @@ export async function GET(request: Request) {
               mode: "insensitive",
             },
           },
+          {
+            AND: [
+              {
+                type: {
+                  name: "Offer",
+                },
+              },
+              {
+                description: {
+                  contains: searchedUniversity,
+                  mode: "insensitive",
+                },
+              },
+            ],
+          },
         ],
       },
       include: {
