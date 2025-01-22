@@ -8,7 +8,7 @@ export default function Loading() {
       <div className="md:max-h-[70dvh] max-h-[65vh] bg-zinc-600 rounded-xl p-3 md:p-5 overflow-y-auto md:!mb-12">
         {/* Notes List Skeleton */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-zinc-500 rounded-xl">
-          {[...Array(10)].map((_, index) => (
+          {[...Array(8)].map((_, index) => (
             <div
               key={index}
               className="p-2 md:p-3 space-y-1 bg-opacity-5 relative overflow-hidden rounded-md animate-pulse"
