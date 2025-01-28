@@ -38,6 +38,9 @@ export const SearchBar = () => {
   const { data, error, isLoading } = useQuery<GroupedSearchedNotes>({
     queryKey: ["searchResults", debouncedSearchWords],
     queryFn: () => fetchSearchResults(debouncedSearchWords),
+    staleTime: 30 * 24 * 60 * 60 * 1000, // 30 days
+    // refetchOnWindowFocus: true, // Refetch on window focus
+    gcTime: 60 * 24 * 60 * 60 * 1000, //60 days
     enabled: debouncedSearchWords.length > 0,
   });
 
