@@ -59,6 +59,7 @@ export const AddANote = ({
   noteTypes,
 }: AddANoteProps) => {
   const router = useRouter();
+  // const queryClient = useQueryClient();
 
   const form = useForm<z.infer<typeof addANoteFormSchema>>({
     resolver: zodResolver(addANoteFormSchema),
@@ -98,6 +99,11 @@ export const AddANote = ({
       };
 
       await axios.post("api/add-note", valuesToSend);
+
+      // queryClient.invalidateQueries({
+      //   queryKey: ["searchResults"],
+      // });
+      // localStorage.removeItem("REACT_QUERY_CACHE");
 
       toast.success("Successfully created the note.");
 
