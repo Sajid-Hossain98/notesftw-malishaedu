@@ -8,7 +8,7 @@ import { useDebounce } from "@/hooks/use-debounce";
 import { usePathname, useRouter } from "next/navigation";
 import qs from "query-string";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+// import axios from "axios";
 import { SearchContent } from "./ui/search-content";
 import { GroupedSearchedNotes } from "@/types";
 import { ActionTooltip } from "./action-tooltip";
@@ -17,12 +17,15 @@ const fetchSearchResults = async (
   searchedUniversity: string
 ): Promise<GroupedSearchedNotes> => {
   try {
-    const { data } = await axios.get(`/api/notes/search`, {
-      params: {
-        university: searchedUniversity,
-      },
-    });
-    return data;
+    const response = await fetch(
+      `/api/notes/search?university=${encodeURIComponent(searchedUniversity)}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Error fetching searched notes");
+    }
+
+    return response.json();
   } catch (error) {
     console.log(error);
     throw new Error("Error fetching searched notes");
