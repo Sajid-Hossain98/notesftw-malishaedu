@@ -3,29 +3,21 @@
 import Image from "next/image";
 import { Input } from "./ui/input";
 import { BadgeInfo, Search, SearchX, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useDebounce } from "@/hooks/use-debounce";
 import { usePathname, useRouter } from "next/navigation";
 import qs from "query-string";
-import { useQuery } from "@tanstack/react-query";
-// import axios from "axios";
+import useSWR from "swr";
+import axios from "axios";
 import { SearchContent } from "./ui/search-content";
 import { GroupedSearchedNotes } from "@/types";
 import { ActionTooltip } from "./action-tooltip";
 
-const fetchSearchResults = async (
-  searchedUniversity: string
-): Promise<GroupedSearchedNotes> => {
+//fetcher for SWR
+const fetchSearchResults = async (url: string) => {
   try {
-    const response = await fetch(
-      `/api/notes/search?university=${encodeURIComponent(searchedUniversity)}`
-    );
-
-    if (!response.ok) {
-      throw new Error("Error fetching searched notes");
-    }
-
-    return response.json();
+    const { data } = await axios.get(url);
+    return data;
   } catch (error) {
     console.log(error);
     throw new Error("Error fetching searched notes");
@@ -34,26 +26,22 @@ const fetchSearchResults = async (
 
 export const SearchBar = () => {
   const [searchWords, setSearchWords] = useState<string>("");
-  const debouncedSearchWords = useDebounce(searchWords, 100);
+  const debouncedSearchWords = useDebounce(searchWords, 10);
   const router = useRouter();
   const pathname = usePathname();
 
-  const { data, error, isLoading } = useQuery<GroupedSearchedNotes>({
-    queryKey: ["searchResults", debouncedSearchWords],
-    queryFn: () => fetchSearchResults(debouncedSearchWords),
-    // staleTime: 30 * 24 * 60 * 60 * 1000, // 30 days
-    // refetchOnWindowFocus: true, // Refetch on window focus
-    // gcTime: 60 * 24 * 60 * 60 * 1000, //60 days
-    enabled: debouncedSearchWords.length > 0,
-  });
+  const { data, error, isLoading } = useSWR<GroupedSearchedNotes>(
+    debouncedSearchWords.length > 0
+      ? `/api/notes/search?university=${debouncedSearchWords}`
+      : null,
+    fetchSearchResults
+  );
 
   useEffect(() => {
     const url = qs.stringifyUrl(
       {
         url: pathname,
-        query: {
-          university: debouncedSearchWords,
-        },
+        query: { university: debouncedSearchWords },
       },
       { skipEmptyString: true, skipNull: true }
     );
