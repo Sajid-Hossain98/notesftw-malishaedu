@@ -84,7 +84,7 @@ export const SearchBar = () => {
         <Input
           className="bg-[#242424] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 caret-[#edf2f4] placeholder-gray-500"
           type="text"
-          placeholder="e.g., NJTech / Nanjing Tech"
+          placeholder="e.g., NJTech / Nanjing Tech / Business Administration"
           value={searchWords}
           onChange={(e) => setSearchWords(e.target.value)}
           autoFocus
@@ -94,7 +94,7 @@ export const SearchBar = () => {
         Having difficulties searching?
         <ActionTooltip
           side="bottom"
-          label="You can search typing either the short name of the university or full name! A list of short names will be provided soon."
+          label="You can search using a university's short name, full name, note title, or even major names (e.g., 'Mechanical Engineering'). It's not case-sensitive, so you can type in uppercase or lowercase. A list of short names will be available soon."
         >
           <BadgeInfo className="h-4 w-4" />
         </ActionTooltip>

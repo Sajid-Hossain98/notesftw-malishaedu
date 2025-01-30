@@ -39,7 +39,7 @@ export const SearchContent = ({
 
       {isLoading && (
         <div className="flex flex-col gap-4">
-          {Array.from({ length: 3 }).map((_, idx) => (
+          {Array.from({ length: 1 }).map((_, idx) => (
             <div key={idx} className="mb-2">
               {/* Header Skeleton */}
               <div className="relative font-semibold md:text-lg text-base flex items-center md:mb-1 mb-0.5">
@@ -49,7 +49,7 @@ export const SearchContent = ({
               </div>
 
               {/* Notes Skeleton */}
-              {Array.from({ length: 2 }).map((_, noteIdx) => (
+              {Array.from({ length: 3 }).map((_, noteIdx) => (
                 <div
                   key={noteIdx}
                   className="flex items-center justify-between w-full min-w-0 py-1 pr-1 truncate hover:rounded-xl md:py-2"
