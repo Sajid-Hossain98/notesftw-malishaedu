@@ -2,6 +2,7 @@ import { GroupedSearchedNotes } from "@/types";
 import { HeartCrack, Lightbulb } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
 import { Skeleton } from "./skeleton";
+import { motion } from "motion/react";
 
 interface SearchContentProps {
   searchedNotes: GroupedSearchedNotes | undefined;
@@ -23,7 +24,15 @@ export const SearchContent = ({
     Object.values(searchedNotes).some((notes) => notes.length > 0);
 
   return (
-    <div className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto bg-stone-700 mt-2 px-2 md:px-4 py-2 rounded-xl md:!mb-12 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-300">
+    <motion.div
+      className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto bg-stone-700 mt-2 px-2 md:px-4 py-2 rounded-xl md:!mb-12 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-300"
+      layout
+      transition={{
+        type: "spring",
+        stiffness: 450,
+        damping: 30,
+      }}
+    >
       {!isLoading && !hasNotes && !searchError && (
         <div className="flex items-center justify-center gap-2 min-h-20 md:gap-3">
           <p className="text-xl font-semibold text-center text-gray-400">
@@ -91,6 +100,14 @@ export const SearchContent = ({
                 key={note.id}
                 className="flex items-center justify-between w-full min-w-0 py-1 pr-1 truncate cursor-pointer md:hover:bg-stone-800 active:bg-stone-800 md:py-2 hover:rounded-xl text-ellipsis md:pr-2"
                 onClick={() => onOpen("viewNote", { note: note })}
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onOpen("viewNote", { note: note });
+                  }
+                }}
               >
                 <div className="flex items-center gap-1 px-1 md:gap-2 md:px-2">
                   <span>
@@ -111,6 +128,6 @@ export const SearchContent = ({
       })}
 
       <div>{searchError?.message}</div>
-    </div>
+    </motion.div>
   );
 };
