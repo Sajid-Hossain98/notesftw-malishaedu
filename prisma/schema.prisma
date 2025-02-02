@@ -26,6 +26,11 @@ enum ApprovalStatus {
   REJECTED
 }
 
+enum NoticeStatus {
+  ACTIVE
+  INACTIVE
+}
+
 model User {
   id          String   @id @default(uuid())
   clerkUserId String   @unique
@@ -35,7 +40,8 @@ model User {
   role        UserRole @default(USER)
 
   notes         Note[]
-  approvedNotes Note[] @relation("ApprovedBy")
+  approvedNotes Note[]   @relation("ApprovedBy")
+  notices       Notice[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -50,6 +56,7 @@ model University {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   notes     Note[]
+  notices   Notice[]
 }
 
 model Note {
@@ -80,4 +87,21 @@ model Type {
   color   String
   bgColor String
   notes   Note[]
+}
+
+model Notice {
+  id String @id @default(uuid())
+
+  title       String
+  description String?      @db.Text
+  status      NoticeStatus @default(ACTIVE)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  universityId String
+  university   University @relation(fields: [universityId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
