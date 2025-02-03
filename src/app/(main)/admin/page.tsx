@@ -4,9 +4,22 @@ import { Suspense } from "react";
 import { List, LoaderCircle } from "lucide-react";
 import { AdminPendingNotes } from "./_components/admin-pending-notes";
 
-export function generateMetadata() {
+interface GenerateMetadataParams {
+  searchParams: { [key: string]: string | undefined };
+}
+
+export async function generateMetadata({
+  searchParams,
+}: GenerateMetadataParams) {
+  const allNotesPage = searchParams.allNotesPage;
+  const pendingNotes = searchParams.pendingNotes;
+
   return {
-    title: "ADMIN",
+    title: allNotesPage
+      ? `Edit notes - Page ${allNotesPage}`
+      : pendingNotes
+      ? `Pending notes - ${pendingNotes}`
+      : "Admin",
   };
 }
 

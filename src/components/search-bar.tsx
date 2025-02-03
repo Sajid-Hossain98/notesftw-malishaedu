@@ -31,9 +31,7 @@ export const SearchBar = () => {
   const pathname = usePathname();
 
   const { data, error, isLoading } = useSWR<GroupedSearchedNotes>(
-    searchWords.length > 0
-      ? `/api/notes/search?university=${searchWords}`
-      : null,
+    searchWords.length > 0 ? `/api/notes/search?search=${searchWords}` : null,
     fetchSearchResults
   );
 
@@ -41,7 +39,7 @@ export const SearchBar = () => {
     const url = qs.stringifyUrl(
       {
         url: pathname,
-        query: { university: searchWords },
+        query: { search: searchWords },
       },
       { skipEmptyString: true, skipNull: true }
     );
@@ -94,6 +92,7 @@ export const SearchBar = () => {
         Having difficulties searching?
         <ActionTooltip
           side="bottom"
+          className="md:max-w-[550px]"
           label="You can search using a university's short name, full name, note title, or even major names (e.g., 'Mechanical Engineering'). It's not case-sensitive, so you can type in uppercase or lowercase. A list of short names will be available soon."
         >
           <BadgeInfo className="h-4 w-4" />

@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   // Getting the search query parameter
   const url = new URL(request.url);
-  const searchedUniversity = url.searchParams.get("university") || "";
+  const searchedUniversity = url.searchParams.get("search") || "";
 
   if (!searchedUniversity) {
     return NextResponse.json([], { status: 400 });

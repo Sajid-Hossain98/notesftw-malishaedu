@@ -1,6 +1,20 @@
 import { NotesList } from "@/components/notes-list";
 import { SearchBar } from "@/components/search-bar";
 
+interface GenerateMetadataParams {
+  searchParams: { [key: string]: string | undefined };
+}
+
+export async function generateMetadata({
+  searchParams,
+}: GenerateMetadataParams) {
+  const searchedKey = searchParams.search;
+
+  return {
+    title: searchedKey ? `${searchedKey} | NotesFTW` : "NotesFTW",
+  };
+}
+
 export default async function Home() {
   return (
     <main className="space-y-3 md:space-y-8">
