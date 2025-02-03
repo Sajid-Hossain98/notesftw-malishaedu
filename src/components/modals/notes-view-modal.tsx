@@ -12,7 +12,7 @@ import {
 import { useModal } from "@/hooks/use-modal-store";
 import { Preview } from "../preview";
 import { ScrollArea } from "../ui/scroll-area";
-import { HandHeart, School } from "lucide-react";
+import { School } from "lucide-react";
 import Image from "next/image";
 import { Separator } from "../ui/separator";
 import { Badge } from "../ui/badge";
@@ -106,9 +106,15 @@ export const NotesViewModal = () => {
             asChild
             className="md:hover:bg-black active:bg-black transition-colors"
           >
-            <span className="flex items-center justify-center w-full gap-2 py-2 border-2 cursor-pointer border-zinc-700 font-semibold text-sm md:text-lg">
+            <span className="flex items-center justify-center w-full gap-2 py-1 md:py-2 border-2 cursor-pointer border-zinc-700 font-semibold text-sm md:text-lg">
               Thanks
-              <HandHeart className="w-4 h-4 sm:w-6 sm:h-6" />
+              <Image
+                src="/static/hand-white.svg"
+                alt="hand-heart"
+                className="h-5 w-5 sm:h-8 sm:w-8"
+                height={300}
+                width={300}
+              />
             </span>
           </DialogClose>
         </DialogFooter>

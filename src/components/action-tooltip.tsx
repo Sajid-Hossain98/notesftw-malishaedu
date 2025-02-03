@@ -6,12 +6,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 interface ActionTooltipProps {
   label: string;
   children: React.ReactNode;
   side?: "top" | "right" | "bottom" | "left";
   align?: "start" | "center" | "end";
+  className?: string;
 }
 
 export const ActionTooltip = ({
@@ -19,6 +21,7 @@ export const ActionTooltip = ({
   children,
   side,
   align,
+  className,
 }: ActionTooltipProps) => {
   return (
     <TooltipProvider>
@@ -28,11 +31,14 @@ export const ActionTooltip = ({
         </TooltipTrigger>
 
         <TooltipContent
-          className="bg-[#000000] text-slate-300 max-w-[300px] md:max-w-[50%] z-50"
+          className={cn(
+            "bg-stone-900 text-sm font-semibold text-zinc-400/95 max-w-[300px] md:max-w-[50%] z-50 border-gray-600 rounded-[4px]",
+            className
+          )}
           side={side}
           align={align}
         >
-          <p className="font-semibold text-sm">{label}</p>
+          <p className="text-justify">{label}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
