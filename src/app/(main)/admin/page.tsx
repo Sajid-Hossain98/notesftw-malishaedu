@@ -4,6 +4,12 @@ import { Suspense } from "react";
 import { List, LoaderCircle } from "lucide-react";
 import { AdminPendingNotes } from "./_components/admin-pending-notes";
 
+export function generateMetadata() {
+  return {
+    title: "ADMIN",
+  };
+}
+
 const AdminPage = () => {
   return (
     <Tabs

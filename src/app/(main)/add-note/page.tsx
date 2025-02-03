@@ -2,6 +2,12 @@ import { initialUser } from "@/lib/initialUser";
 import { AddANote } from "./_components/add-a-note";
 import { db } from "@/lib/db";
 
+export function generateMetadata() {
+  return {
+    title: "Add note",
+  };
+}
+
 const AddNotePage = async () => {
   await initialUser();
 
