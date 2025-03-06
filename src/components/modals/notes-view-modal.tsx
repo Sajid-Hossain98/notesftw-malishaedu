@@ -106,7 +106,7 @@ export const NotesViewModal = () => {
             asChild
             className="md:hover:bg-black active:bg-black transition-colors"
           >
-            <span className="flex items-center justify-center w-full gap-2 py-1 md:py-2 border-2 cursor-pointer border-zinc-700 font-semibold text-sm md:text-lg">
+            <span className="flex items-center justify-center w-full gap-0.5 py-1 md:py-2 border-2 cursor-pointer border-zinc-700 font-semibold text-sm md:text-lg">
               Thanks
               <Image
                 src="/static/hand-white.svg"

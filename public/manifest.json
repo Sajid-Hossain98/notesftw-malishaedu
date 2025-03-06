@@ -1,0 +1,15 @@
+{
+  "name": "NotesFTW",
+  "short_name": "NotesFTW",
+  "theme_color": "#166d4d",
+  "background_color": "#00000",
+  "display": "standalone",
+  "orientation": "any",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    { "src": "/icons/icons-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icons/icons-256.png", "type": "image/png", "sizes": "256x256" },
+    { "src": "/irons/icons-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}
