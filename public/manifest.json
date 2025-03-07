@@ -2,14 +2,15 @@
   "name": "NotesFTW",
   "short_name": "NotesFTW",
   "theme_color": "#166d4d",
-  "background_color": "#000000",
+  "background_color": "#166d4d",
   "display": "standalone",
   "orientation": "any",
   "scope": "/",
   "start_url": "/",
+  "id": "/",
   "icons": [
     { "src": "/icons/Logo-192.png", "type": "image/png", "sizes": "192x192" },
     { "src": "/icons/Logo-256.png", "type": "image/png", "sizes": "256x256" },
-    { "src": "/irons/Logo-512.png", "type": "image/png", "sizes": "512x512" }
+    { "src": "/icons/Logo-512.png", "type": "image/png", "sizes": "512x512" }
   ]
 }
