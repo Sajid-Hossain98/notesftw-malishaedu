@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { ClerkProvider } from "@clerk/nextjs";
 
@@ -28,19 +28,28 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   generator: "Next.js",
   manifest: "/manifest.json",
-  keywords: ["nextjs", "nextjs13", "next13", "pwa", "next-pwa"],
-  // themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
+  keywords: ["notes", "nextjs13", "next13", "pwa", "next-pwa"],
   authors: [
     {
       name: "Sajid Hossain",
       url: "https://github.com/Sajid-Hossain98",
     },
   ],
-  // viewport:
-  //   "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
+
   icons: [
     { rel: "apple-touch-icon", url: "icons/Logo-128.png" },
-    { rel: "icon", url: "icons/Logo-128.png" },
+    { rel: "icon", url: "icons/favicon.png" },
+  ],
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  minimumScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#1E8A65" },
+    { media: "(prefers-color-scheme: light)", color: "#0F5037" },
   ],
 };
 
