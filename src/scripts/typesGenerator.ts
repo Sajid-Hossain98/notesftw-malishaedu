@@ -42,6 +42,11 @@ async function main() {
           bgColor: "bg-rose-400",
           color: "#ffffff",
         },
+        {
+          name: "Scholarship",
+          bgColor: "bg-lime-300",
+          color: "#000",
+        },
       ],
     });
 
