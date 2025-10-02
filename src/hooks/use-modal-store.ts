@@ -1,7 +1,7 @@
 import { SingleNotesWithUniTypeUser } from "@/types";
 import { create } from "zustand";
 
-export type ModalType = "viewNote";
+export type ModalType = "viewNote" | "editNote";
 
 interface ModalData {
   note?: SingleNotesWithUniTypeUser;
