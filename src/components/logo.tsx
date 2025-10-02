@@ -13,6 +13,7 @@ export const Logo = ({ width, height, className }: LogoProps) => {
     <Link href="/">
       <div>
         <Image
+          priority
           src="/static/logo-light.svg"
           alt="Logo"
           width={width}
