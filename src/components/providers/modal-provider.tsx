@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { NotesViewModal } from "../modals/notes-view-modal";
 import { NoteEditModal } from "../modals/note-edit-modal";
-
+import { NoteDeleteModal } from "../modals/note-delete-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -19,7 +19,8 @@ export const ModalProvider = () => {
   return (
     <>
       <NotesViewModal />
-      <NoteEditModal/>
+      <NoteEditModal />
+      <NoteDeleteModal />
     </>
   );
 };

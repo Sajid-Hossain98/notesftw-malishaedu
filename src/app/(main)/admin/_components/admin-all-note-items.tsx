@@ -3,7 +3,7 @@
 import { Separator } from "@/components/ui/separator";
 import { useModal } from "@/hooks/use-modal-store";
 import { NotesWithUniTypeUser } from "@/types";
-import { Edit3, HeartCrack, School } from "lucide-react";
+import { Edit3, HeartCrack, School, Trash } from "lucide-react";
 
 interface AdminAllNoteItemsProps {
   notes: NotesWithUniTypeUser | undefined;
@@ -37,7 +37,7 @@ export const AdminAllNoteItems = ({
           return (
             <div
               key={note.id}
-              className="flex items-center justify-between gap-1 md:gap-2 pl-1 rounded-xl transition-colors"
+              className="flex items-center justify-between gap-1 pl-1 transition-colors md:gap-2 rounded-xl"
             >
               <div
                 className="min-w-0 cursor-pointer md:hover:bg-[#3a3939] active:bg-[#3a3939] w-full px-1 md:px-2 py-1 hover:rounded-[4px]"
@@ -71,12 +71,18 @@ export const AdminAllNoteItems = ({
                 {note?.approvedById}
               </div>
               <button
-                className="md:hover:bg-black active:bg-black cursor-pointer px-3 py-3 rounded-full"
+                className="px-3 py-3 rounded-full cursor-pointer md:hover:bg-black active:bg-black"
                 onClick={() =>
                   onOpen("editNote", { note, universityShortNames, noteTypes })
                 }
               >
                 <Edit3 className="w-4 h-4 md:h-5 md:w-5" />
+              </button>
+              <button
+                className="px-3 py-3 rounded-full cursor-pointer md:hover:bg-black active:bg-black"
+                onClick={() => onOpen("deleteNote", { note })}
+              >
+                <Trash className="w-4 h-4 md:h-5 md:w-5" />
               </button>
             </div>
           );
