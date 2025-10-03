@@ -16,7 +16,15 @@ type NotesResponse = {
   currentPage: number;
 };
 
-export const AdminAllNotes = () => {
+interface AdminAllNotesProps {
+  universityShortNames: { universityShortName: string }[];
+  noteTypes: { name: string }[];
+}
+
+export const AdminAllNotes = ({
+  universityShortNames,
+  noteTypes,
+}: AdminAllNotesProps) => {
   const [page, setPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
   const [searchNotes, setSearchNotes] = useState("");
@@ -115,7 +123,11 @@ export const AdminAllNotes = () => {
         </button>
       </form>
 
-      <AdminAllNoteItems notes={data?.notes} />
+      <AdminAllNoteItems
+        notes={data?.notes}
+        universityShortNames={universityShortNames}
+        noteTypes={noteTypes}
+      />
 
       <div className="flex items-center justify-between mt-3 md:justify-end md:mt-5 md:gap-3">
         <button

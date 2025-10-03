@@ -69,7 +69,7 @@ export const NoteEditModal = () => {
 
   const isModalOpen = isOpen && type === "editNote";
 
-  const { note } = data;
+  const { note, universityShortNames, noteTypes } = data;
 
   const form = useForm<z.infer<typeof editANoteFormSchema>>({
     resolver: zodResolver(editANoteFormSchema),
@@ -112,26 +112,17 @@ export const NoteEditModal = () => {
     }
   }, [note, form]);
 
-  const universityShortFormOptions = note?.university
-    ? [
-        {
-          label:
-            note.university.universityShortName.charAt(0).toUpperCase() +
-            note.university.universityShortName.slice(1),
-          value: note.university.universityShortName,
-        },
-      ]
-    : [];
+  const universityShortFormOptions = universityShortNames?.map(
+    (universityShortName) => ({
+      label: universityShortName.universityShortName,
+      value: universityShortName.universityShortName,
+    })
+  );
 
-  const noteTypeOptions = note?.type
-    ? [
-        {
-          label:
-            note?.type.name.charAt(0).toUpperCase() + note?.type.name.slice(1),
-          value: note?.type.name,
-        },
-      ]
-    : [];
+  const noteTypeOptions = noteTypes?.map((type) => ({
+    label: type.name,
+    value: type.name,
+  }));
 
   const approvalOptions = [
     { value: "PENDING", label: "Pending" },
@@ -163,7 +154,6 @@ export const NoteEditModal = () => {
         toast.error(
           <div>
             <span>Something went wrong!</span>
-            <p>{error.message}</p>
           </div>
         );
       }

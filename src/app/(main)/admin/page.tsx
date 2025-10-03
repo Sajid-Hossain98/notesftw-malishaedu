@@ -3,6 +3,7 @@ import { AdminAllNotes } from "./_components/admin-all-notes";
 import { Suspense } from "react";
 import { List, LoaderCircle } from "lucide-react";
 import { AdminPendingNotes } from "./_components/admin-pending-notes";
+import { db } from "@/lib/db";
 
 interface GenerateMetadataParams {
   searchParams: { [key: string]: string | undefined };
@@ -23,7 +24,19 @@ export async function generateMetadata({
   };
 }
 
-const AdminPage = () => {
+const AdminPage = async () => {
+  const universityShortNameData = await db.university.findMany({
+    select: {
+      universityShortName: true,
+    },
+  });
+
+  const noteTypes = await db.type.findMany({
+    select: {
+      name: true,
+    },
+  });
+
   return (
     <Tabs
       defaultValue="all"
@@ -63,7 +76,10 @@ const AdminPage = () => {
       <TabsContent value="all" className="w-full h-full mt-1">
         {/* TODO: handle loading later */}
         <Suspense fallback={<div>Loading...</div>}>
-          <AdminAllNotes />
+          <AdminAllNotes
+            universityShortNames={universityShortNameData}
+            noteTypes={noteTypes}
+          />
         </Suspense>
       </TabsContent>
 

@@ -5,6 +5,8 @@ export type ModalType = "viewNote" | "editNote";
 
 interface ModalData {
   note?: SingleNotesWithUniTypeUser;
+  universityShortNames?: { universityShortName: string }[];
+  noteTypes?: { name: string }[];
 }
 
 interface ModalStore {
