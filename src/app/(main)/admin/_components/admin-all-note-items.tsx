@@ -7,8 +7,8 @@ import { Edit3, HeartCrack, School } from "lucide-react";
 
 interface AdminAllNoteItemsProps {
   notes: NotesWithUniTypeUser | undefined;
-  universityShortNames: { universityShortName: string }[];
-  noteTypes: { name: string }[];
+  universityShortNames?: { universityShortName: string }[];
+  noteTypes?: { name: string }[];
 }
 
 export const AdminAllNoteItems = ({

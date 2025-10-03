@@ -17,8 +17,8 @@ type NotesResponse = {
 };
 
 interface AdminAllNotesProps {
-  universityShortNames: { universityShortName: string }[];
-  noteTypes: { name: string }[];
+  universityShortNames?: { universityShortName: string }[];
+  noteTypes?: { name: string }[];
 }
 
 export const AdminAllNotes = ({
