@@ -135,16 +135,15 @@ export const NoteEditModal = () => {
   const onSubmit = async (values: z.infer<typeof editANoteFormSchema>) => {
     try {
       const valuesToSend = {
+        id: note?.id,
         title: values.title,
-        universityShortForm: values.universityShortForm?.value,
-        noteType: values.noteType?.value,
+        universityShortForm: values.universityShortForm,
+        noteType: values.noteType,
         noteDescription: values.noteDescription,
-        approval: values.approval?.value,
+        approval: values.approval,
       };
 
-      console.log(values);
-
-      await axios.patch("api/edit-note", valuesToSend);
+      await axios.patch("api/admin/notes", valuesToSend);
 
       toast.success("Updated the note successfully");
 

@@ -121,3 +121,76 @@ export async function GET(request: Request) {
     );
   }
 }
+
+export async function PATCH(req: Request) {
+  const {
+    id,
+    title,
+    universityShortForm,
+    noteType,
+    noteDescription,
+    approval,
+  } = await req.json();
+
+  const currentlyLoggedInUser = await currentUser();
+  const currentlyLoggedInUserData = await currentUserData();
+
+  if (!currentlyLoggedInUser) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+
+  if (
+    currentlyLoggedInUserData?.role !== UserRole.ADMIN &&
+    currentlyLoggedInUserData?.role !== UserRole.MODERATOR
+  ) {
+    return new NextResponse("Your are not allowed to view these items!", {
+      status: 403,
+    });
+  }
+
+  try {
+    const university = await db.university.findUnique({
+      where: {
+        universityShortName: universityShortForm.value,
+      },
+    });
+
+    const type = await db.type.findUnique({
+      where: {
+        name: noteType.value,
+      },
+    });
+
+    if (!university || !type) {
+      return NextResponse.json(
+        { error: "University or Type not found" },
+        { status: 404 }
+      );
+    }
+
+    const updatedNote = await db.note.update({
+      where: {
+        id: id,
+      },
+      data: {
+        title: title,
+        universityId: university.id,
+        typeId: type.id,
+        description: noteDescription,
+        approval: approval.value,
+      },
+    });
+
+    console.log(updatedNote);
+
+    return NextResponse.json(updatedNote, {
+      status: 200,
+    });
+  } catch (error) {
+    console.error("Error fetching notes:", error);
+    return NextResponse.json(
+      { error: "FETCHING_ADMIN_NOTES" },
+      { status: 500 }
+    );
+  }
+}
