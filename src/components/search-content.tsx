@@ -1,7 +1,7 @@
 import { GroupedSearchedNotes } from "@/types";
 import { HeartCrack, Lightbulb } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
-import { Skeleton } from "./skeleton";
+import { Skeleton } from "./ui/skeleton";
 import { motion } from "motion/react";
 
 interface SearchContentProps {
@@ -21,7 +21,9 @@ export const SearchContent = ({
 
   const hasNotes =
     searchedNotes &&
-    Object.values(searchedNotes).some((notes) => notes.length > 0);
+    Object.values(searchedNotes).some((notes) =>
+      notes.some((note) => note.approval === "APPROVED")
+    );
 
   return (
     <motion.div
@@ -80,6 +82,13 @@ export const SearchContent = ({
       )}
 
       {Object.entries(searchedNotes || {}).map(([type, notes]) => {
+        const filteredSearchedNotes = notes?.filter(
+          (note) => note.approval === "APPROVED"
+        );
+
+        if (!filteredSearchedNotes || filteredSearchedNotes.length === 0)
+          return null;
+
         const typeBgColor = notes?.[0]?.type?.bgColor || "bg-gray-600";
         const typeTextColor = notes?.[0]?.type?.color || "text-black";
 

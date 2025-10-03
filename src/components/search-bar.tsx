@@ -9,7 +9,7 @@ import { usePathname, useRouter } from "next/navigation";
 import qs from "query-string";
 import useSWR from "swr";
 import axios from "axios";
-import { SearchContent } from "./ui/search-content";
+import { SearchContent } from "./search-content";
 import { GroupedSearchedNotes } from "@/types";
 import { ActionTooltip } from "./action-tooltip";
 
