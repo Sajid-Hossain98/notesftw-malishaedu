@@ -25,7 +25,7 @@ export async function generateMetadata({
 }
 
 const AdminPage = async () => {
-  const universityShortNameData = await db.university.findMany({
+  const universityShortNames = await db.university.findMany({
     select: {
       universityShortName: true,
     },
@@ -77,7 +77,7 @@ const AdminPage = async () => {
         {/* TODO: handle loading later */}
         <Suspense fallback={<div>Loading...</div>}>
           <AdminAllNotes
-            universityShortNames={universityShortNameData}
+            universityShortNames={universityShortNames}
             noteTypes={noteTypes}
           />
         </Suspense>
