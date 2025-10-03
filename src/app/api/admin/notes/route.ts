@@ -143,7 +143,7 @@ export async function PATCH(req: Request) {
     currentlyLoggedInUserData?.role !== UserRole.ADMIN &&
     currentlyLoggedInUserData?.role !== UserRole.MODERATOR
   ) {
-    return new NextResponse("Your are not allowed to view these items!", {
+    return new NextResponse("Your are not allowed to perform this action!", {
       status: 403,
     });
   }
@@ -187,9 +187,49 @@ export async function PATCH(req: Request) {
       status: 200,
     });
   } catch (error) {
-    console.error("Error fetching notes:", error);
+    console.error("Error editing note:", error);
+    return NextResponse.json({ error: "EDITING_ADMIN_NOTES" }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: Request) {
+  const { noteId } = await req.json();
+
+  const currentlyLoggedInUser = await currentUser();
+  const currentlyLoggedInUserData = await currentUserData();
+
+  if (!currentlyLoggedInUser) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+
+  if (
+    currentlyLoggedInUserData?.role !== UserRole.ADMIN &&
+    currentlyLoggedInUserData?.role !== UserRole.MODERATOR
+  ) {
+    return new NextResponse("Your are not allowed to perform this action!", {
+      status: 403,
+    });
+  }
+
+  if (!noteId) {
     return NextResponse.json(
-      { error: "FETCHING_ADMIN_NOTES" },
+      { error: "Couldn't find the note" },
+      { status: 404 }
+    );
+  }
+
+  try {
+    const deletedNote = await db.note.delete({
+      where: {
+        id: noteId,
+      },
+    });
+
+    return NextResponse.json(deletedNote);
+  } catch (error) {
+    console.error("Error deleting note:", error);
+    return NextResponse.json(
+      { error: "DELETING_ADMIN_NOTES" },
       { status: 500 }
     );
   }

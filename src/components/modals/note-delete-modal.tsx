@@ -1,4 +1,5 @@
 import { useModal } from "@/hooks/use-modal-store";
+import { useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -8,7 +9,9 @@ import {
   DialogFooter,
 } from "../ui/dialog";
 import { Button } from "../ui/button";
+import axios from "axios";
 import { Separator } from "../ui/separator";
+import { toast } from "sonner";
 
 export const NoteDeleteModal = () => {
   const { isOpen, onClose, type, data } = useModal();
@@ -16,6 +19,27 @@ export const NoteDeleteModal = () => {
   const isModalOpen = isOpen && type === "deleteNote";
 
   const { note } = data;
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const onClick = async () => {
+    try {
+      setIsLoading(true);
+      const noteToDelete = note?.id;
+
+      await axios.delete("api/admin/notes", {
+        data: { noteId: noteToDelete },
+      });
+
+      toast.success(`Deleted "${note?.title}" successfully`);
+      onClose();
+    } catch (error) {
+      toast.error("Something went wrong!");
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
@@ -38,12 +62,17 @@ export const NoteDeleteModal = () => {
         <DialogFooter className="p-0">
           <div className="flex items-center justify-start gap-2">
             <Button
+              disabled={isLoading}
               onClick={onClose}
-              className="px-2 py-0 text-cyan-300 hover:bg-cyan-300/80 hover:text-black"
+              className="px-2 py-0 text-cyan-300 hover:bg-cyan-300/70 hover:text-black"
             >
               Cancel
             </Button>
-            <Button className="px-2 py-0 text-rose-400 hover:bg-rose-400/80 hover:text-black">
+            <Button
+              disabled={isLoading}
+              onClick={onClick}
+              className="px-2 py-0 text-rose-400 hover:bg-rose-400/70 hover:text-black"
+            >
               Confirm
             </Button>
           </div>
