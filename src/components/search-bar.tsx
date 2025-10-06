@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Input } from "./ui/input";
 import { BadgeInfo, Search, SearchX, X } from "lucide-react";
 import { useState, useEffect } from "react";
-// import { useDebounce } from "@/hooks/use-debounce";
 import { usePathname, useRouter } from "next/navigation";
 import qs from "query-string";
 import useSWR from "swr";

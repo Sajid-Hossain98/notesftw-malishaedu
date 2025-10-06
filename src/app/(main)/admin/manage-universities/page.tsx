@@ -1,11 +1,25 @@
+import { db } from "@/lib/db";
+import { AdminSearchUniversities } from "./_components/admin-search-universities";
+
 export function generateMetadata() {
   return {
     title: "ADMIN-Universities",
   };
 }
 
-const ManageUniversitiesPage = () => {
-  return <div>Manage universities</div>;
+const ManageUniversitiesPage = async () => {
+  const universities = await db.university.findMany({
+    select: {
+      universityFullName: true,
+      universityShortName: true,
+    },
+  });
+
+  return (
+    <div>
+      <AdminSearchUniversities universities={universities} />
+    </div>
+  );
 };
 
 export default ManageUniversitiesPage;

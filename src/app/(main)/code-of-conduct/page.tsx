@@ -2,7 +2,7 @@ import { Spinner } from "@/components/spinner";
 
 export function generateMetadata() {
   return {
-    title: "Add note",
+    title: "Code of conduct",
   };
 }
 

@@ -53,15 +53,7 @@ const AdminPage = async () => {
           </span>
           All
         </TabsTrigger>
-        {/* <TabsTrigger
-          value="approved"
-          className="md:text-base text-xs md:w-full md:rounded-[2px] bg-[#242424]"
-        >
-          <span>
-            <CircleCheckBig className="w-3 h-3 mr-1 md:h-4 md:w-4 md:mr-2" />
-          </span>
-          Approved
-        </TabsTrigger> */}
+
         <TabsTrigger
           value="pending"
           className="rounded-r-xl md:text-base md:w-full text-xs md:rounded-[2px] bg-[#242424] py-1 md:py-1.5"

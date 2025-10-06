@@ -28,6 +28,11 @@ export type GroupedSearchedNotes = {
   })[]; // Array of notes for each note type (Assessment, Submit, Offer, etc.)
 };
 
+export type Universities = {
+  universityFullName: string;
+  universityShortName: string;
+}[];
+
 export interface UserData {
   name: string;
   id: string;
