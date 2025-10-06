@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { AdminSearchInputField } from "../../_components/admin-search-input";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import qs from "query-string";
@@ -18,6 +17,8 @@ export const AdminSearchUniversities = ({
   const [searchWords, setSearchWords] = useState<string>("");
   const router = useRouter();
   const pathname = usePathname();
+
+  console.log(universities);
 
   useEffect(() => {
     const url = qs.stringifyUrl(
