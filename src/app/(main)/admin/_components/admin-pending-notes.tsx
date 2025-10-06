@@ -9,6 +9,7 @@ import { AdminSearchInputField } from "./admin-search-input";
 import { X } from "lucide-react";
 import { AdminAllNoteItems } from "./admin-all-note-items";
 import { fetchPendingPaginatedNotes } from "@/lib/fetch-pending-paginated-notes";
+import { Spinner } from "@/components/spinner";
 
 type NotesResponse = {
   notes: NotesWithUniTypeUser;
@@ -66,7 +67,9 @@ export const AdminPendingNotes = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="flex justify-center mt-9">
+          <Spinner size={"icon"}/>
+        </div>;
   }
 
   if (isError) {

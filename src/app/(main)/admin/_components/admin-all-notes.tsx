@@ -9,6 +9,7 @@ import qs from "query-string";
 import { AdminSearchInputField } from "./admin-search-input";
 import { AdminAllNoteItems } from "./admin-all-note-items";
 import { X } from "lucide-react";
+import { Spinner } from "@/components/spinner";
 
 type NotesResponse = {
   notes: NotesWithUniTypeUser;
@@ -74,7 +75,9 @@ export const AdminAllNotes = ({
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="flex justify-center mt-9">
+      <Spinner size={"icon"}/>
+    </div>;
   }
 
   if (isError) {

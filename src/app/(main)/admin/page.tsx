@@ -40,7 +40,7 @@ const AdminPage = async () => {
   return (
     <Tabs
       defaultValue="all"
-      className="md:flex md:justify-between md:gap-3 md:w-full"
+      className="md:flex md:justify-between md:gap-3 md:w-full md:h-full"
     >
       {/* grid md:w-[80%] w-full grid-cols-3 mx-auto */}
       <TabsList className="md:flex md:flex-col md:items-center md:justify-start md:gap-2 md:bg-[#242424] md:max-h-fit md:rounded-xl md:px-2 md:py-2 grid md:max-w-[15%] w-full grid-cols-2 md:mt-2">
