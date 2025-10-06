@@ -19,15 +19,59 @@ interface NoteListItemsProps {
 export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
   const { onOpen } = useModal();
 
-  const stripHtml = (html: string) => {
-    return html.replace(/<[^>]*>/g, "");
+  const htmlToPlainText = (html: string | undefined) => {
+    if (!html) return "";
+
+    let text = html;
+
+    // Replace &nbsp; and other entities
+    text = text.replace(/&nbsp;/gi, " ");
+    text = text.replace(/&amp;/gi, "&");
+    text = text.replace(/&lt;/gi, "<");
+    text = text.replace(/&gt;/gi, ">");
+    text = text.replace(/&quot;/gi, '"');
+    text = text.replace(/&#39;/gi, "'");
+
+    // Handle line breaks and paragraphs
+    text = text.replace(/<br\s*\/?>/gi, "\n");
+    text = text.replace(/<\/p>/gi, "\n");
+    text = text.replace(/<p[^>]*>/gi, "");
+
+    // Handle lists
+    // Ordered lists
+    // let olCounter = 0;
+    // text = text.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi, (match, inner) => {
+    //   olCounter = 0;
+    //   return inner.replace(/<li[^>]*>(.*?)<\/li>/gi, (_m, liContent) => {
+    //     olCounter++;
+    //     return `${olCounter}. ${liContent}\n`;
+    //   });
+    // });
+
+    // Unordered lists
+    // text = text.replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gi, (match, inner) => {
+    //   return inner.replace(/<li[^>]*>(.*?)<\/li>/gi, (_m, liContent) => {
+    //     return `- ${liContent}\n`;
+    //   });
+    // });
+
+    // Remove all remaining HTML tags
+    text = text.replace(/<[^>]+>/g, "");
+
+    // Collapse multiple spaces & trim
+    text = text.replace(/\s+/g, " ").trim();
+
+    // Optionally, replace multiple newlines with single newline
+    text = text.replace(/\n\s*\n/g, "\n");
+
+    return text;
   };
 
   return (
     <>
       <div className={cn(classNames?.notesContainer)}>
         {notes?.map((note) => {
-          const plainText = stripHtml(note?.description);
+          const plainText = htmlToPlainText(note?.description);
 
           //preparing the url of the supabase images
           const imageUrl = `${process.env
@@ -39,18 +83,18 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
             <div
               key={note?.id}
               onClick={() => onOpen("viewNote", { note: note })}
-              className={`${note?.type?.bgColor} p-2 md:p-3 space-y-1 min-w-0 cursor-pointer bg-opacity-5 relative overflow-hidden md:hover:bg-opacity-10 active:bg-opacity-10`}
+              className={`${note?.type?.bgColor} p-1 md:p-2 space-y-1 min-w-0 cursor-pointer bg-opacity-5 relative overflow-hidden md:hover:bg-opacity-10 active:bg-opacity-10`}
               style={{
                 borderRadius: "4px",
               }}
             >
-              <div className="flex items-center gap-2 md:gap-4 capitalize">
+              <div className="flex items-center gap-2 capitalize md:gap-4">
                 <Image
                   src={imageUrl}
                   alt={note?.university?.universityShortName}
-                  className="rounded-full h-14 md:h-20 w-14 md:w-20 object-cover select-none bg-zinc-100 p-[1.5px]"
-                  width={100}
-                  height={100}
+                  className="rounded-full h-12 md:h-16 w-12 md:w-16 object-cover select-none bg-zinc-100 p-[1.5px]"
+                  width={80}
+                  height={80}
                 />
                 <div className="flex-1 min-w-0 select-none">
                   <h2 className={cn(classNames?.noteTitle)}>{note?.title}</h2>
