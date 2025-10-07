@@ -17,7 +17,7 @@ export async function generateMetadata({
 
 export default async function Home() {
   return (
-    <main className="space-y-3 md:space-y-8">
+    <main className="space-y-3 md:space-y-5">
       <SearchBar />
 
       <div className="md:max-h-[70dvh] max-h-[65vh] bg-[#242424] rounded-xl p-3 md:p-5 overflow-y-auto md:!mb-12 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-[#242424] [&::-webkit-scrollbar-thumb]:bg-gray-500">

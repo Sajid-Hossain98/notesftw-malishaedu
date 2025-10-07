@@ -29,6 +29,7 @@ export type GroupedSearchedNotes = {
 };
 
 export type Universities = {
+  id: string;
   universityFullName: string;
   universityShortName: string;
   logoImage: string;

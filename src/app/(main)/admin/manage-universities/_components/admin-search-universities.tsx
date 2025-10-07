@@ -4,13 +4,15 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import qs from "query-string";
-import { Edit3, HeartCrack, School, Trash, X } from "lucide-react";
+import { BadgeInfo, Edit3, HeartCrack, School, Trash, X } from "lucide-react";
 import { Universities } from "@/types";
 import axios from "axios";
 import useSWR from "swr";
 import { motion } from "motion/react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
+import { ActionTooltip } from "@/components/action-tooltip";
+import { useModal } from "@/hooks/use-modal-store";
 
 //fetching search results
 const fetchSearchResults = async (url: string) => {
@@ -27,6 +29,8 @@ export const AdminSearchUniversities = () => {
   const [searchWords, setSearchWords] = useState<string>("");
   const router = useRouter();
   const pathname = usePathname();
+
+  const { onOpen } = useModal();
 
   const {
     data,
@@ -77,6 +81,16 @@ export const AdminSearchUniversities = () => {
           />
         )}
       </div>
+      <span className="text-xs hidden md:flex gap-1 justify-center mt-1 text-zinc-400">
+        Info
+        <ActionTooltip
+          side="bottom"
+          className="md:max-w-[550px]"
+          label="So bassically, 'MODERATOR' & 'ADMIN' can edit the name and short name of all the universities but only the 'ADMIN' will be able to delete a university"
+        >
+          <BadgeInfo className="h-4 w-4" />
+        </ActionTooltip>
+      </span>
       {searchWords && (
         <>
           <motion.div
@@ -130,42 +144,60 @@ export const AdminSearchUniversities = () => {
             )}
 
             {data &&
-              data.map((university) => (
-                <div
-                  key={university.universityShortName}
-                  className="flex items-center justify-between gap-1 pl-1 transition-colors md:gap-2 rounded-xl"
-                >
-                  <div className="flex items-center gap-2 min-w-0 md:hover:bg-[#3a3939] active:bg-[#3a3939] w-full px-1 md:px-2 py-1 md:py-2 hover:rounded-[4px]">
-                    <Image
-                      src={`${process.env
-                        .NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/uni_logo_images/${
-                        university?.logoImage
-                      }`}
-                      className="rounded-full h-10 md:h-14 w-10 md:w-14 object-cover select-none bg-zinc-100 p-[1.5px]"
-                      alt="University Logo"
-                      height={100}
-                      width={100}
-                    />
-                    <div>
-                      <h3 className="text-base font-semibold truncate md:text-lg">
-                        {university.universityFullName}
-                      </h3>
-                      <span className="flex items-baseline gap-1 text-xs">
-                        <School className="w-3 h-3 md:h-3 md:w-3" />
+              data.map((university) => {
+                const {
+                  id,
+                  universityFullName,
+                  universityShortName,
+                  logoImage,
+                } = university;
 
-                        {university.universityShortName}
-                      </span>
+                return (
+                  <div
+                    key={universityShortName}
+                    className="flex items-center justify-between gap-1 pl-1 transition-colors md:gap-2 rounded-xl"
+                  >
+                    <div className="flex items-center gap-2 min-w-0 md:hover:bg-[#3a3939] active:bg-[#3a3939] w-full px-1 md:px-2 py-1 md:py-2 hover:rounded-[4px]">
+                      <Image
+                        src={`${process.env
+                          .NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/uni_logo_images/${logoImage}`}
+                        className="rounded-full h-10 md:h-14 w-10 md:w-14 object-cover select-none bg-zinc-100 p-[1.5px]"
+                        alt="University Logo"
+                        height={100}
+                        width={100}
+                      />
+                      <div>
+                        <h3 className="text-base font-semibold truncate md:text-lg">
+                          {universityFullName}
+                        </h3>
+                        <span className="flex items-baseline gap-1 text-xs">
+                          <School className="w-3 h-3 md:h-3 md:w-3" />
+
+                          {universityShortName}
+                        </span>
+                      </div>
                     </div>
-                  </div>
 
-                  <button className="px-3 py-3 rounded-full cursor-pointer md:hover:bg-black active:bg-black">
-                    <Edit3 className="w-4 h-4 md:h-5 md:w-5" />
-                  </button>
-                  <button className="px-3 py-3 rounded-full cursor-pointer md:hover:bg-black active:bg-black">
-                    <Trash className="w-4 h-4 md:h-5 md:w-5" />
-                  </button>
-                </div>
-              ))}
+                    <button
+                      className="px-3 py-3 rounded-full cursor-pointer md:hover:bg-black active:bg-black"
+                      onClick={() =>
+                        onOpen("editUniversity", {
+                          university: {
+                            id: id,
+                            universityShortName: universityShortName,
+                            universityFullName: universityFullName,
+                          },
+                        })
+                      }
+                    >
+                      <Edit3 className="w-4 h-4 md:h-5 md:w-5" />
+                    </button>
+                    <button className="px-3 py-3 rounded-full cursor-pointer md:hover:bg-black active:bg-black">
+                      <Trash className="w-4 h-4 md:h-5 md:w-5" />
+                    </button>
+                  </div>
+                );
+              })}
           </motion.div>
           <div>{searchError?.message}</div>
         </>

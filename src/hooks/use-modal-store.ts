@@ -1,12 +1,21 @@
 import { SingleNotesWithUniTypeUser } from "@/types";
 import { create } from "zustand";
 
-export type ModalType = "viewNote" | "editNote" | "deleteNote";
+export type ModalType =
+  | "viewNote"
+  | "editNote"
+  | "deleteNote"
+  | "editUniversity";
 
 interface ModalData {
   note?: SingleNotesWithUniTypeUser;
   universityShortNames?: { universityShortName: string }[];
   noteTypes?: { name: string }[];
+  university?: {
+    id: string;
+    universityShortName: string;
+    universityFullName: string;
+  };
 }
 
 interface ModalStore {

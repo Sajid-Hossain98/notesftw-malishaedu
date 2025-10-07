@@ -175,7 +175,6 @@ export const NoteEditModal = () => {
             <form
               onSubmit={form.handleSubmit(onSubmit)}
               className="w-full space-y-2"
-              // className="space-y-5 lg:max-w-[80%] md:max-w-[70%] mx-auto relative mb-10"
             >
               <FormField
                 control={form.control}
