@@ -9,6 +9,7 @@ import { Universities } from "@/types";
 import axios from "axios";
 import useSWR from "swr";
 import { motion } from "motion/react";
+import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 
 //fetching search results
@@ -97,6 +98,34 @@ export const AdminSearchUniversities = () => {
                 </p>
 
                 <HeartCrack className="w-5 h-5 text-rose-500" />
+              </div>
+            )}
+
+            {isLoading && (
+              <div className="flex flex-col gap-2">
+                {Array.from({ length: 3 }).map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center justify-between gap-1 pl-1 transition-colors md:gap-2 rounded-xl w-full"
+                  >
+                    <div className="flex items-center gap-2 min-w-0 w-full px-1 md:px-2 py-1 md:py-2 hover:rounded-[4px]">
+                      {/* Logo skeleton */}
+                      <Skeleton className="rounded-full h-10 md:h-14 w-10 md:w-14 bg-zinc-500" />
+
+                      <div className="flex flex-col gap-1">
+                        {/* University name skeleton */}
+                        <Skeleton className="w-32 sm:w-64 md:w-80 h-5 bg-zinc-500 rounded" />
+                        {/* Short name + icon skeleton */}
+                        <Skeleton className="w-20 h-4 bg-zinc-500 rounded" />
+                      </div>
+                    </div>
+
+                    {/* Edit button skeleton */}
+                    <Skeleton className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-zinc-500" />
+                    {/* Delete button skeleton */}
+                    <Skeleton className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-zinc-500" />
+                  </div>
+                ))}
               </div>
             )}
 
