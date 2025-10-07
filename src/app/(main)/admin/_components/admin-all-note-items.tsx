@@ -48,8 +48,8 @@ export const AdminAllNoteItems = ({
                 </h2>
 
                 <div className="flex items-center my-0.5 md:my-1">
-                  <span className="flex items-center gap-1 text-xs">
-                    <School className="w-3 h-3 md:h-4 md:w-4" />
+                  <span className="flex items-baseline gap-0.5 text-xs">
+                    <School className="w-2 h-2 md:h-3 md:w-3" />
                     {note?.university?.universityShortName}
                   </span>
 

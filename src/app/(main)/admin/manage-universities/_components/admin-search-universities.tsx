@@ -4,21 +4,39 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import qs from "query-string";
-import { X } from "lucide-react";
+import { Edit3, HeartCrack, School, Trash, X } from "lucide-react";
 import { Universities } from "@/types";
+import axios from "axios";
+import useSWR from "swr";
+import { motion } from "motion/react";
+import Image from "next/image";
 
-interface AdminSearchUniversitiesProps {
-  universities: Universities | undefined;
-}
+//fetching search results
+const fetchSearchResults = async (url: string) => {
+  try {
+    const { data } = await axios.get(url);
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error fetching searched notes");
+  }
+};
 
-export const AdminSearchUniversities = ({
-  universities,
-}: AdminSearchUniversitiesProps) => {
+export const AdminSearchUniversities = () => {
   const [searchWords, setSearchWords] = useState<string>("");
   const router = useRouter();
   const pathname = usePathname();
 
-  console.log(universities);
+  const {
+    data,
+    error: searchError,
+    isLoading,
+  } = useSWR<Universities>(
+    searchWords.length > 0
+      ? `/api/admin/universities?searched_university=${searchWords}`
+      : null,
+    fetchSearchResults
+  );
 
   useEffect(() => {
     const url = qs.stringifyUrl(
@@ -36,23 +54,93 @@ export const AdminSearchUniversities = ({
     setSearchWords("");
   };
 
-  return (
-    <div className="relative">
-      <Input
-        className="bg-[#242424] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 caret-[#edf2f4] placeholder-gray-500"
-        type="text"
-        placeholder="e.g., NJTech / Nanjing Tech"
-        value={searchWords}
-        onChange={(e) => setSearchWords(e.target.value)}
-        autoFocus
-      />
+  //checking if there are any available searched university!
+  const hasUniversities = data && data.length > 0;
 
-      {searchWords && (
-        <X
-          className="absolute right-3 h-5 w-5 top-[50%] -translate-y-1/2 text-white m-auto stroke-2 cursor-pointer z-10"
-          onClick={handleClearSearch}
+  return (
+    <>
+      <div className="relative">
+        <Input
+          className="bg-[#242424] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 caret-[#edf2f4] placeholder-gray-500"
+          type="text"
+          placeholder="e.g., NJTech / Nanjing Tech"
+          value={searchWords}
+          onChange={(e) => setSearchWords(e.target.value)}
+          autoFocus
         />
+
+        {searchWords && (
+          <X
+            className="absolute right-3 h-5 w-5 top-[50%] -translate-y-1/2 text-white m-auto stroke-2 cursor-pointer z-10"
+            onClick={handleClearSearch}
+          />
+        )}
+      </div>
+      {searchWords && (
+        <>
+          <motion.div
+            className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto bg-stone-700 mt-2 px-2 md:px-4 py-2 rounded-xl md:!mb-12 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-300"
+            layout
+            transition={{
+              type: "spring",
+              stiffness: 450,
+              damping: 30,
+            }}
+          >
+            {!isLoading && !hasUniversities && !searchError && (
+              <div className="flex items-center justify-center gap-2 min-h-20 md:gap-3">
+                <p className="text-xl font-semibold text-center text-gray-400">
+                  No results found for{" "}
+                  <span className="bg-slate-700 px-1 rounded-[3px] py-0.5 md:px-2">
+                    &apos;{searchWords}&apos;
+                  </span>
+                </p>
+
+                <HeartCrack className="w-5 h-5 text-rose-500" />
+              </div>
+            )}
+
+            {data &&
+              data.map((university) => (
+                <div
+                  key={university.universityShortName}
+                  className="flex items-center justify-between gap-1 pl-1 transition-colors md:gap-2 rounded-xl"
+                >
+                  <div className="flex items-center gap-2 min-w-0 md:hover:bg-[#3a3939] active:bg-[#3a3939] w-full px-1 md:px-2 py-1 md:py-2 hover:rounded-[4px]">
+                    <Image
+                      src={`${process.env
+                        .NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/uni_logo_images/${
+                        university?.logoImage
+                      }`}
+                      className="rounded-full h-10 md:h-14 w-10 md:w-14 object-cover select-none bg-zinc-100 p-[1.5px]"
+                      alt="University Logo"
+                      height={100}
+                      width={100}
+                    />
+                    <div>
+                      <h3 className="text-base font-semibold truncate md:text-lg">
+                        {university.universityFullName}
+                      </h3>
+                      <span className="flex items-baseline gap-1 text-xs">
+                        <School className="w-3 h-3 md:h-3 md:w-3" />
+
+                        {university.universityShortName}
+                      </span>
+                    </div>
+                  </div>
+
+                  <button className="px-3 py-3 rounded-full cursor-pointer md:hover:bg-black active:bg-black">
+                    <Edit3 className="w-4 h-4 md:h-5 md:w-5" />
+                  </button>
+                  <button className="px-3 py-3 rounded-full cursor-pointer md:hover:bg-black active:bg-black">
+                    <Trash className="w-4 h-4 md:h-5 md:w-5" />
+                  </button>
+                </div>
+              ))}
+          </motion.div>
+          <div>{searchError?.message}</div>
+        </>
       )}
-    </div>
+    </>
   );
 };

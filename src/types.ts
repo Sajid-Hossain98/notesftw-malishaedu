@@ -31,6 +31,7 @@ export type GroupedSearchedNotes = {
 export type Universities = {
   universityFullName: string;
   universityShortName: string;
+  logoImage: string;
 }[];
 
 export interface UserData {
