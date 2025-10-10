@@ -54,12 +54,6 @@ export const UniversityEditModal = () => {
 
   const { university } = data;
 
-  console.log(
-    university?.id,
-    university?.universityShortName,
-    university?.universityFullName
-  );
-
   const form = useForm<z.infer<typeof editUniversityFormSchema>>({
     resolver: zodResolver(editUniversityFormSchema),
     defaultValues: {
@@ -82,13 +76,14 @@ export const UniversityEditModal = () => {
   const onSubmit = async (values: z.infer<typeof editUniversityFormSchema>) => {
     try {
       const valuesToSend = {
+        id: university?.id,
         universityShortName: values.universityShortForm,
         universityFullName: values.universityFullName,
       };
 
-      await axios.patch("api/admin/universities", valuesToSend);
+      await axios.patch("/api/admin/universities", valuesToSend);
 
-      toast.success("Updated the university successfully");
+      toast.success(`Successfully updated "${university?.universityFullName}"`);
 
       onClose();
     } catch (error) {

@@ -181,8 +181,6 @@ export async function PATCH(req: Request) {
       },
     });
 
-    console.log(updatedNote);
-
     return NextResponse.json(updatedNote, {
       status: 200,
     });

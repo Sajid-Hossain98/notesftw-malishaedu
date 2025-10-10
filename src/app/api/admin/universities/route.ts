@@ -59,3 +59,42 @@ export async function GET(req: Request) {
     );
   }
 }
+
+export async function PATCH(req: Request) {
+  const { id, universityShortName, universityFullName } = await req.json();
+
+  const currentlyLoggedInUser = await currentUser();
+  const currentlyLoggedInUserData = await currentUserData();
+
+  if (!currentlyLoggedInUser) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+
+  if (currentlyLoggedInUserData?.role !== UserRole.ADMIN) {
+    return new NextResponse("Your are not allowed to perform this action.", {
+      status: 403,
+    });
+  }
+
+  try {
+    const updatedUniversity = await db.university.update({
+      where: {
+        id: id,
+      },
+      data: {
+        universityShortName: universityShortName,
+        universityFullName: universityFullName,
+      },
+    });
+
+    return NextResponse.json(updatedUniversity, {
+      status: 200,
+    });
+  } catch (error) {
+    console.error("Error updating university:", error);
+    return NextResponse.json(
+      { error: "UPDATING_ADMIN_UNIVERSITY" },
+      { status: 500 }
+    );
+  }
+}

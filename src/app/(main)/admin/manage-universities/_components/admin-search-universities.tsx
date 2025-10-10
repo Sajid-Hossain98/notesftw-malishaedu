@@ -86,7 +86,7 @@ export const AdminSearchUniversities = () => {
         <ActionTooltip
           side="bottom"
           className="md:max-w-[550px]"
-          label="So bassically, 'MODERATOR' & 'ADMIN' can edit the name and short name of all the universities but only the 'ADMIN' will be able to delete a university"
+          label="So basically, 'MODERATOR' & 'ADMIN' can edit the name and short name of all the universities but only the 'ADMIN' will be able to delete a university"
         >
           <BadgeInfo className="h-4 w-4" />
         </ActionTooltip>
