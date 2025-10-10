@@ -86,7 +86,7 @@ export const AdminSearchUniversities = () => {
         <ActionTooltip
           side="bottom"
           className="md:max-w-[550px]"
-          label="So basically, 'MODERATOR' & 'ADMIN' can edit the name and short name of all the universities but only the 'ADMIN' will be able to delete a university"
+          label="So basically, 'MODERATOR' & 'ADMIN' can edit the name and short name of all the universities but only the 'ADMIN' will be able to delete a university."
         >
           <BadgeInfo className="h-4 w-4" />
         </ActionTooltip>
@@ -192,7 +192,19 @@ export const AdminSearchUniversities = () => {
                     >
                       <Edit3 className="w-4 h-4 md:h-5 md:w-5" />
                     </button>
-                    <button className="px-3 py-3 rounded-full cursor-pointer md:hover:bg-black active:bg-black">
+                    <button
+                      className="px-3 py-3 rounded-full cursor-pointer md:hover:bg-black active:bg-black"
+                      onClick={() =>
+                        onOpen("deleteUniversity", {
+                          university: {
+                            id: id,
+                            universityShortName: universityShortName,
+                            universityFullName: universityFullName,
+                            logoImage: logoImage,
+                          },
+                        })
+                      }
+                    >
                       <Trash className="w-4 h-4 md:h-5 md:w-5" />
                     </button>
                   </div>

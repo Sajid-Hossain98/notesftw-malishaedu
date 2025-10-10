@@ -5,7 +5,8 @@ export type ModalType =
   | "viewNote"
   | "editNote"
   | "deleteNote"
-  | "editUniversity";
+  | "editUniversity"
+  | "deleteUniversity";
 
 interface ModalData {
   note?: SingleNotesWithUniTypeUser;
@@ -14,7 +15,8 @@ interface ModalData {
   university?: {
     id: string;
     universityShortName: string;
-    universityFullName: string;
+    universityFullName?: string;
+    logoImage?: string;
   };
 }
 

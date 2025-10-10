@@ -5,6 +5,7 @@ import { NotesViewModal } from "../modals/notes-view-modal";
 import { NoteEditModal } from "../modals/note-edit-modal";
 import { NoteDeleteModal } from "../modals/note-delete-modal";
 import { UniversityEditModal } from "../modals/university-edit-modal";
+import { UniversityDeleteModal } from "../modals/university-delete-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -23,6 +24,7 @@ export const ModalProvider = () => {
       <NoteEditModal />
       <NoteDeleteModal />
       <UniversityEditModal />
+      <UniversityDeleteModal />
     </>
   );
 };
