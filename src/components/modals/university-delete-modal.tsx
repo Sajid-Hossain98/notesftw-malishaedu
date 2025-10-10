@@ -12,9 +12,12 @@ import { Button } from "../ui/button";
 import axios from "axios";
 import { Separator } from "../ui/separator";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export const UniversityDeleteModal = () => {
   const { isOpen, onClose, type, data } = useModal();
+
+  const router = useRouter();
 
   const isModalOpen = isOpen && type === "deleteUniversity";
 
@@ -26,7 +29,9 @@ export const UniversityDeleteModal = () => {
     try {
       setIsLoading(true);
 
-      await axios.delete("api/admin/university", {
+      console.log(university?.id, university?.logoImage);
+
+      await axios.delete("/api/admin/universities", {
         data: {
           universityId: university?.id,
           logoImage: university?.logoImage,
@@ -34,6 +39,7 @@ export const UniversityDeleteModal = () => {
       });
 
       toast.success(`Deleted "${university?.universityFullName}" successfully`);
+      router.refresh();
       onClose();
     } catch (error) {
       toast.error("Something went wrong!");

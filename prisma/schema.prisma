@@ -72,7 +72,7 @@ model Note {
   approvedBy   User?   @relation("ApprovedBy", fields: [approvedById], references: [id])
 
   universityId String
-  university   University @relation(fields: [universityId], references: [id])
+  university   University @relation(fields: [universityId], references: [id], onDelete: Cascade)
 
   typeId String
   type   Type   @relation(fields: [typeId], references: [id])
