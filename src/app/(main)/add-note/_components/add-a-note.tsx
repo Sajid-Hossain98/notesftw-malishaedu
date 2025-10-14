@@ -21,6 +21,7 @@ import { Editor } from "@/components/editor";
 import { Frown, HeartCrack, Info, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { ActionTooltip } from "@/components/action-tooltip";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface AddANoteProps {
   universityShortNameData: { universityShortName: string }[];
@@ -52,6 +53,7 @@ const addANoteFormSchema = z.object({
     .refine((val) => val !== null, {
       message: "ooh come on, select one for God's sake",
     }),
+  isProtected: z.boolean().default(false),
 });
 
 export const AddANote = ({
@@ -68,6 +70,7 @@ export const AddANote = ({
       universityShortForm: undefined,
       noteDescription: "",
       noteType: undefined,
+      isProtected: false,
     },
   });
 
@@ -96,14 +99,10 @@ export const AddANote = ({
         universityShortForm: values.universityShortForm,
         noteType: values.noteType,
         noteDescription: values.noteDescription,
+        isProtected: values.isProtected,
       };
 
       await axios.post("api/add-note", valuesToSend);
-
-      // queryClient.invalidateQueries({
-      //   queryKey: ["searchResults"],
-      // });
-      // localStorage.removeItem("REACT_QUERY_CACHE");
 
       toast.success("Successfully created the note.");
 
@@ -127,7 +126,7 @@ export const AddANote = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="md:mt-10 mt-4 md:space-y-8 space-y-5 lg:max-w-[80%] md:max-w-[70%] mx-auto relative mb-10"
+        className="md:mt-10 mt-4 md:space-y-5 space-y-3 lg:max-w-[80%] md:max-w-[70%] mx-auto relative mb-10"
       >
         <FormField
           control={form.control}
@@ -148,7 +147,7 @@ export const AddANote = ({
           )}
         />
 
-        <div className="flex flex-col justify-between w-full space-y-6 sm:flex-row sm:space-y-0 gap-3">
+        <div className="flex flex-col justify-between w-full space-y-3 sm:flex-row sm:space-y-0 gap-1 md:gap-3">
           <FormField
             control={form.control}
             name="universityShortForm"
@@ -259,6 +258,36 @@ export const AddANote = ({
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="isProtected"
+          render={({ field }) => (
+            <FormItem className="md:max-h-80 flex items-baseline gap-2">
+              <FormControl>
+                <Checkbox
+                  className="border-2 border-emerald-400/70 data-[state=checked]:bg-emerald-400 data-[state=checked]:border-emerald-400 transition-all duration-200 shadow-[0_0_10px_rgba(16,185,129,0.3)] hover:shadow-[0_0_12px_rgba(16,185,129,0.6)]"
+                  id="isProtected"
+                  checked={!!field.value}
+                  onCheckedChange={(checked) =>
+                    field.onChange(checked === true)
+                  }
+                />
+              </FormControl>
+
+              <ActionTooltip
+                label="Check this box in order to make this note protected so that it will be visible only to the permitted users."
+                side="right"
+              >
+                <FormLabel className="!m-0" htmlFor="isProtected">
+                  Make it protected?
+                </FormLabel>
+              </ActionTooltip>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <Button
           disabled={isLoading}
           type="submit"

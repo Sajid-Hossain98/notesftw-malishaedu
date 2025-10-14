@@ -38,6 +38,7 @@ model User {
   imageUrl    String   @db.Text
   email       String   @db.Text
   role        UserRole @default(USER)
+  canViewProtected Boolean? @default(false)
 
   notes         Note[]
   approvedNotes Note[]   @relation("ApprovedBy")
@@ -64,6 +65,7 @@ model Note {
   title       String         @db.Text
   description String         @db.Text
   approval    ApprovalStatus @default(PENDING)
+  isProtected Boolean? @default(false)
 
   userId String // Foreign key to reference the User
   user   User   @relation(fields: [userId], references: [id])

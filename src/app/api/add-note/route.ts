@@ -6,8 +6,13 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { title, universityShortForm, noteType, noteDescription } =
-      await req.json();
+    const {
+      title,
+      universityShortForm,
+      noteType,
+      noteDescription,
+      isProtected,
+    } = await req.json();
 
     const currentlyLoggedInUser = await currentUser();
     const currentlyLoggedInUserData = await currentUserData();
@@ -58,6 +63,7 @@ export async function POST(req: Request) {
             id: type?.id,
           },
         },
+        isProtected: isProtected,
       },
     });
 
