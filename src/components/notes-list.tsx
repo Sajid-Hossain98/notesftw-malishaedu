@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { NoteListItems } from "./note-list-items";
+import { currentUser } from "@clerk/nextjs/server";
 
 interface NotesListProps {
   classNames?: {
@@ -18,10 +19,31 @@ export const NotesList = async ({
 }: NotesListProps) => {
   let notes;
 
+  const loggedInUser = await currentUser();
+  let canViewProtected = false;
+
+  if (loggedInUser) {
+    const dbUser = await db.user.findUnique({
+      where: {
+        clerkUserId: loggedInUser.id,
+      },
+      select: {
+        role: true,
+        canViewProtected: true,
+      },
+    });
+
+    canViewProtected =
+      dbUser?.role === "ADMIN" ||
+      dbUser?.role === "MODERATOR" ||
+      dbUser?.canViewProtected === true;
+  }
+
   if (getAll) {
     notes = await db.note.findMany({
       where: {
         approval: "APPROVED",
+        ...(canViewProtected ? {} : { isProtected: false }),
       },
       include: {
         university: true,
@@ -49,6 +71,7 @@ export const NotesList = async ({
     notes = await db.note.findMany({
       where: {
         approval: "APPROVED",
+        ...(canViewProtected ? {} : { isProtected: false }),
       },
       include: {
         university: {
