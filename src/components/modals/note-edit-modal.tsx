@@ -26,6 +26,7 @@ import {
 } from "../ui/dialog";
 import { useEffect } from "react";
 import { ActionTooltip } from "../action-tooltip";
+import { Checkbox } from "../ui/checkbox";
 
 const editANoteFormSchema = z.object({
   title: z.string().min(1, {
@@ -62,6 +63,7 @@ const editANoteFormSchema = z.object({
     .refine((val) => val != null, {
       message: "Should be selected",
     }),
+  isProtected: z.boolean().default(false),
 });
 
 export const NoteEditModal = () => {
@@ -88,6 +90,7 @@ export const NoteEditModal = () => {
       approval: note
         ? { value: note.approval, label: note.approval }
         : undefined,
+      isProtected: note?.isProtected || false,
     },
   });
 
@@ -108,6 +111,7 @@ export const NoteEditModal = () => {
         approval: note
           ? { value: note.approval, label: note.approval }
           : undefined,
+        isProtected: note.isProtected || false,
       });
     }
   }, [note, form]);
@@ -141,6 +145,7 @@ export const NoteEditModal = () => {
         noteType: values.noteType,
         noteDescription: values.noteDescription,
         approval: values.approval,
+        isProtected: values.isProtected,
       };
 
       await axios.patch("api/admin/notes", valuesToSend);
@@ -308,6 +313,35 @@ export const NoteEditModal = () => {
                         placeholder=""
                       />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="isProtected"
+                render={({ field }) => (
+                  <FormItem className="md:max-h-80 flex items-baseline gap-2">
+                    <FormControl>
+                      <Checkbox
+                        className="border-2 border-emerald-400/70 data-[state=checked]:bg-emerald-400 data-[state=checked]:border-emerald-400 transition-all duration-200 shadow-[0_0_10px_rgba(16,185,129,0.3)] hover:shadow-[0_0_12px_rgba(16,185,129,0.6)]"
+                        id="isProtected"
+                        checked={!!field.value}
+                        onCheckedChange={(checked) =>
+                          field.onChange(checked === true)
+                        }
+                      />
+                    </FormControl>
+
+                    <ActionTooltip
+                      label="Check this box in order to make this note protected so that it will be visible only to the permitted users."
+                      side="right"
+                    >
+                      <FormLabel className="!m-0" htmlFor="isProtected">
+                        Make it protected?
+                      </FormLabel>
+                    </ActionTooltip>
                     <FormMessage />
                   </FormItem>
                 )}

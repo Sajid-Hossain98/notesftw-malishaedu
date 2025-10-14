@@ -130,6 +130,7 @@ export async function PATCH(req: Request) {
     noteType,
     noteDescription,
     approval,
+    isProtected,
   } = await req.json();
 
   const currentlyLoggedInUser = await currentUser();
@@ -178,6 +179,7 @@ export async function PATCH(req: Request) {
         typeId: type.id,
         description: noteDescription,
         approval: approval.value,
+        isProtected: isProtected,
       },
     });
 
