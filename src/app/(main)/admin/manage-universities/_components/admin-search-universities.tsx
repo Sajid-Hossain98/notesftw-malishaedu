@@ -66,7 +66,7 @@ export const AdminSearchUniversities = () => {
     <>
       <div className="relative">
         <Input
-          className="bg-[#242424] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 caret-[#edf2f4] placeholder-gray-500"
+          className="bg-[#303030] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 caret-[#edf2f4] placeholder-gray-500"
           type="text"
           placeholder="e.g., NJTech / Nanjing Tech"
           value={searchWords}

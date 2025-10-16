@@ -5,7 +5,7 @@ export default function Loading() {
   return (
     <div className="md:flex md:justify-between md:gap-3 md:w-full md:h-full mt-2">
       {/* Tabs List Skeleton */}
-      <div className="md:flex md:flex-col md:items-center md:justify-start md:gap-2 md:bg-[#242424] md:max-h-fit md:rounded-xl md:px-2 md:py-2 grid md:max-w-[15%] w-full grid-cols-2 md:mt-2">
+      <div className="md:flex md:flex-col md:items-center md:justify-start md:gap-2 md:bg-[#303030] md:max-h-fit md:rounded-xl md:px-2 md:py-2 grid md:max-w-[15%] w-full grid-cols-2 md:mt-2">
         <div className="flex items-center justify-center gap-2 py-1.5 bg-[#2c2c2c] rounded-md">
           <List className="w-4 h-4 text-zinc-500" />
           <Skeleton className="w-8 h-4 bg-zinc-500" />

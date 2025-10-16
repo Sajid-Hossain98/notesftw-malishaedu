@@ -4,7 +4,7 @@ import { ActionTooltip } from "./action-tooltip";
 
 export const Footer = () => {
   return (
-    <div className="fixed left-0 bottom-0 font-semibold w-full h-8 md:h-7 bg-[#242424] overflow-hidden">
+    <div className="fixed left-0 bottom-0 font-semibold w-full h-8 md:h-7 bg-[#303030] overflow-hidden">
       <div className="w-full h-full flex justify-center items-center gap-3">
         {/* <ActionTooltip
           label="&lt;MOTIVATION&gt; So the answer to the question 'Why is this site?' would simply be a reason of struggle to find information without delay. I first wanted to build this site when I joined MalishaEdu a year ago in Feb 2024. As it is a place where information is a key component and plays a huge role. At the beginning, I used to get bombarded with information from all directions every day. Although it was easy to right notes but not so simple to find them by navigating through pages of notes / text files / word files / excel sheets. These options were also time consuming :(, so that's where I got the idea to build something like this, and here we are :) &#129309;"

@@ -51,7 +51,7 @@ export const NotesViewModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-[#242424] border-zinc-700 !rounded-xl md:min-w-[60%] w-11/12 p-3 md:p-6 overflow-hidden">
+      <DialogContent className="bg-[#303030] border-zinc-700 !rounded-xl md:min-w-[60%] w-11/12 p-3 md:p-6 overflow-hidden">
         <DialogHeader className="text-start">
           <div>
             <div className="flex items-center justify-start gap-2 md:gap-4 mt-3">

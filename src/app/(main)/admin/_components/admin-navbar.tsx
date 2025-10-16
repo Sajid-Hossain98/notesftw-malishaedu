@@ -35,7 +35,7 @@ export const AdminNavbar = () => {
   );
 
   return (
-    <div className="mx-auto bg-[#242424] rounded-full flex justify-around overflow-hidden md:my-4 my-1">
+    <div className="mx-auto bg-[#303030] rounded-full flex justify-around overflow-hidden md:my-4 my-1">
       {routes.map((route) => (
         <Button
           asChild

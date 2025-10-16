@@ -19,7 +19,7 @@ export const AdminAllNoteItems = ({
   const { onOpen } = useModal();
 
   return (
-    <div className="flex flex-col gap-1 md:gap-2 md:max-h-[65vh] max-h-[45vh] overflow-y-auto overflow-x-hidden mt-2 md:mt-3 bg-[#242424] px-2 md:px-3 py-1 md:py-2 rounded-xl [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-[#242424] [&::-webkit-scrollbar-thumb]:bg-gray-500">
+    <div className="flex flex-col gap-1 md:gap-2 md:max-h-[65vh] max-h-[45vh] overflow-y-auto overflow-x-hidden mt-2 md:mt-3 bg-[#303030] px-2 md:px-3 py-1 md:py-2 rounded-xl [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-[#303030] [&::-webkit-scrollbar-thumb]:bg-gray-500">
       {notes && notes?.length > 0 ? (
         notes?.map((note) => {
           let formattedDate = null;

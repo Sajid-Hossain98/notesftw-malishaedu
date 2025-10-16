@@ -75,9 +75,11 @@ export const AdminAllNotes = ({
   };
 
   if (isLoading) {
-    return <div className="flex justify-center mt-9">
-      <Spinner size={"icon"}/>
-    </div>;
+    return (
+      <div className="flex justify-center mt-9">
+        <Spinner size={"icon"} />
+      </div>
+    );
   }
 
   if (isError) {
@@ -120,7 +122,7 @@ export const AdminAllNotes = ({
 
         <button
           type="submit"
-          className="bg-[#242424] px-2 py-1 md:py-2 text-xs md:text-base font-semibold rounded-[3px]"
+          className="bg-[#303030] px-2 py-1 md:py-2 text-xs md:text-base font-semibold rounded-[3px]"
         >
           Search
         </button>

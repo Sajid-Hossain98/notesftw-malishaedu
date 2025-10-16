@@ -166,7 +166,7 @@ export const NoteEditModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-[#242424] border-zinc-700 !rounded-xl md:min-w-[60%] w-11/12 p-3 md:p-6">
+      <DialogContent className="bg-[#303030] border-zinc-700 !rounded-xl md:min-w-[60%] w-11/12 p-3 md:p-6">
         <DialogHeader>
           <DialogTitle className="mx-auto text-lg text-zinc-300 sm:text-3xl">
             Modify the note
