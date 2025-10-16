@@ -65,21 +65,20 @@ export const SearchBar = () => {
           onClick={handleClearSearch}
         >
           {searchWords ? (
-            <SearchX className="h-10 w-10 text-black m-auto stroke-2" />
+            <SearchX className="w-10 h-10 m-auto text-black stroke-2" />
           ) : (
-            <Search className="h-10 w-10 text-black m-auto stroke-2" />
+            <Search className="w-10 h-10 m-auto text-black stroke-2" />
           )}
         </span>
-
         {searchWords && (
           <X
             className="md:hidden absolute right-3 h-5 w-5 top-[50%] -translate-y-1/2 text-white m-auto stroke-2 cursor-pointer z-10"
             onClick={handleClearSearch}
           />
         )}
-
+        {/* bg-[#242424] */}
         <Input
-          className="bg-[#242424] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 caret-[#edf2f4] placeholder-gray-500"
+          className="bg-[#303030] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 caret-[#edf2f4] placeholder-gray-500"
           type="text"
           placeholder="e.g., NJTech / Nanjing Tech / Business Administration"
           value={searchWords}
@@ -87,18 +86,18 @@ export const SearchBar = () => {
           autoFocus
         />
       </div>
-      <span className="text-xs hidden md:flex gap-1 justify-center mt-1 text-zinc-400">
+      <span className="justify-center hidden gap-1 mt-1 text-xs md:flex text-zinc-400">
         Having difficulties searching?
         <ActionTooltip
           side="bottom"
           className="md:max-w-[550px]"
           label="You can search using a university's short name, full name, note title, or even major names (e.g., 'Mechanical Engineering'). It's not case-sensitive, so you can type in uppercase or lowercase. A list of short names will be available soon."
         >
-          <BadgeInfo className="h-4 w-4" />
+          <BadgeInfo className="w-4 h-4" />
         </ActionTooltip>
       </span>
       {searchWords && (
-        <div className="absolute top-full w-full z-40">
+        <div className="absolute z-40 w-full top-full">
           <SearchContent
             searchedNotes={data}
             searchError={error}

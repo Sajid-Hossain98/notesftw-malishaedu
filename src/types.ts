@@ -42,6 +42,7 @@ export interface UserData {
   clerkUserId: string;
   imageUrl: string;
   email: string;
+  canViewProtected: boolean | null;
   createdAt: Date;
   updatedAt: Date;
 }

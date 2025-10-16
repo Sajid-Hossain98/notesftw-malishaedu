@@ -32,13 +32,13 @@ export const ActionTooltip = ({
 
         <TooltipContent
           className={cn(
-            "bg-stone-900 text-sm font-semibold text-zinc-400/95 max-w-[300px] md:max-w-[50%] z-50 border-gray-600 rounded-[4px]",
+            "bg-gray-400 text-sm font-semibold text-zinc-400/95 max-w-[300px] md:max-w-[50%] z-50 border-gray-600 rounded-[4px]",
             className
           )}
           side={side}
           align={align}
         >
-          <p className="text-justify">{label}</p>
+          <p className="text-justify text-black">{label}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
