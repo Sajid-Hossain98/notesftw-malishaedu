@@ -10,6 +10,7 @@ import { AdminSearchInputField } from "./admin-search-input";
 import { AdminAllNoteItems } from "./admin-all-note-items";
 import { X } from "lucide-react";
 import { Spinner } from "@/components/spinner";
+import Link from "next/link";
 
 type NotesResponse = {
   notes: NotesWithUniTypeUser;
@@ -87,8 +88,11 @@ export const AdminAllNotes = ({
     if (error && (error as any).status === 403) {
       return (
         <div className="mt-8 text-xl font-semibold text-center text-rose-500">
-          Excuse me sir, You are not authorized to view these items! &quot;GO
-          HOME&quot;
+          Excuse me sir, You are not authorized to view these items!{" "}
+          <Link href="/" className="underline underline-offset-2">
+            GO BACK
+          </Link>{" "}
+          please.
         </div>
       );
     }
