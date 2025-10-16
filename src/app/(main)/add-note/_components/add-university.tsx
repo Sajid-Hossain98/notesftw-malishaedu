@@ -126,7 +126,7 @@ export const AddAnUniversity = ({ userData }: AddUniversityProps) => {
   if (userData?.role !== "ADMIN") {
     return (
       <div className="mt-8 text-2xl text-center text-rose-500">
-        You are not authorized to add an university, kindly ask an
+        You are not authorized to add a university, kindly ask an
         &quot;ADMIN&quot;
       </div>
     );

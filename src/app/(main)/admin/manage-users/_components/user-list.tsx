@@ -12,12 +12,14 @@ import { UserRole } from "@prisma/client";
 import axios from "axios";
 import {
   ChevronRight,
+  Loader2,
   ShieldAlert,
   ShieldCheck,
   UserRound,
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
 
 interface UserListProps {
@@ -25,6 +27,8 @@ interface UserListProps {
 }
 
 export const UserList = ({ userData }: UserListProps) => {
+  const [loadingId, setLoadingId] = useState("");
+
   const router = useRouter();
   const onRoleChange = async (
     userId: string,
@@ -32,15 +36,17 @@ export const UserList = ({ userData }: UserListProps) => {
     newRole: UserRole
   ) => {
     try {
+      setLoadingId(userId);
+
       await axios.patch("/api/admin/users", {
         userId: userId,
-        role: newRole,
+        newRole: newRole,
       });
 
-      router.refresh();
       toast.success(
         `${userName} is ${newRole === "ADMIN" ? "an" : "a"} ${newRole} now!`
       );
+      router.refresh();
     } catch (error) {
       if (error instanceof Error) {
         toast.error(
@@ -49,6 +55,8 @@ export const UserList = ({ userData }: UserListProps) => {
           </div>
         );
       }
+    } finally {
+      setLoadingId("");
     }
   };
 
@@ -57,7 +65,7 @@ export const UserList = ({ userData }: UserListProps) => {
       toast.warning(
         `${user.name} is already ${
           user.role === "ADMIN" ? "an" : "a"
-        } ${selectedRole}`
+        } ${selectedRole}.`
       );
     } else {
       onRoleChange(user.id, user.name, selectedRole);
@@ -82,7 +90,7 @@ export const UserList = ({ userData }: UserListProps) => {
                       height={80}
                       width={80}
                       quality={100}
-                      className="w-10 h-10 rounded-full object-cover"
+                      className="w-10 h-10 rounded-full object-cover select-none"
                     />
                     <span className="flex flex-col gap-1">
                       <p className="flex items-center gap-1 text-base font-semibold">
@@ -105,16 +113,21 @@ export const UserList = ({ userData }: UserListProps) => {
                         asChild
                         className="absolute right-0 top-[50%] translate-y-[-50%]"
                       >
-                        <button className="flex items-center justify-end gap-0.5 border-none outline-none h-full hover:bg-[#303030] px-3">
-                          {user.role}
-                          <ChevronRight />
+                        <button className="flex items-center gap-0.5 border-none outline-none h-full hover:bg-[#303030] px-3">
+                          {loadingId === user.id ? (
+                            <Loader2 className="w-4 md:w-5 h-4 md:h-5 animate-spin" />
+                          ) : (
+                            user.role
+                          )}
+                          <ChevronRight className="w-5 h-5" />
                         </button>
                       </DropdownMenuTrigger>
 
                       <DropdownMenuContent
-                        className="z-10 rounded-md bg-zinc-800"
-                        align="end"
-                        sideOffset={6}
+                        className="z-10 rounded-[3px] bg-zinc-800 shadow-[0_6px_15px_-3px_#d4d4d852,0_4px_6px_-4px_#d4d4d852]"
+                        align="start"
+                        side="left"
+                        sideOffset={2}
                       >
                         <DropdownMenuItem
                           className="flex items-center gap-1 cursor-pointer hover:!bg-[#303030]"
