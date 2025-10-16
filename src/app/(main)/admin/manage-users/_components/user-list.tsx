@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,6 +8,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { UserData } from "@/types";
+import { UserRole } from "@prisma/client";
+import axios from "axios";
 import {
   ChevronRight,
   ShieldAlert,
@@ -13,11 +17,53 @@ import {
   UserRound,
 } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface UserListProps {
   userData: UserData[];
 }
+
 export const UserList = ({ userData }: UserListProps) => {
+  const router = useRouter();
+  const onRoleChange = async (
+    userId: string,
+    userName: string,
+    newRole: UserRole
+  ) => {
+    try {
+      await axios.patch("/api/admin/users", {
+        userId: userId,
+        role: newRole,
+      });
+
+      router.refresh();
+      toast.success(
+        `${userName} is ${newRole === "ADMIN" ? "an" : "a"} ${newRole} now!`
+      );
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(
+          <div>
+            <span>Something went wrong!</span>
+          </div>
+        );
+      }
+    }
+  };
+
+  const handleRoleClick = (user: UserData, selectedRole: UserRole) => {
+    if (user.role === selectedRole) {
+      toast.warning(
+        `${user.name} is already ${
+          user.role === "ADMIN" ? "an" : "a"
+        } ${selectedRole}`
+      );
+    } else {
+      onRoleChange(user.id, user.name, selectedRole);
+    }
+  };
+
   return (
     <>
       <div className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-300 rounded-tl-[8px] rounded-bl-[8px]">
@@ -25,7 +71,10 @@ export const UserList = ({ userData }: UserListProps) => {
           <TableBody className="w-full">
             {userData.map((user) => {
               return (
-                <TableRow key={user.id} className="bg-zinc-900">
+                <TableRow
+                  key={user.id}
+                  className="bg-[#303030] transition-all ease-in-out duration-200"
+                >
                   <TableCell className="flex items-center gap-3 py-3">
                     <Image
                       src={user.imageUrl}
@@ -47,7 +96,7 @@ export const UserList = ({ userData }: UserListProps) => {
                           <UserRound className="w-4 h-4" />
                         )}
                       </p>
-                      <p className="font-semibold">{user.email}</p>
+                      <p>{user.email}</p>
                     </span>
                   </TableCell>
                   <TableCell className="pl-0 font-semibold select-none relative">
@@ -56,7 +105,7 @@ export const UserList = ({ userData }: UserListProps) => {
                         asChild
                         className="absolute right-0 top-[50%] translate-y-[-50%]"
                       >
-                        <button className="flex items-center justify-end gap-0.5 border-none outline-none h-full pr-2">
+                        <button className="flex items-center justify-end gap-0.5 border-none outline-none h-full hover:bg-[#303030] px-3">
                           {user.role}
                           <ChevronRight />
                         </button>
@@ -67,15 +116,24 @@ export const UserList = ({ userData }: UserListProps) => {
                         align="end"
                         sideOffset={6}
                       >
-                        <DropdownMenuItem className="flex items-center gap-1 cursor-pointer hover:!bg-zinc-600">
+                        <DropdownMenuItem
+                          className="flex items-center gap-1 cursor-pointer hover:!bg-[#303030]"
+                          onClick={() => handleRoleClick(user, "ADMIN")}
+                        >
                           <ShieldAlert className="w-4 h-4" />
                           Admin
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="flex items-center gap-1 cursor-pointer hover:!bg-zinc-600">
+                        <DropdownMenuItem
+                          className="flex items-center gap-1 cursor-pointer hover:!bg-[#303030]"
+                          onClick={() => handleRoleClick(user, "MODERATOR")}
+                        >
                           <ShieldCheck className="w-4 h-4" />
                           Moderator
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="flex items-center gap-1 cursor-pointer hover:!bg-zinc-600">
+                        <DropdownMenuItem
+                          className="flex items-center gap-1 cursor-pointer hover:!bg-[#303030]"
+                          onClick={() => handleRoleClick(user, "USER")}
+                        >
                           <UserRound className="w-4 h-4" />
                           User
                         </DropdownMenuItem>
