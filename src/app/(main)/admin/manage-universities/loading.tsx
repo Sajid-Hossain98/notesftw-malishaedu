@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
   return (
-    <div className="flex flex-col items-center w-full md:w-[60%] mx-auto mt-6 space-y-2">
+    <div className="flex flex-col items-center w-full mx-auto mt-6 space-y-2">
       {/* Search Input Skeleton */}
       <div className="relative w-full">
         <Skeleton className="h-10 md:h-12 w-full rounded-full bg-zinc-500/60" />

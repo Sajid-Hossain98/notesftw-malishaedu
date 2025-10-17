@@ -6,11 +6,11 @@ import { db } from "@/lib/db";
 
 export async function PATCH(req: Request) {
   try {
-    const { userId, newRole } = await req.json();
+    const { userId, newRole, canViewProtected } = await req.json();
 
-    if (!userId && !newRole) {
+    if (!userId) {
       return NextResponse.json(
-        { error: "User ID/Role is missing" },
+        { error: "User ID is missing" },
         { status: 404 }
       );
     }
@@ -34,6 +34,7 @@ export async function PATCH(req: Request) {
       },
       data: {
         role: newRole,
+        canViewProtected: canViewProtected,
       },
     });
 

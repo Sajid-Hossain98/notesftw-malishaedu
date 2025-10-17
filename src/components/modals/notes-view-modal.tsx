@@ -91,7 +91,7 @@ export const NotesViewModal = () => {
             </Badge>
           </div>
 
-          <Separator className="bg-[#3f3f3f]" />
+          <Separator className="bg-zinc-600" />
 
           <ScrollArea className="md:max-h-[60vh] max-h-[45vh] py-2">
             <Preview
