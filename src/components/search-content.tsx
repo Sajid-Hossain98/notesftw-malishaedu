@@ -27,7 +27,7 @@ export const SearchContent = ({
 
   return (
     <motion.div
-      className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto bg-stone-700 mt-2 px-2 md:px-4 py-2 rounded-xl md:!mb-12 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-300"
+      className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto bg-[#303030] mt-2 px-2 md:px-4 py-2 rounded-xl md:!mb-12 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-300"
       layout
       transition={{
         type: "spring",
@@ -89,25 +89,25 @@ export const SearchContent = ({
         if (!filteredSearchedNotes || filteredSearchedNotes.length === 0)
           return null;
 
-        const typeBgColor = notes?.[0]?.type?.bgColor || "bg-gray-600";
+        const typeBgColor = notes?.[0]?.type?.bgColor || "bg-zinc-600";
         const typeTextColor = notes?.[0]?.type?.color || "text-black";
 
         return (
           <div key={type} className="mb-2 group">
             <div className="relative font-semibold md:text-lg text-base flex items-center md:mb-1 mb-0.5">
-              <span className="w-3.5 h-[1px] bg-gray-600 mr-2"></span>
+              <span className="w-3.5 h-[1px] bg-zinc-600 mr-2"></span>
               <h3
                 className={`${typeBgColor} px-2 py-0.5 rounded-full bg-opacity-60 md:group-hover:bg-opacity-100 transition-colors group-active:bg-opacity-100`}
                 style={{ color: typeTextColor }}
               >
                 {type}
               </h3>
-              <span className="flex-grow h-[1px] bg-gray-600 ml-2"></span>
+              <span className="flex-grow h-[1px] bg-zinc-600 ml-2"></span>
             </div>
             {notes?.map((note) => (
               <div
                 key={note.id}
-                className="flex items-center justify-between w-full min-w-0 py-1 pr-1 truncate cursor-pointer md:hover:bg-stone-800 active:bg-stone-800 md:py-2 hover:rounded-xl text-ellipsis md:pr-2"
+                className="flex items-center justify-between w-full min-w-0 py-1 pr-1 truncate cursor-pointer md:hover:bg-[#414141] active:bg-[#414141] md:py-2 hover:rounded-xl text-ellipsis md:pr-2"
                 onClick={() => onOpen("viewNote", { note: note })}
                 tabIndex={0}
                 onKeyDown={(e) => {
