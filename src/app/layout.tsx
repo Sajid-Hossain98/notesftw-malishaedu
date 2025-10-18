@@ -75,7 +75,7 @@ export default function RootLayout({
           >
             <ModalProvider />
             <QueryProvider>
-              <Header>{children}</Header>
+              <Header className="h-full">{children}</Header>
             </QueryProvider>
             <Toaster theme="system" richColors offset={50} />
           </div>
