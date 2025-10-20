@@ -6,6 +6,7 @@ import { NoteEditModal } from "../modals/note-edit-modal";
 import { NoteDeleteModal } from "../modals/note-delete-modal";
 import { UniversityEditModal } from "../modals/university-edit-modal";
 import { UniversityDeleteModal } from "../modals/university-delete-modal";
+import { AddRuleModal } from "../modals/rule-add-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -25,6 +26,7 @@ export const ModalProvider = () => {
       <NoteDeleteModal />
       <UniversityEditModal />
       <UniversityDeleteModal />
+      <AddRuleModal />
     </>
   );
 };

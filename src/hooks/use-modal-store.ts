@@ -6,7 +6,8 @@ export type ModalType =
   | "editNote"
   | "deleteNote"
   | "editUniversity"
-  | "deleteUniversity";
+  | "deleteUniversity"
+  | "addRule";
 
 interface ModalData {
   note?: SingleNotesWithUniTypeUser;

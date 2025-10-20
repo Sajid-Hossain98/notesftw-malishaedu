@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CodeOfConductList } from "./_components/code-of-conduct-list";
+import { currentUserData } from "@/lib/current-user-data";
 
 export function generateMetadata() {
   return {
@@ -8,6 +9,8 @@ export function generateMetadata() {
 }
 
 const AddNotePage = async () => {
+  const userData = await currentUserData();
+
   return (
     <div className="h-full">
       <div className="flex flex-col items-center gap-1 pb-1 text-center">
@@ -29,7 +32,7 @@ const AddNotePage = async () => {
         />
       </div>
 
-      <CodeOfConductList />
+      <CodeOfConductList userData={userData} />
     </div>
   );
 };
