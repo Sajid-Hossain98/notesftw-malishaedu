@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     }
 
     if (currentlyLoggedInUserData?.role !== UserRole.ADMIN) {
-      return new NextResponse("Your are not allowed to perform this task", {
+      return new NextResponse("You are not allowed to perform this task", {
         status: 403,
       });
     }

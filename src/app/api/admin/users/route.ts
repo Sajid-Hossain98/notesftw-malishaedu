@@ -23,7 +23,7 @@ export async function PATCH(req: Request) {
     }
 
     if (currentlyLoggedInUserData?.role !== UserRole.ADMIN) {
-      return new NextResponse("Your are not allowed to perform this action!", {
+      return new NextResponse("You are not allowed to perform this action!", {
         status: 403,
       });
     }

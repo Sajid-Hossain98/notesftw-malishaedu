@@ -16,7 +16,7 @@ export async function GET(request: Request) {
     currentlyLoggedInUserData?.role !== UserRole.ADMIN &&
     currentlyLoggedInUserData?.role !== UserRole.MODERATOR
   ) {
-    return new NextResponse("Your are not allowed to view these items!", {
+    return new NextResponse("You are not allowed to view these items!", {
       status: 403,
     });
   }
@@ -144,7 +144,7 @@ export async function PATCH(req: Request) {
     currentlyLoggedInUserData?.role !== UserRole.ADMIN &&
     currentlyLoggedInUserData?.role !== UserRole.MODERATOR
   ) {
-    return new NextResponse("Your are not allowed to perform this action!", {
+    return new NextResponse("You are not allowed to perform this action!", {
       status: 403,
     });
   }
@@ -206,7 +206,7 @@ export async function DELETE(req: Request) {
     currentlyLoggedInUserData?.role !== UserRole.ADMIN &&
     currentlyLoggedInUserData?.role !== UserRole.MODERATOR
   ) {
-    return new NextResponse("Your are not allowed to perform this action!", {
+    return new NextResponse("You are not allowed to perform this action!", {
       status: 403,
     });
   }

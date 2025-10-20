@@ -24,7 +24,7 @@ import axios from "axios";
 import { Editor } from "../editor";
 import { ActionTooltip } from "../action-tooltip";
 import { Checkbox } from "../ui/checkbox";
-import { Loader2 } from "lucide-react";
+import { Loader2, Scale } from "lucide-react";
 
 const CodeOfConductListFormSchema = z.object({
   rule: z.string().min(1, {
@@ -57,7 +57,10 @@ export const AddRuleModal = () => {
     try {
       axios.post("/api/code-of-conduct", valuesToSend);
 
+      form.reset();
       router.refresh();
+      toast.success("Added rule successfully.");
+      onClose();
     } catch (error) {
       if (error instanceof Error) {
         toast.error(
@@ -73,8 +76,9 @@ export const AddRuleModal = () => {
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="bg-[#303030] border-zinc-700 !rounded-xl md:min-w-[70%] w-11/12 p-3 md:p-6">
         <DialogHeader>
-          <DialogTitle className="mx-auto text-lg text-zinc-300 sm:text-3xl">
+          <DialogTitle className="flex items-baseline gap-2 mx-auto text-lg text-zinc-300 sm:text-3xl">
             Add a rule
+            <Scale />
           </DialogTitle>
 
           <DialogDescription className="mx-auto text-xs">
