@@ -50,7 +50,7 @@ export const Editor = ({ onChange, value, placeholder }: EditorProps) => {
   ];
 
   return (
-    <div className="bg-zinc-100 text-black rounded-xl overflow-hidden">
+    <div className="overflow-hidden text-black bg-zinc-100 rounded-xl">
       <ReactQuill
         theme="snow"
         formats={quillFormats}

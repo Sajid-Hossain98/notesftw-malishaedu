@@ -46,3 +46,11 @@ export interface UserData {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface CodeOfConduct {
+  id: string;
+  rule: string;
+  isProtected: boolean | null;
+  createdAt: Date;
+  updatedAt: Date;
+}

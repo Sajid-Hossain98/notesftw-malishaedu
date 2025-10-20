@@ -54,7 +54,7 @@ export const NotesViewModal = () => {
       <DialogContent className="bg-[#303030] border-zinc-700 !rounded-xl md:min-w-[60%] w-11/12 p-3 md:p-6 overflow-hidden">
         <DialogHeader className="text-start">
           <div>
-            <div className="flex items-center justify-start gap-2 md:gap-4 mt-3">
+            <div className="flex items-center justify-start gap-2 mt-3 md:gap-4">
               <Image
                 src={imageUrl}
                 className="rounded-full h-14 md:h-20 w-14 md:w-20 object-cover select-none bg-zinc-100 p-[1.5px]"
@@ -69,7 +69,7 @@ export const NotesViewModal = () => {
                 </DialogTitle>
 
                 <div className="flex items-center gap-2">
-                  <DialogDescription className="flex items-center gap-1 sm:gap-2 text-sm font-semibold text-zinc-300 sm:text-xl">
+                  <DialogDescription className="flex items-center gap-1 text-sm font-semibold sm:gap-2 text-zinc-300 sm:text-xl">
                     <School className="w-3.5 h-3.5 md:w-5 md:h-5" />
 
                     {note?.university?.universityShortName}
@@ -93,7 +93,7 @@ export const NotesViewModal = () => {
 
           <Separator className="bg-zinc-600" />
 
-          <ScrollArea className="md:max-h-[60vh] max-h-[45vh] py-2">
+          <ScrollArea className="md:max-h-[60vh] max-h-[45vh] py-2 md:py-3">
             <Preview
               value={note?.description}
               className="text-base md:text-lg"
@@ -104,14 +104,14 @@ export const NotesViewModal = () => {
         <DialogFooter>
           <DialogClose
             asChild
-            className="md:hover:bg-black active:bg-black transition-colors"
+            className="transition-colors md:hover:bg-black active:bg-black"
           >
             <span className="flex items-center justify-center w-full gap-0.5 py-0.5 md:py-1 border-2 cursor-pointer border-zinc-700 font-semibold text-sm md:text-lg">
               Thanks
               <Image
                 src="/static/hand-white.svg"
                 alt="hand-heart"
-                className="h-5 w-5 sm:h-8 sm:w-8"
+                className="w-5 h-5 sm:h-8 sm:w-8"
                 height={300}
                 width={300}
               />
