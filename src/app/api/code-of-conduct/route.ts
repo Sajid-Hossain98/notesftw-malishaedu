@@ -84,7 +84,7 @@ export async function PATCH(req: Request) {
 
 export async function DELETE(req: Request) {
   try {
-    const { ruleId, rule, isProtected } = await req.json();
+    const { ruleId } = await req.json();
 
     const currentlyLoggedInUser = await currentUser();
     const currentlyLoggedInUserData = await currentUserData();
@@ -102,26 +102,22 @@ export async function DELETE(req: Request) {
       );
     }
 
-    if (!ruleId && !rule && isProtected === undefined) {
-      return NextResponse.json(
-        { error: "Rule ID or Protection missing" },
-        { status: 404 }
-      );
+    if (!ruleId) {
+      return NextResponse.json({ error: "Rule ID missing" }, { status: 404 });
     }
 
-    const updatedRule = await db.codeOfConduct.update({
+    await db.codeOfConduct.delete({
       where: {
         id: ruleId,
       },
-      data: {
-        rule: rule,
-        isProtected: isProtected,
-      },
     });
 
-    return NextResponse.json(updatedRule);
+    return NextResponse.json({
+      success: true,
+      message: "Rule deleted successfully.",
+    });
   } catch (error) {
-    console.log("EDIT-RULE/CODE-OF-CONDUCT", error);
+    console.log("DELETE-RULE/CODE-OF-CONDUCT", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
