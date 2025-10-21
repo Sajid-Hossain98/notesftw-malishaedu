@@ -26,7 +26,7 @@ import { ActionTooltip } from "../action-tooltip";
 import { Checkbox } from "../ui/checkbox";
 import { Loader2, Scale } from "lucide-react";
 
-const CodeOfConductListFormSchema = z.object({
+const AddRuleFormSchema = z.object({
   rule: z.string().min(1, {
     message: "Can't be empty.",
   }),
@@ -40,8 +40,8 @@ export const AddRuleModal = () => {
 
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof CodeOfConductListFormSchema>>({
-    resolver: zodResolver(CodeOfConductListFormSchema),
+  const form = useForm<z.infer<typeof AddRuleFormSchema>>({
+    resolver: zodResolver(AddRuleFormSchema),
     defaultValues: {
       rule: "",
     },
@@ -49,7 +49,7 @@ export const AddRuleModal = () => {
 
   const isLoading = form.formState.isSubmitting;
 
-  const onSubmit = (values: z.infer<typeof CodeOfConductListFormSchema>) => {
+  const onSubmit = (values: z.infer<typeof AddRuleFormSchema>) => {
     const valuesToSend = {
       rule: values.rule,
       isProtected: values.isProtected,

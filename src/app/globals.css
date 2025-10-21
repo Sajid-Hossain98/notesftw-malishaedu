@@ -45,10 +45,10 @@
   min-height: fit-content !important;
 }
 
-.ql-editor {
+.ql-bubble .ql-editor {
   padding: 0 !important;
 }
 
-.ql-editor > p {
+.ql-bubble .ql-editor > p {
   padding: 2px !important;
 }
