@@ -37,3 +37,91 @@ export async function POST(req: Request) {
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
+
+export async function PATCH(req: Request) {
+  try {
+    const { ruleId, rule, isProtected } = await req.json();
+
+    const currentlyLoggedInUser = await currentUser();
+    const currentlyLoggedInUserData = await currentUserData();
+
+    if (!currentlyLoggedInUser) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    if (currentlyLoggedInUserData?.role !== UserRole.ADMIN) {
+      return new NextResponse(
+        "Sir, you are not allowed to perform this action.",
+        {
+          status: 403,
+        }
+      );
+    }
+
+    if (!ruleId && !rule && isProtected === undefined) {
+      return NextResponse.json(
+        { error: "Rule ID or Protection missing" },
+        { status: 404 }
+      );
+    }
+
+    const updatedRule = await db.codeOfConduct.update({
+      where: {
+        id: ruleId,
+      },
+      data: {
+        rule: rule,
+        isProtected: isProtected,
+      },
+    });
+
+    return NextResponse.json(updatedRule);
+  } catch (error) {
+    console.log("EDIT-RULE/CODE-OF-CONDUCT", error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const { ruleId, rule, isProtected } = await req.json();
+
+    const currentlyLoggedInUser = await currentUser();
+    const currentlyLoggedInUserData = await currentUserData();
+
+    if (!currentlyLoggedInUser) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    if (currentlyLoggedInUserData?.role !== UserRole.ADMIN) {
+      return new NextResponse(
+        "Sir, you are not allowed to perform this action.",
+        {
+          status: 403,
+        }
+      );
+    }
+
+    if (!ruleId && !rule && isProtected === undefined) {
+      return NextResponse.json(
+        { error: "Rule ID or Protection missing" },
+        { status: 404 }
+      );
+    }
+
+    const updatedRule = await db.codeOfConduct.update({
+      where: {
+        id: ruleId,
+      },
+      data: {
+        rule: rule,
+        isProtected: isProtected,
+      },
+    });
+
+    return NextResponse.json(updatedRule);
+  } catch (error) {
+    console.log("EDIT-RULE/CODE-OF-CONDUCT", error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
