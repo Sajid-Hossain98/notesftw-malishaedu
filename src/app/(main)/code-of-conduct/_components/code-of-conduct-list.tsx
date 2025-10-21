@@ -22,6 +22,7 @@ import { useForm } from "react-hook-form";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Edit2, Trash } from "lucide-react";
+import { useModal } from "@/hooks/use-modal-store";
 
 interface CodeOfConductListProps {
   userData: UserData | null;
@@ -39,11 +40,17 @@ export const CodeOfConductList = ({
   userData,
   codeOfConduct,
 }: CodeOfConductListProps) => {
+  // const [isEditing, setIsEditing] = useState(false);
   const [editingRuleId, setEditingRuleId] = useState<string | null>(null);
 
+  const toggleEdit = (ruleId: string | null) => {
+    setEditingRuleId((current) => (current === ruleId ? null : ruleId));
+  };
   const admin = userData?.role === "ADMIN";
 
   const router = useRouter();
+
+  const { onOpen } = useModal();
 
   const form = useForm<z.infer<typeof CodeOfConductListFormSchema>>({
     resolver: zodResolver(CodeOfConductListFormSchema),
@@ -57,12 +64,16 @@ export const CodeOfConductList = ({
     values: z.infer<typeof CodeOfConductListFormSchema>
   ) => {
     try {
-      await axios.patch("/api/code-of-conduct/", {
+      const valuesToSend = {
         ruleId: editingRuleId,
-        ...values,
-      });
+        rule: values.rule,
+        isProtected: values.isProtected,
+      };
+
+      await axios.patch("/api/code-of-conduct/", valuesToSend);
+
       toast.success("Rule Updated!");
-      // toggleEdit();
+      toggleEdit(editingRuleId);
       router.refresh();
     } catch (error) {
       toast.error("Something went wrong!");
@@ -166,7 +177,14 @@ export const CodeOfConductList = ({
                     <Edit2 className="w-3 h-3" />
                   </button>
 
-                  <button className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black">
+                  <button
+                    className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black"
+                    onClick={() =>
+                      onOpen("deleteRule", {
+                        ruleId: rule?.id,
+                      })
+                    }
+                  >
                     <Trash className="w-3 h-3" />
                   </button>
                 </div>

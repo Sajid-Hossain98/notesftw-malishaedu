@@ -7,7 +7,8 @@ export type ModalType =
   | "deleteNote"
   | "editUniversity"
   | "deleteUniversity"
-  | "addRule";
+  | "addRule"
+  | "deleteRule";
 
 interface ModalData {
   note?: SingleNotesWithUniTypeUser;
@@ -19,6 +20,7 @@ interface ModalData {
     universityFullName?: string;
     logoImage?: string;
   };
+  ruleId?: string;
 }
 
 interface ModalStore {
