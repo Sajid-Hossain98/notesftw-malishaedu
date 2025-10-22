@@ -23,6 +23,7 @@ import { ActionTooltip } from "@/components/action-tooltip";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Edit2, Trash } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
+import { motion } from "motion/react";
 
 interface CodeOfConductListProps {
   userData: UserData | null;
@@ -82,10 +83,37 @@ export const CodeOfConductList = ({
   };
 
   return (
-    <div className="overflow-y-auto max-h-[65%] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:cursor-pointer [&::-webkit-scrollbar-thumb]:rounded-[10px] [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-400/80 pt-2">
+    <motion.div
+      initial="hidden"
+      animate="show"
+      variants={{
+        hidden: { opacity: 0 },
+        show: {
+          opacity: 1,
+          transition: { staggerChildren: 0.08 },
+        },
+      }}
+      className="overflow-y-auto max-h-[65%] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:cursor-pointer [&::-webkit-scrollbar-thumb]:rounded-[10px] [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-400/80 pt-2"
+    >
       {codeOfConduct.map((rule, index) => {
         return (
-          <div key={rule.id}>
+          <motion.div
+            layout
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 14,
+                  mass: 1,
+                },
+              },
+            }}
+            key={rule.id}
+          >
             {editingRuleId === rule.id ? (
               <Form {...form}>
                 <form
@@ -160,7 +188,10 @@ export const CodeOfConductList = ({
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-start gap-2 font-mono text-2xl">
                   <span className="my-2 md:my-4">{index + 1}.</span>
-                  <Preview value={rule.rule} className="my-2 md:my-4" />
+                  <Preview
+                    value={rule.rule}
+                    className="my-1.5 md:my-3 pr-4 rule-font"
+                  />
                 </div>
 
                 {admin && (
@@ -192,7 +223,7 @@ export const CodeOfConductList = ({
                 )}
               </div>
             )}
-          </div>
+          </motion.div>
         );
       })}
 
@@ -201,6 +232,6 @@ export const CodeOfConductList = ({
           <AddRule />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };

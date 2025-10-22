@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap");
+
 @layer utilities {
   .bg-radial {
     background: radial-gradient(circle, #2d2d2d, #1a1a1a, #000);
@@ -51,4 +53,10 @@
 
 .ql-bubble .ql-editor > p {
   padding: 2px !important;
+}
+
+.rule-font .ql-editor * {
+  font-family: "Rock Salt", cursive !important;
+  font-weight: 400;
+  font-style: normal;
 }
