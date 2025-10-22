@@ -82,7 +82,7 @@ export const CodeOfConductList = ({
   };
 
   return (
-    <div className="overflow-y-auto max-h-[65%] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:cursor-pointer [&::-webkit-scrollbar-thumb]:rounded-[10px] [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-300 pt-2">
+    <div className="overflow-y-auto max-h-[65%] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:cursor-pointer [&::-webkit-scrollbar-thumb]:rounded-[10px] [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-400/80 pt-2">
       {codeOfConduct.map((rule, index) => {
         return (
           <div key={rule.id}>
@@ -163,31 +163,33 @@ export const CodeOfConductList = ({
                   <Preview value={rule.rule} className="my-2 md:my-4" />
                 </div>
 
-                <div className="flex items-start gap-1">
-                  <button
-                    className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black"
-                    onClick={() => {
-                      setEditingRuleId(rule.id);
-                      form.reset({
-                        rule: rule.rule,
-                        isProtected: !!rule.isProtected,
-                      });
-                    }}
-                  >
-                    <Edit2 className="w-3 h-3" />
-                  </button>
+                {admin && (
+                  <div className="flex items-start gap-1">
+                    <button
+                      className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black"
+                      onClick={() => {
+                        setEditingRuleId(rule.id);
+                        form.reset({
+                          rule: rule.rule,
+                          isProtected: !!rule.isProtected,
+                        });
+                      }}
+                    >
+                      <Edit2 className="w-3 h-3" />
+                    </button>
 
-                  <button
-                    className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black"
-                    onClick={() =>
-                      onOpen("deleteRule", {
-                        ruleId: rule?.id,
-                      })
-                    }
-                  >
-                    <Trash className="w-3 h-3" />
-                  </button>
-                </div>
+                    <button
+                      className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black"
+                      onClick={() =>
+                        onOpen("deleteRule", {
+                          ruleId: rule?.id,
+                        })
+                      }
+                    >
+                      <Trash className="w-3 h-3" />
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>

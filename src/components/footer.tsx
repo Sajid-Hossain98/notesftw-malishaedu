@@ -17,7 +17,7 @@ export const Footer = () => {
         </ActionTooltip> */}
         <ActionTooltip
           label="It is a phrase that means to try to memorize the information and not rely too much on this site."
-          side="right"
+          side="top"
         >
           <div className="text-xs">DON&apos;T FORGET LAAAH!</div>
         </ActionTooltip>
