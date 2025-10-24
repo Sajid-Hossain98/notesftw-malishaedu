@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { NotebookPen, School, Users2 } from "lucide-react";
+import { NotebookPen, School, Users2, Flag } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
@@ -25,6 +25,12 @@ export const AdminNavbar = () => {
         icon: School,
       },
       {
+        label: "Notices",
+        active: pathname === "/admin/manage-notices",
+        href: "/admin/manage-notices",
+        icon: Flag,
+      },
+      {
         label: "Users",
         active: pathname === "/admin/manage-users",
         href: "/admin/manage-users",
@@ -35,7 +41,7 @@ export const AdminNavbar = () => {
   );
 
   return (
-    <div className="mx-auto bg-[#303030] rounded-full flex justify-around overflow-hidden md:my-4 my-1">
+    <div className="mx-auto bg-[#303030] rounded-full flex justify-around overflow-hidden md:my-2 my-1">
       {routes.map((route) => (
         <Button
           asChild

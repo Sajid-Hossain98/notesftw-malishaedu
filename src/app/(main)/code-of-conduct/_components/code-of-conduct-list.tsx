@@ -186,8 +186,10 @@ export const CodeOfConductList = ({
               </Form>
             ) : (
               <div className="flex items-center justify-between gap-2">
-                <div className="flex items-start gap-2 font-mono text-2xl">
-                  <span className="my-2 md:my-4">{index + 1}.</span>
+                <div className="flex items-start gap-2 md:text-2xl text-base">
+                  <span className="flex-shrink-0 my-2 md:my-4 font-mono md:w-10 w-5 text-right text-base md:text-2xl">
+                    {index + 1}.
+                  </span>
                   <Preview
                     value={rule.rule}
                     className="my-1.5 md:my-3 pr-4 rule-font"
@@ -195,7 +197,7 @@ export const CodeOfConductList = ({
                 </div>
 
                 {admin && (
-                  <div className="flex items-start gap-1">
+                  <div className="flex items-start gap-1 mr-1">
                     <button
                       className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black"
                       onClick={() => {

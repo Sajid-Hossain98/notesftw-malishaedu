@@ -14,7 +14,11 @@ export const MenuItems = ({ userData }: MenuItemsProps) => {
   return (
     <>
       <nav className="w-full mt-10 md:mt-0">
-        <Button variant="myButtons" className="w-full font-semibold md:w-fit">
+        <Button
+          variant="myButtons"
+          className="w-full font-semibold md:w-fit"
+          asChild
+        >
           <Link href="/code-of-conduct" className="flex items-center gap-1">
             <BookHeart className="w-5 h-5" />
             Code of conduct
@@ -25,7 +29,7 @@ export const MenuItems = ({ userData }: MenuItemsProps) => {
       <nav className="w-full">
         <Button
           variant="myButtons"
-          className="w-full gap-1 font-semibold md:w-fit"
+          className="w-full font-semibold md:w-fit"
           asChild
         >
           <Link href="/add-note" className="flex items-center">

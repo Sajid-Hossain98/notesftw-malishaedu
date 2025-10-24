@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Rock+Salt&display=swap");
 
 @layer utilities {
   .bg-radial {
@@ -55,8 +55,20 @@
   padding: 2px !important;
 }
 
-.rule-font .ql-editor * {
-  font-family: "Rock Salt", cursive !important;
-  font-weight: 400;
-  font-style: normal;
+@media (min-width: 721px) {
+  .rule-font .ql-editor * {
+    font-family: "Rock Salt", cursive !important;
+    font-weight: 400;
+    font-style: normal;
+    text-align: justify;
+  }
+}
+
+@media (max-width: 720px) {
+  .rule-font .ql-editor * {
+    font-family: "Raleway", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-align: justify;
+  }
 }

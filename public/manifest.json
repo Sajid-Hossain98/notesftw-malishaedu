@@ -3,7 +3,7 @@
   "short_name": "NotesFTW",
   "theme_color": "#166d4d",
   "background_color": "#166d4d",
-  "display": "minimal-ui",
+  "display": "standalone",
   "orientation": "any",
   "scope": "/",
   "start_url": "/",
