@@ -54,3 +54,10 @@ export interface CodeOfConduct {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface Notices {
+  id: string;
+  title: string;
+  description: string | null;
+  expiresOn: Date | null;
+}
