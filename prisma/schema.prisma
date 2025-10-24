@@ -57,7 +57,6 @@ model University {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   notes     Note[]
-  notices   Notice[]
 }
 
 model Note {
@@ -97,12 +96,10 @@ model Notice {
   title       String
   description String?      @db.Text
   status      NoticeStatus @default(ACTIVE)
+  expiresOn   DateTime?
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
-
-  universityId String
-  university   University @relation(fields: [universityId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -113,7 +110,6 @@ model CodeOfConduct {
 
   rule String @db.Text
   isProtected Boolean? @default(false)
-
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
