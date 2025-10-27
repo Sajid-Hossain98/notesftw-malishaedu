@@ -1,10 +1,5 @@
 import { db } from "@/lib/db";
-import {
-  ArrowRightToLine,
-  CloudAlert,
-  MailCheck,
-  ReceiptText,
-} from "lucide-react";
+import { CloudAlert, MailCheck, ReceiptText } from "lucide-react";
 
 const NoticeDetailsPage = async ({
   params,
