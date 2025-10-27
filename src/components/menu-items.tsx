@@ -1,4 +1,4 @@
-import { BookHeart, Plus, Shield } from "lucide-react";
+import { BookHeart, Flag, Plus, Shield } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,7 @@ export const MenuItems = ({ userData }: MenuItemsProps) => {
           className="w-full font-semibold md:w-fit"
           asChild
         >
-          <Link href="/code-of-conduct" className="flex items-center gap-1">
+          <Link href="/code-of-conduct" className="!gap-1">
             <BookHeart className="w-5 h-5" />
             Code of conduct
           </Link>
@@ -32,7 +32,20 @@ export const MenuItems = ({ userData }: MenuItemsProps) => {
           className="w-full font-semibold md:w-fit"
           asChild
         >
-          <Link href="/add-note" className="flex items-center">
+          <Link href="/notices" className="!gap-1">
+            <Flag className="w-5 h-5" />
+            Notices
+          </Link>
+        </Button>
+      </nav>
+
+      <nav className="w-full">
+        <Button
+          variant="myButtons"
+          className="w-full font-semibold md:w-fit"
+          asChild
+        >
+          <Link href="/add-note" className="!gap-1">
             <Plus className="w-5 h-5" />
             Add notes
           </Link>

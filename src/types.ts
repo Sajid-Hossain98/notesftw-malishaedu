@@ -60,4 +60,6 @@ export interface Notices {
   title: string;
   description: string | null;
   expiresOn: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
 }
