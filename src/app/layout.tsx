@@ -63,7 +63,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className="relative text-zinc-300 overflow-hidden bg-[url('/static/bg-gradient-img.svg')] bg-no-repeat bg-cover bg-top"
+          className="relative dark:text-zinc-300 text-[#1A1A1A] overflow-hidden dark:bg-[url('/static/bg-gradient-img.svg')] dark:bg-no-repeat dark:bg-cover dark:bg-top bg-zinc-200/80"
           suppressHydrationWarning={true}
         >
           <ThemeProvider
@@ -73,7 +73,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="absolute inset-0 md:bg-black/30 bg-black/15 -z-10" />
+            <div className="absolute inset-0 dark:md:bg-black/30 dark:bg-black/15 -z-10" />
             <div
               className={cn(
                 "w-[92vw] mx-auto h-[100dvh]",

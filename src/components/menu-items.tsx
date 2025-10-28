@@ -14,7 +14,7 @@ export const MenuItems = ({ userData }: MenuItemsProps) => {
 
   return (
     <>
-      <nav>
+      <nav className="flex items-center">
         <ModeToggle />
       </nav>
       <nav className="w-full mt-10 md:mt-0">
@@ -64,7 +64,7 @@ export const MenuItems = ({ userData }: MenuItemsProps) => {
             asChild
           >
             <Link href="/admin">
-              <Shield strokeWidth={3} className="!h-6 !w-6" />
+              <Shield className="!h-6 !w-6" />
             </Link>
           </Button>
         </nav>

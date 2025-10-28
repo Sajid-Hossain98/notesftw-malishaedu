@@ -9,7 +9,7 @@ export const Footer = async () => {
   const notices = await db.notice.findMany();
 
   return (
-    <div className="fixed left-0 bottom-0 w-full bg-[#303030] overflow-hidden">
+    <div className="fixed left-0 bottom-0 w-full dark:bg-[#303030] overflow-hidden">
       <div className="flex flex-col items-center justify-center w-full h-full">
         <NoticeMarquee notices={notices} />
         {/* <ActionTooltip

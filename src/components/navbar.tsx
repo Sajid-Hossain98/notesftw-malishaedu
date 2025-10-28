@@ -12,7 +12,7 @@ export const Navbar = async () => {
 
       <MobileSidebar />
 
-      <div className="md:flex hidden gap-3">
+      <div className="md:flex hidden gap-3 select-none">
         <MenuItems userData={userData} />
       </div>
     </div>

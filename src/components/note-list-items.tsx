@@ -83,7 +83,7 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
             <div
               key={note?.id}
               onClick={() => onOpen("viewNote", { note: note })}
-              className={`${note?.type?.bgColor} p-1 md:p-2 space-y-1 min-w-0 cursor-pointer bg-opacity-5 relative overflow-hidden md:hover:bg-opacity-10 active:bg-opacity-10`}
+              className={`${note?.type?.bgColor} p-1 md:p-2 space-y-1 min-w-0 cursor-pointer dark:bg-opacity-5 bg-opacity-10 relative overflow-hidden dark:md:hover:bg-opacity-10 md:hover:bg-opacity-15 active:bg-opacity-10`}
               style={{
                 borderRadius: "4px",
               }}
@@ -92,7 +92,7 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
                 <Image
                   src={imageUrl}
                   alt={note?.university?.universityShortName}
-                  className="rounded-full h-12 md:h-16 w-12 md:w-16 object-cover select-none bg-zinc-100 p-[1.5px]"
+                  className="dark:rounded-full h-12 md:h-16 w-12 md:w-16 object-cover select-none dark:bg-zinc-100 p-[1.5px]"
                   width={80}
                   height={80}
                 />
@@ -107,7 +107,7 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
                     {note?.type?.name}
                   </Badge>
 
-                  <p className="flex items-start gap-1 text-xs font-semibold text-zinc-300 sm:text-sm">
+                  <p className="flex items-start gap-1 text-xs font-semibold dark:text-zinc-300 sm:text-sm">
                     <School className="w-3.5 h-3.5 md:w-4 md:h-4" />
 
                     {note?.university.universityShortName}

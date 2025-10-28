@@ -27,7 +27,7 @@ export const SearchContent = ({
 
   return (
     <motion.div
-      className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto bg-[#303030] mt-2 px-2 md:px-4 py-2 rounded-xl md:!mb-12 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-300"
+      className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto dark:bg-[#303030] bg-[#FAFAFA] mt-2 px-2 md:px-4 py-2 rounded-xl md:!mb-12 [&::-webkit-scrollbar]:w-1 dark:[&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-track]:bg-zinc-200 dark:[&::-webkit-scrollbar-thumb]:bg-stone-300 [&::-webkit-scrollbar-thumb]:bg-stone-500 shadow-[8px_8px_12px_rgba(0,0,0,0.3)] dark:shadow-none"
       layout
       transition={{
         type: "spring",
@@ -107,7 +107,7 @@ export const SearchContent = ({
             {notes?.map((note) => (
               <div
                 key={note.id}
-                className="flex items-center justify-between w-full min-w-0 py-1 pr-1 truncate cursor-pointer md:hover:bg-[#414141] active:bg-[#414141] md:py-2 hover:rounded-xl text-ellipsis md:pr-2"
+                className="flex items-center justify-between w-full min-w-0 py-1 pr-1 truncate cursor-pointer dark:md:hover:bg-[#414141] md:hover:bg-zinc-200/80 dark:active:bg-[#414141] md:py-2 hover:rounded-[5px] text-ellipsis md:pr-2"
                 onClick={() => onOpen("viewNote", { note: note })}
                 tabIndex={0}
                 onKeyDown={(e) => {
@@ -127,7 +127,7 @@ export const SearchContent = ({
                   </h4>
                 </div>
 
-                <span className="text-xs bg-slate-800 px-2 py-0.5 rounded-xl font-semibold">
+                <span className="text-xs dark:bg-slate-800 bg-zinc-200 px-2 py-0.5 rounded-xl font-semibold">
                   {note.university.universityShortName}
                 </span>
               </div>

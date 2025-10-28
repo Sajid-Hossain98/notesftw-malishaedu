@@ -1,6 +1,10 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 interface LogoProps {
   width: number;
@@ -9,12 +13,36 @@ interface LogoProps {
 }
 
 export const Logo = ({ width, height, className }: LogoProps) => {
+  const { theme } = useTheme();
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <div
+        style={{ width, height }}
+        className={cn(
+          "dark:bg-slate-800 bg-zinc-300 animate-pulse rounded-full",
+          className
+        )}
+      />
+    );
+  }
+
   return (
     <Link href="/">
       <div>
         <Image
           priority
-          src="/static/logo-light.svg"
+          src={
+            theme === "dark"
+              ? `/static/logo-light.svg`
+              : "/static/logo-dark.svg"
+          }
           alt="Logo"
           width={width}
           height={height}

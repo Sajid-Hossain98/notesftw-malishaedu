@@ -20,7 +20,7 @@ export default async function Home() {
     <main className="space-y-3 md:space-y-5">
       <SearchBar />
 
-      <div className="md:max-h-[70dvh] max-h-[65vh] bg-[#303030] rounded-xl p-3 md:p-5 overflow-y-auto md:!mb-12 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-[#303030] [&::-webkit-scrollbar-thumb]:bg-gray-500">
+      <div className="md:max-h-[70dvh] max-h-[65vh] dark:bg-[#303030] bg-[#FAFAFA] rounded-xl p-3 md:p-5 overflow-y-auto md:!mb-12 [&::-webkit-scrollbar]:w-1 dark:[&::-webkit-scrollbar-track]:bg-[#303030] [&::-webkit-scrollbar-track]:bg-zinc-200 dark:[&::-webkit-scrollbar-thumb]:bg-gray-500 [&::-webkit-scrollbar-thumb]:bg-stone-500 shadow-[2px_2px_4px_rgba(0,0,0,0.15)]">
         <NotesList
           getAll={false}
           sliceCount={22}
