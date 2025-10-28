@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/config/site";
 import { ModalProvider } from "@/components/providers/modal-provider";
 import QueryProvider from "@/components/providers/QueryProviders";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -65,20 +66,28 @@ export default function RootLayout({
           className="relative text-zinc-300 overflow-hidden bg-[url('/static/bg-gradient-img.svg')] bg-no-repeat bg-cover bg-top"
           suppressHydrationWarning={true}
         >
-          <div className="absolute inset-0 md:bg-black/30 bg-black/15 -z-10" />
-          <div
-            className={cn(
-              "w-[92vw] mx-auto h-[100dvh]",
-              geistSans.className,
-              lightAvenir.className
-            )}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            storageKey="notesftw-theme"
+            enableSystem
+            disableTransitionOnChange
           >
-            <ModalProvider />
-            <QueryProvider>
-              <Header className="h-full">{children}</Header>
-            </QueryProvider>
-            <Toaster theme="system" richColors offset={50} />
-          </div>
+            <div className="absolute inset-0 md:bg-black/30 bg-black/15 -z-10" />
+            <div
+              className={cn(
+                "w-[92vw] mx-auto h-[100dvh]",
+                geistSans.className,
+                lightAvenir.className
+              )}
+            >
+              <ModalProvider />
+              <QueryProvider>
+                <Header className="h-full">{children}</Header>
+              </QueryProvider>
+              <Toaster theme="system" richColors offset={50} />
+            </div>
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

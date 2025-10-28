@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { UserData } from "@/types";
+import { ModeToggle } from "./mode-toggle";
 
 interface MenuItemsProps {
   userData: UserData | null;
@@ -13,6 +14,9 @@ export const MenuItems = ({ userData }: MenuItemsProps) => {
 
   return (
     <>
+      <nav>
+        <ModeToggle />
+      </nav>
       <nav className="w-full mt-10 md:mt-0">
         <Button
           variant="myButtons"
