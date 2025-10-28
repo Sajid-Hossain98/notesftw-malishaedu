@@ -29,14 +29,15 @@ export const AddNoteNavbar = () => {
   );
 
   return (
-    <div className="lg:max-w-[80%] md:max-w-[70%] mx-auto bg-[#303030] rounded-full flex justify-around overflow-hidden md:my-4">
+    <div className="lg:max-w-[80%] md:max-w-[70%] mx-auto dark:bg-[#303030] bg-[#FAFAFA] rounded-full flex justify-around overflow-hidden md:my-4">
       {routes.map((route) => (
         <Button
           asChild
           key={route.href}
           className={cn(
             "w-full text-base md:text-lg",
-            route.active && "text-black bg-zinc-300 hover:bg-zinc-300/80"
+            route.active &&
+              "dark:text-black bg-zinc-300 hover:bg-zinc-300/80 dark:bg-zinc-300 dark:hover:bg-zinc-300/80"
           )}
         >
           <Link href={route.href} className="font-semibold h-full py-1 md:py-2">

@@ -13,7 +13,7 @@ interface LogoProps {
 }
 
 export const Logo = ({ width, height, className }: LogoProps) => {
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -33,14 +33,16 @@ export const Logo = ({ width, height, className }: LogoProps) => {
     );
   }
 
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
   return (
     <Link href="/">
       <div>
         <Image
           priority
           src={
-            theme === "dark"
-              ? `/static/logo-light.svg`
+            currentTheme === "dark"
+              ? "/static/logo-light.svg"
               : "/static/logo-dark.svg"
           }
           alt="Logo"

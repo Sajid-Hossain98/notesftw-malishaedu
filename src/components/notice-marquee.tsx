@@ -14,6 +14,7 @@ export const NoticeMarquee = ({ notices }: NoticeMarqueeProps) => {
       speed={100}
       gradient
       gradientWidth={95}
+      gradientColor="#000"
       className="font-sans font-medium tracking-wide pb-0.5"
     >
       {notices.map((notice) => {
@@ -24,7 +25,7 @@ export const NoticeMarquee = ({ notices }: NoticeMarqueeProps) => {
             {notice.description && (
               <Link
                 href={`/notices/${notice.id}`}
-                className="pl-2 text-red-300 underline cursor-pointer underline-offset-2"
+                className="pl-2 dark:text-rose-300 text-rose-500 underline cursor-pointer underline-offset-2"
               >
                 see more
               </Link>
