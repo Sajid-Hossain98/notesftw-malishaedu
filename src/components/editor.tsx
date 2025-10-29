@@ -23,7 +23,12 @@ export const Editor = ({ onChange, value, placeholder }: EditorProps) => {
     toolbar: [
       [{ header: [1, 2, 3, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ list: "ordered" }, { list: "bullet" }],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
       ["link"],
       [{ align: [] }],
       [{ color: [] }],
@@ -41,6 +46,7 @@ export const Editor = ({ onChange, value, placeholder }: EditorProps) => {
     "strike",
     "blockquote",
     "list",
+    "indent",
     "bullet",
     "link",
     "align",
