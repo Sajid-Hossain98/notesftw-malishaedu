@@ -1,5 +1,4 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { List, LoaderCircle } from "lucide-react";
 
 export default function Loading() {
   return (
@@ -7,11 +6,9 @@ export default function Loading() {
       {/* Tabs List Skeleton */}
       <div className="md:flex md:flex-col md:items-center md:justify-start md:gap-2 dark:md:bg-[#303030] bg-zinc-300 md:max-h-fit md:rounded-xl md:px-2 md:py-2 grid md:max-w-[15%] w-full grid-cols-2 md:mt-2">
         <div className="flex items-center justify-center gap-2 py-1.5 dark:bg-[#2c2c2c] bg-zinc-300 rounded-[3px]">
-          <List className="w-4 h-4 text-zinc-600" />
           <Skeleton className="w-8 h-4 dark:bg-zinc-600 bg-zinc-300 rounded-[4px]" />
         </div>
         <div className="flex items-center justify-center gap-2 py-1.5 dark:bg-[#2c2c2c] bg-zinc-300 rounded-[3px]">
-          <LoaderCircle className="w-4 h-4 text-zinc-600" />
           <Skeleton className="w-12 h-4 dark:bg-zinc-600 bg-zinc-300 rounded-[4px]" />
         </div>
       </div>

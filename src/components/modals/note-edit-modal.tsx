@@ -166,9 +166,9 @@ export const NoteEditModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-[#303030] border-zinc-700 !rounded-xl md:min-w-[60%] w-11/12 p-3 md:p-6">
+      <DialogContent className="dark:bg-[#303030] bg-[#FAFAFA] border-zinc-700 !rounded-xl md:min-w-[60%] w-11/12 p-3 md:p-6">
         <DialogHeader>
-          <DialogTitle className="mx-auto text-lg text-zinc-300 sm:text-3xl">
+          <DialogTitle className="mx-auto text-lg dark:text-zinc-300 sm:text-3xl">
             Modify the note
           </DialogTitle>
 
@@ -194,7 +194,7 @@ export const NoteEditModal = () => {
                       <Input
                         disabled={isLoading}
                         {...field}
-                        className="text-lg text-black md:text-xl bg-zinc-100 rounded-xl"
+                        className="text-lg text-black md:text-xl bg-zinc-100 border-black rounded-[5px]"
                       />
                     </FormControl>
                     <FormMessage />
@@ -217,7 +217,7 @@ export const NoteEditModal = () => {
                           {...field}
                           value={field.value}
                           options={universityShortFormOptions}
-                          className="text-black"
+                          className="text-black border border-black rounded-[5px]"
                           isDisabled={isLoading}
                           noOptionsMessage={() => (
                             <div className="flex items-center justify-center gap-2">
@@ -264,7 +264,7 @@ export const NoteEditModal = () => {
                           {...field}
                           value={field.value}
                           options={noteTypeOptions}
-                          className="text-black"
+                          className="text-black border border-black rounded-[5px]"
                           isDisabled={isLoading}
                           noOptionsMessage={() => (
                             <div className="flex items-center justify-center gap-2">
@@ -322,7 +322,7 @@ export const NoteEditModal = () => {
                 control={form.control}
                 name="isProtected"
                 render={({ field }) => (
-                  <FormItem className="md:max-h-80 flex items-baseline gap-2">
+                  <FormItem className="flex items-baseline gap-2 md:max-h-80">
                     <FormControl>
                       <Checkbox
                         className="border-2 border-emerald-400/70 data-[state=checked]:bg-emerald-400 data-[state=checked]:border-emerald-400 transition-all duration-200 shadow-[0_0_10px_rgba(16,185,129,0.3)] hover:shadow-[0_0_12px_rgba(16,185,129,0.6)]"
@@ -371,7 +371,7 @@ export const NoteEditModal = () => {
                         {...field}
                         value={field.value}
                         options={approvalOptions}
-                        className="text-black"
+                        className="text-black border border-black rounded-[5px]"
                         isDisabled={isLoading}
                         noOptionsMessage={() => (
                           <div className="flex items-center justify-center gap-2">

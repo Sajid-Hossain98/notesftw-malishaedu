@@ -25,7 +25,7 @@ export const NoticeMarquee = ({ notices }: NoticeMarqueeProps) => {
             {notice.description && (
               <Link
                 href={`/notices/${notice.id}`}
-                className="pl-2 dark:text-rose-300 text-rose-500 underline cursor-pointer underline-offset-2"
+                className="pl-2 underline cursor-pointer dark:text-rose-300 text-rose-500 underline-offset-2"
               >
                 see more
               </Link>
@@ -34,7 +34,7 @@ export const NoticeMarquee = ({ notices }: NoticeMarqueeProps) => {
             {notices.length > 1 && (
               <Separator
                 orientation="vertical"
-                className="w-[1px] mx-2 h-5 bg-zinc-300"
+                className="w-[1px] mx-2 h-5 dark:bg-zinc-300 bg-zinc-800"
               />
             )}
           </div>

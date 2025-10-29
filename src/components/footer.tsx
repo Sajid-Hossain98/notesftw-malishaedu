@@ -21,7 +21,7 @@ export const Footer = async () => {
             <ShieldQuestion className="w-4 h-4 text-black md:w-5 md:h-5" />
           </span>
         </ActionTooltip> */}
-        <Separator className="h-[1.5px] w-full bg-zinc-600 mb-0.5" />
+        <Separator className="h-[1.5px] w-full dark:bg-zinc-600 bg-zinc-400 mb-0.5" />
 
         <div className="flex items-center justify-center w-full gap-3 font-semibold">
           <ActionTooltip
