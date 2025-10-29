@@ -73,7 +73,7 @@ export const AddNotice = () => {
   return (
     <Form {...form}>
       <form
-        className="md:space-y-5 space-y-3 mt-5"
+        className="mt-5 space-y-3 md:space-y-5"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -134,7 +134,7 @@ export const AddNotice = () => {
               <FormControl>
                 <input
                   type="date"
-                  className="md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-[5px] px-3 w-full"
+                  className="md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-[5px] px-3 w-full border border-black"
                   value={
                     field.value
                       ? new Date(field.value).toISOString().split("T")[0]
@@ -157,11 +157,11 @@ export const AddNotice = () => {
           disabled={isLoading}
           type="submit"
           variant={"myButtons"}
-          className="w-full text-lg md:text-xl !mt-8 font-semibold"
+          className="w-full text-lg md:text-xl !mt-8 font-semibold border border-black"
         >
           Create
           {isLoading && (
-            <Loader2 className="h-3 w-3 md:h-4 md:w-4 animate-spin" />
+            <Loader2 className="w-3 h-3 md:h-4 md:w-4 animate-spin" />
           )}
         </Button>
       </form>

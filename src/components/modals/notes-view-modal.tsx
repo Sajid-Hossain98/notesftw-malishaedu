@@ -91,7 +91,7 @@ export const NotesViewModal = () => {
             </Badge>
           </div>
 
-          <Separator className="bg-zinc-600" />
+          <Separator className="dark:bg-zinc-600 bg-zinc-400/70" />
 
           <ScrollArea className="md:max-h-[60vh] max-h-[45vh] py-2 md:py-3">
             <Preview
@@ -106,7 +106,7 @@ export const NotesViewModal = () => {
             asChild
             className="transition-colors dark:md:hover:bg-black dark:active:bg-black hover:bg-zinc-200/80 active:bg-zinc-200/80"
           >
-            <span className="flex items-center justify-center w-full gap-0.5 py-0.5 md:py-1 border-2 cursor-pointer border-zinc-700 font-semibold text-sm md:text-lg">
+            <span className="flex items-center justify-center w-full gap-0.5 py-0.5 md:py-1 border-2 cursor-pointer dark:border-zinc-700 border-zinc-400/70 font-semibold text-sm md:text-lg">
               Thanks
               <Image
                 src="/static/finger-heart.png"

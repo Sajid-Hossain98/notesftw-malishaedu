@@ -69,7 +69,7 @@ export const NoticeList = ({ notices }: NoticeListProps) => {
               className="text-base font-semibold md:text-xl -tracking-tight"
             >
               {notice.title}{" "}
-              <span className="text-xs text-zinc-400/80">
+              <span className="text-xs dark:text-zinc-400/80 text-zinc-500">
                 [Updated at {formattedDate}]
               </span>
             </Link>

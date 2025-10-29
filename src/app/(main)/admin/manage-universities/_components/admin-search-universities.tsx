@@ -66,7 +66,7 @@ export const AdminSearchUniversities = () => {
     <>
       <div className="relative">
         <Input
-          className="bg-[#303030] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 caret-[#edf2f4] placeholder-gray-500"
+          className="dark:bg-[#303030] bg-[#FAFAFA] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 dark:caret-[#edf2f4] placeholder-gray-500 shadow-[2px_2px_4px_rgba(0,0,0,0.15)] dark:shadow-none"
           type="text"
           placeholder="e.g., NJTech / Nanjing Tech"
           value={searchWords}
@@ -81,14 +81,14 @@ export const AdminSearchUniversities = () => {
           />
         )}
       </div>
-      <span className="text-xs hidden md:flex gap-1 justify-center mt-1 text-zinc-400">
+      <span className="justify-center hidden gap-1 mt-1 text-xs md:flex text-zinc-400">
         Info
         <ActionTooltip
           side="bottom"
           className="md:max-w-[550px]"
           label="So basically, 'MODERATOR' & 'ADMIN' can edit the name and short name of all the universities but only the 'ADMIN' will be able to delete a university."
         >
-          <BadgeInfo className="h-4 w-4" />
+          <BadgeInfo className="w-4 h-4" />
         </ActionTooltip>
       </span>
       {searchWords && (
@@ -120,24 +120,24 @@ export const AdminSearchUniversities = () => {
                 {Array.from({ length: 3 }).map((_, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center justify-between gap-1 pl-1 transition-colors md:gap-2 rounded-xl w-full"
+                    className="flex items-center justify-between w-full gap-1 pl-1 transition-colors md:gap-2 rounded-xl"
                   >
                     <div className="flex items-center gap-2 min-w-0 w-full px-1 md:px-2 py-1 md:py-2 hover:rounded-[4px]">
                       {/* Logo skeleton */}
-                      <Skeleton className="rounded-full h-10 md:h-14 w-10 md:w-14 bg-zinc-500" />
+                      <Skeleton className="w-10 h-10 rounded-full md:h-14 md:w-14 bg-zinc-500" />
 
                       <div className="flex flex-col gap-1">
                         {/* University name skeleton */}
-                        <Skeleton className="w-32 sm:w-64 md:w-80 h-5 bg-zinc-500 rounded" />
+                        <Skeleton className="w-32 h-5 rounded sm:w-64 md:w-80 bg-zinc-500" />
                         {/* Short name + icon skeleton */}
-                        <Skeleton className="w-20 h-4 bg-zinc-500 rounded" />
+                        <Skeleton className="w-20 h-4 rounded bg-zinc-500" />
                       </div>
                     </div>
 
                     {/* Edit button skeleton */}
-                    <Skeleton className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-zinc-500" />
+                    <Skeleton className="w-10 h-10 rounded-full md:h-12 md:w-12 bg-zinc-500" />
                     {/* Delete button skeleton */}
-                    <Skeleton className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-zinc-500" />
+                    <Skeleton className="w-10 h-10 rounded-full md:h-12 md:w-12 bg-zinc-500" />
                   </div>
                 ))}
               </div>

@@ -43,10 +43,10 @@ const AdminPage = async () => {
       className="md:flex md:justify-between md:gap-3 md:w-full md:h-full"
     >
       {/* grid md:w-[80%] w-full grid-cols-3 mx-auto */}
-      <TabsList className="md:flex md:flex-col md:items-center md:justify-start md:gap-2 md:bg-[#303030] md:max-h-fit md:rounded-xl md:px-2 md:py-2 grid md:max-w-[15%] w-full grid-cols-2 md:mt-2">
+      <TabsList className="md:flex md:flex-col md:items-center md:justify-start md:gap-2 dark:md:bg-[#303030] bg-[#FAFAFA] md:max-h-fit md:rounded-xl md:px-2 md:py-2 grid md:max-w-[15%] w-full grid-cols-2 md:mt-2">
         <TabsTrigger
           value="all"
-          className="rounded-l-xl md:w-full md:rounded-[2px] text-xs md:text-base bg-[#303030] py-1 md:py-1.5"
+          className="rounded-l-xl md:w-full md:rounded-[4px] text-xs md:text-base py-1 md:py-1.5 font-medium bg-[#FAFAFA] dark:bg-[#1C1C1C] hover:bg-[#F2F2F2] dark:hover:bg-[#2A2A2A] data-[state=active]:bg-zinc-300 dark:data-[state=active]:bg-[#FAFAFA] dark:data-[state=active]:text-[#1A1A1A] text-[#1A1A1A] dark:text-[#FAFAFA] transition-colors duration-300"
         >
           <span>
             <List className="w-3 h-3 mr-1 md:h-4 md:w-4 md:mr-2" />
@@ -56,7 +56,7 @@ const AdminPage = async () => {
 
         <TabsTrigger
           value="pending"
-          className="rounded-r-xl md:text-base md:w-full text-xs md:rounded-[2px] bg-[#303030] py-1 md:py-1.5"
+          className="rounded-l-xl md:w-full md:rounded-[4px] text-xs md:text-base py-1 md:py-1.5 font-medium bg-[#FAFAFA] dark:bg-[#1C1C1C] hover:bg-[#F2F2F2] dark:hover:bg-[#2A2A2A] data-[state=active]:bg-zinc-300 dark:data-[state=active]:bg-[#FAFAFA] dark:data-[state=active]:text-[#1A1A1A] text-[#1A1A1A] dark:text-[#FAFAFA] transition-colors duration-300"
         >
           <span>
             <LoaderCircle className="w-3 h-3 mr-1 md:h-4 md:w-4 md:mr-2" />

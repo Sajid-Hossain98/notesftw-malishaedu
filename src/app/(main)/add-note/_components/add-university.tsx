@@ -146,7 +146,7 @@ export const AddAnUniversity = ({ userData }: AddUniversityProps) => {
               <FormLabel>University short name</FormLabel>
               <FormControl>
                 <Input
-                  className="md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-xl"
+                  className="md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-[5px]"
                   disabled={isLoading}
                   placeholder="Enter the short name of the university"
                   {...field}
@@ -165,7 +165,7 @@ export const AddAnUniversity = ({ userData }: AddUniversityProps) => {
               <FormLabel>University full name</FormLabel>
               <FormControl>
                 <Input
-                  className="md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-xl"
+                  className="md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-[5px]"
                   disabled={isLoading}
                   placeholder="Enter the full name of the university"
                   {...field}
@@ -184,7 +184,7 @@ export const AddAnUniversity = ({ userData }: AddUniversityProps) => {
               <FormLabel>University logo</FormLabel>
               <FormControl>
                 <Input
-                  className="bg-zinc-100 text-black text-lg rounded-xl file:bg-slate-400 cursor-pointer py-0 file:py-2 px-0 md:px-0 file:px-4"
+                  className="bg-zinc-100 text-black text-lg rounded-[5px] file:bg-slate-400 cursor-pointer py-0 file:py-2 px-0 md:px-0 file:px-4"
                   type="file"
                   accept="image/png"
                   disabled={isLoading}
@@ -199,12 +199,12 @@ export const AddAnUniversity = ({ userData }: AddUniversityProps) => {
         <Button
           disabled={isLoading}
           variant={"myButtons"}
-          className="w-full text-lg md:text-xl !mt-8 font-semibold"
+          className="w-full text-lg md:text-xl !mt-8 font-semibold border border-black"
           type="submit"
         >
           Create
           {isLoading && (
-            <Loader2 className="h-3 w-3 md:h-4 md:w-4 animate-spin" />
+            <Loader2 className="w-3 h-3 md:h-4 md:w-4 animate-spin" />
           )}
         </Button>
       </form>

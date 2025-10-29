@@ -126,7 +126,7 @@ export const AddANote = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="md:mt-10 mt-4 md:space-y-5 space-y-3 lg:max-w-[80%] md:max-w-[70%] mx-auto relative mb-10"
+        className="md:mt-4 mt-2 md:space-y-5 space-y-3 lg:max-w-[80%] md:max-w-[70%] mx-auto relative mb-10"
       >
         <FormField
           control={form.control}
@@ -137,7 +137,7 @@ export const AddANote = ({
               <FormControl>
                 <Input
                   disabled={isLoading}
-                  className="md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-xl"
+                  className="md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-[5px]"
                   placeholder="Enter the title of the note"
                   {...field}
                 />
@@ -159,7 +159,7 @@ export const AddANote = ({
                     {...field}
                     value={field.value}
                     options={shortNameOptions}
-                    className="text-black"
+                    className="text-black border border-black rounded-[5px]"
                     isDisabled={isLoading}
                     noOptionsMessage={() => (
                       <div className="flex items-center justify-center gap-2">
@@ -211,7 +211,7 @@ export const AddANote = ({
                     {...field}
                     value={field.value}
                     options={noteTypesOptions}
-                    className="text-black"
+                    className="text-black border border-black rounded-[5px]"
                     isDisabled={isLoading}
                     noOptionsMessage={() => (
                       <div className="flex items-center justify-center gap-2">
@@ -292,7 +292,7 @@ export const AddANote = ({
           disabled={isLoading}
           type="submit"
           variant={"myButtons"}
-          className="w-full text-lg md:text-xl !mt-8 font-semibold"
+          className="w-full text-lg md:text-xl !mt-4 font-semibold border border-black"
         >
           Create
           {isLoading && (

@@ -41,19 +41,20 @@ export const AdminNavbar = () => {
   );
 
   return (
-    <div className="mx-auto bg-[#303030] rounded-full flex justify-around overflow-hidden md:my-2 my-1">
+    <div className="mx-auto dark:bg-[#303030] bg-[#FAFAFA] rounded-full flex justify-around overflow-hidden md:my-2 my-1">
       {routes.map((route) => (
         <Button
           asChild
           key={route.href}
           className={cn(
             "w-full text-xs md:text-lg",
-            route.active && "text-black bg-zinc-300 hover:bg-zinc-300/80"
+            route.active &&
+              "dark:text-black bg-zinc-300 hover:bg-zinc-300/80 dark:bg-zinc-300 dark:hover:bg-zinc-300/80"
           )}
         >
           <Link
             href={route.href}
-            className="font-semibold h-full py-1 md:py-2 min-w-0"
+            className="h-full min-w-0 py-1 font-semibold md:py-2"
           >
             <route.icon />
             <p className="truncate text-ellipsis">{route.label}</p>
