@@ -8,6 +8,7 @@ import { UniversityEditModal } from "../modals/university-edit-modal";
 import { UniversityDeleteModal } from "../modals/university-delete-modal";
 import { AddRuleModal } from "../modals/rule-add-modal";
 import { RuleDeleteModal } from "../modals/rule-delete-modal";
+import { NoticeEditModal } from "../modals/notice-edit-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -29,6 +30,7 @@ export const ModalProvider = () => {
       <UniversityDeleteModal />
       <AddRuleModal />
       <RuleDeleteModal />
+      <NoticeEditModal />
     </>
   );
 };

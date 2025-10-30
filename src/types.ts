@@ -1,4 +1,4 @@
-import { Note, Type, University, UserRole } from "@prisma/client";
+import { Note, NoticeStatus, Type, University, UserRole } from "@prisma/client";
 
 export type NotesWithUniTypeUser = (Note & {
   university: {
@@ -60,6 +60,7 @@ export interface Notices {
   title: string;
   description: string | null;
   expiresOn: Date | null;
+  status: NoticeStatus;
   createdAt: Date;
   updatedAt: Date;
 }

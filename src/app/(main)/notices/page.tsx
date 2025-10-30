@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { NoticeList } from "./_components/notice-list";
 import { ListTree } from "lucide-react";
+import { currentUserData } from "@/lib/current-user-data";
 
 export function generateMetadata() {
   return {
@@ -9,6 +10,7 @@ export function generateMetadata() {
 }
 
 const Notices = async () => {
+  const userData = await currentUserData();
   const notices = await db.notice.findMany({
     orderBy: {
       createdAt: "desc",
@@ -21,7 +23,7 @@ const Notices = async () => {
         <ListTree />
         List of notice
       </h2>
-      <NoticeList notices={notices} />
+      <NoticeList notices={notices} userData={userData} />
     </div>
   );
 };

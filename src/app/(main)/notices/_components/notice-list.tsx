@@ -1,15 +1,29 @@
 "use client";
 
-import { Notices } from "@/types";
+import { Notices, UserData } from "@/types";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ChevronsLeftRight, ChevronsLeftRightEllipsis } from "lucide-react";
+import {
+  ChevronsLeftRight,
+  ChevronsLeftRightEllipsis,
+  Edit2,
+  Trash,
+} from "lucide-react";
+// import { useRouter } from "next/navigation";
+import { useModal } from "@/hooks/use-modal-store";
 
 interface NoticeListProps {
   notices: Notices[];
+  userData: UserData | null;
 }
 
-export const NoticeList = ({ notices }: NoticeListProps) => {
+export const NoticeList = ({ notices, userData }: NoticeListProps) => {
+  const admin = userData?.role === "ADMIN";
+
+  // const router = useRouter();
+
+  const { onOpen } = useModal();
+
   return (
     <motion.div
       initial="hidden"
@@ -64,15 +78,32 @@ export const NoticeList = ({ notices }: NoticeListProps) => {
                 <ChevronsLeftRight />
               )}
             </span>
-            <Link
-              href={`/notices/${notice.id}`}
-              className="text-base font-semibold md:text-xl -tracking-tight"
-            >
-              {notice.title}{" "}
-              <span className="text-xs dark:text-zinc-400/80 text-zinc-500">
-                [Updated at {formattedDate}]
-              </span>
-            </Link>
+            <div className="flex items-center md:gap-4 gap-2">
+              <Link
+                href={`/notices/${notice.id}`}
+                className="text-base font-semibold md:text-xl -tracking-tight"
+              >
+                {notice.title}{" "}
+                <span className="text-xs dark:text-zinc-400/80 text-zinc-500">
+                  [Last Updated on {formattedDate}]
+                </span>
+              </Link>
+
+              {admin && (
+                <div className="flex items-start gap-1 mr-1">
+                  <button
+                    className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black"
+                    onClick={() => onOpen("editNotice", { notice: notice })}
+                  >
+                    <Edit2 className="w-3 h-3" />
+                  </button>
+
+                  <button className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black">
+                    <Trash className="w-3 h-3" />
+                  </button>
+                </div>
+              )}
+            </div>
           </motion.div>
         );
       })}

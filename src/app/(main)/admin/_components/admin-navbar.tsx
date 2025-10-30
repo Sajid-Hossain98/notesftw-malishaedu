@@ -25,7 +25,7 @@ export const AdminNavbar = () => {
         icon: School,
       },
       {
-        label: "Notices",
+        label: "Add Notice",
         active: pathname === "/admin/manage-notices",
         href: "/admin/manage-notices",
         icon: Flag,
