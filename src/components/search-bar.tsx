@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Input } from "./ui/input";
 import { BadgeInfo, Search, SearchX, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 import useSWR from "swr";
 import axios from "axios";
@@ -24,8 +24,11 @@ const fetchSearchResults = async (url: string) => {
 };
 
 export const SearchBar = () => {
-  const [searchWords, setSearchWords] = useState<string>("");
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("search") || "";
+  const [searchWords, setSearchWords] = useState<string>(initialQuery);
   // const debouncedSearchWords = useDebounce(searchWords, 10);
+
   const router = useRouter();
   const pathname = usePathname();
 

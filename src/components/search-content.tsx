@@ -27,7 +27,7 @@ export const SearchContent = ({
 
   return (
     <motion.div
-      className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto dark:bg-[#303030] bg-[#FAFAFA] mt-2 px-2 md:px-4 py-2 rounded-xl md:!mb-12 [&::-webkit-scrollbar]:w-1 dark:[&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-track]:bg-zinc-200 dark:[&::-webkit-scrollbar-thumb]:bg-stone-300 [&::-webkit-scrollbar-thumb]:bg-stone-500 shadow-[8px_8px_12px_rgba(0,0,0,0.3)] dark:shadow-none"
+      className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto dark:bg-[#303030] bg-[#FAFAFA] mt-2 px-2 md:px-4 py-2 rounded-xl md:!mb-12 [&::-webkit-scrollbar]:w-1 dark:[&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-track]:bg-zinc-200 dark:[&::-webkit-scrollbar-thumb]:bg-stone-300 [&::-webkit-scrollbar-thumb]:bg-stone-500 shadow-[8px_8px_12px_rgba(0,0,0,0.3)] dark:shadow-[8px_8px_12px_rgba(0,0,0,0.4)]"
       layout
       transition={{
         type: "spring",
