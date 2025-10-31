@@ -103,7 +103,10 @@ export const NoticeList = ({ notices, userData }: NoticeListProps) => {
                     <Edit2 className="w-3 h-3" />
                   </button>
 
-                  <button className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black">
+                  <button
+                    className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black"
+                    onClick={() => onOpen("deleteNotice", { notice })}
+                  >
                     <Trash className="w-3 h-3" />
                   </button>
                 </div>
