@@ -31,7 +31,7 @@ export const NoticeDeleteModal = () => {
 
       await axios.delete("/api/admin/notices", {
         data: {
-          universityId: notice?.id,
+          noticeId: notice?.id,
         },
       });
 

@@ -90,3 +90,43 @@ export async function PATCH(req: Request) {
     );
   }
 }
+
+export async function DELETE(req: Request) {
+  try {
+    const { noticeId } = await req.json();
+
+    const currentlyLoggedInUser = await currentUser();
+    const currentlyLoggedInUserData = await currentUserData();
+
+    if (!currentlyLoggedInUser) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    if (currentlyLoggedInUserData?.role !== UserRole.ADMIN) {
+      return new NextResponse(
+        "Sir, you are not allowed to perform this action.",
+        {
+          status: 403,
+        }
+      );
+    }
+
+    if (!noticeId) {
+      return NextResponse.json({ error: "Notice ID missing" }, { status: 404 });
+    }
+
+    await db.notice.delete({
+      where: {
+        id: noticeId,
+      },
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: "Notice deleted successfully.",
+    });
+  } catch (error) {
+    console.log("DELETE-NOTICE", error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
