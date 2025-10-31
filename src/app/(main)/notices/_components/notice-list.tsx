@@ -9,8 +9,8 @@ import {
   Edit2,
   Trash,
 } from "lucide-react";
-// import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
+import { Button } from "@/components/ui/button";
 
 interface NoticeListProps {
   notices: Notices[];
@@ -19,8 +19,6 @@ interface NoticeListProps {
 
 export const NoticeList = ({ notices, userData }: NoticeListProps) => {
   const admin = userData?.role === "ADMIN";
-
-  // const router = useRouter();
 
   const { onOpen } = useModal();
 
@@ -37,6 +35,13 @@ export const NoticeList = ({ notices, userData }: NoticeListProps) => {
       }}
       className="overflow-y-auto max-h-[65%] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:cursor-pointer [&::-webkit-scrollbar-thumb]:rounded-[10px] [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-400/80"
     >
+      <Button
+        className="bg-cyan-300 px-3 py-2 dark:text-black hover:bg-cyan-400 font-semibold rounded-[5px] mb-2"
+        asChild
+      >
+        <Link href="/admin/manage-notices">Add notice</Link>
+      </Button>
+
       {notices.map((notice) => {
         let formattedDate;
 
@@ -78,7 +83,7 @@ export const NoticeList = ({ notices, userData }: NoticeListProps) => {
                 <ChevronsLeftRight />
               )}
             </span>
-            <div className="flex items-center md:gap-4 gap-2">
+            <div className="flex items-center gap-2 md:gap-4">
               <Link
                 href={`/notices/${notice.id}`}
                 className="text-base font-semibold md:text-xl -tracking-tight"

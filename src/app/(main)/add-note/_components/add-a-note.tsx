@@ -147,7 +147,7 @@ export const AddANote = ({
           )}
         />
 
-        <div className="flex flex-col justify-between w-full space-y-3 sm:flex-row sm:space-y-0 gap-1 md:gap-3">
+        <div className="flex flex-col justify-between w-full gap-1 space-y-3 sm:flex-row sm:space-y-0 md:gap-3">
           <FormField
             control={form.control}
             name="universityShortForm"
@@ -202,9 +202,9 @@ export const AddANote = ({
               <FormItem className="sm:w-[50%]">
                 <FormLabel className="flex items-center gap-2">
                   Type of note
-                  <ActionTooltip label="Select a type that suits the best.">
-                    <Info className="h-5 w-5" />
-                  </ActionTooltip>
+                  <button title="What type of note it is? select a type that suits the best.">
+                    <Info className="w-5 h-5" />
+                  </button>
                 </FormLabel>
                 <FormControl>
                   <Select
@@ -263,7 +263,7 @@ export const AddANote = ({
           control={form.control}
           name="isProtected"
           render={({ field }) => (
-            <FormItem className="md:max-h-80 flex items-baseline gap-2">
+            <FormItem className="flex items-baseline gap-2 md:max-h-80">
               <FormControl>
                 <Checkbox
                   className="border-2 border-emerald-400/70 data-[state=checked]:bg-emerald-400 data-[state=checked]:border-emerald-400 transition-all duration-200 shadow-[0_0_10px_rgba(16,185,129,0.3)] hover:shadow-[0_0_12px_rgba(16,185,129,0.6)]"
@@ -293,10 +293,11 @@ export const AddANote = ({
           type="submit"
           variant={"myButtons"}
           className="w-full text-lg md:text-xl !mt-4 font-semibold border border-black"
+          title="If you’re a regular user, your note will remain pending until it’s approved by an admin or moderator."
         >
           Create
           {isLoading && (
-            <Loader2 className="h-3 w-3 md:h-4 md:w-4 animate-spin" />
+            <Loader2 className="w-3 h-3 md:h-4 md:w-4 animate-spin" />
           )}
         </Button>
       </form>

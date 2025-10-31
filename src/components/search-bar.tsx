@@ -10,7 +10,6 @@ import useSWR from "swr";
 import axios from "axios";
 import { SearchContent } from "./search-content";
 import { GroupedSearchedNotes } from "@/types";
-import { ActionTooltip } from "./action-tooltip";
 
 //fetcher for SWR
 const fetchSearchResults = async (url: string) => {
@@ -91,13 +90,9 @@ export const SearchBar = () => {
       </div>
       <span className="justify-center hidden gap-1 mt-1 text-xs md:flex dark:text-zinc-400 text-zinc-600">
         Having difficulties searching?
-        <ActionTooltip
-          side="bottom"
-          className="md:max-w-[550px]"
-          label="You can search using a university's short name, full name, note title, or even major names (e.g., 'Mechanical Engineering'). It's not case-sensitive, so you can type in uppercase or lowercase. A list of short names will be available soon."
-        >
+        <button title="You can search using a university's short name, full name, note title, or even major names (e.g., 'Mechanical Engineering'). It's not case-sensitive, so you can type in uppercase or lowercase. A list of short names will be available soon.">
           <BadgeInfo className="w-4 h-4" />
-        </ActionTooltip>
+        </button>
       </span>
       {searchWords && (
         <div className="absolute z-40 w-full top-full">

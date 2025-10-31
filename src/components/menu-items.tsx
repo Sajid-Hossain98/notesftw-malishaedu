@@ -62,6 +62,7 @@ export const MenuItems = ({ userData }: MenuItemsProps) => {
             variant="myButtons"
             className="w-full gap-1 font-semibold md:w-fit"
             asChild
+            title="Admin panel"
           >
             <Link href="/admin">
               <Shield className="!h-6 !w-6" />

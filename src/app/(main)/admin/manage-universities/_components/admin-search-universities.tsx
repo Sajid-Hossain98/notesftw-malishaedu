@@ -11,7 +11,6 @@ import useSWR from "swr";
 import { motion } from "motion/react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
-import { ActionTooltip } from "@/components/action-tooltip";
 import { useModal } from "@/hooks/use-modal-store";
 
 //fetching search results
@@ -81,15 +80,11 @@ export const AdminSearchUniversities = () => {
           />
         )}
       </div>
-      <span className="justify-center hidden gap-1 mt-1 text-xs md:flex text-zinc-400">
+      <span className="justify-center hidden gap-1 mt-1 text-xs md:flex dark:text-zinc-400 text-zinc-500">
         Info
-        <ActionTooltip
-          side="bottom"
-          className="md:max-w-[550px]"
-          label="So basically, 'MODERATOR' & 'ADMIN' can edit the name and short name of all the universities but only the 'ADMIN' will be able to delete a university."
-        >
+        <button title="So basically, 'MODERATOR' & 'ADMIN' can edit the name and short name of all the universities but only the 'ADMIN' will be able to delete a university.">
           <BadgeInfo className="w-4 h-4" />
-        </ActionTooltip>
+        </button>
       </span>
       {searchWords && (
         <>
