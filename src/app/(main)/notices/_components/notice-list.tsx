@@ -83,7 +83,7 @@ export const NoticeList = ({ notices, userData }: NoticeListProps) => {
                 <ChevronsLeftRight />
               )}
             </span>
-            <div className="flex items-center gap-2 md:gap-4">
+            <div className="flex items-center justify-between w-full gap-2 md:gap-4">
               <Link
                 href={`/notices/${notice.id}`}
                 className="text-base font-semibold md:text-xl -tracking-tight"

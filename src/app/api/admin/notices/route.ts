@@ -43,3 +43,50 @@ export async function POST(req: Request) {
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
+
+export async function PATCH(req: Request) {
+  try {
+    const { id, title, description, expiresOn } = await req.json();
+
+    const currentlyLoggedInUser = await currentUser();
+    const currentlyLoggedInUserData = await currentUserData();
+
+    if (!currentlyLoggedInUser) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    if (currentlyLoggedInUserData?.role !== UserRole.ADMIN) {
+      return new NextResponse("You are not allowed to perform this action.", {
+        status: 403,
+      });
+    }
+
+    if (!title) {
+      return NextResponse.json(
+        { error: "Title can't be empty" },
+        { status: 404 }
+      );
+    }
+
+    const updatedNotice = await db.notice.update({
+      where: {
+        id: id,
+      },
+      data: {
+        title: title,
+        description: description,
+        expiresOn: expiresOn,
+      },
+    });
+
+    return NextResponse.json(updatedNotice, {
+      status: 200,
+    });
+  } catch (error) {
+    console.error("Error updating notice:", error);
+    return NextResponse.json(
+      { error: "UPDATING_ADMIN_NOTICE" },
+      { status: 500 }
+    );
+  }
+}
