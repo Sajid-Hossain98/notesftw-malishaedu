@@ -99,9 +99,9 @@ export const UniversityEditModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-[#303030] border-zinc-700 !rounded-xl md:min-w-[50%] w-11/12 p-3 md:p-6">
+      <DialogContent className="dark:bg-[#303030] bg-[#FAFAFA] border-zinc-700 !rounded-xl md:min-w-[50%] w-11/12 p-3 md:p-6">
         <DialogHeader>
-          <DialogTitle className="mx-auto text-lg text-zinc-300 sm:text-3xl">
+          <DialogTitle className="mx-auto text-lg dark:text-zinc-300 sm:text-3xl">
             Modify the university
           </DialogTitle>
 
@@ -126,7 +126,7 @@ export const UniversityEditModal = () => {
 
                       <FormControl>
                         <Input
-                          className="md:py-2 md:text-xl text-lg bg-zinc-100 text-black rounded-xl"
+                          className="md:py-2 md:text-xl text-lg bg-zinc-100 text-black rounded-[5px]"
                           disabled={isLoading}
                           placeholder="Enter the short name of the university"
                           {...field}
@@ -148,7 +148,7 @@ export const UniversityEditModal = () => {
 
                       <FormControl>
                         <Input
-                          className="md:py-2 md:text-xl text-lg bg-zinc-100 text-black rounded-xl"
+                          className="md:py-2 md:text-xl text-lg bg-zinc-100 text-black rounded-[5px]"
                           disabled={isLoading}
                           placeholder="Enter the full name of the university"
                           {...field}
@@ -164,7 +164,7 @@ export const UniversityEditModal = () => {
                 disabled={isLoading}
                 type="submit"
                 variant={"myButtons"}
-                className="w-full py-1 !mt-6 text-sm font-semibold border-2 rounded-none cursor-pointer md:py-2 border-zinc-700 md:text-lg md:hover:bg-black active:bg-black"
+                className="w-full py-1 !mt-6 text-sm font-semibold border-2 rounded-none cursor-pointer md:py-2 border-zinc-700 md:text-lg dark:md:hover:bg-black dark:active:bg-black md:hover:bg-zinc-200"
               >
                 Update
                 {isLoading && (

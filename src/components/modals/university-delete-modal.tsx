@@ -49,22 +49,24 @@ export const UniversityDeleteModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-[#303030] border-zinc-700 !rounded-xl md:min-w-[30%] w-11/12 p-3 md:p-6">
+      <DialogContent className="dark:bg-[#303030] bg-[#FAFAFA] border-zinc-700 !rounded-xl md:min-w-[30%] w-11/12 p-3 md:p-6">
         <DialogHeader className="pt-4">
-          <DialogTitle className="text-lg text-zinc-300 sm:text-3xl">
+          <DialogTitle className="text-lg dark:text-zinc-300 sm:text-3xl">
             Delete university
           </DialogTitle>
           <Separator className="h-[0.5px] w-full bg-zinc-500" />
           <DialogDescription className="">
             Are you sure you want to do this?
             <br />
-            <span className="font-semibold text-cyan-300">
+            <span className="font-semibold dark:text-cyan-300 text-cyan-600">
               {university?.universityFullName}
             </span>{" "}
             will be deleted permanently along with{" "}
-            <span className="font-semibold text-rose-400">all the notes</span>{" "}
+            <span className="font-semibold dark:text-rose-400 text-rose-600">
+              all the notes
+            </span>{" "}
             related to{" "}
-            <span className="font-semibold text-cyan-300">
+            <span className="font-semibold dark:text-cyan-300 text-cyan-600">
               {university?.universityFullName}.
             </span>
           </DialogDescription>

@@ -75,7 +75,7 @@ export const AdminSearchUniversities = () => {
 
         {searchWords && (
           <X
-            className="absolute right-3 h-5 w-5 top-[50%] -translate-y-1/2 text-white m-auto stroke-2 cursor-pointer z-10"
+            className="absolute right-3 h-5 w-5 top-[50%] -translate-y-1/2 dark:text-white m-auto stroke-2 cursor-pointer z-10 mr-2"
             onClick={handleClearSearch}
           />
         )}
@@ -92,7 +92,7 @@ export const AdminSearchUniversities = () => {
       {searchWords && (
         <>
           <motion.div
-            className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto bg-stone-700 mt-2 px-2 md:px-4 py-2 rounded-xl md:!mb-12 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-300"
+            className="md:max-h-[70vh] max-h-[50vh] overflow-y-auto dark:bg-stone-700 bg-[#FAFAFA] mt-2 px-2 md:px-4 py-2 rounded-xl md:!mb-12 [&::-webkit-scrollbar]:w-1 dark:[&::-webkit-scrollbar-track]:bg-stone-600 dark:[&::-webkit-scrollbar-thumb]:bg-stone-300 [&::-webkit-scrollbar-track]:bg-zinc-200 [&::-webkit-scrollbar-thumb]:bg-stone-500"
             layout
             transition={{
               type: "spring",
@@ -122,20 +122,20 @@ export const AdminSearchUniversities = () => {
                   >
                     <div className="flex items-center gap-2 min-w-0 w-full px-1 md:px-2 py-1 md:py-2 hover:rounded-[4px]">
                       {/* Logo skeleton */}
-                      <Skeleton className="w-10 h-10 rounded-full md:h-14 md:w-14 bg-zinc-500" />
+                      <Skeleton className="w-10 h-10 rounded-full md:h-14 md:w-14 dark:bg-zinc-600 bg-zinc-400" />
 
                       <div className="flex flex-col gap-1">
                         {/* University name skeleton */}
-                        <Skeleton className="w-32 h-5 rounded sm:w-64 md:w-80 bg-zinc-500" />
+                        <Skeleton className="w-32 h-5 rounded sm:w-64 md:w-80 dark:bg-zinc-600 bg-zinc-400" />
                         {/* Short name + icon skeleton */}
-                        <Skeleton className="w-20 h-4 rounded bg-zinc-500" />
+                        <Skeleton className="w-20 h-4 rounded dark:bg-zinc-600 bg-zinc-400" />
                       </div>
                     </div>
 
                     {/* Edit button skeleton */}
-                    <Skeleton className="w-10 h-10 rounded-full md:h-12 md:w-12 bg-zinc-500" />
+                    <Skeleton className="w-10 h-10 rounded-full md:h-12 md:w-12 dark:bg-zinc-600 bg-zinc-400" />
                     {/* Delete button skeleton */}
-                    <Skeleton className="w-10 h-10 rounded-full md:h-12 md:w-12 bg-zinc-500" />
+                    <Skeleton className="w-10 h-10 rounded-full md:h-12 md:w-12 dark:bg-zinc-600 bg-zinc-400" />
                   </div>
                 ))}
               </div>
@@ -155,7 +155,7 @@ export const AdminSearchUniversities = () => {
                     key={universityShortName}
                     className="flex items-center justify-between gap-1 pl-1 transition-colors md:gap-2 rounded-xl"
                   >
-                    <div className="flex items-center gap-2 min-w-0 md:hover:bg-[#3a3939] active:bg-[#3a3939] w-full px-1 md:px-2 py-1 md:py-2 hover:rounded-[4px]">
+                    <div className="flex items-center gap-2 min-w-0 dark:md:hover:bg-[#3a3939] dark:active:bg-[#3a3939] w-full px-1 md:px-2 py-1 md:py-2 hover:rounded-[4px] md:hover:bg-zinc-200/80 active:bg-zinc-200/80">
                       <Image
                         src={`${process.env
                           .NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/uni_logo_images/${logoImage}`}
@@ -177,7 +177,7 @@ export const AdminSearchUniversities = () => {
                     </div>
 
                     <button
-                      className="px-3 py-3 rounded-full cursor-pointer md:hover:bg-black active:bg-black"
+                      className="px-3 py-3 rounded-full cursor-pointer dark:md:hover:bg-black dark:active:bg-black md:hover:bg-zinc-200/80 active:bg-zinc-200/80"
                       onClick={() =>
                         onOpen("editUniversity", {
                           university: {
@@ -192,7 +192,7 @@ export const AdminSearchUniversities = () => {
                       <Edit3 className="w-4 h-4 md:h-5 md:w-5" />
                     </button>
                     <button
-                      className="px-3 py-3 rounded-full cursor-pointer md:hover:bg-black active:bg-black"
+                      className="px-3 py-3 rounded-full cursor-pointer dark:md:hover:bg-black dark:active:bg-black md:hover:bg-zinc-200/80 active:bg-zinc-200/80"
                       onClick={() =>
                         onOpen("deleteUniversity", {
                           university: {

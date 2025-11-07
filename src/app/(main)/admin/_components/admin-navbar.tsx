@@ -49,7 +49,7 @@ export const AdminNavbar = () => {
           className={cn(
             "w-full text-xs md:text-lg",
             route.active &&
-              "dark:text-black bg-zinc-300 hover:bg-zinc-300/80 dark:bg-zinc-300 dark:hover:bg-zinc-300/80"
+              "dark:text-black bg-zinc-300 hover:bg-zinc-300 dark:bg-zinc-300 dark:hover:bg-zinc-300/80"
           )}
         >
           <Link
