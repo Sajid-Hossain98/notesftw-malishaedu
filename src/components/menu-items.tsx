@@ -48,6 +48,7 @@ export const MenuItems = ({ userData }: MenuItemsProps) => {
           variant="myButtons"
           className="w-full font-semibold md:w-fit"
           asChild
+          title="Requires login"
         >
           <Link href="/add-note" className="!gap-1">
             <Plus className="w-5 h-5" />

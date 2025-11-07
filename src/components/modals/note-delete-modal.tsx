@@ -64,14 +64,14 @@ export const NoteDeleteModal = () => {
             <Button
               disabled={isLoading}
               onClick={onClose}
-              className="px-2 py-0 dark:text-cyan-300 text-cyan-600 md:hover:bg-cyan-300/70 hover:text-black"
+              className="px-2 py-0 dark:text-cyan-300 text-cyan-600 md:hover:bg-cyan-300/70 hover:text-black dark:hover:text-white"
             >
               Cancel
             </Button>
             <Button
               disabled={isLoading}
               onClick={onClick}
-              className="px-2 py-0 dark:text-rose-400 text-rose-600 hover:bg-rose-400/70 hover:text-black"
+              className="px-2 py-0 dark:text-rose-400 text-rose-600 hover:bg-rose-400/70 hover:text-black dark:hover:text-white"
             >
               Confirm
             </Button>

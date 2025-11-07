@@ -115,6 +115,7 @@ export const AdminPendingNotes = () => {
         <button
           type="submit"
           className="dark:bg-[#303030] bg-[#FAFAFA] hover:bg-[#FAFAFA]/50 dark:hover:bg-none px-2 py-1 md:py-2 text-xs md:text-base font-semibold rounded-[3px]"
+          title={searchInput && "Click to search"}
         >
           Search
         </button>

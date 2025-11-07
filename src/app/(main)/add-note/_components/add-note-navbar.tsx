@@ -36,9 +36,10 @@ export const AddNoteNavbar = () => {
           key={route.href}
           className={cn(
             "w-full text-base md:text-lg",
-            route.active &&
+            !route.active &&
               "dark:text-black bg-zinc-300 hover:bg-zinc-300/80 dark:bg-zinc-300 dark:hover:bg-zinc-300/80"
           )}
+          title={route.active ? "" : route.label}
         >
           <Link href={route.href} className="font-semibold h-full py-1 md:py-2">
             <route.icon />

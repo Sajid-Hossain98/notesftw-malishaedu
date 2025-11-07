@@ -24,7 +24,7 @@ export function ModeToggle() {
       onClick={() => setTheme(isDark ? "light" : "dark")}
       type="button"
       area-label="Dark mode/light mode toggle"
-      title={`${isDark ? "Let there be light" : "Embrace the dark"}`}
+      title={isDark ? "Let there be light" : "Embrace the dark"}
     >
       {isDark ? <Sun className="w-7 h-7" /> : <Moon className="w-7 h-7" />}
     </button>

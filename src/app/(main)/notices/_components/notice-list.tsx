@@ -36,8 +36,9 @@ export const NoticeList = ({ notices, userData }: NoticeListProps) => {
       className="overflow-y-auto max-h-[65%] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:cursor-pointer [&::-webkit-scrollbar-thumb]:rounded-[10px] [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-400/80"
     >
       <Button
-        className="bg-cyan-300 px-3 py-2 dark:text-black hover:bg-cyan-400 font-semibold rounded-[5px] mb-2"
+        className="bg-cyan-300 px-3 py-2 dark:text-black hover:bg-cyan-400 font-semibold rounded-[5px] md:mb-4"
         asChild
+        title="Add a notice"
       >
         <Link href="/admin/manage-notices">Add notice</Link>
       </Button>
@@ -99,6 +100,7 @@ export const NoticeList = ({ notices, userData }: NoticeListProps) => {
                   <button
                     className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black"
                     onClick={() => onOpen("editNotice", { notice: notice })}
+                    title="Edit"
                   >
                     <Edit2 className="w-3 h-3" />
                   </button>
@@ -106,6 +108,7 @@ export const NoticeList = ({ notices, userData }: NoticeListProps) => {
                   <button
                     className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black"
                     onClick={() => onOpen("deleteNotice", { notice })}
+                    title="Delete"
                   >
                     <Trash className="w-3 h-3" />
                   </button>

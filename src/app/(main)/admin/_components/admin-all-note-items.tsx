@@ -75,12 +75,14 @@ export const AdminAllNoteItems = ({
                 onClick={() =>
                   onOpen("editNote", { note, universityShortNames, noteTypes })
                 }
+                title={`Edit - "${note?.title}"`}
               >
                 <Edit3 className="w-4 h-4 md:h-5 md:w-5" />
               </button>
               <button
-                className="px-3 py-3 rounded-full cursor-pointer md:hover:bg-black md:hover:bg-zinc-200/80 dark:active:bg-black active:bg-zinc-200/80"
+                className="px-3 py-3 rounded-full cursor-pointer dark:md:hover:bg-black md:hover:bg-zinc-200/80 dark:active:bg-black active:bg-zinc-200/80"
                 onClick={() => onOpen("deleteNote", { note })}
+                title="Delete"
               >
                 <Trash className="w-4 h-4 md:h-5 md:w-5" />
               </button>

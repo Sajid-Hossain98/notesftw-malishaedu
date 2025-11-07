@@ -9,6 +9,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
         variant="link"
         className="text-[#edf2f4] rounded-full bg-red-900"
         asChild
+        title="Go back to homepage"
       >
         <Link href="/">Return home</Link>
       </Button>

@@ -82,7 +82,10 @@ export const AdminSearchUniversities = () => {
       </div>
       <span className="justify-center hidden gap-1 mt-1 text-xs md:flex dark:text-zinc-400 text-zinc-500">
         Info
-        <button title="So basically, 'MODERATOR' & 'ADMIN' can edit the name and short name of all the universities but only the 'ADMIN' will be able to delete a university.">
+        <button
+          className="cursor-help"
+          title="So basically, 'MODERATOR' & 'ADMIN' can edit the name and short name of all the universities but only the 'ADMIN' will be able to delete a university."
+        >
           <BadgeInfo className="w-4 h-4" />
         </button>
       </span>
@@ -184,6 +187,7 @@ export const AdminSearchUniversities = () => {
                           },
                         })
                       }
+                      title={`Edit - "${universityFullName}"`}
                     >
                       <Edit3 className="w-4 h-4 md:h-5 md:w-5" />
                     </button>
@@ -199,6 +203,7 @@ export const AdminSearchUniversities = () => {
                           },
                         })
                       }
+                      title={`Delete - "${universityFullName}"`}
                     >
                       <Trash className="w-4 h-4 md:h-5 md:w-5" />
                     </button>

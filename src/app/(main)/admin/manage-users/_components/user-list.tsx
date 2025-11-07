@@ -117,6 +117,7 @@ export const UserList = ({ userData }: UserListProps) => {
                     <DropdownMenuTrigger
                       asChild
                       className="absolute right-0 top-[50%] translate-y-[-50%]"
+                      title="Click for options"
                     >
                       <button className="flex items-center gap-0.5 border-none outline-none h-full dark:md:hover:bg-[#303030] md:hover:bg-[#FAFAFA] px-3">
                         {loadingId === user.id ? (
