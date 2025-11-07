@@ -19,7 +19,7 @@ const NoticeDetailsPage = async ({
         {notice?.title}
       </h2>
       {notice?.description ? (
-        <p className="flex items-start gap-2 text-base md:gap-4 md:text-lg">
+        <p className="flex items-start gap-2 text-base md:gap-4 md:text-2xl">
           <ReceiptText className="w-5 h-5 md:mt-1" />
           {notice.description}
         </p>

@@ -49,9 +49,9 @@ export const RuleDeleteModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-[#303030] border-zinc-700 !rounded-xl md:min-w-[30%] w-11/12 p-3 md:p-6">
+      <DialogContent className="dark:bg-[#303030] bg-[#FAFAFA] border-zinc-700 !rounded-xl md:min-w-[30%] w-11/12 p-3 md:p-6">
         <DialogHeader className="pt-4">
-          <DialogTitle className="text-lg text-zinc-300 sm:text-3xl">
+          <DialogTitle className="text-lg dark:text-zinc-300 sm:text-3xl">
             Delete rule
           </DialogTitle>
           <Separator className="h-[0.5px] w-full bg-zinc-500" />
@@ -64,14 +64,14 @@ export const RuleDeleteModal = () => {
           <div className="flex items-center justify-start gap-2">
             <Button
               onClick={onClose}
-              className="px-2 py-0 text-cyan-300 hover:bg-cyan-300/70 hover:text-black"
+              className="px-2 py-0 dark:text-cyan-300 text-cyan-600 md:hover:bg-cyan-300/70 hover:text-black"
             >
               Cancel
             </Button>
             <Button
               disabled={isLoading}
               onClick={onClick}
-              className="flex items-center px-2 py-0 text-rose-400 hover:bg-rose-400/70 hover:text-black"
+              className="px-2 py-0 dark:text-rose-400 text-rose-600 hover:bg-rose-400/70 hover:text-black"
             >
               Confirm
               {isLoading && <Spinner size={"sm"} />}

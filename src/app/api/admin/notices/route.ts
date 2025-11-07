@@ -46,7 +46,7 @@ export async function POST(req: Request) {
 
 export async function PATCH(req: Request) {
   try {
-    const { id, title, description, expiresOn } = await req.json();
+    const { id, title, description, status, expiresOn } = await req.json();
 
     const currentlyLoggedInUser = await currentUser();
     const currentlyLoggedInUserData = await currentUserData();
@@ -61,7 +61,7 @@ export async function PATCH(req: Request) {
       });
     }
 
-    if (!title) {
+    if (!title && !status) {
       return NextResponse.json(
         { error: "Title can't be empty" },
         { status: 404 }
@@ -75,6 +75,7 @@ export async function PATCH(req: Request) {
       data: {
         title: title,
         description: description,
+        status: status,
         expiresOn: expiresOn,
       },
     });

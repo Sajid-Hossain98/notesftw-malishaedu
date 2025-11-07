@@ -121,6 +121,9 @@ export const CodeOfConductList = ({
                   className="flex items-baseline gap-2"
                 >
                   <div className="flex flex-col w-full md:gap-3">
+                    <span className="flex-shrink-0 font-mono md:w-10 w-5 text-right text-base md:text-2xl">
+                      {index + 1}.
+                    </span>
                     <FormField
                       control={form.control}
                       name="rule"
@@ -207,6 +210,7 @@ export const CodeOfConductList = ({
                           isProtected: !!rule.isProtected,
                         });
                       }}
+                      title="Edit"
                     >
                       <Edit2 className="w-3 h-3" />
                     </button>
@@ -218,6 +222,7 @@ export const CodeOfConductList = ({
                           ruleId: rule?.id,
                         })
                       }
+                      title="Delete"
                     >
                       <Trash className="w-3 h-3" />
                     </button>

@@ -88,6 +88,7 @@ export const NoticeEditModal = () => {
         id: notice?.id,
         title: values.title,
         description: values.description,
+        status: values.status.value,
         expiresOn: values.expiresOn,
       };
 
@@ -190,7 +191,7 @@ export const NoticeEditModal = () => {
                         <FormControl>
                           <input
                             type="date"
-                            className="md:py-2 md:text-xl text-lg bg-zinc-100 text-black rounded-[5px] px-3 w-full border border-black"
+                            className="md:py-1.5 md:text-xl text-lg bg-zinc-100 text-black rounded-[5px] px-3 w-full border border-black"
                             value={
                               field.value
                                 ? new Date(field.value)
@@ -223,8 +224,9 @@ export const NoticeEditModal = () => {
                             {...field}
                             value={field.value}
                             options={noticeStatusOptions}
-                            className="text-black border border-black rounded-[5px] py-1"
+                            className="text-black border border-black rounded-[5px]"
                             isDisabled={isLoading}
+                            isSearchable={false}
                             noOptionsMessage={() => (
                               <div className="flex items-center justify-center gap-2">
                                 <Frown className="w-14 h-14 text-rose-600" />
