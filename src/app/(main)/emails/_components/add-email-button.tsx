@@ -14,13 +14,13 @@ export const AddEmailButton = ({
 
   return (
     <button
-      className="border-2 cursor-pointer border-zinc-600 text-zinc-600"
+      className="border-2 cursor-pointer border-zinc-600 dark:border-zinc-400 text-zinc-600 dark:text-zinc-400"
       onClick={() =>
         onOpen("addEmail", { universityShortNames: universityShortNames })
       }
       title="Add an email"
     >
-      <Plus className="w-32 h-20" />
+      <Plus className="w-14 md:w-24 h-6 md:h-8" />
     </button>
   );
 };

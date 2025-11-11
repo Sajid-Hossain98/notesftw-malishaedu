@@ -60,26 +60,24 @@ export const AddEmailModal = () => {
 
   const isLoading = form.formState.isSubmitting;
 
-  const onSubmit = (values: z.infer<typeof addAnEmailFormSchema>) => {
-    const valuesToSend = {
-      email: values.email,
-      universities: values.universities,
-    };
-
+  const onSubmit = async (values: z.infer<typeof addAnEmailFormSchema>) => {
     try {
-      axios.post("/api/emails", valuesToSend);
+      const valuesToSend = {
+        email: values.email,
+        universities: values.universities,
+      };
 
+      await axios.post("/api/emails", valuesToSend);
+
+      toast.success("Email added");
       form.reset();
       router.refresh();
-      toast.success("Email added");
       onClose();
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(
-          <div>
-            <span>Something went wrong!</span>
-          </div>
-        );
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data || "Something went wrong!");
+      } else {
+        toast.error("Something went wrong!");
       }
     }
   };
@@ -97,7 +95,7 @@ export const AddEmailModal = () => {
       <DialogContent className="dark:bg-[#303030] bg-[#FAFAFA] border-zinc-700 !rounded-xl md:min-w-[50%] w-11/12 p-3 md:p-6">
         <DialogHeader>
           <DialogTitle className="flex items-baseline gap-2 mx-auto text-lg dark:text-zinc-300 sm:text-3xl">
-            Add an email
+            Add email
             <Mails />
           </DialogTitle>
 

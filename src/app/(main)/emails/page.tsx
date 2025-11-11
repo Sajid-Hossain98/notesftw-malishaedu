@@ -17,19 +17,9 @@ const Emails = async () => {
 
   return (
     <div className="space-y-3 md:space-y-8">
-      <div className="py-2 text-center">
+      <div className="py-2">
         <AddEmailButton universityShortNames={universityShortNames} />
       </div>
-      {/* <Button
-        title="Add a new email"
-        variant={"myButtons"}
-        asChild
-        onClick={() => onOpen("addRule")}
-      >
-        <Link href="/emails/add-email">Add email</Link>
-      </Button> */}
-
-      <span>Check emails</span>
     </div>
   );
 };

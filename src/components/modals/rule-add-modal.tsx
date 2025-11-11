@@ -49,13 +49,14 @@ export const AddRuleModal = () => {
 
   const isLoading = form.formState.isSubmitting;
 
-  const onSubmit = (values: z.infer<typeof AddRuleFormSchema>) => {
-    const valuesToSend = {
-      rule: values.rule,
-      isProtected: values.isProtected,
-    };
+  const onSubmit = async (values: z.infer<typeof AddRuleFormSchema>) => {
     try {
-      axios.post("/api/code-of-conduct", valuesToSend);
+      const valuesToSend = {
+        rule: values.rule,
+        isProtected: values.isProtected,
+      };
+
+      await axios.post("/api/code-of-conduct", valuesToSend);
 
       form.reset();
       router.refresh();
@@ -74,9 +75,9 @@ export const AddRuleModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-[#303030] border-zinc-700 !rounded-xl md:min-w-[70%] w-11/12 p-3 md:p-6">
+      <DialogContent className="dark:bg-[#303030] bg-[#FAFAFA] border-zinc-700 !rounded-xl md:min-w-[70%] w-11/12 p-3 md:p-6">
         <DialogHeader>
-          <DialogTitle className="flex items-baseline gap-2 mx-auto text-lg text-zinc-300 sm:text-3xl">
+          <DialogTitle className="flex items-baseline gap-2 mx-auto text-lg dark:text-zinc-300 sm:text-3xl">
             Add a rule
             <Scale />
           </DialogTitle>
