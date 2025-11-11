@@ -73,7 +73,7 @@ export const AddEmailModal = () => {
       form.reset();
       router.refresh();
       onClose();
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data || "Something went wrong!");
       } else {

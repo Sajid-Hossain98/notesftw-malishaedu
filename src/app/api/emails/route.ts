@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json(emails, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
         return new NextResponse("Email already exists", {
