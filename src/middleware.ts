@@ -5,7 +5,11 @@ import {
 } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const isProtectedRoute = createRouteMatcher(["/add-note(.*)", "/admin(.*)"]);
+const isProtectedRoute = createRouteMatcher([
+  "/add-note(.*)",
+  "/admin(.*)",
+  "/emails(.*)",
+]);
 const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
 export default clerkMiddleware(async (auth, request) => {

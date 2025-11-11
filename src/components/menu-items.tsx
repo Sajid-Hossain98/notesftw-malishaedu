@@ -1,4 +1,4 @@
-import { BookHeart, Flag, Plus, Shield } from "lucide-react";
+import { BookHeart, Flag, Mails, Plus, Shield } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ interface MenuItemsProps {
 
 export const MenuItems = ({ userData }: MenuItemsProps) => {
   const admin = userData?.role === "ADMIN" || userData?.role === "MODERATOR";
+  const canViewProtected = userData?.canViewProtected === true;
 
   return (
     <>
@@ -56,6 +57,22 @@ export const MenuItems = ({ userData }: MenuItemsProps) => {
           </Link>
         </Button>
       </nav>
+
+      {(canViewProtected || admin) && (
+        <nav className="w-full">
+          <Button
+            variant="myButtons"
+            className="w-full font-semibold md:w-fit"
+            asChild
+            title="Requires login"
+          >
+            <Link href="/emails" className="!gap-1">
+              <Mails className="w-5 h-5" />
+              Emails
+            </Link>
+          </Button>
+        </nav>
+      )}
 
       {admin && (
         <nav className="w-full">

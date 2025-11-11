@@ -3,7 +3,7 @@ import { AddAnUniversity } from "../_components/add-university";
 
 export function generateMetadata() {
   return {
-    title: "Add-university",
+    title: "Add university",
   };
 }
 
