@@ -40,9 +40,13 @@ model User {
   role        UserRole @default(USER)
   canViewProtected Boolean? @default(false)
 
-  notes         Note[]
-  approvedNotes Note[]   @relation("ApprovedBy")
-  notices       Notice[]
+  notes               Note[]
+  approvedNotes       Note[]   @relation("ApprovedBy")
+  notices             Notice[]
+  emails              Email[]
+  emailLastChecked    Email[] @relation("LastCheckedBy")
+  emailCheckedBy      EmailCheckHistory[] @relation("CheckedBy")
+
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -57,6 +61,7 @@ model University {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   notes     Note[]
+  emails    Email[]  @relation("EmailUniversities")
 }
 
 model Note {
@@ -113,4 +118,39 @@ model CodeOfConduct {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Email {
+  id             String   @id @default(uuid())
+  email          String   @unique
+
+  addedById      String
+  addedBy        User     @relation(fields: [addedById], references: [id])
+
+  lastCheckedById String? 
+  lastCheckedBy   User?    @relation("LastCheckedBy", fields: [lastCheckedById], references: [id])
+
+  universities    University[]  @relation("EmailUniversities") // many-to-many
+
+  lastCheckedAt  DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  history EmailCheckHistory[]
+}
+
+model EmailCheckHistory {
+  id         String   @id @default(uuid())
+
+  emailId    String
+  email      Email    @relation(fields: [emailId], references: [id], onDelete: Cascade)
+
+  checkedById String
+  checkedBy   User     @relation("CheckedBy", fields: [checkedById], references: [id])
+  
+  checkedAt  DateTime  @default(now())
+
+  @@index([checkedAt])
 }
