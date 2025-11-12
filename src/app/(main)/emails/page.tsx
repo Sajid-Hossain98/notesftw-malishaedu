@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { AddEmailButton } from "./_components/add-email-button";
+import { EmailListPage } from "./_components/email-list-page";
 
 export function generateMetadata() {
   return {
@@ -17,8 +18,10 @@ const Emails = async () => {
 
   return (
     <div className="space-y-3 md:space-y-8">
-      <div className="py-2">
+      <div className="py-2 w-full relative">
         <AddEmailButton universityShortNames={universityShortNames} />
+
+        <EmailListPage />
       </div>
     </div>
   );
