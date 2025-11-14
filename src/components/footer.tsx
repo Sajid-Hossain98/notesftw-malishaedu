@@ -7,7 +7,7 @@ import { Caveat } from "next/font/google";
 import { cn } from "@/lib/utils";
 // import { ShieldQuestion } from "lucide-react";
 
-export const caveat = Caveat({
+const caveat = Caveat({
   subsets: ["latin"],
   weight: "400", // Sixtyfour has only one weight
   variable: "--font-sixtyfour",
