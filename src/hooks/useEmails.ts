@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -5,6 +6,9 @@ interface Email {
   id: string;
   email: string;
   universities: { universityShortName: string }[];
+  addedBy: User;
+  lastCheckedBy: User;
+  lastCheckedAt: Date;
 }
 
 interface FetchEmailsResponse {

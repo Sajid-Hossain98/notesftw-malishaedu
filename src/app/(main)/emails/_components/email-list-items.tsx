@@ -2,11 +2,12 @@ import { Spinner } from "@/components/spinner";
 import { Separator } from "@/components/ui/separator";
 import { useEmails } from "@/hooks/useEmails";
 import { cn } from "@/lib/utils";
-import { HeartCrack, Smile } from "lucide-react";
+import { Check, Copy, HeartCrack, Smile } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 import { useCallback, useEffect, useState } from "react";
 import { List, type RowComponentProps } from "react-window";
+import { toast } from "sonner";
 
 interface EmailListItemsProps {
   searchWords: string;
@@ -62,6 +63,17 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
     );
   };
 
+  const handleEmailCopy = (email: string) => {
+    navigator.clipboard.writeText(email);
+    toast.success(`Copied ${email}`, {
+      style: {
+        color: "#1A1A1A",
+        background: "#4ade80",
+      },
+      position: "bottom-left",
+    });
+  };
+
   if (status === "pending") {
     return (
       <div className="flex justify-center p-8">
@@ -72,7 +84,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
 
   if (status === "error") {
     return (
-      <div className="flex items-center justify-center md:text-2xl text-lg gap-1 p-4">
+      <div className="flex items-center justify-center gap-1 p-4 text-lg md:text-2xl">
         <HeartCrack className="text-red-500" />
         Failed to load emails
       </div>
@@ -84,10 +96,10 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
       <>
         {selectedUniversity ? (
           <>
-            <div className="flex items-center md:gap-3 gap-2 mt-2 md:mt-4">
+            <div className="flex items-center gap-2 mt-2 md:gap-3 md:mt-4">
               <span className="text-lg font-semibold">
                 Filtered by:{" "}
-                <span className="font-bold text-xs underline">
+                <span className="text-xs font-bold underline">
                   #{selectedUniversity}
                 </span>
               </span>
@@ -105,7 +117,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
           <div className="h-[33px] mb-2" />
         )}
 
-        <div className="flex items-center justify-center md:text-2xl text-lg gap-1 py-4">
+        <div className="flex items-center justify-center gap-1 py-4 text-lg md:text-2xl">
           <Smile className="text-red-500" />
           No emails found
           {searchWords && !selectedUniversity && (
@@ -153,10 +165,34 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
     return (
       <div
         key={email.id}
-        className="border-b border-b-zinc-400/80 dark:border-b-zinc-700 px-1"
+        className="px-1 py-1 border-b border-b-zinc-400/80 dark:border-b-zinc-700"
         style={style}
       >
-        <p className="font-medium text-base md:text-xl">{email.email}</p>
+        <div className="flex items-center gap-1 md:gap-2">
+          <div className="flex items-center gap-1 md:gap-3">
+            <button
+              type="button"
+              title="Mark as checked"
+              className="border-2 border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors p-1.5 md:hover:bg rounded-full"
+            >
+              <Check className="w-4 h-4 md:h-6 md:w-6" />
+            </button>
+            <button
+              type="button"
+              title="Copy"
+              className="border-2 border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors p-1.5 md:hover:bg rounded-full"
+              onClick={() => handleEmailCopy(email.email)}
+            >
+              <Copy className="w-4 h-4 md:h-6 md:w-6" />
+            </button>
+          </div>
+          <p className="text-base font-medium md:text-xl">
+            {email.email}
+            {email.lastCheckedAt?.getDay().toString()}
+            {email.lastCheckedBy?.name}
+          </p>
+        </div>
+
         <div className="flex gap-0.5 mt-1">
           {email.universities?.map((u) => (
             <span
@@ -165,7 +201,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
               className={cn(
                 "rounded-[2px] px-1 py-0.5 text-xs cursor-pointer dark:text-[#FAFAFA] text-[#1A1A1A] font-bold",
                 selectedUniversity === u.universityShortName &&
-                  "bg-green-300 dark:bg-green-400 dark:text-[#1A1A1A]"
+                  "bg-green-300 md:hover:bg-green-300/70 dark:bg-green-400 dark:md:hover:bg-green-400/90 transition-colors dark:text-[#1A1A1A]"
               )}
             >
               #{u.universityShortName}
@@ -180,17 +216,17 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
     <div className="h-[60vh] !mt-2 md:!mt-4">
       {selectedUniversity ? (
         <>
-          <div className="flex items-center md:gap-3 gap-2 w-fit">
+          <div className="flex items-center gap-2 md:gap-3 w-fit">
             <span className="text-lg font-semibold">
               Filtered by:{" "}
-              <span className="font-bold text-xs underline">
+              <span className="text-xs font-bold underline">
                 #{selectedUniversity}
               </span>
             </span>
 
             <button
               onClick={() => setSelectedUniversity(null)}
-              className="px-2 py-0 bg-rose-500 dark:bg-rose-400 md:hover:bg-rose-500/85 dark:md:hover:bg-rose-400/95 transition-colors rounded-[2px] font-medium text-white dark:text-[#1A1A1A]"
+              className="px-2 py-0 bg-green-300 md:hover:bg-green-300/70 dark:bg-green-400 dark:md:hover:bg-green-400/90 transition-colors rounded-[2px] font-medium text-[#1A1A1A]"
             >
               Clear
             </button>
@@ -204,7 +240,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
       <List
         rowComponent={RowComponent}
         rowCount={allEmails.length + (isFetchingNextPage ? 1 : 0)}
-        rowHeight={60}
+        rowHeight={70}
         rowProps={{ emails: allEmails, isFetchingNextPage }}
         onRowsRendered={handleRowsRendered}
         overscanCount={5}
