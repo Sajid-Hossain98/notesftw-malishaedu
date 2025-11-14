@@ -110,12 +110,14 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
           No emails found
           {searchWords && !selectedUniversity && (
             <span>
-              matching <span className="text-red-500">"{searchWords}"</span>
+              matching{" "}
+              <span className="text-red-500">&quot;{searchWords}&quot;</span>
             </span>
           )}
           {searchWords && selectedUniversity && (
             <span>
-              matching <span className="text-red-500">"{searchWords}" </span>
+              matching{" "}
+              <span className="text-red-500">&quot;{searchWords}&quot; </span>
               for <span className="text-red-500">#{selectedUniversity}</span>
             </span>
           )}
