@@ -3,7 +3,16 @@ import { ActionTooltip } from "./action-tooltip";
 import { NoticeMarquee } from "./notice-marquee";
 import { Separator } from "./ui/separator";
 import { db } from "@/lib/db";
+import { Caveat } from "next/font/google";
+import { cn } from "@/lib/utils";
 // import { ShieldQuestion } from "lucide-react";
+
+export const caveat = Caveat({
+  subsets: ["latin"],
+  weight: "400", // Sixtyfour has only one weight
+  variable: "--font-sixtyfour",
+  display: "swap",
+});
 
 export const Footer = async () => {
   const notices = await db.notice.findMany({
@@ -32,7 +41,9 @@ export const Footer = async () => {
             label="It is a phrase that means to try to memorize the information and not rely too much on this site."
             side="top"
           >
-            <div className="text-xs">DON&apos;T FORGET LAAAH!</div>
+            <div className={cn("text-base font-bold", caveat.className)}>
+              DON&apos;T FORGET LAAAH!
+            </div>
           </ActionTooltip>
 
           <SignedIn>

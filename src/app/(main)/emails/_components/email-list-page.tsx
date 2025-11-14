@@ -15,19 +15,19 @@ export const EmailListPage = () => {
   const handleClearSearch = () => setSearchWords("");
 
   return (
-    <div className="space-y-6">
-      {/* Search bar */}
-      <div className="">
+    <div>
+      <div className="relative md:w-[40%] w-full md:ml-auto">
         {searchWords && (
           <X
-            className="absolute right-3 h-5 w-5 top-[50%] -translate-y-1/2 text-gray-500 cursor-pointer z-10"
+            className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 cursor-pointer z-10"
             onClick={handleClearSearch}
           />
         )}
+
         <Input
-          className="dark:bg-[#303030] bg-[#FAFAFA] rounded-[3px] border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 dark:placeholder:caret-[#edf2f4] placeholder-gray-500 shadow-[2px_2px_4px_rgba(0,0,0,0.15)] dark:shadow-none w-[30%] md:text-base absolute right-0 top-2"
+          className="dark:bg-[#303030] bg-[#FAFAFA] rounded-[3px] border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 dark:placeholder:caret-[#edf2f4] placeholder-gray-500 shadow-[2px_2px_4px_rgba(0,0,0,0.15)] dark:shadow-none h-8 md:!text-lg text-base"
           type="text"
-          placeholder="Email / University"
+          placeholder="Email / University(e.g., NJTech / BNU)"
           value={searchWords}
           onChange={(e) => setSearchWords(e.target.value)}
         />

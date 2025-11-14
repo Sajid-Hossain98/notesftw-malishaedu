@@ -1,6 +1,8 @@
+import { Spinner } from "@/components/spinner";
+import { Separator } from "@/components/ui/separator";
 import { useEmails } from "@/hooks/useEmails";
 import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
+import { HeartCrack, Smile } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 import { useCallback, useEffect, useState } from "react";
@@ -46,7 +48,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
   const handleRowsRendered = useCallback(
     (visibleRows: { startIndex: number; stopIndex: number }) => {
       const nearEnd =
-        visibleRows.stopIndex >= allEmails.length - 5 && hasNextPage;
+        visibleRows.stopIndex >= allEmails.length - 2 && hasNextPage;
       if (nearEnd && !isFetchingNextPage) {
         fetchNextPage();
       }
@@ -63,19 +65,63 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
   if (status === "pending") {
     return (
       <div className="flex justify-center p-8">
-        <Loader2 className="animate-spin text-gray-400" size={32} />
+        <Spinner size={"icon"} />
       </div>
     );
   }
 
   if (status === "error") {
     return (
-      <div className="text-red-500 text-center p-4">Failed to load emails.</div>
+      <div className="flex items-center justify-center md:text-2xl text-lg gap-1 p-4">
+        <HeartCrack className="text-red-500" />
+        Failed to load emails
+      </div>
     );
   }
 
   if (status === "success" && allEmails.length === 0) {
-    return <div className="text-gray-500 text-center">No emails found.</div>;
+    return (
+      <>
+        {selectedUniversity ? (
+          <>
+            <div className="flex items-center md:gap-3 gap-2 mt-2 md:mt-4">
+              <span className="text-lg font-semibold">
+                Filtered by:{" "}
+                <span className="font-bold text-xs underline">
+                  #{selectedUniversity}
+                </span>
+              </span>
+
+              <button
+                onClick={() => setSelectedUniversity(null)}
+                className="px-2 py-0 bg-rose-500 dark:bg-rose-400 md:hover:bg-rose-500/85 dark:md:hover:bg-rose-400/95 transition-colors rounded-[2px] font-medium text-white dark:text-[#1A1A1A]"
+              >
+                Clear
+              </button>
+            </div>
+            <Separator className="h-[1px] bg-zinc-400 mt-1 mb-2" />
+          </>
+        ) : (
+          <div className="h-[33px] mb-2" />
+        )}
+
+        <div className="flex items-center justify-center md:text-2xl text-lg gap-1 py-4">
+          <Smile className="text-red-500" />
+          No emails found
+          {searchWords && !selectedUniversity && (
+            <span>
+              matching <span className="text-red-500">"{searchWords}"</span>
+            </span>
+          )}
+          {searchWords && selectedUniversity && (
+            <span>
+              matching <span className="text-red-500">"{searchWords}" </span>
+              for <span className="text-red-500">#{selectedUniversity}</span>
+            </span>
+          )}
+        </div>
+      </>
+    );
   }
 
   // Row renderer
@@ -83,22 +129,39 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
     index,
     style,
     emails,
-  }: RowComponentProps<{ emails: typeof allEmails }>) {
+    isFetchingNextPage, // add this to rowProps
+  }: RowComponentProps<{
+    emails: typeof allEmails;
+    isFetchingNextPage: boolean;
+  }>) {
+    // Check if this is the loader row
+    if (index === emails.length && isFetchingNextPage) {
+      return (
+        <div
+          style={style}
+          className="flex items-center justify-center w-full h-full"
+        >
+          <Spinner size="lg" />
+        </div>
+      );
+    }
+
     const email = emails[index];
+
     return (
       <div
         key={email.id}
-        className="border border-b-zinc-400 px-1 font-sans"
+        className="border-b border-b-zinc-400/80 dark:border-b-zinc-700 px-1"
         style={style}
       >
-        <p className="font-semibold text-base md:text-xl">{email.email}</p>
-        <div className="flex gap-1 mt-1">
+        <p className="font-medium text-base md:text-xl">{email.email}</p>
+        <div className="flex gap-0.5 mt-1">
           {email.universities?.map((u) => (
             <span
               key={u.universityShortName}
               onClick={() => handleUniversityClick(u.universityShortName)}
               className={cn(
-                "rounded-[2px] px-1 pt-0.5 text-xs cursor-pointer dark:text-[#FAFAFA] text-[#1A1A1A] font-semibold",
+                "rounded-[2px] px-1 py-0.5 text-xs cursor-pointer dark:text-[#FAFAFA] text-[#1A1A1A] font-bold",
                 selectedUniversity === u.universityShortName &&
                   "bg-green-300 dark:bg-green-400 dark:text-[#1A1A1A]"
               )}
@@ -112,21 +175,39 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
   }
 
   return (
-    <div className="h-[65vh]">
+    <div className="h-[60vh] !mt-2 md:!mt-4">
+      {selectedUniversity ? (
+        <>
+          <div className="flex items-center md:gap-3 gap-2 w-fit">
+            <span className="text-lg font-semibold">
+              Filtered by:{" "}
+              <span className="font-bold text-xs underline">
+                #{selectedUniversity}
+              </span>
+            </span>
+
+            <button
+              onClick={() => setSelectedUniversity(null)}
+              className="px-2 py-0 bg-rose-500 dark:bg-rose-400 md:hover:bg-rose-500/85 dark:md:hover:bg-rose-400/95 transition-colors rounded-[2px] font-medium text-white dark:text-[#1A1A1A]"
+            >
+              Clear
+            </button>
+          </div>
+          <Separator className="h-[1px] bg-zinc-400 mt-1 mb-2" />
+        </>
+      ) : (
+        <div className="h-[33px] mb-2" />
+      )}
+
       <List
         rowComponent={RowComponent}
-        rowCount={allEmails.length}
+        rowCount={allEmails.length + (isFetchingNextPage ? 1 : 0)}
         rowHeight={60}
-        rowProps={{ emails: allEmails }}
+        rowProps={{ emails: allEmails, isFetchingNextPage }}
         onRowsRendered={handleRowsRendered}
         overscanCount={5}
-        className="[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:cursor-pointer [&::-webkit-scrollbar-thumb]:rounded-[10px] [&::-webkit-scrollbar-track]:bg-stone-400 [&::-webkit-scrollbar-thumb]:bg-stone-600/80"
+        className="[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-[5px] [&::-webkit-scrollbar-thumb]:cursor-pointer [&::-webkit-scrollbar-thumb]:rounded-[10px] [&::-webkit-scrollbar-track]:bg-stone-400 [&::-webkit-scrollbar-thumb]:bg-stone-600/80"
       />
-      {isFetchingNextPage && (
-        <div className="flex justify-center py-4">
-          <Loader2 className="animate-spin text-gray-400" size={24} />
-        </div>
-      )}
     </div>
   );
 };
