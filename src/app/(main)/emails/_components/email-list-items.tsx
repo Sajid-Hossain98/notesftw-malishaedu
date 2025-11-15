@@ -50,20 +50,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage, status } =
     useEmails({ search: searchWords, university: selectedUniversity || "" });
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const allEmails =
-    data?.pages
-      .flatMap((page) => page.emails)
-      .filter((email) => {
-        if (!email.lastCheckedAt) return true;
-        const lastChecked = new Date(email.lastCheckedAt);
-        lastChecked.setHours(0, 0, 0, 0);
-        return lastChecked < today;
-      }) ?? [];
-
-  // const allEmails = data?.pages.flatMap((page) => page.emails) ?? [];
+  const allEmails = data?.pages.flatMap((page) => page.emails) ?? [];
 
   const handleRowsRendered = useCallback(
     (visibleRows: { startIndex: number; stopIndex: number }) => {

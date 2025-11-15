@@ -70,23 +70,109 @@ export async function POST(req: Request) {
   }
 }
 
+// export async function GET(request: Request) {
+//   try {
+//     // Getting the search query parameters
+//     const url = new URL(request.url);
+//     const search = url.searchParams.get("search") || "";
+//     const university = url.searchParams.get("university") || "";
+//     const cursor = url.searchParams.get("cursor") || undefined;
+//     const limit = parseInt(url.searchParams.get("limit") || "20", 10);
+
+//     const currentlyLoggedInUser = await currentUser();
+
+//     const currentlyLoggedInUserData = await currentUserData();
+
+//     if (!currentlyLoggedInUser) {
+//       return new NextResponse("Unauthorized", { status: 401 });
+//     }
+
+//     if (
+//       !(
+//         currentlyLoggedInUserData?.canViewProtected ||
+//         currentlyLoggedInUserData?.role === UserRole.ADMIN ||
+//         currentlyLoggedInUserData?.role === UserRole.MODERATOR
+//       )
+//     ) {
+//       return new NextResponse(
+//         "Sir, you are not allowed to perform this action.",
+//         {
+//           status: 403,
+//         }
+//       );
+//     }
+
+//     const emails = await db.email.findMany({
+//       take: limit + 1,
+//       ...(cursor ? { skip: 1, cursor: { id: cursor } } : {}),
+//       where: {
+//         OR: [
+//           { email: { contains: search, mode: "insensitive" } },
+//           {
+//             universities: {
+//               some: {
+//                 universityShortName: { contains: search, mode: "insensitive" },
+//               },
+//             },
+//           },
+//         ],
+//         ...(university
+//           ? {
+//               universities: {
+//                 some: {
+//                   universityShortName: university,
+//                 },
+//               },
+//             }
+//           : {}),
+//       },
+//       include: {
+//         universities: true,
+//         addedBy: true,
+//         history: true,
+//         lastCheckedBy: true,
+//       },
+//       orderBy: {
+//         createdAt: "asc",
+//       },
+//     });
+
+//     let nextCursor = null;
+
+//     if (emails.length > limit) {
+//       const nextItem = emails.pop();
+//       nextCursor = nextItem?.id || null;
+//     }
+
+//     return NextResponse.json({
+//       emails,
+//       nextCursor,
+//       hasNextPage: !!nextCursor,
+//     });
+//   } catch (error) {
+//     console.log(error);
+
+//     return NextResponse.json(
+//       { error: "Error fetching emails" },
+//       { status: 500 }
+//     );
+//   }
+// }
+
 export async function GET(request: Request) {
   try {
-    // Getting the search query parameters
+    // Parse query parameters
     const url = new URL(request.url);
     const search = url.searchParams.get("search") || "";
     const university = url.searchParams.get("university") || "";
     const cursor = url.searchParams.get("cursor") || undefined;
     const limit = parseInt(url.searchParams.get("limit") || "20", 10);
 
+    // Auth check
     const currentlyLoggedInUser = await currentUser();
-
     const currentlyLoggedInUserData = await currentUserData();
-
-    if (!currentlyLoggedInUser) {
+    if (!currentlyLoggedInUser)
       return new NextResponse("Unauthorized", { status: 401 });
-    }
-
     if (
       !(
         currentlyLoggedInUserData?.canViewProtected ||
@@ -96,49 +182,69 @@ export async function GET(request: Request) {
     ) {
       return new NextResponse(
         "Sir, you are not allowed to perform this action.",
-        {
-          status: 403,
-        }
+        { status: 403 }
       );
     }
 
+    // 1️⃣ Calculate start of today in UTC
+    const nowUTC = new Date();
+    const todayStartUTC = new Date(
+      Date.UTC(
+        nowUTC.getUTCFullYear(),
+        nowUTC.getUTCMonth(),
+        nowUTC.getUTCDate()
+      )
+    );
+
+    // 2️⃣ Fetch emails
     const emails = await db.email.findMany({
       take: limit + 1,
       ...(cursor ? { skip: 1, cursor: { id: cursor } } : {}),
       where: {
-        OR: [
-          { email: { contains: search, mode: "insensitive" } },
+        AND: [
           {
-            universities: {
-              some: {
-                universityShortName: { contains: search, mode: "insensitive" },
-              },
-            },
-          },
-        ],
-        ...(university
-          ? {
-              universities: {
-                some: {
-                  universityShortName: university,
+            OR: [
+              { email: { contains: search, mode: "insensitive" } },
+              {
+                universities: {
+                  some: {
+                    universityShortName: {
+                      contains: search,
+                      mode: "insensitive",
+                    },
+                  },
                 },
               },
-            }
-          : {}),
+            ],
+          },
+          ...(university
+            ? [
+                {
+                  universities: {
+                    some: { universityShortName: university },
+                  },
+                },
+              ]
+            : []),
+          // 3️⃣ Show only emails never checked or checked before today UTC
+          {
+            OR: [
+              { lastCheckedAt: null }, // never checked → show
+              { lastCheckedAt: { lt: todayStartUTC } }, // checked before today → show
+            ],
+          },
+        ],
       },
       include: {
         universities: true,
         addedBy: true,
-        history: true,
         lastCheckedBy: true,
       },
-      orderBy: {
-        createdAt: "asc",
-      },
+      orderBy: { createdAt: "desc" },
     });
 
+    // Pagination
     let nextCursor = null;
-
     if (emails.length > limit) {
       const nextItem = emails.pop();
       nextCursor = nextItem?.id || null;
@@ -150,8 +256,7 @@ export async function GET(request: Request) {
       hasNextPage: !!nextCursor,
     });
   } catch (error) {
-    console.log(error);
-
+    console.error("GET /api/emails error:", error);
     return NextResponse.json(
       { error: "Error fetching emails" },
       { status: 500 }
