@@ -2,12 +2,15 @@ import { Spinner } from "@/components/spinner";
 import { Separator } from "@/components/ui/separator";
 import { useEmails } from "@/hooks/useEmails";
 import { cn } from "@/lib/utils";
+import { useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import { Check, Copy, HeartCrack, Smile } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 import { useCallback, useEffect, useState } from "react";
 import { List, type RowComponentProps } from "react-window";
 import { toast } from "sonner";
+import { motion } from "motion/react";
 
 interface EmailListItemsProps {
   searchWords: string;
@@ -22,6 +25,9 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
     initialUniversity
   );
 
+  const [fadingEmails, setFadingEmails] = useState<Set<string>>(new Set());
+
+  const queryClient = useQueryClient();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -44,7 +50,20 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage, status } =
     useEmails({ search: searchWords, university: selectedUniversity || "" });
 
-  const allEmails = data?.pages.flatMap((page) => page.emails) ?? [];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const allEmails =
+    data?.pages
+      .flatMap((page) => page.emails)
+      .filter((email) => {
+        if (!email.lastCheckedAt) return true;
+        const lastChecked = new Date(email.lastCheckedAt);
+        lastChecked.setHours(0, 0, 0, 0);
+        return lastChecked < today;
+      }) ?? [];
+
+  // const allEmails = data?.pages.flatMap((page) => page.emails) ?? [];
 
   const handleRowsRendered = useCallback(
     (visibleRows: { startIndex: number; stopIndex: number }) => {
@@ -74,6 +93,47 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
     });
   };
 
+  const handleEmailCheck = async (emailId: string) => {
+    try {
+      setFadingEmails((prev) => new Set(prev).add(emailId));
+
+      // Wait for fade animation
+      await new Promise((res) => setTimeout(res, 300));
+      // Optimistically remove the email from the cache
+      queryClient.setQueryData<
+        { pages: { emails: typeof allEmails }[] } | undefined
+      >(["emails"], (oldData) => {
+        if (!oldData) return oldData;
+
+        const newPages = oldData.pages.map((page) => ({
+          ...page,
+          emails: page.emails.filter((email) => email.id !== emailId),
+        }));
+
+        return { ...oldData, pages: newPages };
+      });
+
+      // Call API
+      await axios.post("/api/emails/email-check-history", { emailId });
+
+      toast.success("Checked");
+
+      // Optionally, refetch to ensure latest server state
+      queryClient.invalidateQueries({ queryKey: ["emails"] });
+    } catch (error) {
+      // If error, roll back optimistic update
+      queryClient.invalidateQueries({ queryKey: ["emails"] });
+
+      if (error instanceof Error) {
+        toast.error(
+          <div>
+            <span>Something went wrong!</span>
+          </div>
+        );
+      }
+    }
+  };
+
   if (status === "pending") {
     return (
       <div className="flex justify-center p-8">
@@ -94,28 +154,25 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
   if (status === "success" && allEmails.length === 0) {
     return (
       <>
-        {selectedUniversity ? (
-          <>
-            <div className="flex items-center gap-2 mt-2 md:gap-3 md:mt-4">
-              <span className="text-lg font-semibold">
-                Filtered by:{" "}
+        <div className="flex items-center gap-1 md:gap-3 mt-2 md:mt-4">
+          <span className="text-lg font-semibold">Filtered by:</span>
+          {selectedUniversity && (
+            <>
+              <div className="flex items-baseline gap-2 md:gap-3 w-fit">
                 <span className="text-xs font-bold underline">
                   #{selectedUniversity}
                 </span>
-              </span>
-
-              <button
-                onClick={() => setSelectedUniversity(null)}
-                className="px-2 py-0 bg-rose-500 dark:bg-rose-400 md:hover:bg-rose-500/85 dark:md:hover:bg-rose-400/95 transition-colors rounded-[2px] font-medium text-white dark:text-[#1A1A1A]"
-              >
-                Clear
-              </button>
-            </div>
-            <Separator className="h-[1px] bg-zinc-400 mt-1 mb-2" />
-          </>
-        ) : (
-          <div className="h-[33px] mb-2" />
-        )}
+                <button
+                  onClick={() => setSelectedUniversity(null)}
+                  className="px-2 py-0 bg-green-300 md:hover:bg-green-300/70 dark:bg-green-400 dark:md:hover:bg-green-400/90 transition-colors rounded-[2px] font-medium text-[#1A1A1A]"
+                >
+                  Clear
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+        <Separator className="h-[1px] bg-zinc-400 mt-1 mb-2" />
 
         <div className="flex items-center justify-center gap-1 py-4 text-lg md:text-2xl">
           <Smile className="text-red-500" />
@@ -162,44 +219,74 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
 
     const email = emails[index];
 
+    let formattedDate = null;
+
+    const lastCheckedAtDate = email?.lastCheckedAt
+      ? new Date(email.lastCheckedAt)
+      : null;
+
+    if (lastCheckedAtDate) {
+      formattedDate = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "numeric",
+        second: "numeric",
+      }).format(lastCheckedAtDate);
+    }
+
     return (
-      <div
+      <motion.div
         key={email.id}
-        className="px-1 py-1 border-b border-b-zinc-400/80 dark:border-b-zinc-700"
+        className="px-1 md:py-1 border-b border-b-zinc-400/80 dark:border-b-zinc-700"
         style={style}
+        animate={{ opacity: fadingEmails.has(email.id) ? 0 : 1 }}
+        transition={{ duration: 0.1 }}
       >
         <div className="flex items-center gap-1 md:gap-2">
           <div className="flex items-center gap-1 md:gap-3">
             <button
               type="button"
               title="Mark as checked"
-              className="border-2 border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors p-1.5 md:hover:bg rounded-full"
+              className="md:border-2 border border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors md:p-1.5 p-1 md:hover:bg rounded-full"
+              onClick={() => handleEmailCheck(email.id)}
             >
-              <Check className="w-4 h-4 md:h-6 md:w-6" />
+              <Check className="w-3 h-3 md:h-5 md:w-5" />
             </button>
             <button
               type="button"
               title="Copy"
-              className="border-2 border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors p-1.5 md:hover:bg rounded-full"
+              className="md:border-2 border border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors md:p-1.5 p-1 md:hover:bg rounded-full"
               onClick={() => handleEmailCopy(email.email)}
             >
-              <Copy className="w-4 h-4 md:h-6 md:w-6" />
+              <Copy className="w-3 h-3 md:h-5 md:w-5" />
             </button>
           </div>
-          <p className="text-base font-medium md:text-xl">
-            {email.email}
-            {email.lastCheckedAt?.getDay().toString()}
-            {email.lastCheckedBy?.name}
-          </p>
+          <div>
+            <p className="text-sm font-medium md:text-xl">{email.email}</p>
+            <span className="text-xs flex items-center gap-2 text-zinc-800 dark:text-zinc-400 font-medium">
+              Last checked:{" "}
+              {email.lastCheckedAt ? (
+                <>
+                  {formattedDate}
+                  <Separator className="w-[1px] bg-zinc-500 h-3" />
+                  by: {email.lastCheckedBy?.name ?? "Unknown"}
+                </>
+              ) : (
+                "Never"
+              )}
+            </span>
+          </div>
         </div>
 
-        <div className="flex gap-0.5 mt-1">
+        <div className="md:mt-1">
           {email.universities?.map((u) => (
             <span
               key={u.universityShortName}
               onClick={() => handleUniversityClick(u.universityShortName)}
               className={cn(
-                "rounded-[2px] px-1 py-0.5 text-xs cursor-pointer dark:text-[#FAFAFA] text-[#1A1A1A] font-bold",
+                "rounded-[2px] px-1 md:py-0.5 text-xs cursor-pointer dark:text-[#FAFAFA] text-[#1A1A1A] font-bold select-none",
                 selectedUniversity === u.universityShortName &&
                   "bg-green-300 md:hover:bg-green-300/70 dark:bg-green-400 dark:md:hover:bg-green-400/90 transition-colors dark:text-[#1A1A1A]"
               )}
@@ -208,39 +295,36 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
             </span>
           ))}
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   return (
     <div className="h-[60vh] !mt-2 md:!mt-4">
-      {selectedUniversity ? (
-        <>
-          <div className="flex items-center gap-2 md:gap-3 w-fit">
-            <span className="text-lg font-semibold">
-              Filtered by:{" "}
+      <div className="flex items-center gap-1 md:gap-3">
+        <span className="text-lg font-semibold">Filtered by:</span>
+        {selectedUniversity && (
+          <>
+            <div className="flex items-baseline gap-2 md:gap-3 w-fit">
               <span className="text-xs font-bold underline">
                 #{selectedUniversity}
               </span>
-            </span>
-
-            <button
-              onClick={() => setSelectedUniversity(null)}
-              className="px-2 py-0 bg-green-300 md:hover:bg-green-300/70 dark:bg-green-400 dark:md:hover:bg-green-400/90 transition-colors rounded-[2px] font-medium text-[#1A1A1A]"
-            >
-              Clear
-            </button>
-          </div>
-          <Separator className="h-[1px] bg-zinc-400 mt-1 mb-2" />
-        </>
-      ) : (
-        <div className="h-[33px] mb-2" />
-      )}
+              <button
+                onClick={() => setSelectedUniversity(null)}
+                className="px-2 py-0 bg-green-300 md:hover:bg-green-300/70 dark:bg-green-400 dark:md:hover:bg-green-400/90 transition-colors rounded-[2px] font-medium text-[#1A1A1A]"
+              >
+                Clear
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+      <Separator className="h-[1px] bg-zinc-400 mt-1 mb-2" />
 
       <List
         rowComponent={RowComponent}
         rowCount={allEmails.length + (isFetchingNextPage ? 1 : 0)}
-        rowHeight={70}
+        rowHeight={75}
         rowProps={{ emails: allEmails, isFetchingNextPage }}
         onRowsRendered={handleRowsRendered}
         overscanCount={5}

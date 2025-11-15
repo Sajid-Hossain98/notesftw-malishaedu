@@ -60,7 +60,7 @@ export const SearchBar = () => {
           height={54}
           width={54}
           alt="MalishaEdu's Logo"
-          className="absolute hidden transform -translate-y-1/2 bg-zinc-200/80 rounded-full top-1/2 left-1.5 aspect-square md:flex"
+          className="absolute hidden transform -translate-y-1/2 bg-zinc-200/80 rounded-full top-1/2 left-1.5 aspect-square md:flex select-none"
         />
         <span
           className="absolute hidden transform -translate-y-1/2 bg-zinc-200/80 rounded-full top-1/2 right-1.5 aspect-square md:flex h-[54px] w-[54px] cursor-pointer"

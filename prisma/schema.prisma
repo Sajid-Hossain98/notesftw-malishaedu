@@ -32,24 +32,24 @@ enum NoticeStatus {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  clerkUserId String   @unique
-  name        String
-  imageUrl    String   @db.Text
-  email       String   @db.Text
-  role        UserRole @default(USER)
-  canViewProtected Boolean? @default(false)
+  id                String   @id @default(uuid())
+  clerkUserId       String   @unique
+  name              String
+  imageUrl          String   @db.Text
+  email             String   @db.Text
+  role              UserRole @default(USER)
+  canViewProtected  Boolean? @default(false)
 
-  notes               Note[]
-  approvedNotes       Note[]   @relation("ApprovedBy")
-  notices             Notice[]
-  emails              Email[]
-  emailLastChecked    Email[] @relation("LastCheckedBy")
-  emailCheckedBy      EmailCheckHistory[] @relation("CheckedBy")
+  notes             Note[]
+  approvedNotes     Note[]   @relation("ApprovedBy")
+  notices           Notice[]
+  emails            Email[]
+  emailLastChecked  Email[] @relation("LastCheckedBy")
+  emailCheckedBy    EmailCheckHistory[] @relation("CheckedBy")
 
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 model University {
@@ -58,83 +58,83 @@ model University {
   universityFullName  String
   logoImage           String @db.Text
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  notes     Note[]
-  emails    Email[]  @relation("EmailUniversities")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  notes             Note[]
+  emails            Email[]  @relation("EmailUniversities")
 }
 
 model Note {
-  id          String         @id @default(uuid())
-  title       String         @db.Text
-  description String         @db.Text
-  approval    ApprovalStatus @default(PENDING)
-  isProtected Boolean? @default(false)
+  id                String         @id @default(uuid())
+  title             String         @db.Text
+  description       String         @db.Text
+  approval          ApprovalStatus @default(PENDING)
+  isProtected       Boolean? @default(false)
 
-  userId String // Foreign key to reference the User
-  user   User   @relation(fields: [userId], references: [id])
+  userId            String // Foreign key to reference the User
+  user              User   @relation(fields: [userId], references: [id])
 
-  approvedById String? // Foreign key to reference the approving user
-  approvedBy   User?   @relation("ApprovedBy", fields: [approvedById], references: [id])
+  approvedById      String? // Foreign key to reference the approving user
+  approvedBy        User?   @relation("ApprovedBy", fields: [approvedById], references: [id])
 
-  universityId String
-  university   University @relation(fields: [universityId], references: [id], onDelete: Cascade)
+  universityId      String
+  university        University @relation(fields: [universityId], references: [id], onDelete: Cascade)
 
-  typeId String
-  type   Type   @relation(fields: [typeId], references: [id])
+  typeId            String
+  type              Type   @relation(fields: [typeId], references: [id])
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 model Type {
-  id      String @id @default(uuid())
-  name    String @unique
-  color   String
-  bgColor String
-  notes   Note[]
+  id                String @id @default(uuid())
+  name              String @unique
+  color             String
+  bgColor           String
+  notes             Note[]
 }
 
 model Notice {
   id String @id @default(uuid())
 
-  title       String
-  description String?      @db.Text
-  status      NoticeStatus @default(ACTIVE)
-  expiresOn   DateTime?
+  title             String
+  description       String?      @db.Text
+  status            NoticeStatus @default(ACTIVE)
+  expiresOn         DateTime?
 
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  userId            String
+  user              User   @relation(fields: [userId], references: [id])
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 model CodeOfConduct {
-  id String @id @default(uuid())
+  id                String @id @default(uuid())
 
-  rule String @db.Text
-  isProtected Boolean? @default(false)
+  rule              String @db.Text
+  isProtected       Boolean? @default(false)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 model Email {
-  id             String   @id @default(uuid())
-  email          String   @unique
+  id                String   @id @default(uuid())
+  email             String   @unique
 
-  addedById      String
-  addedBy        User     @relation(fields: [addedById], references: [id])
+  addedById         String
+  addedBy           User     @relation(fields: [addedById], references: [id])
 
-  lastCheckedById String? 
-  lastCheckedBy   User?    @relation("LastCheckedBy", fields: [lastCheckedById], references: [id])
+  lastCheckedById   String? 
+  lastCheckedBy     User?    @relation("LastCheckedBy", fields: [lastCheckedById], references: [id])
 
-  universities    University[]  @relation("EmailUniversities") // many-to-many
+  universities      University[]  @relation("EmailUniversities") // many-to-many
 
-  lastCheckedAt  DateTime?
+  lastCheckedAt     DateTime?
 
-  createdAt DateTime @default(now())
+  createdAt         DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   // Relations
@@ -142,15 +142,15 @@ model Email {
 }
 
 model EmailCheckHistory {
-  id         String   @id @default(uuid())
+  id                String   @id @default(uuid())
 
-  emailId    String
-  email      Email    @relation(fields: [emailId], references: [id], onDelete: Cascade)
+  emailId           String
+  email             Email    @relation(fields: [emailId], references: [id], onDelete: Cascade)
 
-  checkedById String
-  checkedBy   User     @relation("CheckedBy", fields: [checkedById], references: [id])
+  checkedById       String
+  checkedBy         User     @relation("CheckedBy", fields: [checkedById], references: [id])
   
-  checkedAt  DateTime  @default(now())
+  checkedAt         DateTime  @default(now())
 
   @@index([checkedAt])
 }

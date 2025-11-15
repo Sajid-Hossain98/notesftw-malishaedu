@@ -49,7 +49,7 @@ export const Logo = ({ width, height, className }: LogoProps) => {
           width={width}
           height={height}
           loading="eager"
-          className={cn("w-12 md:w-14", className)}
+          className={cn("w-12 md:w-14 select-none", className)}
         />
       </div>
     </Link>
