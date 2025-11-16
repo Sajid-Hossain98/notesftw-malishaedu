@@ -25,6 +25,7 @@ import Select from "react-select";
 
 import { HeartCrack, Info, Loader2, Mails } from "lucide-react";
 import { Input } from "../ui/input";
+import { useQueryClient } from "@tanstack/react-query";
 
 const addAnEmailFormSchema = z.object({
   email: z
@@ -49,6 +50,7 @@ export const AddEmailModal = () => {
   const { universityShortNames: universityShortNamesData } = data;
 
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const form = useForm<z.infer<typeof addAnEmailFormSchema>>({
     resolver: zodResolver(addAnEmailFormSchema),
@@ -72,6 +74,8 @@ export const AddEmailModal = () => {
       toast.success("Email added");
       form.reset();
       router.refresh();
+      queryClient.invalidateQueries({ queryKey: ["emails"] });
+
       onClose();
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {

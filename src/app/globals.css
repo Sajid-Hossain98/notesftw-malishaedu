@@ -4,6 +4,12 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Rock+Salt&display=swap");
 
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+
 @layer utilities {
   .bg-radial {
     background: radial-gradient(circle, #2d2d2d, #1a1a1a, #000);

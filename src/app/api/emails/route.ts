@@ -240,7 +240,14 @@ export async function GET(request: Request) {
         addedBy: true,
         lastCheckedBy: true,
       },
-      orderBy: { createdAt: "desc" },
+      orderBy: [
+        {
+          lastCheckedAt: {
+            sort: "asc",
+          },
+        },
+        { id: "asc" },
+      ],
     });
 
     // Pagination

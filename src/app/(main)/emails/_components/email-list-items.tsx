@@ -11,6 +11,7 @@ import { useCallback, useEffect, useState } from "react";
 import { List, type RowComponentProps } from "react-window";
 import { toast } from "sonner";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 interface EmailListItemsProps {
   searchWords: string;
@@ -85,7 +86,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
       setFadingEmails((prev) => new Set(prev).add(emailId));
 
       // Wait for fade animation
-      await new Promise((res) => setTimeout(res, 300));
+      await new Promise((res) => setTimeout(res, 100));
       // Optimistically remove the email from the cache
       queryClient.setQueryData<
         { pages: { emails: typeof allEmails }[] } | undefined
@@ -123,7 +124,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
 
   if (status === "pending") {
     return (
-      <div className="flex justify-center p-8">
+      <div className="flex justify-center mt-12 md:mt-20">
         <Spinner size={"icon"} />
       </div>
     );
@@ -141,7 +142,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
   if (status === "success" && allEmails.length === 0) {
     return (
       <>
-        <div className="flex items-center gap-1 md:gap-3 mt-2 md:mt-4">
+        <div className="flex items-center gap-1 mt-2 md:gap-3 md:mt-4">
           <span className="text-lg font-semibold">Filtered by:</span>
           {selectedUniversity && (
             <>
@@ -226,7 +227,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
     return (
       <motion.div
         key={email.id}
-        className="px-1 md:py-1 border-b border-b-zinc-400/80 dark:border-b-zinc-700"
+        className="px-1 border-b md:py-1 border-b-zinc-400/80 dark:border-b-zinc-700"
         style={style}
         animate={{ opacity: fadingEmails.has(email.id) ? 0 : 1 }}
         transition={{ duration: 0.1 }}
@@ -252,7 +253,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
           </div>
           <div>
             <p className="text-sm font-medium md:text-xl">{email.email}</p>
-            <span className="text-xs flex items-center gap-2 text-zinc-800 dark:text-zinc-400 font-medium">
+            <span className="flex items-center gap-2 text-xs font-medium text-zinc-800 dark:text-zinc-400">
               Last checked:{" "}
               {email.lastCheckedAt ? (
                 <>
@@ -288,23 +289,32 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
 
   return (
     <div className="h-[60vh] !mt-2 md:!mt-4">
-      <div className="flex items-center gap-1 md:gap-3">
-        <span className="text-lg font-semibold">Filtered by:</span>
-        {selectedUniversity && (
-          <>
-            <div className="flex items-baseline gap-2 md:gap-3 w-fit">
-              <span className="text-xs font-bold underline">
-                #{selectedUniversity}
-              </span>
-              <button
-                onClick={() => setSelectedUniversity(null)}
-                className="px-2 py-0 bg-green-300 md:hover:bg-green-300/70 dark:bg-green-400 dark:md:hover:bg-green-400/90 transition-colors rounded-[2px] font-medium text-[#1A1A1A]"
-              >
-                Clear
-              </button>
-            </div>
-          </>
-        )}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-1 md:gap-3">
+          <span className="text-lg font-semibold">Filtered by:</span>
+          {selectedUniversity && (
+            <>
+              <div className="flex items-baseline gap-2 md:gap-3 w-fit">
+                <span className="text-xs font-bold underline">
+                  #{selectedUniversity}
+                </span>
+                <button
+                  onClick={() => setSelectedUniversity(null)}
+                  className="px-2 py-0 bg-green-300 md:hover:bg-green-300/70 dark:bg-green-400 dark:md:hover:bg-green-400/90 transition-colors rounded-[2px] font-medium text-[#1A1A1A]"
+                >
+                  Clear
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+
+        <Link
+          href={"/emails/dashboard"}
+          className="[background:linear-gradient(45deg,#4ade80,theme(colors.green.400)_50%,#4ade80)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.green.600/.48)_80%,_theme(colors.rose.600)_86%,_theme(colors.rose.400)_90%,_theme(colors.rose.600)_94%,_theme(colors.green.600/.48))_border-box] rounded-[3px] md:border-[3px] border border-transparent animate-border font-semibold md:px-2 md:py-1 px-1.5 py-0.5 text-[#1A1A1A]"
+        >
+          Activities
+        </Link>
       </div>
       <Separator className="h-[1px] bg-zinc-400 mt-1 mb-2" />
 

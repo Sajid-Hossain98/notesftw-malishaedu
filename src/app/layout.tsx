@@ -81,8 +81,8 @@ export default function RootLayout({
                 lightAvenir.className
               )}
             >
-              <ModalProvider />
               <QueryProvider>
+                <ModalProvider />
                 <Header className="h-full">{children}</Header>
               </QueryProvider>
               <Toaster theme="system" richColors offset={50} />
