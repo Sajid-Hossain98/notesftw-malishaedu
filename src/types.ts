@@ -64,3 +64,12 @@ export interface Notices {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface MailHistory {
+  id: string;
+  checkedAt: Date;
+  checkedBy: {
+    name: string;
+    imageUrl: string;
+  } | null;
+}

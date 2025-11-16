@@ -239,6 +239,10 @@ export async function GET(request: Request) {
         universities: true,
         addedBy: true,
         lastCheckedBy: true,
+        history: {
+          orderBy: { checkedAt: "desc" },
+          include: { checkedBy: true },
+        },
       },
       orderBy: [
         {

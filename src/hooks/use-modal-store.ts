@@ -1,4 +1,4 @@
-import { Notices, SingleNotesWithUniTypeUser } from "@/types";
+import { MailHistory, Notices, SingleNotesWithUniTypeUser } from "@/types";
 import { create } from "zustand";
 
 export type ModalType =
@@ -11,7 +11,8 @@ export type ModalType =
   | "deleteRule"
   | "editNotice"
   | "deleteNotice"
-  | "addEmail";
+  | "addEmail"
+  | "viewMailHistory";
 
 interface ModalData {
   note?: SingleNotesWithUniTypeUser;
@@ -25,6 +26,7 @@ interface ModalData {
   };
   ruleId?: string;
   notice?: Notices;
+  mailHistory?: MailHistory[];
 }
 
 interface ModalStore {

@@ -8,7 +8,12 @@ interface Email {
   universities: { universityShortName: string }[];
   addedBy: User;
   lastCheckedBy: User;
-  lastCheckedAt: Date;
+  lastCheckedAt: Date | null;
+  history?: {
+    id: string;
+    checkedAt: Date;
+    checkedBy: User | null;
+  }[];
 }
 
 interface FetchEmailsResponse {

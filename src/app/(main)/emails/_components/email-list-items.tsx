@@ -12,6 +12,7 @@ import { List, type RowComponentProps } from "react-window";
 import { toast } from "sonner";
 import { motion } from "motion/react";
 import Link from "next/link";
+import { IndividualMailCheckingHistory } from "./individual-mail-checking-history";
 
 interface EmailListItemsProps {
   searchWords: string;
@@ -227,62 +228,81 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
     return (
       <motion.div
         key={email.id}
-        className="px-1 border-b md:py-1 border-b-zinc-400/80 dark:border-b-zinc-700"
+        className="flex items-center justify-between px-1 border-b md:py-1 border-b-zinc-400/80 dark:border-b-zinc-700"
         style={style}
         animate={{ opacity: fadingEmails.has(email.id) ? 0 : 1 }}
         transition={{ duration: 0.1 }}
       >
-        <div className="flex items-center gap-1 md:gap-2">
-          <div className="flex items-center gap-1 md:gap-3">
-            <button
-              type="button"
-              title="Mark as checked"
-              className="md:border-2 border border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors md:p-1.5 p-1 md:hover:bg rounded-full"
-              onClick={() => handleEmailCheck(email.id)}
-            >
-              <Check className="w-3 h-3 md:h-5 md:w-5" />
-            </button>
-            <button
-              type="button"
-              title="Copy"
-              className="md:border-2 border border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors md:p-1.5 p-1 md:hover:bg rounded-full"
-              onClick={() => handleEmailCopy(email.email)}
-            >
-              <Copy className="w-3 h-3 md:h-5 md:w-5" />
-            </button>
+        <div>
+          <div className="flex items-center gap-1 md:gap-2">
+            <div className="flex items-center gap-1 md:gap-3">
+              <button
+                type="button"
+                title="Mark as checked"
+                className="md:border-2 border border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors md:p-1.5 p-1 md:hover:bg rounded-full"
+                onClick={() => handleEmailCheck(email.id)}
+              >
+                <Check className="w-3 h-3 md:h-5 md:w-5" />
+              </button>
+              <button
+                type="button"
+                title="Copy"
+                className="md:border-2 border border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors md:p-1.5 p-1 md:hover:bg rounded-full"
+                onClick={() => handleEmailCopy(email.email)}
+              >
+                <Copy className="w-3 h-3 md:h-5 md:w-5" />
+              </button>
+            </div>
+            <div>
+              <p className="text-sm font-medium md:text-xl">{email.email}</p>
+              <span className="flex items-center gap-2 text-xs font-medium text-zinc-800 dark:text-zinc-400">
+                <span className="font-semibold">Last checked: </span>
+                {email.lastCheckedAt ? (
+                  <>
+                    {formattedDate}
+                    <Separator className="w-[1px] bg-zinc-500 h-3" />
+                    <span className="font-semibold">by:</span>
+                    {email.lastCheckedBy?.name ?? "Unknown"}
+                  </>
+                ) : (
+                  "Never"
+                )}
+              </span>
+            </div>
           </div>
-          <div>
-            <p className="text-sm font-medium md:text-xl">{email.email}</p>
-            <span className="flex items-center gap-2 text-xs font-medium text-zinc-800 dark:text-zinc-400">
-              Last checked:{" "}
-              {email.lastCheckedAt ? (
-                <>
-                  {formattedDate}
-                  <Separator className="w-[1px] bg-zinc-500 h-3" />
-                  by: {email.lastCheckedBy?.name ?? "Unknown"}
-                </>
-              ) : (
-                "Never"
-              )}
-            </span>
+
+          <div className="md:mt-1">
+            {email.universities?.map((u) => (
+              <span
+                key={u.universityShortName}
+                onClick={() => handleUniversityClick(u.universityShortName)}
+                className={cn(
+                  "rounded-[2px] px-1 md:py-0.5 text-xs cursor-pointer dark:text-[#FAFAFA] text-[#1A1A1A] font-bold select-none",
+                  selectedUniversity === u.universityShortName &&
+                    "bg-green-300 md:hover:bg-green-300/70 dark:bg-green-400 dark:md:hover:bg-green-400/90 transition-colors dark:text-[#1A1A1A]"
+                )}
+              >
+                #{u.universityShortName}
+              </span>
+            ))}
           </div>
         </div>
 
-        <div className="md:mt-1">
-          {email.universities?.map((u) => (
-            <span
-              key={u.universityShortName}
-              onClick={() => handleUniversityClick(u.universityShortName)}
-              className={cn(
-                "rounded-[2px] px-1 md:py-0.5 text-xs cursor-pointer dark:text-[#FAFAFA] text-[#1A1A1A] font-bold select-none",
-                selectedUniversity === u.universityShortName &&
-                  "bg-green-300 md:hover:bg-green-300/70 dark:bg-green-400 dark:md:hover:bg-green-400/90 transition-colors dark:text-[#1A1A1A]"
-              )}
-            >
-              #{u.universityShortName}
-            </span>
-          ))}
-        </div>
+        <IndividualMailCheckingHistory
+          currentEmail={email.email}
+          mailCheckHistory={
+            email.history?.map((h) => ({
+              id: h.id,
+              checkedAt: new Date(h.checkedAt),
+              checkedBy: h.checkedBy
+                ? {
+                    name: h.checkedBy.name,
+                    imageUrl: h.checkedBy.imageUrl,
+                  }
+                : null,
+            })) ?? []
+          }
+        />
       </motion.div>
     );
   }

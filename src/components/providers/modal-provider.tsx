@@ -11,6 +11,7 @@ import { RuleDeleteModal } from "../modals/rule-delete-modal";
 import { NoticeEditModal } from "../modals/notice-edit-modal";
 import { NoticeDeleteModal } from "../modals/notice-delete-modal";
 import { AddEmailModal } from "../modals/email-add-modal";
+import { MailHistoryViewModal } from "../modals/mailHistory-view-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -35,6 +36,7 @@ export const ModalProvider = () => {
       <NoticeEditModal />
       <NoticeDeleteModal />
       <AddEmailModal />
+      <MailHistoryViewModal />
     </>
   );
 };
