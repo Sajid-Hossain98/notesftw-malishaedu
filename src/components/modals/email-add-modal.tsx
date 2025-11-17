@@ -148,7 +148,7 @@ export const AddEmailModal = () => {
                         isMulti
                         value={field.value}
                         options={universitiesOptions}
-                        className="text-black border border-black rounded-[5px]"
+                        className="text-black border border-black text-start rounded-[5px]"
                         isDisabled={isLoading}
                         noOptionsMessage={() => (
                           <div className="flex items-center justify-center gap-2">

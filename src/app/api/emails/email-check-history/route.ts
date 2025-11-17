@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { currentUser } from "@clerk/nextjs/server";
 import { UserRole } from "@prisma/client";
 import { NextResponse } from "next/server";
+
 export async function POST(req: Request) {
   try {
     const { emailId } = await req.json();
@@ -41,13 +42,6 @@ export async function POST(req: Request) {
       data: {
         lastCheckedById: currentlyLoggedInUserData.id,
         lastCheckedAt: now,
-
-        history: {
-          create: {
-            checkedById: currentlyLoggedInUserData.id,
-            checkedAt: now,
-          },
-        },
       },
     });
 
