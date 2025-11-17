@@ -10,11 +10,16 @@ interface IndividualMailCheckingHistoryProps {
       imageUrl: string;
     } | null;
   }[];
-  currentEmail: string;
+  currentEmailData: {
+    email: string;
+    addedBy: string;
+    createdAt: Date;
+  };
 }
 
 export const IndividualMailCheckingHistory = ({
   mailCheckHistory,
+  currentEmailData,
 }: IndividualMailCheckingHistoryProps) => {
   const { onOpen } = useModal();
 
@@ -22,7 +27,11 @@ export const IndividualMailCheckingHistory = ({
     <button
       className="md:mr-5 md:border-2 border border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors md:p-1.5 p-1 md:hover:bg rounded-full"
       onClick={() =>
-        onOpen("viewMailHistory", { mailHistory: mailCheckHistory })
+        onOpen("viewMailHistory", {
+          mailHistoryData: [
+            { mailHistory: mailCheckHistory, currentEmailData },
+          ],
+        })
       }
     >
       <History className="w-3 h-3 md:h-5 md:w-5" />

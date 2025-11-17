@@ -9,6 +9,7 @@ interface Email {
   addedBy: User;
   lastCheckedBy: User;
   lastCheckedAt: Date | null;
+  createdAt: Date;
   history?: {
     id: string;
     checkedAt: Date;

@@ -26,7 +26,14 @@ interface ModalData {
   };
   ruleId?: string;
   notice?: Notices;
-  mailHistory?: MailHistory[];
+  mailHistoryData?: {
+    mailHistory: MailHistory[];
+    currentEmailData: {
+      email: string;
+      addedBy: string;
+      createdAt: Date;
+    };
+  }[];
 }
 
 interface ModalStore {

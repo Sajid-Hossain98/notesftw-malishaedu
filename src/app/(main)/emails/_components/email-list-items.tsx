@@ -82,7 +82,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
     });
   };
 
-  const handleEmailCheck = async (emailId: string) => {
+  const handleEmailCheck = async (email: string, emailId: string) => {
     try {
       setFadingEmails((prev) => new Set(prev).add(emailId));
 
@@ -105,7 +105,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
       // Call API
       await axios.post("/api/emails/email-check-history", { emailId });
 
-      toast.success("Checked");
+      toast.success("Marked as checked");
 
       // Optionally, refetch to ensure latest server state
       queryClient.invalidateQueries({ queryKey: ["emails"] });
@@ -221,8 +221,26 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
         day: "numeric",
         hour: "2-digit",
         minute: "numeric",
-        second: "numeric",
       }).format(lastCheckedAtDate);
+    }
+
+    function timeAgo(date: Date) {
+      const now = new Date();
+
+      // Normalize both dates to midnight (not comparing time)
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const target = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+      );
+
+      const diff = today.getTime() - target.getTime();
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+      if (days === 0) return "Today";
+      if (days === 1) return "Yesterday";
+      return `${days} days ago`;
     }
 
     return (
@@ -240,7 +258,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
                 type="button"
                 title="Mark as checked"
                 className="md:border-2 border border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors md:p-1.5 p-1 md:hover:bg rounded-full"
-                onClick={() => handleEmailCheck(email.id)}
+                onClick={() => handleEmailCheck(email.email, email.id)}
               >
                 <Check className="w-3 h-3 md:h-5 md:w-5" />
               </button>
@@ -255,15 +273,18 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
             </div>
             <div>
               <p className="text-sm font-medium md:text-xl">{email.email}</p>
-              <span className="flex items-center gap-2 text-xs font-medium text-zinc-800 dark:text-zinc-400">
-                <span className="font-semibold">Last checked: </span>
+              <span className="flex items-center gap-1 text-xs font-medium md:gap-2 text-zinc-800 dark:text-zinc-400">
+                <span className="hidden font-semibold md:block">
+                  Last checked:{" "}
+                </span>
                 {email.lastCheckedAt ? (
-                  <>
-                    {formattedDate}
-                    <Separator className="w-[1px] bg-zinc-500 h-3" />
-                    <span className="font-semibold">by:</span>
-                    {email.lastCheckedBy?.name ?? "Unknown"}
-                  </>
+                  <div>
+                    {lastCheckedAtDate && timeAgo(lastCheckedAtDate)} ⦅
+                    {formattedDate}⦆ ●{" "}
+                    <span className="font-semibold">
+                      {email.lastCheckedBy?.name ?? "Unknown"}
+                    </span>
+                  </div>
                 ) : (
                   "Never"
                 )}
@@ -289,7 +310,11 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
         </div>
 
         <IndividualMailCheckingHistory
-          currentEmail={email.email}
+          currentEmailData={{
+            email: email.email,
+            addedBy: email.addedBy.name,
+            createdAt: email.createdAt,
+          }}
           mailCheckHistory={
             email.history?.map((h) => ({
               id: h.id,
