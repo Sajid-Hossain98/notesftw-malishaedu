@@ -105,7 +105,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
       // Call API
       await axios.post("/api/emails/email-check-history", { emailId });
 
-      toast.success("Marked as checked");
+      toast.success(`Checked "${email}"`);
 
       // Optionally, refetch to ensure latest server state
       queryClient.invalidateQueries({ queryKey: ["emails"] });

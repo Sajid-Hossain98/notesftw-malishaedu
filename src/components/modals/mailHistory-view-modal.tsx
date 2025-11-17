@@ -59,12 +59,12 @@ export const MailHistoryViewModal = () => {
             return (
               <div
                 key={index}
-                className="flex flex-col items-start gap-1 md:items-end md:flex-row md:gap-2"
+                className="flex flex-col items-start gap-1 md:items-center md:flex-row md:gap-2"
               >
                 <span className="text-xs font-medium md:text-sm">
                   ⦿ Records for
                 </span>
-                <div className="flex md:items-end flex-col md:flex-row gap-1 md:gap-2">
+                <div className="flex md:items-center flex-col md:flex-row gap-1 md:gap-2">
                   <h3 className="text-sm font-semibold underline md:text-lg underline-offset-2">
                     {allMailHistory?.currentEmailData?.email}
                   </h3>
