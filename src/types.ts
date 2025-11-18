@@ -73,3 +73,10 @@ export interface MailHistory {
     imageUrl: string;
   } | null;
 }
+
+export type CheckingRank = {
+  id: string;
+  name: string;
+  imageUrl: string;
+  count: number;
+};

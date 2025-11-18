@@ -355,7 +355,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
         </div>
 
         <Link
-          href={"/emails/dashboard"}
+          href={"/emails/activities"}
           className="[background:linear-gradient(45deg,#4ade80,theme(colors.green.400)_50%,#4ade80)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.green.600/.48)_80%,_theme(colors.rose.600)_86%,_theme(colors.rose.400)_90%,_theme(colors.rose.600)_94%,_theme(colors.green.600/.48))_border-box] rounded-[3px] md:border-[3px] border border-transparent animate-border font-semibold md:px-2 md:py-1 px-1.5 py-0.5 text-[#1A1A1A]"
         >
           Activities
