@@ -23,6 +23,9 @@ const Emails = async () => {
     select: {
       universityShortName: true,
     },
+    orderBy: {
+      universityShortName: "asc",
+    },
   });
 
   return (

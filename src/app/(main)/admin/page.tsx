@@ -29,6 +29,9 @@ const AdminPage = async () => {
     select: {
       universityShortName: true,
     },
+    orderBy: {
+      universityShortName: "asc",
+    },
   });
 
   const noteTypes = await db.type.findMany({
