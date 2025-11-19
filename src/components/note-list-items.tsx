@@ -37,24 +37,6 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
     text = text.replace(/<\/p>/gi, "\n");
     text = text.replace(/<p[^>]*>/gi, "");
 
-    // Handle lists
-    // Ordered lists
-    // let olCounter = 0;
-    // text = text.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi, (match, inner) => {
-    //   olCounter = 0;
-    //   return inner.replace(/<li[^>]*>(.*?)<\/li>/gi, (_m, liContent) => {
-    //     olCounter++;
-    //     return `${olCounter}. ${liContent}\n`;
-    //   });
-    // });
-
-    // Unordered lists
-    // text = text.replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gi, (match, inner) => {
-    //   return inner.replace(/<li[^>]*>(.*?)<\/li>/gi, (_m, liContent) => {
-    //     return `- ${liContent}\n`;
-    //   });
-    // });
-
     // Remove all remaining HTML tags
     text = text.replace(/<[^>]+>/g, "");
 
