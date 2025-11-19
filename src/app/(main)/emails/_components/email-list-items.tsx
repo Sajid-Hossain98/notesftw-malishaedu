@@ -73,7 +73,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
 
   const handleEmailCopy = (email: string) => {
     navigator.clipboard.writeText(email);
-    toast.success(`Copied ${email}`, {
+    toast.success(`Copied '${email}'`, {
       style: {
         color: "#1A1A1A",
         background: "#4ade80",
@@ -105,7 +105,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
       // Call API
       await axios.post("/api/emails/email-check-history", { emailId });
 
-      toast.success(`Checked "${email}"`);
+      toast.success(`Checked '${email}'`);
 
       // Optionally, refetch to ensure latest server state
       queryClient.invalidateQueries({ queryKey: ["emails"] });
@@ -143,7 +143,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
   if (status === "success" && allEmails.length === 0) {
     return (
       <>
-        <div className="flex items-center gap-1 mt-2 md:gap-3 md:mt-4">
+        <div className="flex items-center justify-between gap-1 mt-2 md:gap-3 md:mt-4">
           <span className="text-lg font-semibold">Filtered by:</span>
           {selectedUniversity && (
             <>
@@ -160,6 +160,13 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
               </div>
             </>
           )}
+
+          <Link
+            href={"/emails/activities"}
+            className="[background:linear-gradient(45deg,#4ade80,theme(colors.green.400)_50%,#4ade80)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.green.600/.48)_80%,_theme(colors.rose.600)_86%,_theme(colors.rose.400)_90%,_theme(colors.rose.600)_94%,_theme(colors.green.600/.48))_border-box] rounded-[3px] md:border-[3px] border border-transparent animate-border font-semibold md:px-2 md:py-1 px-1.5 py-0.5 text-[#1A1A1A]"
+          >
+            Activities
+          </Link>
         </div>
         <Separator className="h-[1px] bg-zinc-400 mt-1 mb-2" />
 

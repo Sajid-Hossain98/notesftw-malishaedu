@@ -1,9 +1,12 @@
+import { currentUserData } from "@/lib/current-user-data";
 import { EmailCheckRank } from "./_components/email-check-rank";
 
-const ActivityPage = () => {
+const ActivityPage = async () => {
+  const userData = await currentUserData();
+
   return (
     <div>
-      <EmailCheckRank />
+      <EmailCheckRank userData={userData} />
     </div>
   );
 };
