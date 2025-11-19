@@ -123,25 +123,27 @@ export const EmailCheckRank = ({ userData }: EmailCheckRankProps) => {
               key={user.id}
               className="flex items-center justify-start gap-1.5 md:gap-2 my-1 md:my-2"
             >
-              <span className="bg-[#BDBCC4] px-1 md:px-2 py-3 rounded-tl-full rounded-bl-full rounded-br-full text-[#1A1A1A] font-semibold text-sm">
+              <span className="bg-[#BDBCC4] px-1 md:px-2 py-3 rounded-tl-full rounded-bl-full rounded-br-full text-[#1A1A1A] font-semibold text-sm md:text-2xl md:h-14 h-12 flex items-center">
                 {formattedRank}
               </span>
 
-              <div className="bg-[#BDBCC4] rounded-[10px] text-[#1A1A1A] font-semibold md:w-[87%] w-full flex items-center gap-2 overflow-hidden">
+              <div className="bg-[#BDBCC4] rounded-[10px] text-[#1A1A1A] font-semibold md:w-[87%] w-full flex items-center gap-2 overflow-hidden h-12 md:h-14">
                 <Image
                   src={user?.imageUrl ?? "/malishaedu-logo.png"}
                   alt="user"
                   height={50}
                   width={50}
                   quality={100}
-                  className={cn(`object-cover`)}
+                  className={cn(`object-cover h-full`)}
                 />
                 <div className="flex items-center justify-between w-full pl-1 pr-3 md:pr-6">
                   <h4>
                     {user.name}
                     {currentUsersRankItem && "⦅You⦆"}
                   </h4>
-                  <p>{user.count}</p>
+                  <p className="text-base font-semibold md:text-2xl">
+                    {user.count}
+                  </p>
                 </div>
               </div>
             </div>

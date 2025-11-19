@@ -59,7 +59,7 @@ const AddNotePage = async () => {
             width={100}
             height={100}
             loading="eager"
-            className="w-7 h-7 transform -scale-x-100"
+            className="transform w-7 h-7 -scale-x-100"
           />
         </h1>
         <span className="text-xs font-semibold">
