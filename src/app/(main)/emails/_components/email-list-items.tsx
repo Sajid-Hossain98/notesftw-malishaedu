@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { IndividualMailCheckingHistory } from "./individual-mail-checking-history";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface EmailListItemsProps {
   searchWords: string;
@@ -125,8 +126,46 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
 
   if (status === "pending") {
     return (
-      <div className="flex justify-center mt-12 md:mt-20">
-        <Spinner size={"icon"} />
+      <div>
+        <div className="flex items-center justify-between  mt-2 md:mt-4">
+          {/* Filtered by: Label & University Filter */}
+          <div className="flex items-center gap-2 md:gap-3">
+            {/* "Filtered by:" Label */}
+            <Skeleton className="w-24 h-5 rounded-md dark:bg-zinc-600 bg-zinc-400" />
+
+            {/* Simulated University Filter Button (if one is selected initially) */}
+            <Skeleton className="w-16 h-4 rounded-[2px] dark:bg-zinc-600 bg-zinc-400" />
+          </div>
+
+          {/* Activities Link Skeleton */}
+          <Skeleton className="w-20 h-7 rounded-[3px] dark:bg-zinc-600 bg-zinc-400" />
+        </div>
+
+        <div className="space-y-2 pt-1 animate-pulse">
+          {Array.from({ length: 6 }).map((_, idx) => (
+            <div
+              key={idx}
+              className="flex items-center justify-between px-1 border-b md:py-1 border-b-zinc-400/80 dark:border-b-zinc-700 h-[75px]" // h-[75px] matches rowHeight
+            >
+              <div className="flex items-start gap-2 md:gap-3">
+                <Skeleton className="w-8 h-8 rounded-full md:w-10 md:h-10 dark:bg-zinc-600 bg-zinc-400" />
+                <Skeleton className="w-8 h-8 rounded-full md:w-10 md:h-10 dark:bg-zinc-600 bg-zinc-400" />
+
+                <div className="space-y-1">
+                  <Skeleton className="w-64 h-5 rounded-md md:w-96 dark:bg-zinc-600 bg-zinc-400" />
+                  <Skeleton className="w-40 h-3 rounded-md md:w-64 dark:bg-zinc-600 bg-zinc-400" />
+
+                  <div className="flex gap-2">
+                    <Skeleton className="w-12 h-3 rounded-[2px] dark:bg-zinc-600 bg-zinc-400" />
+                    <Skeleton className="w-10 h-3 rounded-[2px] dark:bg-zinc-600 bg-zinc-400" />
+                  </div>
+                </div>
+              </div>
+
+              <Skeleton className="w-10 h-10 rounded-full dark:bg-zinc-600 bg-zinc-400" />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
