@@ -12,7 +12,7 @@ export default function EmailListItemsLoading() {
         {/* Filtered by: Label & University Filter */}
         <div className="flex items-center gap-2 md:gap-3">
           {/* "Filtered by:" Label */}
-          <Skeleton className="w-24 h-5 rounded-md dark:bg-zinc-600 bg-zinc-400" />
+          <Skeleton className="w-24 h-5 dark:bg-zinc-600 bg-zinc-400" />
 
           {/* Simulated University Filter Button (if one is selected initially) */}
           <Skeleton className="w-16 h-4 rounded-[2px] dark:bg-zinc-600 bg-zinc-400" />
@@ -28,7 +28,7 @@ export default function EmailListItemsLoading() {
       {/* 2. Email List Items Skeleton (Simulating the virtualized list) */}
       <div className="space-y-2 pt-1 animate-pulse">
         {/* Create 8 list item skeletons to fill the visible area */}
-        {Array.from({ length: 6 }).map((_, idx) => (
+        {Array.from({ length: 5 }).map((_, idx) => (
           <div
             key={idx}
             className="flex items-center justify-between px-1 border-b md:py-1 border-b-zinc-400/80 dark:border-b-zinc-700 h-[75px]" // h-[75px] matches rowHeight

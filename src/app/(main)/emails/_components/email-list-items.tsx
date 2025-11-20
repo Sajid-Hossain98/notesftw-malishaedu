@@ -131,7 +131,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
           {/* Filtered by: Label & University Filter */}
           <div className="flex items-center gap-2 md:gap-3">
             {/* "Filtered by:" Label */}
-            <Skeleton className="w-24 h-5 rounded-md dark:bg-zinc-600 bg-zinc-400" />
+            <Skeleton className="w-24 h-5 dark:bg-zinc-600 bg-zinc-400" />
 
             {/* Simulated University Filter Button (if one is selected initially) */}
             <Skeleton className="w-16 h-4 rounded-[2px] dark:bg-zinc-600 bg-zinc-400" />
@@ -142,7 +142,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
         </div>
 
         <div className="space-y-2 pt-1 animate-pulse">
-          {Array.from({ length: 6 }).map((_, idx) => (
+          {Array.from({ length: 5 }).map((_, idx) => (
             <div
               key={idx}
               className="flex items-center justify-between px-1 border-b md:py-1 border-b-zinc-400/80 dark:border-b-zinc-700 h-[75px]" // h-[75px] matches rowHeight
@@ -152,8 +152,8 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
                 <Skeleton className="w-8 h-8 rounded-full md:w-10 md:h-10 dark:bg-zinc-600 bg-zinc-400" />
 
                 <div className="space-y-1">
-                  <Skeleton className="w-64 h-5 rounded-md md:w-96 dark:bg-zinc-600 bg-zinc-400" />
-                  <Skeleton className="w-40 h-3 rounded-md md:w-64 dark:bg-zinc-600 bg-zinc-400" />
+                  <Skeleton className="w-64 h-5 md:w-96 dark:bg-zinc-600 bg-zinc-400" />
+                  <Skeleton className="w-40 h-3 md:w-64 dark:bg-zinc-600 bg-zinc-400" />
 
                   <div className="flex gap-2">
                     <Skeleton className="w-12 h-3 rounded-[2px] dark:bg-zinc-600 bg-zinc-400" />
@@ -183,9 +183,9 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
     return (
       <>
         <div className="flex items-center justify-between gap-1 mt-2 md:gap-3 md:mt-4">
-          <span className="text-lg font-semibold">Filtered by:</span>
-          {selectedUniversity && (
-            <>
+          <div className="flex items-center gap-1 md:gap-3">
+            <span className="text-lg font-semibold">Filtered by:</span>
+            {selectedUniversity && (
               <div className="flex items-baseline gap-2 md:gap-3 w-fit">
                 <span className="text-xs font-bold underline">
                   #{selectedUniversity}
@@ -197,8 +197,8 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
                   Clear
                 </button>
               </div>
-            </>
-          )}
+            )}
+          </div>
 
           <Link
             href={"/emails/activities"}
@@ -211,16 +211,16 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
 
         <div className="flex items-center justify-center gap-1 py-4 text-lg md:text-2xl">
           <Smile className="text-red-500" />
-          No emails found
+          No emails to check
           {searchWords && !selectedUniversity && (
             <span>
-              matching{" "}
+              that match{" "}
               <span className="text-red-500">&quot;{searchWords}&quot;</span>
             </span>
           )}
           {searchWords && selectedUniversity && (
             <span>
-              matching{" "}
+              that match{" "}
               <span className="text-red-500">&quot;{searchWords}&quot; </span>
               for <span className="text-red-500">#{selectedUniversity}</span>
             </span>
@@ -384,19 +384,17 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
         <div className="flex items-center gap-1 md:gap-3">
           <span className="text-lg font-semibold">Filtered by:</span>
           {selectedUniversity && (
-            <>
-              <div className="flex items-baseline gap-2 md:gap-3 w-fit">
-                <span className="text-xs font-bold underline">
-                  #{selectedUniversity}
-                </span>
-                <button
-                  onClick={() => setSelectedUniversity(null)}
-                  className="px-2 py-0 bg-green-300 md:hover:bg-green-300/70 dark:bg-green-400 dark:md:hover:bg-green-400/90 transition-colors rounded-[2px] font-medium text-[#1A1A1A]"
-                >
-                  Clear
-                </button>
-              </div>
-            </>
+            <div className="flex items-baseline gap-2 md:gap-3 w-fit">
+              <span className="text-xs font-bold underline">
+                #{selectedUniversity}
+              </span>
+              <button
+                onClick={() => setSelectedUniversity(null)}
+                className="px-2 py-0 bg-green-300 md:hover:bg-green-300/70 dark:bg-green-400 dark:md:hover:bg-green-400/90 transition-colors rounded-[2px] font-medium text-[#1A1A1A]"
+              >
+                Clear
+              </button>
+            </div>
           )}
         </div>
 

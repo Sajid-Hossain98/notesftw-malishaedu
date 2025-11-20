@@ -19,6 +19,8 @@ export const EmailCheckRank = ({ userData }: EmailCheckRankProps) => {
       <div className="flex flex-col gap-4">
         {/* 2. Top Three Ranked Skeletons (Only the main container shape) */}
         <div className="md:absolute md:left-0 md:w-[48%] space-y-2 animate-pulse">
+          <Skeleton className="w-64 h-6 rounded-xl md:w-80 dark:bg-zinc-600 bg-zinc-400 animate-pulse px-1 py-1 md:px-2 md:py-2" />
+
           {/* Rank 2 Skeleton (Silver: 90% Width, Medium Height) */}
           <div className="bg-zinc-400 dark:bg-zinc-600 w-[90%] rounded-tr-full rounded-br-full relative py-3 md:py-6 h-20 md:h-28" />
 
@@ -34,7 +36,7 @@ export const EmailCheckRank = ({ userData }: EmailCheckRankProps) => {
           {Array.from({ length: 6 }).map((_, idx) => (
             <div
               key={idx}
-              className="flex items-center justify-start gap-1.5 md:gap-2 my-1 md:my-2"
+              className="flex items-center justify-start gap-1.5 md:gap-2 my-1 md:my-2 w-full md:w-[92%]"
             >
               {/* Rank Number Skeleton */}
               <Skeleton className="w-12 h-12 rounded-tl-full rounded-bl-full rounded-br-full md:w-16 md:h-14 dark:bg-zinc-600 bg-zinc-400" />
@@ -79,7 +81,7 @@ export const EmailCheckRank = ({ userData }: EmailCheckRankProps) => {
             <div
               key={user?.id}
               className={cn(
-                `flex items-center gap-2 pl-3 md:pl-5 md:pr-6 pr-3 rounded-tr-full rounded-br-full text-[#1A1A1A] relative`, // Added 'relative'
+                `flex items-center gap-2 pl-3 md:pl-5 md:pr-6 pr-3 rounded-tr-full rounded-br-full text-[#1A1A1A] relative`,
                 user?.id === displayOrder[1]?.id &&
                   "bg-[#D4AF37] w-full shadow-[6px_-4px_8px_rgba(0,0,0,0.15),_6px_4px_8px_rgba(0,0,0,0.15),_6px_0px_8px_rgba(0,0,0,0.15)] z-10 md:py-8 py-5",
                 user?.id === displayOrder[0]?.id &&
@@ -104,9 +106,9 @@ export const EmailCheckRank = ({ userData }: EmailCheckRankProps) => {
                   width={100}
                   quality={100}
                   className={cn(
-                    `object-cover w-4 h-4 rounded-full select-none md:h-8 md:w-8 -rotate-45 absolute`,
+                    `object-cover w-4 h-4 rounded-full select-none md:h-8 md:w-8 -rotate-[42deg] absolute`,
                     user?.id === displayOrder[1]?.id &&
-                      "md:-left-3 -left-2 -top-1.5 md:-top-4",
+                      "md:-left-3 -left-2 -top-1.5 md:-top-3 -rotate-[43deg]",
                     user?.id === displayOrder[0]?.id && "md:-left-3 md:-top-4",
                     user?.id === displayOrder[2]?.id && "md:-left-3 md:-top-4"
                   )}

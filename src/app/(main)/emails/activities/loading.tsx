@@ -31,7 +31,7 @@ export default function EmailCheckRankLoading() {
               <Skeleton className="object-cover h-full w-12 rounded-l-[10px] dark:bg-zinc-500 bg-zinc-300" />
               <div className="flex items-center justify-between w-full pl-1 pr-3 md:pr-6">
                 {/* User Name Skeleton */}
-                <Skeleton className="w-24 h-4 rounded-md dark:bg-zinc-500 bg-zinc-300" />
+                <Skeleton className="w-24 h-4 dark:bg-zinc-500 bg-zinc-300" />
                 {/* Count Skeleton */}
                 <Skeleton className="w-6 h-6 rounded-full dark:bg-zinc-500 bg-zinc-300" />
               </div>
