@@ -5,6 +5,8 @@ export default function EmailCheckRankLoading() {
     <div className="flex flex-col gap-4">
       {/* 2. Top Three Ranked Skeletons (Only the main container shape) */}
       <div className="md:absolute md:left-0 md:w-[48%] space-y-2 animate-pulse">
+        <Skeleton className="w-64 h-6 rounded-xl md:w-80 dark:bg-zinc-600 bg-zinc-400 animate-pulse px-1 py-1 md:px-2 md:py-2" />
+
         {/* Rank 2 Skeleton (Silver: 90% Width, Medium Height) */}
         <div className="bg-zinc-400 dark:bg-zinc-600 w-[90%] rounded-tr-full rounded-br-full relative py-3 md:py-6 h-20 md:h-28" />
 

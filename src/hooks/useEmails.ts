@@ -23,9 +23,11 @@ interface FetchEmailsResponse {
 }
 
 export function useEmails({
+  apiUrl,
   search,
   university,
 }: {
+  apiUrl?: string;
   search?: string;
   university?: string;
 }) {
@@ -36,7 +38,7 @@ export function useEmails({
       const cursorParam = pageParam ? `&cursor=${pageParam}` : "";
       const universityParam = university ? `&university=${university}` : "";
       const response = await axios.get(
-        `/api/emails?limit=20&search=${
+        `${apiUrl}?limit=20&search=${
           search || ""
         }${universityParam}${cursorParam}`
       );

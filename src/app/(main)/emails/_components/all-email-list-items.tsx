@@ -1,25 +1,23 @@
+"use client";
 import { Spinner } from "@/components/spinner";
 import { Separator } from "@/components/ui/separator";
 import { useEmails } from "@/hooks/useEmails";
 import { cn } from "@/lib/utils";
-import { useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { Check, Copy, HeartCrack, Smile } from "lucide-react";
+import { Copy, Edit3, HeartCrack, Smile, Trash } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 import { useCallback, useEffect, useState } from "react";
 import { List, type RowComponentProps } from "react-window";
 import { toast } from "sonner";
-import { motion } from "motion/react";
 import Link from "next/link";
 import { IndividualMailCheckingHistory } from "./individual-mail-checking-history";
 import { Skeleton } from "@/components/ui/skeleton";
 
-interface EmailListItemsProps {
+interface AllEmailListItemsProps {
   searchWords: string;
 }
 
-export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
+export const AllEmailListItems = ({ searchWords }: AllEmailListItemsProps) => {
   const searchParams = useSearchParams();
 
   const initialUniversity = searchParams.get("university") || null;
@@ -28,9 +26,6 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
     initialUniversity
   );
 
-  const [fadingEmails, setFadingEmails] = useState<Set<string>>(new Set());
-
-  const queryClient = useQueryClient();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -52,7 +47,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
   // Hook to fetch emails with pagination
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage, status } =
     useEmails({
-      apiUrl: "/api/emails",
+      apiUrl: "/api/emails/all-emails",
       search: searchWords,
       university: selectedUniversity || "",
     });
@@ -85,47 +80,6 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
       },
       position: "bottom-left",
     });
-  };
-
-  const handleEmailCheck = async (email: string, emailId: string) => {
-    try {
-      setFadingEmails((prev) => new Set(prev).add(emailId));
-
-      // Wait for fade animation
-      await new Promise((res) => setTimeout(res, 100));
-      // Optimistically remove the email from the cache
-      queryClient.setQueryData<
-        { pages: { emails: typeof allEmails }[] } | undefined
-      >(["emails"], (oldData) => {
-        if (!oldData) return oldData;
-
-        const newPages = oldData.pages.map((page) => ({
-          ...page,
-          emails: page.emails.filter((email) => email.id !== emailId),
-        }));
-
-        return { ...oldData, pages: newPages };
-      });
-
-      // Call API
-      await axios.post("/api/emails/email-check-history", { emailId });
-
-      toast.success(`Checked '${email}'`);
-
-      // Optionally, refetch to ensure latest server state
-      queryClient.invalidateQueries({ queryKey: ["emails"] });
-    } catch (error) {
-      // If error, roll back optimistic update
-      queryClient.invalidateQueries({ queryKey: ["emails"] });
-
-      if (error instanceof Error) {
-        toast.error(
-          <div>
-            <span>Something went wrong!</span>
-          </div>
-        );
-      }
-    }
   };
 
   if (status === "pending") {
@@ -294,46 +248,32 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
     }
 
     return (
-      <motion.div
+      <div
         key={email.id}
         className="flex items-center justify-between px-1 border-b md:py-1 border-b-zinc-400/80 dark:border-b-zinc-700"
         style={style}
-        animate={{ opacity: fadingEmails.has(email.id) ? 0 : 1 }}
-        transition={{ duration: 0.1 }}
       >
         <div>
           <div className="flex items-center gap-1 md:gap-2">
-            <div className="flex items-center gap-1 md:gap-3">
-              <button
-                type="button"
-                title="Mark as checked"
-                className="md:border-2 border border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors md:p-1.5 p-1 md:hover:bg rounded-full"
-                onClick={() => handleEmailCheck(email.email, email.id)}
-              >
-                <Check className="w-3 h-3 md:h-5 md:w-5" />
-              </button>
-              <button
-                type="button"
-                title="Copy"
-                className="md:border-2 border border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors md:p-1.5 p-1 md:hover:bg rounded-full"
-                onClick={() => handleEmailCopy(email.email)}
-              >
-                <Copy className="w-3 h-3 md:h-5 md:w-5" />
-              </button>
-            </div>
+            <button
+              type="button"
+              title="Copy"
+              className="md:border-2 border border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors md:p-1.5 p-1 md:hover:bg rounded-full"
+              onClick={() => handleEmailCopy(email.email)}
+            >
+              <Copy className="w-3 h-3 md:h-5 md:w-5" />
+            </button>
             <div>
               <p className="text-sm font-medium md:text-xl">{email.email}</p>
-              <span className="flex items-center gap-1 text-xs font-medium md:gap-2 text-zinc-800 dark:text-zinc-400">
+              <span className="flex items-center gap-1 text-xs font-semibold md:gap-2 text-zinc-800 dark:text-zinc-400">
                 <span className="hidden font-semibold md:block">
-                  Last checked:{" "}
+                  Last checked:
                 </span>
                 {email.lastCheckedAt ? (
                   <div>
                     {lastCheckedAtDate && timeAgo(lastCheckedAtDate)} ⦅
                     {formattedDate}⦆ ●{" "}
-                    <span className="font-semibold">
-                      {email.lastCheckedBy?.name ?? "Unknown"}
-                    </span>
+                    <span>{email.lastCheckedBy?.name ?? "Unknown"}</span>
                   </div>
                 ) : (
                   "Never"
@@ -342,7 +282,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
             </div>
           </div>
 
-          <div className="md:mt-1">
+          <div className="">
             {email.universities?.map((u) => (
               <span
                 key={u.universityShortName}
@@ -359,26 +299,42 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
           </div>
         </div>
 
-        <IndividualMailCheckingHistory
-          currentEmailData={{
-            email: email.email,
-            addedBy: email.addedBy.name,
-            createdAt: email.createdAt,
-          }}
-          mailCheckHistory={
-            email.history?.map((h) => ({
-              id: h.id,
-              checkedAt: new Date(h.checkedAt),
-              checkedBy: h.checkedBy
-                ? {
-                    name: h.checkedBy.name,
-                    imageUrl: h.checkedBy.imageUrl,
-                  }
-                : null,
-            })) ?? []
-          }
-        />
-      </motion.div>
+        <div className="flex items-center gap-1 md:gap-2">
+          <IndividualMailCheckingHistory
+            currentEmailData={{
+              email: email.email,
+              addedBy: email.addedBy.name,
+              createdAt: email.createdAt,
+            }}
+            mailCheckHistory={
+              email.history?.map((h) => ({
+                id: h.id,
+                checkedAt: new Date(h.checkedAt),
+                checkedBy: h.checkedBy
+                  ? {
+                      name: h.checkedBy.name,
+                      imageUrl: h.checkedBy.imageUrl,
+                    }
+                  : null,
+              })) ?? []
+            }
+          />
+          <button
+            type="button"
+            title="Copy"
+            className="md:border-2 border border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors md:p-1.5 p-1 md:hover:bg rounded-full"
+          >
+            <Edit3 className="w-3 h-3 md:h-5 md:w-5" />
+          </button>
+          <button
+            type="button"
+            title="Copy"
+            className="md:mr-5 md:border-2 border border-[#1A1A1A] dark:border-[#FAFAFA] md:hover:bg-zinc-300 dark:md:hover:bg-zinc-800 transition-colors md:p-1.5 p-1 md:hover:bg rounded-full"
+          >
+            <Trash className="w-3 h-3 md:h-5 md:w-5" />
+          </button>
+        </div>
+      </div>
     );
   }
 

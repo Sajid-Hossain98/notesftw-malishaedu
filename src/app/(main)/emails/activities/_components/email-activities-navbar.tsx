@@ -14,8 +14,8 @@ export const EmailActivitiesNavbar = () => {
     () => [
       {
         label: "All Emails",
-        active: pathname === "/emails/activities/all",
-        href: "/emails/activities/all",
+        active: pathname === "/emails/all",
+        href: "/emails/all",
         icon: Mails,
       },
     ],
