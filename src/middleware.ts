@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 const isProtectedRoute = createRouteMatcher([
   "/add-note(.*)",
   "/admin(.*)",
-  // "/emails(.*)",
+  "/emails(.*)",
 ]);
 const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
