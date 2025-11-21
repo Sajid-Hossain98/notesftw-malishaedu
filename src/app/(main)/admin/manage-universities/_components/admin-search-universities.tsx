@@ -4,7 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import qs from "query-string";
-import { BadgeInfo, Edit3, HeartCrack, School, Trash, X } from "lucide-react";
+import { BadgeInfo, Edit3, HeartCrack, School, Trash } from "lucide-react";
 import { Universities } from "@/types";
 import axios from "axios";
 import useSWR from "swr";
@@ -74,10 +74,20 @@ export const AdminSearchUniversities = () => {
         />
 
         {searchWords && (
-          <X
-            className="absolute right-3 h-5 w-5 top-[50%] -translate-y-1/2 dark:text-white m-auto stroke-2 cursor-pointer z-10 mr-2"
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 1024 1024"
+            fill="currentColor"
+            className="absolute right-3 h-5 w-5 top-[50%] -translate-y-1/2 text-[#1A1A1A] dark:text-[#FAFAFA] m-auto stroke-2 cursor-pointer z-10 mr-2"
             onClick={handleClearSearch}
-          />
+          >
+            <path
+              transform="rotate(45 512 512)"
+              d="M555.08992 513.35168a36.864 36.864 0 0 1-36.74112-36.864V155.648a36.864 36.864 0 0 1 73.728 0v284.09856l285.24544 1.024a36.864 36.864 0 1 1-0.24576 73.728l-321.9456-1.14688zM501.06368 567.37792a36.864 36.864 0 0 0-36.864-36.74112H143.36a36.864 36.864 0 1 0 0 73.728h284.09856l1.024 285.24544a36.864 36.864 0 0 0 73.728-0.24576l-1.14688-321.98656z"
+            ></path>
+          </svg>
         )}
       </div>
       <span className="justify-center hidden gap-1 mt-1 text-xs md:flex dark:text-zinc-400 text-zinc-500">

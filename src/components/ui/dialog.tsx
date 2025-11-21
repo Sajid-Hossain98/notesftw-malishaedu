@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -45,7 +44,19 @@ const DialogContent = React.forwardRef<
     >
       {children}
       <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-        <X className="h-4 md:h-10 w-4 md:w-10 md:p-2 dark:md:hover:bg-stone-700 md:hover:bg-zinc-300 md:rounded-full" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 1024 1024"
+          fill="currentColor"
+          className="h-4 md:h-10 w-4 md:w-10 md:p-2 dark:md:hover:bg-stone-700 md:hover:bg-zinc-300 text-[#1A1A1A] dark:text-[#FAFAFA] md:rounded-full"
+        >
+          <path
+            transform="rotate(45 512 512)"
+            d="M555.08992 513.35168a36.864 36.864 0 0 1-36.74112-36.864V155.648a36.864 36.864 0 0 1 73.728 0v284.09856l285.24544 1.024a36.864 36.864 0 1 1-0.24576 73.728l-321.9456-1.14688zM501.06368 567.37792a36.864 36.864 0 0 0-36.864-36.74112H143.36a36.864 36.864 0 1 0 0 73.728h284.09856l1.024 285.24544a36.864 36.864 0 0 0 73.728-0.24576l-1.14688-321.98656z"
+          ></path>
+        </svg>
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>

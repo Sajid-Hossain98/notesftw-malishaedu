@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import qs from "query-string";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { AdminSearchInputField } from "./admin-search-input";
-import { X } from "lucide-react";
 import { AdminAllNoteItems } from "./admin-all-note-items";
 import { fetchPendingPaginatedNotes } from "@/lib/fetch-pending-paginated-notes";
 import { Spinner } from "@/components/spinner";
@@ -105,10 +104,20 @@ export const AdminPendingNotes = () => {
           />
 
           {searchInput && (
-            <X
-              className="absolute w-4 h-4 -translate-y-1/2 cursor-pointer md:right-3 right-1 top-1/2 md:h-5 md:w-5"
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 1024 1024"
+              fill="currentColor"
+              className="absolute w-4 h-4 -translate-y-1/2 text-[#1A1A1A] dark:text-[#FAFAFA] cursor-pointer md:right-3 right-1 top-1/2 md:h-5 md:w-5"
               onClick={() => setSearchInput("")}
-            />
+            >
+              <path
+                transform="rotate(45 512 512)"
+                d="M555.08992 513.35168a36.864 36.864 0 0 1-36.74112-36.864V155.648a36.864 36.864 0 0 1 73.728 0v284.09856l285.24544 1.024a36.864 36.864 0 1 1-0.24576 73.728l-321.9456-1.14688zM501.06368 567.37792a36.864 36.864 0 0 0-36.864-36.74112H143.36a36.864 36.864 0 1 0 0 73.728h284.09856l1.024 285.24544a36.864 36.864 0 0 0 73.728-0.24576l-1.14688-321.98656z"
+              ></path>
+            </svg>
           )}
         </div>
 

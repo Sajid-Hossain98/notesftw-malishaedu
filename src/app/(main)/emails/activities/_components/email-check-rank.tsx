@@ -184,7 +184,7 @@ export const EmailCheckRank = ({ userData }: EmailCheckRankProps) => {
                     {user.name}
                     {currentUsersRankItem && "⦅You⦆"}
                   </h4>
-                  <p className="text-base font-semibold md:text-2xl">
+                  <p className="text-base font-semibold md:text-2xl text-green-900">
                     {user.count}
                   </p>
                 </div>
