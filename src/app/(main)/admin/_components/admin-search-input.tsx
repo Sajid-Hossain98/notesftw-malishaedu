@@ -22,7 +22,7 @@ export const AdminSearchInputField = ({
       style={{
         borderRadius: "5px",
       }}
-      className="dark:bg-[#303030] bg-[#FAFAFA] w-full !text-xs md:!text-base text-center border-none focus-visible:outline dark:outline-[#edf2f4] outline-[#303030] focus-visible:outline-1 dark:caret-[#edf2f4] placeholder-gray-400 py-1 md:my-2 min-h-4 md:min-h-10"
+      className="dark:bg-[#303030] bg-[#FAFAFA] w-full !text-xs md:!text-base text-center border-none dark:caret-[#edf2f4] placeholder-gray-400 py-1 md:my-2 min-h-4 md:min-h-10"
     />
   );
 };

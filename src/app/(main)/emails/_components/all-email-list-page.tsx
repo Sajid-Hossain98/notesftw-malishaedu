@@ -34,7 +34,7 @@ export const AllEmailListPage = () => {
         )}
 
         <Input
-          className="dark:bg-[#303030] bg-[#FAFAFA] rounded-[3px] border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 dark:placeholder:caret-[#edf2f4] placeholder-gray-500 shadow-[2px_2px_4px_rgba(0,0,0,0.15)] dark:shadow-[2px_2px_4px_rgba(255,255,255,0.3)] h-8 md:text-lg text-base placeholder:text-base md:placeholder:text-lg"
+          className="dark:bg-[#303030] bg-[#FAFAFA] rounded-[3px] border-none dark:placeholder:caret-[#edf2f4] placeholder-gray-500 shadow-[2px_2px_4px_rgba(0,0,0,0.15)] dark:shadow-[2px_2px_4px_rgba(255,255,255,0.3)] h-8 md:text-lg text-base placeholder:text-base md:placeholder:text-lg"
           type="text"
           placeholder="Email / University(e.g., NJTech / BNU)"
           value={searchWords}

@@ -131,7 +131,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
   if (status === "pending") {
     return (
       <div>
-        <div className="flex items-center justify-between  mt-2 md:mt-4">
+        <div className="flex items-center justify-between mt-2 md:mt-4">
           {/* Filtered by: Label & University Filter */}
           <div className="flex items-center gap-2 md:gap-3">
             {/* "Filtered by:" Label */}
@@ -145,7 +145,7 @@ export const EmailListItems = ({ searchWords }: EmailListItemsProps) => {
           <Skeleton className="w-20 h-7 rounded-[3px] dark:bg-zinc-600 bg-zinc-400" />
         </div>
 
-        <div className="space-y-2 pt-1 animate-pulse">
+        <div className="pt-1 space-y-2 animate-pulse">
           {Array.from({ length: 5 }).map((_, idx) => (
             <div
               key={idx}

@@ -90,7 +90,7 @@ export const SearchBar = () => {
         )}
         {/* bg-[#242424] */}
         <Input
-          className="dark:bg-[#303030] bg-[#FAFAFA] h-full px-5 text-center rounded-full border-none focus-visible:outline outline-[#edf2f4] focus-visible:outline-1 dark:placeholder:caret-[#edf2f4] placeholder-gray-500 shadow-[2px_2px_4px_rgba(0,0,0,0.15)] dark:shadow-none"
+          className="dark:bg-[#303030] bg-[#FAFAFA] h-full px-5 text-center rounded-full border-none dark:placeholder:caret-[#edf2f4] placeholder-gray-500 shadow-[2px_2px_4px_rgba(0,0,0,0.15)] dark:shadow-none"
           type="text"
           placeholder="e.g., NJTech / Nanjing Tech / Business Administration"
           value={searchWords}

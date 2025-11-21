@@ -164,7 +164,7 @@ export const MailHistoryViewModal = () => {
                 ) : (
                   <div
                     key={index}
-                    className="flex items-center gap-1 py-2 text-base font-medium md:gap-2 md:text-2xl text-rose-500 dark:text-rose-400 md:py-3 animate-pulse"
+                    className="flex items-end gap-1 py-2 text-base font-medium md:gap-2 md:text-2xl text-rose-500 dark:text-rose-400 md:py-3 animate-pulse"
                   >
                     Not checked by anyone so far{" "}
                     <Frown className="w-4 h-4 md:w-6 md:h-6 " />
