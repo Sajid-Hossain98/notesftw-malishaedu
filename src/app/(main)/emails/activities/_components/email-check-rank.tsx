@@ -19,13 +19,13 @@ export const EmailCheckRank = ({ userData }: EmailCheckRankProps) => {
       <div className="flex flex-col gap-4">
         {/* 2. Top Three Ranked Skeletons (Only the main container shape) */}
         <div className="md:absolute md:left-0 md:w-[48%] space-y-2 animate-pulse">
-          <Skeleton className="w-64 h-6 rounded-xl md:w-80 dark:bg-zinc-600 bg-zinc-400 animate-pulse px-1 py-1 md:px-2 md:py-2" />
+          <Skeleton className="w-64 h-6 px-1 py-1 rounded-xl md:w-80 dark:bg-zinc-600 bg-zinc-400 animate-pulse md:px-2 md:py-2" />
 
           {/* Rank 2 Skeleton (Silver: 90% Width, Medium Height) */}
           <div className="bg-zinc-400 dark:bg-zinc-600 w-[90%] rounded-tr-full rounded-br-full relative py-3 md:py-6 h-20 md:h-28" />
 
           {/* Rank 1 Skeleton (Gold: Full Width, Tallest) */}
-          <div className="bg-zinc-400 dark:bg-zinc-600 w-full rounded-tr-full rounded-br-full relative md:py-8 py-5 h-24 md:h-32" />
+          <div className="relative w-full h-24 py-5 rounded-tr-full rounded-br-full bg-zinc-400 dark:bg-zinc-600 md:py-8 md:h-32" />
 
           {/* Rank 3 Skeleton (Bronze: 80% Width, Medium Height) */}
           <div className="bg-zinc-400 dark:bg-zinc-600 w-[80%] rounded-tr-full rounded-br-full relative py-3 md:py-6 h-20 md:h-28" />
@@ -47,7 +47,7 @@ export const EmailCheckRank = ({ userData }: EmailCheckRankProps) => {
                 <Skeleton className="object-cover h-full w-12 rounded-l-[10px] dark:bg-zinc-500 bg-zinc-300" />
                 <div className="flex items-center justify-between w-full pl-1 pr-3 md:pr-6">
                   {/* User Name Skeleton */}
-                  <Skeleton className="w-36 h-4 dark:bg-zinc-500 bg-zinc-300" />
+                  <Skeleton className="h-4 w-36 dark:bg-zinc-500 bg-zinc-300" />
                   {/* Count Skeleton */}
                   <Skeleton className="w-6 h-6 rounded-full dark:bg-zinc-500 bg-zinc-300" />
                 </div>
@@ -184,7 +184,7 @@ export const EmailCheckRank = ({ userData }: EmailCheckRankProps) => {
                     {user.name}
                     {currentUsersRankItem && "⦅You⦆"}
                   </h4>
-                  <p className="text-base font-semibold md:text-2xl text-green-900">
+                  <p className="text-base font-semibold text-green-900 md:text-2xl">
                     {user.count}
                   </p>
                 </div>

@@ -98,7 +98,16 @@ export const UserList = ({ userData }: UserListProps) => {
                     className="object-cover w-10 h-10 rounded-full select-none"
                   />
                   <span className="flex flex-col gap-1">
-                    <p className="flex items-center gap-1 text-base font-semibold">
+                    <button
+                      className="flex items-center gap-1 text-base font-semibold cursor-default"
+                      title={
+                        user.role === "ADMIN"
+                          ? "Admin"
+                          : user.role === "MODERATOR"
+                          ? "Moderator"
+                          : "User"
+                      }
+                    >
                       {user.name}
 
                       {user.role === "ADMIN" ? (
@@ -108,7 +117,7 @@ export const UserList = ({ userData }: UserListProps) => {
                       ) : (
                         <UserRound className="w-4 h-4" />
                       )}
-                    </p>
+                    </button>
                     <p>{user.email}</p>
                   </span>
                 </TableCell>
@@ -162,7 +171,7 @@ export const UserList = ({ userData }: UserListProps) => {
                         className="flex items-center justify-between gap-2 cursor-default"
                       >
                         <ActionTooltip
-                          label="Do you want this user to be able to see notes which are protected?"
+                          label="Do you want this user to be able to view documents and content which are protected?"
                           side="bottom"
                         >
                           <span className="flex items-center gap-1">
@@ -182,7 +191,7 @@ export const UserList = ({ userData }: UserListProps) => {
                               <path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3" />
                               <path d="M12 17h.01" />
                             </svg>
-                            See protected notes
+                            Can view protected
                           </span>
                         </ActionTooltip>
 
