@@ -19,6 +19,8 @@ interface NoticeListProps {
 
 export const NoticeList = ({ notices, userData }: NoticeListProps) => {
   const admin = userData?.role === "ADMIN";
+  const adminOrModerator =
+    userData?.role === "ADMIN" || userData?.role === "MODERATOR";
 
   const { onOpen } = useModal();
 
@@ -95,8 +97,8 @@ export const NoticeList = ({ notices, userData }: NoticeListProps) => {
                 </span>
               </Link>
 
-              {admin && (
-                <div className="flex items-start gap-1 mr-1">
+              <div className="flex items-start gap-1 mr-1">
+                {adminOrModerator && (
                   <button
                     className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black"
                     onClick={() => onOpen("editNotice", { notice: notice })}
@@ -104,7 +106,9 @@ export const NoticeList = ({ notices, userData }: NoticeListProps) => {
                   >
                     <Edit2 className="w-3 h-3" />
                   </button>
+                )}
 
+                {admin && (
                   <button
                     className="px-2 py-1 text-xs border border-zinc-400 rounded-[3px] hover:bg-zinc-400 hover:text-black"
                     onClick={() => onOpen("deleteNotice", { notice })}
@@ -112,8 +116,8 @@ export const NoticeList = ({ notices, userData }: NoticeListProps) => {
                   >
                     <Trash className="w-3 h-3" />
                   </button>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </motion.div>
         );
