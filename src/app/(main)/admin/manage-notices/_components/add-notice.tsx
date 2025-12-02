@@ -134,7 +134,7 @@ export const AddNotice = () => {
               <FormControl>
                 <input
                   type="date"
-                  className="md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-[5px] px-3 w-full border border-black"
+                  className="notice-date-input md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-[5px] px-3 w-full border border-black"
                   value={
                     field.value
                       ? new Date(field.value).toISOString().split("T")[0]

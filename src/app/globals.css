@@ -61,6 +61,10 @@
   padding: 2px !important;
 }
 
+.notice-date-input {
+  color-scheme: light;
+}
+
 @media (min-width: 721px) {
   .rule-font .ql-editor * {
     font-family: "Rock Salt", cursive !important;
