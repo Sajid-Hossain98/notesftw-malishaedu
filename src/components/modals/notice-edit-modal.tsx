@@ -129,7 +129,7 @@ export const NoticeEditModal = () => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="w-full space-y-2"
+              className="w-full space-y-2 relative"
             >
               <div className="flex flex-col md:gap-3">
                 <FormField
@@ -137,7 +137,10 @@ export const NoticeEditModal = () => {
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="!text-sm">Title </FormLabel>
+                      <FormLabel className="!text-sm">
+                        <span className="text-red-500">* </span>
+                        Title
+                      </FormLabel>
 
                       <FormControl>
                         <Input

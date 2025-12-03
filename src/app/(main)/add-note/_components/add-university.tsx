@@ -143,7 +143,10 @@ export const AddAnUniversity = ({ userData }: AddUniversityProps) => {
           name="universityShortForm"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>University short name</FormLabel>
+              <FormLabel>
+                <span className="text-red-500">* </span>
+                University short name
+              </FormLabel>
               <FormControl>
                 <Input
                   className="md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-[5px]"
@@ -162,7 +165,10 @@ export const AddAnUniversity = ({ userData }: AddUniversityProps) => {
           name="universityFullName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>University full name</FormLabel>
+              <FormLabel>
+                <span className="text-red-500">* </span>
+                University full name
+              </FormLabel>
               <FormControl>
                 <Input
                   className="md:py-3 md:text-xl text-lg bg-zinc-100 text-black rounded-[5px]"
@@ -181,7 +187,10 @@ export const AddAnUniversity = ({ userData }: AddUniversityProps) => {
           name="logoImage"
           render={() => (
             <FormItem>
-              <FormLabel>University logo</FormLabel>
+              <FormLabel>
+                <span className="text-red-500">* </span>
+                University logo
+              </FormLabel>
               <FormControl>
                 <Input
                   className="bg-zinc-100 text-black text-lg rounded-[5px] file:bg-slate-400 cursor-pointer py-0 file:py-2 px-0 md:px-0 file:px-4"

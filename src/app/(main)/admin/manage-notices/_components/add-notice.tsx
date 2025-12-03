@@ -73,7 +73,7 @@ export const AddNotice = () => {
   return (
     <Form {...form}>
       <form
-        className="mt-5 space-y-3 md:space-y-5"
+        className="mt-5 space-y-3 md:space-y-5 relative"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -82,8 +82,9 @@ export const AddNotice = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>
+                <span className="text-red-500">* </span>
                 Title of the notice{" "}
-                <span className="text-xs text-zinc-400">
+                <span className="text-xs text-zinc-600 dark:text-zinc-400">
                   (only this will be displayed in the homepage.)
                 </span>
               </FormLabel>
@@ -106,7 +107,9 @@ export const AddNotice = () => {
             <FormItem>
               <FormLabel>
                 Write a description{" "}
-                <span className="text-xs text-zinc-400">(if necessary)</span>
+                <span className="text-xs text-zinc-600 dark:text-zinc-400">
+                  (if necessary)
+                </span>
               </FormLabel>
               <FormControl>
                 <Textarea
@@ -127,7 +130,7 @@ export const AddNotice = () => {
             <FormItem>
               <FormLabel>
                 Expiry date{" "}
-                <span className="text-xs text-zinc-400">
+                <span className="text-xs text-zinc-600 dark:text-zinc-400">
                   (optional — leave blank if not needed)
                 </span>
               </FormLabel>

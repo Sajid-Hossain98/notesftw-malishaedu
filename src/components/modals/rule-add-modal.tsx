@@ -89,7 +89,7 @@ export const AddRuleModal = () => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="w-full space-y-2"
+              className="w-full space-y-2 relative"
             >
               <div className="flex flex-col md:gap-3">
                 <FormField
@@ -98,6 +98,7 @@ export const AddRuleModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="!text-sm">
+                        <span className="text-red-500">* </span>
                         Write a rule with proper clarification
                       </FormLabel>
 

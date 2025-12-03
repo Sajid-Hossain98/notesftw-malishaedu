@@ -112,7 +112,7 @@ export const UniversityEditModal = () => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="w-full space-y-2"
+              className="w-full space-y-2 relative"
             >
               <div className="flex flex-col md:gap-3">
                 <FormField
@@ -121,6 +121,7 @@ export const UniversityEditModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="!text-sm">
+                        <span className="text-red-500">* </span>
                         University short name
                       </FormLabel>
 
@@ -143,6 +144,7 @@ export const UniversityEditModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="!text-sm">
+                        <span className="text-red-500">* </span>
                         University full name
                       </FormLabel>
 

@@ -93,7 +93,7 @@ export const CodeOfConductList = ({
           transition: { staggerChildren: 0.08 },
         },
       }}
-      className="overflow-y-auto max-h-[65%] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:rounded-[10px] [&::-webkit-scrollbar-thumb]:cursor-pointer [&::-webkit-scrollbar-thumb]:rounded-[10px] [&::-webkit-scrollbar-track]:bg-stone-600 [&::-webkit-scrollbar-thumb]:bg-stone-400/80 pt-2"
+      className="overflow-y-auto max-h-[65%] [&::-webkit-scrollbar]:w-1 dark:[&::-webkit-scrollbar-track]:bg-[#303030] [&::-webkit-scrollbar-track]:bg-zinc-200 dark:[&::-webkit-scrollbar-thumb]:bg-gray-500 [&::-webkit-scrollbar-thumb]:bg-stone-500 pt-2"
     >
       {codeOfConduct.map((rule, index) => {
         return (
@@ -118,7 +118,7 @@ export const CodeOfConductList = ({
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className="flex items-baseline gap-2"
+                  className="flex items-baseline gap-2 relative"
                 >
                   <div className="flex flex-col w-full md:gap-3">
                     <span className="flex-shrink-0 font-mono md:w-10 w-5 text-right text-base md:text-2xl">

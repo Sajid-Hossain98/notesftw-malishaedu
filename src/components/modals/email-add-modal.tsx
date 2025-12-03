@@ -117,7 +117,10 @@ export const AddEmailModal = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>
+                      <span className="text-red-500">* </span>
+                      Email
+                    </FormLabel>
                     <FormControl>
                       <Input
                         disabled={isLoading}
@@ -137,6 +140,7 @@ export const AddEmailModal = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="flex items-center gap-2">
+                      <span className="text-red-500">* </span>
                       Universities
                       <button title="Can be selected one or more universities for which this email needs to be monitored.">
                         <Info className="w-5 h-5" />

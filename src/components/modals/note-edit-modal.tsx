@@ -179,7 +179,7 @@ export const NoteEditModal = () => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="w-full space-y-2"
+              className="w-full space-y-2 relative"
             >
               <FormField
                 control={form.control}
@@ -187,6 +187,7 @@ export const NoteEditModal = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="!text-sm">
+                      <span className="text-red-500">* </span>
                       Title of the note
                     </FormLabel>
 
@@ -209,6 +210,7 @@ export const NoteEditModal = () => {
                   render={({ field }) => (
                     <FormItem className="sm:w-[50%]">
                       <FormLabel className="!text-sm">
+                        <span className="text-red-500">* </span>
                         University short name
                       </FormLabel>
 
@@ -257,7 +259,10 @@ export const NoteEditModal = () => {
                   name="noteType"
                   render={({ field }) => (
                     <FormItem className="sm:w-[50%]">
-                      <FormLabel className="!text-sm">Type of note</FormLabel>
+                      <FormLabel className="!text-sm">
+                        <span className="text-red-500">* </span>
+                        Type of note
+                      </FormLabel>
 
                       <FormControl>
                         <Select
@@ -303,6 +308,7 @@ export const NoteEditModal = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="!text-sm">
+                      <span className="text-red-500">* </span>
                       Description of the note
                     </FormLabel>
 
@@ -353,7 +359,10 @@ export const NoteEditModal = () => {
                 render={({ field }) => (
                   <FormItem>
                     <span className="flex items-center gap-1">
-                      <FormLabel className="!text-sm">Status</FormLabel>
+                      <FormLabel className="!text-sm">
+                        <span className="text-red-500">* </span>
+                        Status
+                      </FormLabel>
 
                       <ActionTooltip
                         label='Notes created by an ADMIN or MODERATOR are automatically

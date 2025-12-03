@@ -133,7 +133,10 @@ export const AddANote = ({
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title of the note</FormLabel>
+              <FormLabel>
+                <span className="text-red-500">* </span>
+                Title of the note
+              </FormLabel>
               <FormControl>
                 <Input
                   disabled={isLoading}
@@ -153,7 +156,10 @@ export const AddANote = ({
             name="universityShortForm"
             render={({ field }) => (
               <FormItem className="sm:w-[50%]">
-                <FormLabel>University short name</FormLabel>
+                <FormLabel>
+                  <span className="text-red-500">* </span>
+                  University short name
+                </FormLabel>
                 <FormControl>
                   <Select
                     {...field}
@@ -201,6 +207,7 @@ export const AddANote = ({
             render={({ field }) => (
               <FormItem className="sm:w-[50%]">
                 <FormLabel className="flex items-center gap-2">
+                  <span className="text-red-500">* </span>
                   Type of note
                   <button title="What type of note it is? select a type that suits the best.">
                     <Info className="w-5 h-5" />
@@ -250,7 +257,10 @@ export const AddANote = ({
           name="noteDescription"
           render={({ field }) => (
             <FormItem className="md:max-h-80">
-              <FormLabel>Description of the note</FormLabel>
+              <FormLabel>
+                <span className="text-red-500">* </span>
+                Description of the note
+              </FormLabel>
               <FormControl>
                 <Editor {...field} placeholder={"Click here to write..."} />
               </FormControl>
