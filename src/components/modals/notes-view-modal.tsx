@@ -16,6 +16,7 @@ import { School } from "lucide-react";
 import Image from "next/image";
 import { Separator } from "../ui/separator";
 import { Badge } from "../ui/badge";
+import { cn } from "@/lib/utils";
 
 export const NotesViewModal = () => {
   const { isOpen, onClose, type, data } = useModal();
@@ -51,7 +52,14 @@ export const NotesViewModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="dark:bg-[#303030] bg-[#FAFAFA] border-zinc-700 !rounded-xl md:min-w-[60%] w-11/12 p-3 md:p-6 overflow-hidden">
+      <DialogContent
+        className={cn(
+          "dark:bg-[#303030] bg-[#FAFAFA] !rounded-xl md:min-w-[60%] w-11/12 p-3 md:p-6 overflow-hidden",
+          note?.isProtected
+            ? "border-t-[10px] border-r-0 border-b-0 border-l-0 dark:border-rose-300 border-rose-400"
+            : "border-none"
+        )}
+      >
         <DialogHeader className="text-start">
           <div>
             <div className="flex items-center justify-start gap-2 mt-3 md:gap-4">

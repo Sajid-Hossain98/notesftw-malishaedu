@@ -147,7 +147,7 @@ export const AddRuleModal = () => {
                 disabled={isLoading}
                 type="submit"
                 variant={"myButtons"}
-                className="w-full py-1 !mt-6 text-sm font-semibold border-2 rounded-none cursor-pointer md:py-2 border-zinc-700 md:text-lg md:hover:bg-black active:bg-black"
+                className="w-full py-1 !mt-6 text-sm font-semibold border-2 rounded-none cursor-pointer md:py-2 border-zinc-700 md:text-lg dark:md:hover:bg-black dark:active:bg-black md:hover:bg-zinc-200"
               >
                 Add
                 {isLoading && (

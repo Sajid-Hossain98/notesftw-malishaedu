@@ -65,7 +65,12 @@ export const NoteListItems = ({ notes, classNames }: NoteListItemsProps) => {
             <div
               key={note?.id}
               onClick={() => onOpen("viewNote", { note: note })}
-              className={`${note?.type?.bgColor} p-1 md:p-2 space-y-1 min-w-0 cursor-pointer dark:bg-opacity-5 bg-opacity-10 relative overflow-hidden dark:md:hover:bg-opacity-10 md:hover:bg-opacity-15 active:bg-opacity-10 transition-colors`}
+              className={cn(
+                `${note?.type?.bgColor} p-1 md:p-2 space-y-1 min-w-0 cursor-pointer dark:bg-opacity-5 bg-opacity-10 relative overflow-hidden dark:md:hover:bg-opacity-10 md:hover:bg-opacity-15 active:bg-opacity-10 transition-colors`,
+                note?.isProtected
+                  ? "border-l-[5px] border-rose-400"
+                  : "border-none"
+              )}
               style={{
                 borderRadius: "4px",
               }}

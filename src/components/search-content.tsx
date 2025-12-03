@@ -3,6 +3,7 @@ import { HeartCrack, Lightbulb } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
 import { Skeleton } from "./ui/skeleton";
 import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
 
 interface SearchContentProps {
   searchedNotes: GroupedSearchedNotes | undefined;
@@ -120,7 +121,14 @@ export const SearchContent = ({
               >
                 <div className="flex items-center gap-1 px-1 md:gap-2 md:px-2">
                   <span>
-                    <Lightbulb className="w-4 h-4 text-cyan-600" />
+                    <Lightbulb
+                      className={cn(
+                        "w-4 h-4",
+                        note.isProtected
+                          ? "dark:text-rose-400 text-rose-500"
+                          : "text-cyan-600"
+                      )}
+                    />
                   </span>
                   <h4 className="text-sm md:text-base font-semibold">
                     {note.title}
